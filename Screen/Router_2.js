@@ -1,10 +1,8 @@
-import { View, Button } from "react-native";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import {
   ViroARScene,
   ViroText,
-  ViroConstants,
   ViroARSceneNavigator,
 } from "@viro-community/react-viro";
 
