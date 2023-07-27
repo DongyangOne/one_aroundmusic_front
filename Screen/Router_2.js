@@ -4,24 +4,23 @@ import {
   ViroARScene,
   ViroText,
   ViroARSceneNavigator,
+  Viro360Image,
+  ViroImage,
 } from "@viro-community/react-viro";
-
-const HelloWorldSceneAR = ({ navigation }) => {
-  const [text, setText] = useState("Initializing AR...");
-  const onPress = () => navigation.navigate("one");
-  function onInitialized(state, reason) {
-    console.log("guncelleme", state, reason);
-    setText("Hello World!");
-  }
-
+import { sceneNavigator } from "@viro-community/viro-react";
+import Router_1 from "./Router_1";
+const HelloWorldSceneAR = ({ navigation, props }) => {
+  const handleClick = () => {
+    props.sceneNavigator.push({ scene: Router_1 });
+  };
   return (
-    <ViroARScene onTrackingUpdated={onInitialized}>
-      <ViroText
-        text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1]}
-        onClick={onPress}
-        style={styles.helloWorldTextStyle}
+    <ViroARScene>
+      <ViroImage
+        height={1}
+        width={1}
+        position={[0, 0, -3]}
+        onClick={handleClick}
+        source={require("../assets/mountain.png")}
       />
     </ViroARScene>
   );
