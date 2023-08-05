@@ -11,12 +11,12 @@ import {
 
 import Header from "../components/Header";
 
-const Map = () => {
+const Map = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <TouchableOpacity onPress={() => navigation.navigate("ArScreen")}>
-          <Header/>
+          <Header />
           <Image
             style={{ width: 25, height: 25, margin: 3 }}
             source={require("../../assets/upload.png")}
