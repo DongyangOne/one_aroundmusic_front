@@ -4,6 +4,7 @@ import Swiper from "react-native-swiper";
 import Main from "./screens/Main";
 import Map from "./screens/Map";
 import Music from "./screens/Music";
+import Arscreen from "./screens/ArScreen";
 var styles = {
   wrapper: {},
   slide1: {
@@ -34,13 +35,14 @@ var styles = {
 export default () => (
   <Swiper style={styles.wrapper} loop={false} index={1}>
     <View testID="Hello" style={styles.slide1}>
-      <Main />
-    </View>
-    <View testID="Beautiful" style={styles.slide2}>
-      <Map />
-    </View>
-    <View testID="Simple" style={styles.slide3}>
       <Music />
     </View>
+    <View testID="Beautiful" style={styles.slide2}>
+      <Main />
+    </View>
+    <View testID="Simple" style={styles.slide3}>
+      <Map />
+    </View>
+    <Arscreen />
   </Swiper>
 );
