@@ -4,7 +4,9 @@ import Swiper from "react-native-swiper";
 import Main from "./views/screens/Main";
 import Map from "./views/screens/Map";
 import Music from "./views/screens/Music";
-import Arscreen from "./views/screens/ArScreen";
+import ArScreen from "./views/screens/ArScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 var styles = {
   wrapper: {},
   slide1: {
@@ -31,7 +33,7 @@ var styles = {
     fontWeight: "bold",
   },
 };
-
+const Stack = createStackNavigator();
 export default () => (
   <Swiper style={styles.wrapper} loop={false} index={1}>
     <View testID="Hello" style={styles.slide1}>
@@ -40,9 +42,11 @@ export default () => (
     <View testID="Beautiful" style={styles.slide2}>
       <Main />
     </View>
-    <View testID="Simple" style={styles.slide3}>
-      <Map />
-    </View>
-    <Arscreen />
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Map">
+        <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="ArScreen" component={ArScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   </Swiper>
 );

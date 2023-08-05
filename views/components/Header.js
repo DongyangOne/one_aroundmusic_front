@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     height: 34,
     marginTop: 17,
     marginLeft: 311,
-  }
+  },
 });
 
 export default Header;
