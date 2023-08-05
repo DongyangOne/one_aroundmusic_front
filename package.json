@@ -12,7 +12,9 @@
   "dependencies": {
     "@viro-community/react-viro": "^2.23.0",
     "react": "18.1.0",
-    "react-native": "0.70.1"
+    "react-native": "0.70.1",
+    "react-native-swiper": "^1.6.0",
+    "react-native-swiper-view": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
