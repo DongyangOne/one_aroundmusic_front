@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, View } from "react-native";
 import Swiper from "react-native-swiper";
-import Main from "./screens/Main";
-import Map from "./screens/Map";
-import Music from "./screens/Music";
-import Arscreen from "./screens/ArScreen";
+import Main from "./views/screens/Main";
+import Map from "./views/screens/Map";
+import Music from "./views/screens/Music";
+import Arscreen from "./views/screens/ArScreen";
 var styles = {
   wrapper: {},
   slide1: {

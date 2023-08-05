@@ -8,15 +8,18 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import ArScreen from "./ArScreen";
+
+import Header from "../components/Header";
+
 const Map = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <TouchableOpacity onPress={() => navigation.navigate("ArScreen")}>
+          <Header/>
           <Image
             style={{ width: 25, height: 25, margin: 3 }}
-            source={require("../assets/upload.png")}
+            source={require("../../assets/upload.png")}
           />
         </TouchableOpacity>
       </ScrollView>
@@ -25,10 +28,7 @@ const Map = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-  },
+  container: {},
   scrollView: {
     backgroundColor: "pink",
     marginHorizontal: 20,
