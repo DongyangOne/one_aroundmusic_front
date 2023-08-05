@@ -32,8 +32,8 @@ var styles = {
 };
 
 export default () => (
-  <Swiper style={styles.wrapper} loop={false}>
-    <View testID="Hello" style={styles.slide1} component>
+  <Swiper style={styles.wrapper} loop={false} index={1}>
+    <View testID="Hello" style={styles.slide1}>
       <Main />
     </View>
     <View testID="Beautiful" style={styles.slide2}>
