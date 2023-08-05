@@ -7,10 +7,14 @@ import {
   StatusBar,
 } from "react-native";
 
+import Header from "../components/Header";
+
 const Msuic = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <Header/>
       <ScrollView style={styles.scrollView}>
+        
         <Text style={styles.text}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -26,10 +30,7 @@ const Msuic = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-  },
+  container: {},
   scrollView: {
     backgroundColor: "pink",
     marginHorizontal: 20,
