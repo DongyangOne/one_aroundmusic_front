@@ -4,7 +4,7 @@ import { ScrollView } from "react-native-virtualized-view";
 import Header from "../components/Header";
 import Listening from "./Listening";
 
-const Msuic = ({ navigation }) => {
+const Music = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
