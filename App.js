@@ -43,7 +43,7 @@ export default () => (
       <Main />
     </View>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Map" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="ArScreen" component={ArScreen} />
       </Stack.Navigator>
