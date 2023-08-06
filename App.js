@@ -9,6 +9,7 @@ import FilterScreen from "./views/screens/FilterScreen";
 import ArScreen from "./views/screens/ArScreen";
 import MyPage from "./views/screens/MyPage";
 import PopularKing from "./views/screens/PopularKing";
+import Listening from "./views/screens/Listening";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -82,6 +83,16 @@ export default () => (
             headerTintColor: "#034AA6",
             headerTitleAlign: "center",
           }}
+        />
+        <Stack.Screen
+          name="Listening"
+          component={Listening}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ArScreen"
+          component={ArScreen}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

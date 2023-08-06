@@ -32,53 +32,40 @@ const FILTER = [
 const DATA = [
   {
     id: 1,
-    tag: "#10대",
-  },
-  {
-    id: 2,
-    tag: "#봄",
-  },
-  {
-    id: 1,
-    tag: "#여성",
+    tag: "#태그",
   },
 ];
 
 const SONG = [
   {
-    id: 1,
-    title: "봄봄봄",
-    singer: "로이킴",
-    date: "2013 . 04 . 22",
-    image: require("../../assets/album/album1.png"),
+    title: "신호등",
+    singer: "이무진",
+    date: "2022 . 04 . 22",
+    image: require("../../assets/music1.jpg"),
   },
   {
-    id: 2,
-    title: "봄이좋냐",
-    singer: "10cm",
-    date: "2013 . 04 . 22",
-    image: require("../../assets/album/album2.png"),
+    title: "Super Shy",
+    singer: "NewJeans",
+    date: "2023 . 07 . 21",
+    image: require("../../assets/album/album5.png"),
   },
   {
-    id: 3,
-    title: "벚꽃엔딩",
-    singer: "버스커 버스커",
-    date: "2013 . 04 . 22",
-    image: require("../../assets/album/album3.png"),
+    title: "퀸카(Queencard)",
+    singer: "(여자)아이들",
+    date: "2023 . 05 . 15",
+    image: require("../../assets/album/album6.png"),
   },
   {
-    id: 1,
-    title: "봄봄봄",
-    singer: "로이킴",
-    date: "2013 . 04 . 22",
-    image: require("../../assets/album/album1.png"),
+    title: "I AM",
+    singer: "IVE(아이브)",
+    date: "2023 . 04 . 22",
+    image: require("../../assets/album/album4.png"),
   },
   {
-    id: 2,
-    title: "봄이좋냐",
-    singer: "10cm",
-    date: "2013 . 04 . 22",
-    image: require("../../assets/album/album2.png"),
+    title: "Spicy",
+    singer: "aespa",
+    date: "2023 . 05 . 08",
+    image: require("../../assets/album/album8.png"),
   },
   {
     id: 3,
@@ -114,6 +101,7 @@ const Music = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header onPress={() => navigation.navigate("MyPage")} />
+
       <View style={{ flexDirection: "row" }}>
         <FlatList
           style={styles.filter}
