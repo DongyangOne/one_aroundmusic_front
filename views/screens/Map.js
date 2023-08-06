@@ -74,29 +74,36 @@ const Map = ({ navigation }) => {
         scrollDuringRotateOrZoomEnabled={false}
         followsUserLocation={true}
         showsMyLocationButton={false}
-        showsIndoors = {false}
+        showsIndoors={false}
         showsPointsOfInterest={false}
         zoomEnabled={false}
         zoomTapEnabled={false}
         zoomControlEnabled={false}
         pitchEnabled={false}
         moveOnMarkerPress={false}
-        onMarkerPress={() => {
-          navigation.navigate('ArScreen');
-        }}
       >
-
         <ArMarker
-          location={{latitude: location.latitude-0.0005, longitude: location.longitude-0.0005}}
-          size={{width: 200, height: 200}}
+          location={{
+            latitude: location.latitude - 0.0005,
+            longitude: location.longitude - 0.0005,
+          }}
+          size={{ width: 200, height: 200 }}
+          onPress={() => {
+            navigation.navigate("ArScreen");
+          }}
         />
 
         <ArMarker
-          location={{latitude: location.latitude+0.0005, longitude: location.longitude+0.0005}}
-          size={{width: 150, height: 150}}
+          location={{
+            latitude: location.latitude + 0.0005,
+            longitude: location.longitude + 0.0005,
+          }}
+          size={{ width: 150, height: 150 }}
+          onPress={() => {
+            navigation.navigate("ArScreen1");
+          }}
         />
-
-        </MapView>
+      </MapView>
     </>
   );
 };
