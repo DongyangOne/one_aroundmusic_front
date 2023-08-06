@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Button,
   Text,
@@ -6,14 +6,14 @@ import {
   View,
   StyleSheet,
   Image,
-} from 'react-native';
-import Header from '../components/Header';
-const Mypage = ({navigation}) => {
+} from "react-native";
+import Header from "../components/Header";
+const Mypage = ({ navigation }) => {
   return (
     <View style={styles.contain}>
       <View style={styles.myPage}>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
+          <TouchableOpacity onPress={() => navigation.navigate("FriendList")}>
             <View style={styles.friendBtn}>
               <Text style={styles.text}>내 친구 1,004</Text>
             </View>
@@ -22,35 +22,38 @@ const Mypage = ({navigation}) => {
           <Text style={styles.id}>MiRae23</Text>
         </View>
         <Image
-          source={require('../../assets/profile.png')}
+          source={require("../../assets/profile.png")}
           style={styles.profile}
         />
       </View>
       <View style={styles.king}>
         <Image
-          source={require('../../assets/king1.png')}
+          source={require("../../assets/king1.png")}
+          style={styles.kingking}
+        ></Image>
+
+        <Image
+          source={require("../../assets/king2.png")}
           style={styles.kingking}
         ></Image>
         <Image
-          source={require('../../assets/king2.png')}
-          style={styles.kingking}
-        ></Image>
-        <Image
-          source={require('../../assets/king3.png')}
+          source={require("../../assets/king3.png")}
           style={styles.kingking}
         ></Image>
       </View>
       <View style={styles.reward}>
+        <TouchableOpacity onPress={() => navigation.navigate("PopularKing")}>
+          <Image
+            source={require("../../assets/reward1.png")}
+            style={styles.rewardreward}
+          ></Image>
+        </TouchableOpacity>
         <Image
-          source={require('../../assets/reward1.png')}
+          source={require("../../assets/reward2.png")}
           style={styles.rewardreward}
         ></Image>
         <Image
-          source={require('../../assets/reward2.png')}
-          style={styles.rewardreward}
-        ></Image>
-        <Image
-          source={require('../../assets/reward3.png')}
+          source={require("../../assets/reward3.png")}
           style={styles.rewardreward}
         ></Image>
       </View>
@@ -61,34 +64,34 @@ const Mypage = ({navigation}) => {
 const styles = StyleSheet.create({
   contain: {
     flex: 1,
-    backgroundColor: '#FFFF',
+    backgroundColor: "#FFFF",
   },
   myPage: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   friendBtn: {
     width: 146,
     height: 27,
     marginTop: 17,
     marginLeft: 0,
-    borderColor: '#034AA6',
+    borderColor: "#034AA6",
     borderWidth: 1,
     borderRadius: 13,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 88,
     marginLeft: 56,
   },
   text: {
     fontSize: 12,
-    color: '#034AA6',
+    color: "#034AA6",
   },
   id: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 58,
     marginTop: 11,
-    color: '#034AA6',
+    color: "#034AA6",
   },
   profile: {
     width: 100,
@@ -98,9 +101,9 @@ const styles = StyleSheet.create({
   },
   king: {
     marginTop: 34,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   kingking: {
     width: 96,
@@ -108,9 +111,9 @@ const styles = StyleSheet.create({
     margin: 7,
   },
   reward: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 30,
   },
   rewardreward: {
