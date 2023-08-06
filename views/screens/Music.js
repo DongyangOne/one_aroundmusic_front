@@ -1,16 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  View,
-  Button,
-  FlatList,
-  Image,
-} from 'react-native';
-
+import {StyleSheet, SafeAreaView, View, FlatList, Image} from 'react-native';
+import {ScrollView} from 'react-native-virtualized-view';
 import Header from '../components/Header';
 import FilterButton from '../components/FilterButton';
 import SongList from '../components/SongList';
@@ -48,35 +38,30 @@ const DATA = [
 
 const SONG = [
   {
-    id: 1,
     title: '신호등',
     singer: '이무진',
     date: '2022 . 04 . 22',
     image: require('../../assets/music1.jpg'),
   },
   {
-    id: 2,
     title: 'Super Shy',
     singer: 'NewJeans',
     date: '2023 . 07 . 21',
     image: require('../../assets/album/album5.png'),
   },
   {
-    id: 3,
     title: '퀸카(Queencard)',
     singer: '(여자)아이들',
     date: '2023 . 05 . 15',
     image: require('../../assets/album/album6.png'),
   },
   {
-    id: 4,
     title: 'I AM',
     singer: 'IVE(아이브)',
     date: '2023 . 04 . 22',
     image: require('../../assets/album/album4.png'),
   },
   {
-    id: 5,
     title: 'Spicy',
     singer: 'aespa',
     date: '2023 . 05 . 08',
@@ -84,31 +69,31 @@ const SONG = [
   },
   {
     id: 3,
-    title: '미술관에서',
-    singer: '콜드(Colde)',
-    date: '2021 . 04 . 22',
-    image: require('../../assets/album/album7.png'),
+    title: '벚꽃엔딩',
+    singer: '버스커 버스커',
+    date: '2013 . 04 . 22',
+    image: require('../../assets/album/album3.png'),
   },
   {
     id: 1,
-    title: '신호등',
-    singer: '이무진',
-    date: '2022 . 04 . 22',
-    image: require('../../assets/music1.jpg'),
+    title: '봄봄봄',
+    singer: '로이킴',
+    date: '2013 . 04 . 22',
+    image: require('../../assets/album/album1.png'),
   },
   {
     id: 2,
-    title: 'Super Shy',
-    singer: 'NewJeans',
-    date: '2023 . 07 . 21',
-    image: require('../../assets/album/album5.png'),
+    title: '봄이좋냐',
+    singer: '10cm',
+    date: '2013 . 04 . 22',
+    image: require('../../assets/album/album2.png'),
   },
   {
     id: 3,
-    title: '퀸카(Queencard)',
-    singer: '(여자)아이들',
-    date: '2023 . 05 . 15',
-    image: require('../../assets/album/album6.png'),
+    title: '벚꽃엔딩',
+    singer: '버스커 버스커',
+    date: '2013 . 04 . 22',
+    image: require('../../assets/album/album3.png'),
   },
 ];
 

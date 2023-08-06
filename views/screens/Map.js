@@ -2,15 +2,11 @@ import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  Image,
   View,
   Platform,
   PermissionsAndroid,
 } from "react-native";
-import MapView from 'react-native-maps';
+import MapView from "react-native-maps";
 import Geolocation from "react-native-geolocation-service";
 
 async function requestPermission() {
@@ -21,7 +17,7 @@ async function requestPermission() {
     // 안드로이드 위치 정보 수집 권한 요청
     if (Platform.OS === "android") {
       return await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );
     }
   } catch (e) {
@@ -46,7 +42,7 @@ const Map = ({ navigation }) => {
             enableHighAccuracy: true,
             timeout: 3600,
             maximumAge: 3600,
-          },
+          }
         );
       }
     });
@@ -61,23 +57,22 @@ const Map = ({ navigation }) => {
   }
 
   return (
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: 0.005,
-          longitudeDelta: 0.05,
-        }}
-        showsUserLocation={true}
-        minZoomLevel={18}
-        maxZoomLevel={18}
-        scrollEnabled={false}
-        scrollDuringRotateOrZoomEnabled={false}
-      />
+    <MapView
+      style={{ flex: 1 }}
+      initialRegion={{
+        latitude: location.latitude,
+        longitude: location.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.05,
+      }}
+      showsUserLocation={true}
+      minZoomLevel={18}
+      maxZoomLevel={18}
+      scrollEnabled={false}
+      scrollDuringRotateOrZoomEnabled={false}
+    />
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {},

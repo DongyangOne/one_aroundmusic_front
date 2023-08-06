@@ -1,16 +1,14 @@
 import React from "react";
-import { SafeAreaView, View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
 
 const MainStory = ({ id, src, story }) => {
   return (
-    // <SafeAreaView style={styles.container}>
     <View style={styles.storyRow}>
       <View>
         <Image source={src} style={styles.image}></Image>
         <Text style={styles.text}>{id}</Text>
       </View>
     </View>
-    //  </SafeAreaView>
   );
 };
 
@@ -33,9 +31,8 @@ const styles = StyleSheet.create({
     borderColor: "#B6CBE5",
   },
   text: {
-    
     marginLeft: 25,
-  }
+  },
 });
 
 export default MainStory;

@@ -6,8 +6,8 @@ import {
   ScrollView,
   StatusBar,
   Image,
-  TouchableOpacity,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Header = (navigation) => {
   return (

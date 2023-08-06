@@ -15,7 +15,6 @@ const Contents = ({ data }) => {
           <Image source={data[2].story} style={styles.image}></Image>
           <Text style={styles.text}>집에 가고싶다..</Text>
           <Text style={styles.date}>2022.12.14</Text>
-
         </View>
       </View>
     </SafeAreaView>
@@ -24,8 +23,7 @@ const Contents = ({ data }) => {
 
 const styles = StyleSheet.create({
   container: {},
-  content:{
-  },
+  content: {},
   storyRow: {
     flexDirection: "row",
     marginTop: 13,
@@ -41,11 +39,13 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginTop: 15,
     fontSize: 12,
+    color: "black",
   },
   date: {
     marginLeft: 25,
     marginTop: 6,
     fontSize: 10,
+    color: "black",
   },
 });
 

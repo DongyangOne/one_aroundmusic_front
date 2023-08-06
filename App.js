@@ -7,9 +7,11 @@ import Music from "./views/screens/Music";
 import Music2 from "./views/screens/Music2";
 import FilterScreen from "./views/screens/FilterScreen";
 import ArScreen from "./views/screens/ArScreen";
+import MyPage from "./views/screens/MyPage";
 import Listening from "./views/screens/Listening";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+
 var styles = {
   wrapper: {},
   slide1: {
@@ -73,9 +75,25 @@ export default () => (
         />
       </Stack.Navigator>
     </NavigationContainer>
-    <View testID="Beautiful" style={styles.slide2}>
-      <Main />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MyPage"
+          component={MyPage}
+          options={{
+            headerShown: true,
+            title: "인기왕 리워드",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Map" component={Map} />

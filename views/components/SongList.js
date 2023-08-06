@@ -1,6 +1,6 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import { Image, StyleSheet, Text, View } from "react-native";
 
-const SongList = ({title, image, singer, date}) => {
+const SongList = ({ title, image, singer, date }) => {
   return (
     <View style={styles.wrap}>
       <View style={styles.container}>
@@ -19,7 +19,7 @@ const SongList = ({title, image, singer, date}) => {
 const styles = StyleSheet.create({
   wrap: {},
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginHorizontal: 7,
   },
   image: {
@@ -32,21 +32,21 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 17,
-    color: '#034AA6',
-    fontWeight: 'bold',
+    color: "#034AA6",
+    fontWeight: "bold",
   },
   singer: {
     fontSize: 12,
-    color: '#D0D0D0',
+    color: "#D0D0D0",
   },
   date: {
     fontSize: 10,
-    color: '#D0D0D0',
+    color: "#D0D0D0",
   },
   line: {
     height: 1,
     width: 370,
-    backgroundColor: '#034AA6',
+    backgroundColor: "#034AA6",
     marginVertical: 15,
   },
 });
