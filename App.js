@@ -1,18 +1,23 @@
-import React from 'react';
-import {Text, View} from 'react-native';
-import Swiper from 'react-native-swiper';
-import Main from './views/screens/Main';
-import Map from './views/screens/Map';
-import Music from './views/screens/Music';
-import Music2 from './views/screens/Music2';
-import FilterScreen from './views/screens/FilterScreen';
-import ArScreen from './views/screens/ArScreen';
-import MyPage from './views/screens/MyPage';
-import PopularKing from './views/screens/PopularKing';
-import Listening from './views/screens/Listening';
-import FriendList from './views/screens/FriendList';
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import React from "react";
+import { Text, View } from "react-native";
+import Swiper from "react-native-swiper";
+import Main from "./views/screens/Main";
+import Map from "./views/screens/Map";
+import Music from "./views/screens/Music";
+import Music2 from "./views/screens/Music2";
+import FilterScreen from "./views/screens/FilterScreen";
+import ArScreen from "./views/screens/ArScreen";
+import ArScreen1 from "./views/screens/ArScreen1";
+import MyPage from "./views/screens/MyPage";
+import PopularKing from "./views/screens/PopularKing";
+import ListenKing from "./views/screens/ListenKing";
+import WKing from "./views/screens/WKing";
+import Listening from "./views/screens/Listening";
+import FriendList from "./views/screens/FriendList";
+import Board from "./views/screens/Board";
+import NotMain from "./views/screens/NotMain";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
 var styles = {
   wrapper: {},
@@ -96,6 +101,16 @@ export default () => (
           }}
         />
         <Stack.Screen
+          name="WKing"
+          component={WKing}
+          options={{
+            headerShown: true,
+            title: "듣기왕 리워드",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
           name="Listening"
           component={Listening}
           options={{ headerShown: false }}
@@ -105,26 +120,23 @@ export default () => (
           component={Board}
           options={{
             headerShown: true,
-            title: '게시물 작성',
-            headerTintColor: '#034AA6',
-            headerTitleAlign: 'center',
+            title: "게시물 작성",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen
-          name="Board"
-          component={Board}
+          name="NotMain"
+          component={NotMain}
           options={{
-            headerShown: true,
-            title: '게시물 작성',
-            headerTintColor: '#034AA6',
-            headerTitleAlign: 'center',
+            headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="ArScreen"
           component={ArScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
     <NavigationContainer>
