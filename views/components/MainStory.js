@@ -10,7 +10,6 @@ const MainStory = ({ id, src, story }) => {
         <Text style={styles.text}>{id}</Text>
       </View>
     </View>
-
     //  </SafeAreaView>
   );
 };
@@ -20,6 +19,7 @@ const styles = StyleSheet.create({
   storyRow: {
     flexDirection: "row",
     marginTop: 13,
+    height: 80,
   },
   image: {
     width: 50,
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     borderColor: "#B6CBE5",
   },
   text: {
+    
     marginLeft: 25,
   }
 });
