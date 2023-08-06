@@ -2,15 +2,11 @@ import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  Image,
   View,
   Platform,
   PermissionsAndroid,
 } from "react-native";
-import MapView, { Marker } from 'react-native-maps';
+import MapView from "react-native-maps";
 import Geolocation from "react-native-geolocation-service";
 import ArMarker from "../components/Marker";
 
@@ -21,7 +17,7 @@ async function requestPermission() {
     }
     if (Platform.OS === "android") {
       return await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );
     }
   } catch (e) {
@@ -46,7 +42,7 @@ const Map = ({ navigation }) => {
             enableHighAccuracy: true,
             timeout: 3600,
             maximumAge: 3600,
-          },
+          }
         );
       }
     });
@@ -104,7 +100,6 @@ const Map = ({ navigation }) => {
     </>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {},

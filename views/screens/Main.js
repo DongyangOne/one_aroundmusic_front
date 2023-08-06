@@ -1,17 +1,10 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  StatusBar,
-  FlatList,
-  View,
-  Image,
-} from "react-native";
+import { StyleSheet, SafeAreaView, FlatList, View } from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
 import Header from "../components/Header";
 import MainStory from "../components/MainStory";
 import Contents from "../components/Contents";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export const DATA = [
   {
@@ -50,12 +43,13 @@ const ContentsItem = ({ id, src, story }) => (
   </View>
 );
 
-const Main = () => {
+const Main = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View>
-          <Header />
+          <Header onPress={() => navigation.navigate("MyPage")} />
+
           <View>
             <FlatList
               data={DATA}

@@ -8,6 +8,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import FilterDetailButton from "../components/FilterDetailButton";
+
 import {
   DATAAGE,
   DATADATE,
@@ -85,7 +86,10 @@ const FilterScreen = ({ navigation }) => {
           horizontal={false}
           numColumns={5}
         />
-        <TouchableOpacity style={styles.button} onPress={handleGoBack}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Music2")}
+        >
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
