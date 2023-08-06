@@ -8,6 +8,7 @@ import Music2 from "./views/screens/Music2";
 import FilterScreen from "./views/screens/FilterScreen";
 import ArScreen from "./views/screens/ArScreen";
 import MyPage from "./views/screens/MyPage";
+import PopularKing from "./views/screens/PopularKing";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -62,6 +63,26 @@ export default () => (
           component={Music2}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="MyPage"
+          component={MyPage}
+          options={{
+            headerShown: true,
+            title: "마이페이지",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="PopularKing"
+          component={PopularKing}
+          options={{
+            headerShown: true,
+            title: "인기왕 리워드",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
     <NavigationContainer>
@@ -74,6 +95,16 @@ export default () => (
         <Stack.Screen
           name="MyPage"
           component={MyPage}
+          options={{
+            headerShown: true,
+            title: "마이페이지",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="PopularKing"
+          component={PopularKing}
           options={{
             headerShown: true,
             title: "인기왕 리워드",

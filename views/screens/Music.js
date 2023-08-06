@@ -113,7 +113,7 @@ const SONG = [
 const Music = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <Header onPress={() => navigation.navigate("MyPage")} />
       <View style={{ flexDirection: "row" }}>
         <FlatList
           style={styles.filter}
