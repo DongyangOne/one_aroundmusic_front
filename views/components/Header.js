@@ -7,6 +7,7 @@ import {
   StatusBar,
   Image,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Header = () => {
   return (
