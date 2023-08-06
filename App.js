@@ -11,6 +11,7 @@ import MyPage from './views/screens/MyPage';
 import PopularKing from './views/screens/PopularKing';
 import Listening from './views/screens/Listening';
 import FriendList from './views/screens/FriendList';
+import Board from './views/screens/Board'
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -89,6 +90,16 @@ export default () => (
           name="Listening"
           component={Listening}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Board"
+          component={Board}
+          options={{
+            headerShown: true,
+            title: '게시물 작성',
+            headerTintColor: '#034AA6',
+            headerTitleAlign: 'center',
+          }}
         />
         <Stack.Screen
           name="ArScreen"
