@@ -54,6 +54,7 @@ export default () => (
             headerTitleAlign: "center",
           }}
         />
+        <Stack.Screen name="ArScreen" component={ArScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     <View testID="Beautiful" style={styles.slide2}>

@@ -6,11 +6,14 @@ import {
   ScrollView,
   StatusBar,
   Image,
+  TouchableOpacity,
 } from "react-native";
 
-const Header = () => {
+const Header = (navigation) => {
   return (
-    <Image source={require("../../assets/myPage.png")} style={styles.image} />
+    <TouchableOpacity onPress={() => navigation.navigate("ArScreen")}>
+      <Image source={require("../../assets/myPage.png")} style={styles.image} />
+    </TouchableOpacity>
   );
 };
 
