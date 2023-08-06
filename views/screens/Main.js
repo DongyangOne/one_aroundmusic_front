@@ -77,7 +77,9 @@ const Main = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 17,
+    flex:1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
