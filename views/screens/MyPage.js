@@ -48,14 +48,18 @@ const Mypage = ({ navigation }) => {
             style={styles.rewardreward}
           ></Image>
         </TouchableOpacity>
-        <Image
-          source={require("../../assets/reward2.png")}
-          style={styles.rewardreward}
-        ></Image>
-        <Image
-          source={require("../../assets/reward3.png")}
-          style={styles.rewardreward}
-        ></Image>
+        <TouchableOpacity onPress={() => navigation.navigate("WKing")}>
+          <Image
+            source={require("../../assets/reward2.png")}
+            style={styles.rewardreward}
+          ></Image>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("ListenKing")}>
+          <Image
+            source={require("../../assets/reward3.png")}
+            style={styles.rewardreward}
+          ></Image>
+        </TouchableOpacity>
       </View>
     </View>
   );

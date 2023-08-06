@@ -10,6 +10,8 @@ import ArScreen from "./views/screens/ArScreen";
 import ArScreen1 from "./views/screens/ArScreen1";
 import MyPage from "./views/screens/MyPage";
 import PopularKing from "./views/screens/PopularKing";
+import WKing from "./views/screens/WKing";
+import ListenKing from "./views/screens/ListenKing";
 import Listening from "./views/screens/Listening";
 import FriendList from "./views/screens/FriendList";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -87,6 +89,16 @@ export default () => (
           }}
         />
         <Stack.Screen
+          name="ListenKing"
+          component={ListenKing}
+          options={{
+            headerShown: true,
+            title: "듣기왕 리워드",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
           name="Listening"
           component={Listening}
           options={{ headerShown: false }}
@@ -121,6 +133,26 @@ export default () => (
           options={{
             headerShown: true,
             title: "인기왕 리워드",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="WKing"
+          component={WKing}
+          options={{
+            headerShown: true,
+            title: "걷기왕 리워드",
+            headerTintColor: "#034AA6",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="ListenKing"
+          component={ListenKing}
+          options={{
+            headerShown: true,
+            title: "듣기왕 리워드",
             headerTintColor: "#034AA6",
             headerTitleAlign: "center",
           }}
