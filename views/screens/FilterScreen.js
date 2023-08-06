@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,28 +6,28 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-} from "react-native";
-import FilterDetailButton from "../components/FilterDetailButton";
+} from 'react-native';
+import FilterDetailButton from '../components/FilterDetailButton';
 import {
   DATAAGE,
   DATADATE,
   DATASEASON,
   DATASEX,
   DATATIME,
-} from "../components/DummyData";
+} from '../components/DummyData';
 
-const Item = ({ title }) => (
+const Item = ({title}) => (
   <View style={styles.item}>
     <FilterDetailButton title={title} />
   </View>
 );
 
-const FilterScreen = ({ navigation }) => {
+const FilterScreen = ({navigation}) => {
   const handleGoBack = () => {
     navigation.goBack();
   };
 
-  const renderItem = ({ item }) => <Item title={item.title} />;
+  const renderItem = ({item}) => <Item title={item.title} />;
 
   return (
     <>
@@ -85,7 +85,10 @@ const FilterScreen = ({ navigation }) => {
           horizontal={false}
           numColumns={5}
         />
-        <TouchableOpacity style={styles.button} onPress={handleGoBack}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Music2')}
+        >
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
@@ -96,31 +99,31 @@ export default FilterScreen;
 
 var styles = {
   MainText: {
-    color: "#034AA6",
+    color: '#034AA6',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 23,
     marginLeft: 10,
     marginBottom: 10,
   },
   flatList: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   item: {
     margin: 3,
   },
   button: {
-    backgroundColor: "#034AA6",
+    backgroundColor: '#034AA6',
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 5,
     marginHorizontal: 30,
-    alignItems: "center",
-    marginTop: "30%",
+    alignItems: 'center',
+    marginTop: '30%',
   },
   buttonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 };
