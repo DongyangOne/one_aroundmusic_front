@@ -8,9 +8,11 @@ import Music2 from './views/screens/Music2';
 import FilterScreen from './views/screens/FilterScreen';
 import ArScreen from './views/screens/ArScreen';
 import MyPage from './views/screens/MyPage';
+import PopularKing from './views/screens/PopularKing';
+import Listening from './views/screens/Listening';
+import FriendList from './views/screens/FriendList';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import FriendList from './views/screens/FriendList';
 
 var styles = {
   wrapper: {},
@@ -63,6 +65,36 @@ export default () => (
           component={Music2}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="MyPage"
+          component={MyPage}
+          options={{
+            headerShown: true,
+            title: '마이페이지',
+            headerTintColor: '#034AA6',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="PopularKing"
+          component={PopularKing}
+          options={{
+            headerShown: true,
+            title: '인기왕 리워드',
+            headerTintColor: '#034AA6',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="Listening"
+          component={Listening}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ArScreen"
+          component={ArScreen}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
     <NavigationContainer>
@@ -75,6 +107,16 @@ export default () => (
         <Stack.Screen
           name="MyPage"
           component={MyPage}
+          options={{
+            headerShown: true,
+            title: '마이페이지',
+            headerTintColor: '#034AA6',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="PopularKing"
+          component={PopularKing}
           options={{
             headerShown: true,
             title: '인기왕 리워드',

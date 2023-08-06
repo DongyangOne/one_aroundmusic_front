@@ -163,6 +163,7 @@ const Music = ({navigation}) => {
         numColumns={5}
       />
       <ScrollView style={styles.scrollView}>
+        <TouchableOpacity onPress={() => navigation.navigate('Listening')}>
         <FlatList
           data={SONG}
           renderItem={({item}) => (
@@ -174,6 +175,7 @@ const Music = ({navigation}) => {
             />
           )}
         />
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

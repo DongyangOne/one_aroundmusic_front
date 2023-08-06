@@ -48,9 +48,8 @@ const Main = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate("MyPage")}>
-            <Header />
-          </TouchableOpacity>
+          <Header onPress={() => navigation.navigate("MyPage")} />
+
           <View>
             <FlatList
               data={DATA}
