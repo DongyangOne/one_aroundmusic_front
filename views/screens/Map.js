@@ -7,25 +7,35 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  View,
 } from "react-native";
-
+import MapView from 'react-native-maps';
 import Header from "../components/Header";
+
 
 const Map = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <TouchableOpacity onPress={() => navigation.navigate("ArScreen")}>
-          <Header />
-          <Image
-            style={{ width: 25, height: 25, margin: 3 }}
-            source={require("../../assets/upload.png")}
-          />
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+    //<SafeAreaView style={styles.container}>
+      //<ScrollView>
+        //<TouchableOpacity onPress={() => navigation.navigate("ArScreen")}>
+          //<Header />
+          <View style={{ flex: 1 }}>
+      <MapView
+        style={{ flex: 1 }}
+        initialRegion={{
+          latitude: 37.566535,
+          longitude: 126.9779692,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
+    </View>
+        //</TouchableOpacity>
+      //</ScrollView>
+    //</SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {},
