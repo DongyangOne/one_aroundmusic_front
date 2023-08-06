@@ -10,15 +10,15 @@ import {
   Platform,
   PermissionsAndroid,
 } from "react-native";
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import Geolocation from "react-native-geolocation-service";
+import ArMarker from "../components/Marker";
 
 async function requestPermission() {
   try {
     if (Platform.OS === "ios") {
       return await Geolocation.requestAuthorization("always");
     }
-    // 안드로이드 위치 정보 수집 권한 요청
     if (Platform.OS === "android") {
       return await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -61,6 +61,7 @@ const Map = ({ navigation }) => {
   }
 
   return (
+    <>
       <MapView
         style={{ flex: 1 }}
         initialRegion={{
@@ -69,12 +70,38 @@ const Map = ({ navigation }) => {
           latitudeDelta: 0.005,
           longitudeDelta: 0.05,
         }}
+        mapType="standard"
         showsUserLocation={true}
         minZoomLevel={18}
         maxZoomLevel={18}
         scrollEnabled={false}
         scrollDuringRotateOrZoomEnabled={false}
-      />
+        followsUserLocation={true}
+        showsMyLocationButton={false}
+        showsIndoors = {false}
+        showsPointsOfInterest={false}
+        zoomEnabled={false}
+        zoomTapEnabled={false}
+        zoomControlEnabled={false}
+        pitchEnabled={false}
+        moveOnMarkerPress={false}
+        onMarkerPress={() => {
+          navigation.navigate('ArScreen');
+        }}
+      >
+
+        <ArMarker
+          location={{latitude: location.latitude-0.0005, longitude: location.longitude-0.0005}}
+          size={{width: 200, height: 200}}
+        />
+
+        <ArMarker
+          location={{latitude: location.latitude+0.0005, longitude: location.longitude+0.0005}}
+          size={{width: 150, height: 150}}
+        />
+
+        </MapView>
+    </>
   );
 };
 
