@@ -2,10 +2,10 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  ScrollView,
   FlatList,
   View,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import FilterDetailButton from "../components/FilterDetailButton";
 import {
@@ -30,7 +30,7 @@ const FilterScreen = ({ navigation }) => {
   const renderItem = ({ item }) => <Item title={item.title} />;
 
   return (
-    <ScrollView>
+    <>
       <View>
         <Text style={styles.MainText}>나이</Text>
         <FlatList
@@ -49,7 +49,8 @@ const FilterScreen = ({ navigation }) => {
           renderItem={renderItem}
           keyExtractor={item => item.id}
           style={styles.flatList}
-          horizontal={true}
+          horizontal={false}
+          numColumns={5}
         />
       </View>
       <View>
@@ -88,7 +89,7 @@ const FilterScreen = ({ navigation }) => {
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </>
   );
 };
 export default FilterScreen;

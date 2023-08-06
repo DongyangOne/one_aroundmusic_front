@@ -3,18 +3,17 @@ import {
   StyleSheet,
   Text,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   FlatList,
   View,
-  Image
+  Image,
 } from "react-native";
-
+import { ScrollView } from "react-native-virtualized-view";
 import Header from "../components/Header";
 import MainStory from "../components/MainStory";
 import Contents from "../components/Contents";
 
-const DATA = [
+export const DATA = [
   {
     id: "또치",
     src: require("../../assets/111.jpeg"),
@@ -55,28 +54,28 @@ const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-      <View>
-        <Header />
         <View>
-          <FlatList
-            data={DATA}
-            renderItem={({ item }) => (
-              <FriendItem id={item.id} src={item.src} story={item.story} />
-            )}
-            numColumns={5}
-          />
-          {/* <FlatList
+          <Header />
+          <View>
+            <FlatList
+              data={DATA}
+              renderItem={({ item }) => (
+                <FriendItem id={item.id} src={item.src} story={item.story} />
+              )}
+              numColumns={5}
+            />
+            {/* <FlatList
             data={DATA}
             renderItem={({ item }) => (
               <ContentsItem id={item.id} src={item.src} story={item.story} />
             )}
             numColumns={3}
           /> */}
-          <View > 
-          <Contents data={DATA}/>
+            <View>
+              <Contents data={DATA} />
+            </View>
+          </View>
         </View>
-        </View>
-      </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -86,7 +85,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 17,
   },
-
 });
 
 export default Main;
