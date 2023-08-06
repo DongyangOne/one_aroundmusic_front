@@ -27,7 +27,7 @@ const Listening = ({navigation}) => {
             <Text style={styles.title}>봄봄봄</Text>
             <Text style={styles.singer}>로이킴</Text>
             <Image source={require("../../assets/streaming.png")} style={styles.stream}/>
-            <Image source={require("../../assets/play.png")} style={styles.play}/>
+            <Image source={require("../../assets/playBtn.png")} style={styles.play}/>
             <TouchableOpacity onPress={() => navigation.navigate("ArScreen")}>
                 <Image source={require("../../assets/share.png")} style={styles.share}/>
             </TouchableOpacity>
