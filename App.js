@@ -13,19 +13,19 @@ var styles = {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#9DD6EB",
+    backgroundColor: "#FFFF",
   },
   slide2: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#97CAE5",
+    backgroundColor: "#FFFF",
   },
   slide3: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#92BBD9",
+    backgroundColor: "#FFFF",
   },
   text: {
     color: "#fff",
