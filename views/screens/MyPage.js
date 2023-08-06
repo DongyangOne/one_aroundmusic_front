@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import Header from "../components/Header";
-const Mypage = ({ navigation }) => {
+const MyPage = ({ navigation }) => {
   return (
     <View style={styles.contain}>
       <View style={styles.myPage}>
@@ -127,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Mypage;
+export default MyPage;

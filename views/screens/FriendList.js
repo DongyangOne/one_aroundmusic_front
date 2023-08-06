@@ -147,47 +147,47 @@ const FRIENDSLIST = [
   },
   {
     id: 2,
-    name: '김주만',
+    name: '한민규',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 3,
-    name: '김주만',
+    name: '이세진',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 4,
-    name: '김주만',
+    name: '최수진',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 5,
-    name: '김주만',
+    name: '이예빈',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 6,
-    name: '김주만',
+    name: '여남경',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 7,
-    name: '김주만',
+    name: '유예린',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 8,
-    name: '김주만',
+    name: '유병재',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 9,
-    name: '김주만',
+    name: '유재석',
     image: require('../../assets/111.jpeg'),
   },
   {
     id: 10,
-    name: '김주만',
+    name: '조정석',
     image: require('../../assets/111.jpeg'),
   },
 ];
