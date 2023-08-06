@@ -7,6 +7,7 @@ import {
   StatusBar,
   FlatList,
   View,
+  Image
 } from "react-native";
 
 import Header from "../components/Header";
@@ -53,10 +54,9 @@ const ContentsItem = ({ id, src, story }) => (
 const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <ScrollView> */}
+      <ScrollView>
       <View>
         <Header />
-        {/* <MainStory /> */}
         <View>
           <FlatList
             data={DATA}
@@ -65,18 +65,19 @@ const Main = () => {
             )}
             numColumns={5}
           />
-          <FlatList
+          {/* <FlatList
             data={DATA}
             renderItem={({ item }) => (
               <ContentsItem id={item.id} src={item.src} story={item.story} />
             )}
             numColumns={3}
-            style={styles.main}
-          />
+          /> */}
+          <View > 
+          <Contents data={DATA}/>
         </View>
-        {/* <Contents/> */}
+        </View>
       </View>
-      {/* </ScrollView> */}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -85,9 +86,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 17,
   },
-  main:{
-    //marginTop: 10,
-  }
+
 });
 
 export default Main;
