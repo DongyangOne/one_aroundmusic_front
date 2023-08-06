@@ -1,22 +1,17 @@
 import React from "react";
-import {
-  SafeAreaView,
-  View,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { SafeAreaView, View, StyleSheet, Image, Text } from "react-native";
 
-
-
-const MainStory = ({src}) => {
+const MainStory = ({ id, src, story }) => {
   return (
-   // <SafeAreaView style={styles.container}>
-      <View style={styles.storyRow}>
-        <View><Image source={src} style={styles.image}></Image></View>
-        <View><Image source={src} style={styles.image}></Image></View>
-        <View><Image source={src} style={styles.image}></Image></View>
+    // <SafeAreaView style={styles.container}>
+    <View style={styles.storyRow}>
+      <View>
+        <Image source={src} style={styles.image}></Image>
+        <Text style={styles.text}>{id}</Text>
       </View>
-  //  </SafeAreaView>
+    </View>
+
+    //  </SafeAreaView>
   );
 };
 
@@ -26,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 13,
   },
-  image:{
+  image: {
     width: 50,
     height: 50,
     borderTopLeftRadius: 25,
@@ -35,8 +30,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 25,
     marginLeft: 18,
     borderWidth: 3,
-    borderColor: '#B6CBE5',
-
+    borderColor: "#B6CBE5",
+  },
+  text: {
+    marginLeft: 25,
   }
 });
 
