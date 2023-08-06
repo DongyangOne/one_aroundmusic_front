@@ -1,20 +1,13 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, Text, SafeAreaView, ScrollView } from "react-native";
 
 import Header from "../components/Header";
 
 const Msuic = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
+      <Header />
       <ScrollView style={styles.scrollView}>
-        
         <Text style={styles.text}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
