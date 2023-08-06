@@ -9,9 +9,11 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Header = () => {
+const Header = (navigation) => {
   return (
-    <Image source={require("../../assets/myPage.png")} style={styles.image} />
+    <TouchableOpacity onPress={() => navigation.navigate("ArScreen")}>
+      <Image source={require("../../assets/myPage.png")} style={styles.image} />
+    </TouchableOpacity>
   );
 };
 
