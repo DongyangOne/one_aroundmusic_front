@@ -27,8 +27,8 @@ const WorldSceneAR = () => {
         height={0.5}
         width={0.5}
         position={[0, 0.5, -1.5]}
-        placeholderSource={require("../../assets/music3.png")}
-        source={require("../../assets/music3.png")}
+        placeholderSource={require("../../assets/borderAlbum.png")}
+        source={require("../../assets/borderAlbum.png")}
       />
       <ViroImage
         height={0.2}
