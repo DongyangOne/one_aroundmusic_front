@@ -70,6 +70,10 @@ const Map = ({ navigation }) => {
           longitudeDelta: 0.05,
         }}
         showsUserLocation={true}
+        minZoomLevel={18}
+        maxZoomLevel={18}
+        scrollEnabled={false}
+        scrollDuringRotateOrZoomEnabled={false}
       />
   );
 };
