@@ -8,7 +8,6 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import Header from "../components/Header";
 
 const Listening = ({ navigation }) => {
   return (
