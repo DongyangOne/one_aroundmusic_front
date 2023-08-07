@@ -1,7 +1,7 @@
-import {Image, StyleSheet, View, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Image, StyleSheet, View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const FriendsItem = ({name, image, state}) => {
+const FriendsItem = ({ name, image, state }) => {
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
@@ -19,15 +19,15 @@ const FriendsItem = ({name, image, state}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginHorizontal: 19,
     marginTop: 19,
   },
   userInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   profile: {
     width: 50,
@@ -37,18 +37,18 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 17,
     marginLeft: 18,
-    color: '#034AA6',
-    fontWeight: 'bold',
+    color: "#034AA6",
+    fontWeight: "bold",
   },
   btn: {
     width: 83,
     height: 30,
-    backgroundColor: '#034AA6',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#034AA6",
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnText: {
-    color: 'white',
+    color: "white",
   },
 });
 

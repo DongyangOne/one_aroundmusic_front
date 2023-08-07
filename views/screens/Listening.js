@@ -34,7 +34,9 @@ const Listening = ({ navigation }) => {
                 source={require("../../assets/playBtn.png")}
                 style={styles.play}
               />
-              <TouchableOpacity onPress={() => navigation.navigate("Board")}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("ArScreen2")}
+              >
                 <Image
                   source={require("../../assets/share.png")}
                   style={styles.share}

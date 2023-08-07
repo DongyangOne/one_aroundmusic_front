@@ -8,6 +8,7 @@ import Music2 from "./views/screens/Music2";
 import FilterScreen from "./views/screens/FilterScreen";
 import ArScreen from "./views/screens/ArScreen";
 import ArScreen1 from "./views/screens/ArScreen1";
+import ArScreen2 from "./views/screens/ArScreen2";
 import MyPage from "./views/screens/MyPage";
 import PopularKing from "./views/screens/PopularKing";
 import ListenKing from "./views/screens/ListenKing";
@@ -16,6 +17,7 @@ import Listening from "./views/screens/Listening";
 import FriendList from "./views/screens/FriendList";
 import Board from "./views/screens/Board";
 import NotMain from "./views/screens/NotMain";
+
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -113,6 +115,11 @@ export default () => (
         <Stack.Screen
           name="Listening"
           component={Listening}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ArScreen2"
+          component={ArScreen2}
           options={{ headerShown: false }}
         />
         <Stack.Screen
