@@ -11,7 +11,9 @@ import {
 } from "react-native";
 
 const Board = ({ data, navigation }) => {
-  const [value, onChangeText] = React.useState("Useless Multiline Placeholder");
+  const [value, onChangeText] = React.useState(
+    "봄 바람을 맞으면서 기분이 산뜻해졌다."
+  );
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -39,15 +41,17 @@ const Board = ({ data, navigation }) => {
           multiline
           numberOfLines={4}
           maxLength={40}
-          onChangeText={text => onChangeText(text)}
+          onChangeText={(text) => onChangeText(text)}
           value={value}
           style={styles.soft}
         />
+      </View>
+      <View style={styles.btnContainer}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("NotMain")}
         >
-          <Text style={styles.buttonText}>적용하기</Text>
+          <Text style={styles.buttonText}>업로드하기</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -74,36 +78,43 @@ const styles = StyleSheet.create({
   },
   hard: {},
   soft: {
-    width: 280,
+    width: 350,
+    height: 100,
     shadowColor: "rgba(0, 0, 0, 0.15)",
     shadowOpacity: 0.5,
     backgroundColor: "white",
     color: "#B2B2B2",
-    borderRadius: 10,
+    borderRadius: 20,
     textAlignVertical: "top",
   },
   soft1: {
-    width: 280,
+    width: 350,
     height: 38,
     shadowColor: "rgba(0, 0, 0, 0.15)",
     shadowOpacity: 0.5,
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 15,
     textAlignVertical: "top",
   },
+  btnContainer: {
+    alignItems: "center",
+  },
   button: {
-    backgroundColor: "#034AA6",
+    width: 380,
+    height: 50,
+    backgroundColor: "#0A0A2A",
     paddingVertical: 8,
     paddingHorizontal: 30,
-    borderRadius: 5,
-    marginHorizontal: 30,
+    borderRadius: 20,
+    marginHorizontal: 20,
     alignItems: "center",
-    marginTop: "30%",
+    marginTop: "45%",
   },
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+    marginTop: "1%",
   },
 });
 
