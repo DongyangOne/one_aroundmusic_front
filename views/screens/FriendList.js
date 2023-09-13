@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from "react";
 import {
   FlatList,
   Text,
@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-} from 'react-native';
-import FriendsItem from '../components/FriendsItem';
+} from "react-native";
+import FriendsItem from "../components/FriendsItem";
 
 const FriendList = () => {
-  const [mode, setMode] = useState('내 친구');
+  const [mode, setMode] = useState("내 친구");
 
   return (
     <View style={styles.container}>
@@ -20,18 +20,22 @@ const FriendList = () => {
         <TouchableOpacity
           style={[
             styles.myFriend,
-            mode == '내 친구'
-              ? {backgroundColor: '#034AA6'}
+            mode == "내 친구"
+              ? {
+                  backgroundColor: "#001C3E",
+                }
               : {
-                  backgroundColor: 'white',
-                  borderColor: '#034AA6',
-                  borderWidth: 1,
+                  backgroundColor: "white",
+                  borderColor: "#001C3E",
+                  borderWidth: 0,
                 },
           ]}
-          onPress={() => setMode('내 친구')}
+          onPress={() => setMode("내 친구")}
         >
           <Text
-            style={mode == '내 친구' ? {color: 'white'} : {color: '#034AA6'}}
+            style={
+              mode == "내 친구" ? { color: "white" } : { color: "#001C3E" }
+            }
           >
             내 친구
           </Text>
@@ -39,18 +43,20 @@ const FriendList = () => {
         <TouchableOpacity
           style={[
             styles.request,
-            mode == '친구 요청'
-              ? {backgroundColor: '#034AA6'}
+            mode == "친구 요청"
+              ? { backgroundColor: "#001C3E" }
               : {
-                  backgroundColor: 'white',
-                  borderColor: '#034AA6',
-                  borderWidth: 1,
+                  backgroundColor: "white",
+                  borderColor: "#000000",
+                  borderWidth: 0,
                 },
           ]}
-          onPress={() => setMode('친구 요청')}
+          onPress={() => setMode("친구 요청")}
         >
           <Text
-            style={mode == '친구 요청' ? {color: 'white'} : {color: '#034AA6'}}
+            style={
+              mode == "친구 요청" ? { color: "white" } : { color: "#001C3E" }
+            }
           >
             친구요청
           </Text>
@@ -60,7 +66,7 @@ const FriendList = () => {
       <View style={styles.search}>
         <TextInput style={styles.input} />
         <Image
-          source={require('../../assets/searchIcon.png')}
+          source={require("../../assets/searchIcon.png")}
           style={styles.searchIcon}
         />
       </View>
@@ -69,12 +75,12 @@ const FriendList = () => {
         <Text style={styles.title}>{mode}</Text>
         <ScrollView style={styles.scrollView}>
           <FlatList
-            data={mode == '내 친구' ? FRIENDSLIST : REQUEST}
-            renderItem={({item}) => (
+            data={mode == "내 친구" ? FRIENDSLIST : REQUEST}
+            renderItem={({ item }) => (
               <FriendsItem
                 name={item.name}
                 image={item.image}
-                state={mode == '내 친구' ? '친구 끊기' : '수락 하기'}
+                state={mode == "내 친구" ? "친구 끊기" : "수락 하기"}
               />
             )}
           />
@@ -87,7 +93,7 @@ const FriendList = () => {
 const styles = StyleSheet.create({
   container: {},
   mode: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginHorizontal: 19,
     marginTop: 25,
   },
@@ -95,31 +101,31 @@ const styles = StyleSheet.create({
     width: 100,
     height: 30,
     borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 15,
   },
   request: {
     width: 100,
     height: 30,
     borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   search: {
     borderWidth: 1,
-    borderColor: '#034AA6',
-    borderRadius: 30,
-    width: '90%',
+    borderColor: "#C2C1C1",
+    borderRadius: 10,
+    width: "90%",
     height: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 19,
     marginHorizontal: 19,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   input: {
-    width: '85%',
+    width: "85%",
   },
   searchIcon: {
     width: 32,
@@ -127,106 +133,106 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   title: {
-    color: '#034AA6',
+    color: "#001C3E",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginHorizontal: 19,
     marginTop: 19,
   },
   scrollView: {
     width: 400,
-    height: '80%',
+    height: "80%",
   },
 });
 
 const FRIENDSLIST = [
   {
     id: 1,
-    name: '김주만',
-    image: require('../../assets/111.jpeg'),
+    name: "김주만",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 2,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 3,
-    name: '이세진',
-    image: require('../../assets/111.jpeg'),
+    name: "이세진",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 4,
-    name: '최수진',
-    image: require('../../assets/111.jpeg'),
+    name: "최수진",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 5,
-    name: '이예빈',
-    image: require('../../assets/111.jpeg'),
+    name: "이예빈",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 6,
-    name: '여남경',
-    image: require('../../assets/111.jpeg'),
+    name: "여남경",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 7,
-    name: '유예린',
-    image: require('../../assets/111.jpeg'),
+    name: "유예린",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 8,
-    name: '유병재',
-    image: require('../../assets/111.jpeg'),
+    name: "유병재",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 9,
-    name: '유재석',
-    image: require('../../assets/111.jpeg'),
+    name: "유재석",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 10,
-    name: '조정석',
-    image: require('../../assets/111.jpeg'),
+    name: "조정석",
+    image: require("../../assets/111.jpeg"),
   },
 ];
 
 const REQUEST = [
   {
     id: 1,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 2,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 3,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 4,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 5,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 6,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
   {
     id: 7,
-    name: '한민규',
-    image: require('../../assets/111.jpeg'),
+    name: "한민규",
+    image: require("../../assets/111.jpeg"),
   },
 ];
 

@@ -27,19 +27,19 @@ var styles = {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFF",
+    backgroundColor: "#EDEDED",
   },
   slide2: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFF",
+    backgroundColor: "#EDEDED",
   },
   slide3: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFFF",
+    backgroundColor: "#EDEDED",
   },
   text: {
     color: "#fff",
@@ -198,7 +198,10 @@ export default () => (
           component={FriendList}
           options={{
             title: "친구",
-            headerTintColor: "#034AA6",
+            headerStyle: {
+              backgroundColor: "#001C3E",
+            },
+            headerTintColor: "#ffffff",
             headerTitleAlign: "center",
           }}
         />

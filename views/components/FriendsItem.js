@@ -37,18 +37,20 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 17,
     marginLeft: 18,
-    color: "#034AA6",
+    color: "#484848",
     fontWeight: "bold",
   },
   btn: {
-    width: 83,
+    width: 100,
     height: 30,
-    backgroundColor: "#034AA6",
+    backgroundColor: "#001C3E",
+    borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
   },
   btnText: {
     color: "white",
+    fontSize: 12,
   },
 });
 
