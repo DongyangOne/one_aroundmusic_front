@@ -8,11 +8,12 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
+// import { LinearGradient } from "expo-linear-gradient";
 import LinearGradient from "react-native-linear-gradient";
 
 import Header from "../components/Header";
 
-const MyPage = ({ navigation }) => {
+const BACKUP_MyPage = ({ navigation }) => {
   /** 친구 수 저장 Variable */
   const [friend, setFriend] = useState(0);
 
@@ -91,6 +92,14 @@ const MyPage = ({ navigation }) => {
               style={styles.rewardLogo}
             />
             <Text style={styles.rewardreward}>인기왕 리워드 보러가기</Text>
+            {/* 가로줄 넣기 */}
+            {/* <View></View> */}
+
+            {/* Previous Code */}
+            {/* <Image
+            source={require("../../assets/reward1.png")}
+            style={styles.rewardreward}
+          ></Image> */}
           </TouchableOpacity>
           <View style={styles.rewardLine}>
             <Image
@@ -100,7 +109,8 @@ const MyPage = ({ navigation }) => {
           </View>
         </View>
 
-        {/** 걷기왕
+        {/** Walk king
+         * 걷기왕
          * 파란색, 200C, 위치 표시
          * onPress={() => navigation.navigate("WKing")
          */}
@@ -131,6 +141,14 @@ const MyPage = ({ navigation }) => {
               style={styles.rewardLogo}
             />
             <Text style={styles.rewardreward}>걷기왕 리워드 보러가기</Text>
+            {/* 가로줄 넣기 */}
+            {/* <View></View> */}
+
+            {/* Previous Code */}
+            {/* <Image
+            source={require("../../assets/reward1.png")}
+            style={styles.rewardreward}
+          ></Image> */}
           </TouchableOpacity>
           <View style={styles.rewardLine}>
             <Image
@@ -171,6 +189,14 @@ const MyPage = ({ navigation }) => {
               style={styles.rewardLogo}
             />
             <Text style={styles.rewardreward}>듣기왕 리워드 보러가기</Text>
+            {/* 가로줄 넣기 */}
+            {/* <View></View> */}
+
+            {/* Previous Code */}
+            {/* <Image
+            source={require("../../assets/reward1.png")}
+            style={styles.rewardreward}
+          ></Image> */}
           </TouchableOpacity>
           <View style={styles.rewardLine}>
             <Image
@@ -237,7 +263,9 @@ const styles = StyleSheet.create({
     width: 140,
     height: 27,
     marginTop: 17,
+    // marginTop: 88,
     marginLeft: 25,
+    // marginLeft: 56,
     textAlign: "left",
     borderColor: "#034AA6",
     borderWidth: 1,
@@ -258,6 +286,7 @@ const styles = StyleSheet.create({
     // fontWeight: "bold",
     marginTop: 20,
     marginLeft: 25,
+    // marginLeft: 58,
     // color: "#034AA6",
     color: "#071c3c",
   },
@@ -265,9 +294,9 @@ const styles = StyleSheet.create({
   profile: {
     width: 100,
     height: 104,
+    // marginTop: 49,
     marginLeft: 34,
   },
-  // king 부분 Container
   kingContainer: {
     backgroundColor: "#041c3c",
     // flex: 1,
@@ -314,56 +343,82 @@ const styles = StyleSheet.create({
   kingTitle: {
     fontSize: 23,
     color: "#000",
+    // flex: 1,
     marginLeft: 25,
   },
   // Badge Picture Container Style
   kingLogoCont: {
+    // flex: 3,
     alignItems: "left",
+    // width: 100,
   },
   // Badge Picture Style
   kingLogo: {
     width: 70,
     height: 70,
   },
-  // 1022C 같은 코드
+  // 1022C 같은 코드 (???)
   kingCode: {
+    // flex: 1,
     fontSize: 11,
     color: "#000",
   },
   // Next Button (Arrow picture)
   kingNext: {
+    // flex: 1,
     width: 20,
     height: 20,
     marginRight: 25,
   },
+  // kingking: {
+  //   width: 96,
+  //   height: 155,
+  //   margin: 7,
+  // },
   reward: {
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 40,
+    // marginTop: -20,
+    // justifyContent: "center",
+    // marginTop: 30,
+    // color: "green",
   },
   rewardLogo: {
+    // width: 299,
     width: 23,
     height: 23,
     marginRight: 10,
+    // margin: 13,
   },
   rewardText: {
+    // fontSize: 10,
     color: "#000",
   },
   rewardreward: {
     color: "#ccc",
     width: 299,
+    // width: 23,
     height: 23,
     marginRight: 10,
     margin: 13,
   },
   rewardLine: {
+    // width: "80%",
+    // width: 100,
+    // height: 10,
+    // backgroundColor: "#000",
     marginHorizontal: 35,
     marginTop: -10,
     marginBottom: 10,
   },
   rewardLinePic: {
     width: 350,
+    // height: 10,
+    // backgroundColor: "#000",
     resizeMode: "center",
+    // objectFit: "scale-down",
+    // overflow: "hidden",
   },
 });
 
