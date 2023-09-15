@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,23 +6,30 @@ import {
   ScrollView,
   StatusBar,
   Image,
-} from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+  View,
+} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Header = ({ onPress }) => {
+const Header = ({onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <Image source={require("../../assets/myPage.png")} style={styles.image} />
+    <TouchableOpacity style={styles.wrap} onPress={onPress}>
+      <View style={styles.image}>
+        <Image source={require('../../assets/myPage.png')} />
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
+  wrap: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: '#001C3E',
+    height: 60,
+  },
   image: {
-    width: 34,
-    height: 34,
-    marginTop: 17,
-    marginLeft: 311,
+    marginRight: 18,
   },
 });
 
