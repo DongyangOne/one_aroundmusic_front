@@ -224,13 +224,17 @@ const styles = StyleSheet.create({
   contain: {
     flex: 1,
     backgroundColor: "#fff",
+    color: "#fff",
     // backgroundColor: "#041c3c",
+    // backgroundColor: "#0f0",
     // paddingTop: 50,
   },
   // Top area
   myPage: {
+    backgroundColor: "#fff",
     flexDirection: "row",
     // marginLeft: 20,
+    // backgroundColor: "#0ff",
   },
   // Friend Button
   friendBtn: {
