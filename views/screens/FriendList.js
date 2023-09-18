@@ -62,7 +62,6 @@ const FriendList = () => {
           </Text>
         </TouchableOpacity>
       </View>
-
       <View style={styles.search}>
         <TextInput style={styles.input} />
         <Image
@@ -70,7 +69,6 @@ const FriendList = () => {
           style={styles.searchIcon}
         />
       </View>
-
       <View>
         <Text style={styles.title}>{mode}</Text>
         <ScrollView style={styles.scrollView}>
@@ -104,6 +102,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: 15,
+    ...Platform.select({
+      android: {
+        elevation: 5,
+      },
+    }),
   },
   request: {
     width: 100,
@@ -111,6 +114,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
+    marginRight: 15,
+    ...Platform.select({
+      android: {
+        elevation: 5,
+      },
+    }),
   },
   search: {
     borderWidth: 1,

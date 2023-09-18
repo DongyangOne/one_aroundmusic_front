@@ -47,6 +47,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
+    ...Platform.select({
+      android: {
+        elevation: 5,
+      },
+    }),
   },
   btnText: {
     color: "white",
