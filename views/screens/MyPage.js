@@ -1,62 +1,51 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  Image,
-  ImageBackground,
-} from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { Text, TouchableOpacity, View, StyleSheet, Image } from "react-native";
 
 import Header from "../components/Header";
 
 const MyPage = ({ navigation }) => {
-  /** 친구 수 저장 Variable */
-  const [friend, setFriend] = useState(0);
+  const [friend, setFriend] = useState(0); // save user's number of friends
+  const [userId, setUserId] = useState("Guest"); // save userID (like MiRae23)
 
   useEffect(() => {
-    // 친구 수 불러오기
+    // Load userID
+    // Load the user's number of friends
     // console.log("Load Friend List");
   }, []);
 
   return (
     <View style={styles.contain}>
       <View style={styles.myPage}>
+        {/* Profile picture */}
         <Image
           style={styles.profile}
           source={require("../../assets/profile.png")}
         />
         <View>
-          <Text style={styles.id}>MiRae23</Text>
+          {/** FUNCTION IMPLEMENT:
+           * Load the logged-in user's ID */}
+          <Text style={styles.id}>{userId}</Text>
+          {/* Friend button area */}
           <TouchableOpacity onPress={() => navigation.navigate("FriendList")}>
             <View style={styles.friendBtn}>
-              {/* 친구 몇명 있는지 계산? */}
+              {/** FUNCTION IMPLEMENT:
+               * Count the logged-in user's number of friends */}
               <Text style={styles.text}>내 친구 {friend}</Text>
             </View>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* 공백 */}
-      <View style={{ marginTop: 30 }}></View>
+      {/* Margins */}
+      <View style={styles.MiddleMargin}></View>
 
-      {/* 무슨 왕 시작 */}
+      {/* Start blah, blah king*/}
       {/* ========================== */}
-      {/* <LinearGradient
-        colors={["transparent", "#aaa"]}
-        style={styles.kingGradient}
-        start={{ x: 0, y: 0.1 }}
-        end={{ x: 0, y: 0 }}
-        // locations={(0, 0.1, 0)}
-      >
-        <LinearGradient
-          colors={["transparent", "#aaa"]}
-          style={styles.kingGradient}
-          start={{ x: 0.03, y: 0 }}
-          end={{ x: 0, y: 0 }}
-        > */}
+      {/** 인기왕
+       * Red color, 1022Ç, Heart logo
+       * onPress={() => navigation.navigate("PopularKing")
+       */}
+      {/* White Famous-King box */}
       <View style={styles.king}>
         <Text style={styles.kingTitle}>인기왕</Text>
         <View styles={styles.kingLogoCont}>
@@ -74,13 +63,9 @@ const MyPage = ({ navigation }) => {
           />
         </View>
       </View>
-      {/* </LinearGradient>
-      </LinearGradient> */}
+
+      {/* the area, filled with 남색 */}
       <View style={styles.kingContainer}>
-        {/** 인기왕
-         * Red, 1022Ç, 하트 표시
-         * onPress={() => navigation.navigate("PopularKing")
-         */}
         <View>
           <TouchableOpacity
             style={styles.reward}
@@ -90,7 +75,7 @@ const MyPage = ({ navigation }) => {
               source={require("../../assets/MyPage_king_popular.png")}
               style={styles.rewardLogo}
             />
-            <Text style={styles.rewardreward}>인기왕 리워드 보러가기</Text>
+            <Text style={styles.rewardText}>인기왕 리워드 보러가기</Text>
           </TouchableOpacity>
           <View style={styles.rewardLine}>
             <Image
@@ -101,7 +86,7 @@ const MyPage = ({ navigation }) => {
         </View>
 
         {/** 걷기왕
-         * 파란색, 200C, 위치 표시
+         * Blue color, 200C, position-mark logo
          * onPress={() => navigation.navigate("WKing")
          */}
         <View>
@@ -130,7 +115,7 @@ const MyPage = ({ navigation }) => {
               source={require("../../assets/MyPage_king_walk.png")}
               style={styles.rewardLogo}
             />
-            <Text style={styles.rewardreward}>걷기왕 리워드 보러가기</Text>
+            <Text style={styles.rewardText}>걷기왕 리워드 보러가기</Text>
           </TouchableOpacity>
           <View style={styles.rewardLine}>
             <Image
@@ -141,7 +126,7 @@ const MyPage = ({ navigation }) => {
         </View>
 
         {/** 듣기왕
-         * 초록색, 1112C, 재생 표시
+         * Green color, 1112C, play-button logo
          * onPress={() => navigation.navigate("ListenKing")
          */}
         <View>
@@ -170,7 +155,7 @@ const MyPage = ({ navigation }) => {
               source={require("../../assets/MyPage_king_listen.png")}
               style={styles.rewardLogo}
             />
-            <Text style={styles.rewardreward}>듣기왕 리워드 보러가기</Text>
+            <Text style={styles.rewardText}>듣기왕 리워드 보러가기</Text>
           </TouchableOpacity>
           <View style={styles.rewardLine}>
             <Image
@@ -179,61 +164,24 @@ const MyPage = ({ navigation }) => {
             />
           </View>
         </View>
-
-        {/* Previous Code */}
-        {/* <Image
-          source={require("../../assets/king1.png")}
-          style={styles.kingking}
-        ></Image>
-        <Image
-          source={require("../../assets/king2.png")}
-          style={styles.kingking}
-        ></Image>
-        <Image
-          source={require("../../assets/king3.png")}
-          style={styles.kingking}
-        ></Image> */}
       </View>
-
-      {/* Previous Code */}
-      {/* <View style={styles.reward}>
-        <TouchableOpacity onPress={() => navigation.navigate("PopularKing")}>
-          <Image
-            source={require("../../assets/reward1.png")}
-            style={styles.rewardreward}
-          ></Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("WKing")}>
-          <Image
-            source={require("../../assets/reward2.png")}
-            style={styles.rewardreward}
-          ></Image>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("ListenKing")}>
-          <Image
-            source={require("../../assets/reward3.png")}
-            style={styles.rewardreward}
-          ></Image>
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 };
 
+// Style Sheet
 const styles = StyleSheet.create({
+  // MyPage whole container
   contain: {
     flex: 1,
     backgroundColor: "#fff",
     color: "#fff",
     // backgroundColor: "#041c3c",
-    // backgroundColor: "#0f0",
-    // paddingTop: 50,
   },
   // Top area
   myPage: {
     backgroundColor: "#fff",
     flexDirection: "row",
-    // marginLeft: 20,
     // backgroundColor: "#0ff",
   },
   // Friend Button
@@ -259,10 +207,8 @@ const styles = StyleSheet.create({
   // user ID
   id: {
     fontSize: 24,
-    // fontWeight: "bold",
     marginTop: 20,
     marginLeft: 25,
-    // color: "#034AA6",
     color: "#071c3c",
   },
   // Profile picture
@@ -271,65 +217,48 @@ const styles = StyleSheet.create({
     height: 104,
     marginLeft: 34,
   },
-  // king 부분 Container
+  // for Middle margin area
+  MiddleMargin: {
+    marginTop: 30,
+  },
+  // king Whole Container
   kingContainer: {
     backgroundColor: "#041c3c",
-    // flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     top: -40,
-    // paddingTop: 40,
     paddingVertical: 40,
-    // bottom: 80,
     zIndex: 10,
   },
-  kingGradient: {
-    zIndex: 101,
-    // height: 80,
-    // zIndex: 50,
-    height: 80,
-    // marginTop: 34,
-    // flexDirection: "row",
-    // alignItems: "center",
-    // justifyContent: "space-between",
-    // backgroundColor: "#fff",
-    // borderColor: "#000",
-    // borderWidth: 1,
-    borderRadius: 25,
-    marginHorizontal: 25,
-    // marginVertical: 10,
-  },
-  kingGradientInner: {},
+  // blah, blah king box style
   king: {
     zIndex: 50,
     height: 80,
-    // marginTop: 34,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#fff",
-    borderColor: "#000",
+    borderColor: "#041c3c",
     borderWidth: 1,
     borderRadius: 25,
     marginHorizontal: 25,
-    // marginVertical: 10,
   },
-  // title text (like 인기왕, 걷기왕, 듣기왕)
+  // king inner title text (like 인기왕, 걷기왕, 듣기왕)
   kingTitle: {
     fontSize: 23,
     color: "#000",
     marginLeft: 25,
   },
-  // Badge Picture Container Style
+  // Badge Picture Container
   kingLogoCont: {
     alignItems: "left",
   },
-  // Badge Picture Style
+  // Badge Picture logo size
   kingLogo: {
     width: 70,
     height: 70,
   },
-  // 1022C 같은 코드
+  // king code
   kingCode: {
     fontSize: 11,
     color: "#000",
@@ -340,31 +269,33 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 25,
   },
+  // reward container
   reward: {
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 40,
   },
+  // reward mini logo (like heart, position-mark, play-button etc.)
   rewardLogo: {
     width: 23,
     height: 23,
     marginRight: 10,
   },
+  // ~~~ 리워드 보러가기
   rewardText: {
-    color: "#000",
-  },
-  rewardreward: {
     color: "#ccc",
     width: 299,
     height: 23,
     marginRight: 10,
     margin: 13,
   },
+  // looooong arrow container
   rewardLine: {
     marginHorizontal: 35,
     marginTop: -10,
     marginBottom: 10,
   },
+  // looooong arrow picture
   rewardLinePic: {
     width: 350,
     resizeMode: "center",
