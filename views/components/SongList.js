@@ -1,53 +1,76 @@
 import { Image, StyleSheet, Text, View } from "react-native";
-
 const SongList = ({ title, image, singer, date }) => {
   return (
-    <View style={styles.wrap}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.musicBox}>
         <Image style={styles.image} source={image} />
+
         <View style={styles.text}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.singer}>{singer}</Text>
-          <Text style={styles.date}>{date}</Text>
+          <View style={{ marginTop: 3 }}>
+            <Text style={styles.singerName}>노래 {singer}</Text>
+          </View>
+        </View>
+        <View style={styles.play}>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              style={{ width: 25, height: 30 }}
+              source={require("../../assets/playButton.png")}
+            />
+          </View>
         </View>
       </View>
-      <View style={styles.line} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  wrap: {},
   container: {
     flexDirection: "row",
-    marginHorizontal: 7,
+    marginHorizontal: 35,
+    flex: 1,
+    backgroundColor: "#001C3E",
+    marginLeft: 40,
+    marginTop: 15,
+    marginRight: 25,
+    elevation: 10,
+  },
+  musicBox: {
+    flex: 1,
+    margin: 15,
+    flexDirection: "row",
+    backgroundColor: "#001C3E",
   },
   image: {
     width: 100,
     height: 100,
+    left: -40,
+  },
+  play: {
+    backgroundColor: "#001C3E",
+    textAlign: "center",
+    justifyContent: "center",
+    flex: 1,
   },
   text: {
-    marginLeft: 17,
-    marginTop: 17,
+    textAlign: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    flex: 2,
   },
   title: {
-    fontSize: 17,
-    color: "#034AA6",
+    fontSize: 20,
+    color: "white",
     fontWeight: "bold",
   },
-  singer: {
+  singerName: {
     fontSize: 12,
     color: "#D0D0D0",
-  },
-  date: {
-    fontSize: 10,
-    color: "#D0D0D0",
-  },
-  line: {
-    height: 1,
-    width: 370,
-    backgroundColor: "#034AA6",
-    marginVertical: 15,
   },
 });
 

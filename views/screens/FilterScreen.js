@@ -5,10 +5,8 @@ import {
   FlatList,
   View,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
 import FilterDetailButton from "../components/FilterDetailButton";
-
 import {
   DATAAGE,
   DATADATE,
@@ -100,24 +98,22 @@ export default FilterScreen;
 
 var styles = {
   MainText: {
-    color: "#034AA6",
-    fontSize: 18,
+    color: "#001C3E",
+    fontSize: 20,
     fontWeight: "bold",
     marginTop: 23,
-    marginLeft: 10,
+    marginLeft: 14,
     marginBottom: 10,
   },
-  flatList: {
-    flexDirection: "column",
-  },
   item: {
-    margin: 3,
+    marginLeft:6,
+    margin:3
   },
   button: {
-    backgroundColor: "#034AA6",
+    backgroundColor: "#001C3E",
     paddingVertical: 8,
     paddingHorizontal: 30,
-    borderRadius: 5,
+    borderRadius: 10,
     marginHorizontal: 30,
     alignItems: "center",
     marginTop: "30%",

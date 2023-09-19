@@ -14,7 +14,7 @@ const Header = ({onPress}) => {
   return (
     <TouchableOpacity style={styles.wrap} onPress={onPress}>
       <View style={styles.image}>
-        <Image source={require('../../assets/myPage.png')} />
+        <Image source={require('../../assets/myPage1.png')} />
       </View>
     </TouchableOpacity>
   );

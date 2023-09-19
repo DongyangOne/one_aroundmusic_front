@@ -1,12 +1,12 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const FilterButton = ({title, color, textColor, onPress}) => {
+const FilterButton = ({ title, color, textColor, onPress }) => {
   return (
     <TouchableOpacity
-      style={[{backgroundColor: color}, styles.filterBtn]}
+      style={[{ backgroundColor: color }, styles.filterBtn]}
       onPress={onPress}
     >
-      <Text style={[styles.text, {color: textColor}]}>{title}</Text>
+      <Text style={[styles.text, { color: textColor }]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -15,10 +15,12 @@ const styles = StyleSheet.create({
   filterBtn: {
     width: 60,
     height: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 15,
-    marginRight: 11.06,
+    marginLeft: 6,
+    marginTop: 2,
+    backgroundColor: "#F2F3F6",
   },
   text: {
     fontSize: 15,
