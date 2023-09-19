@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -6,14 +7,40 @@ import {
   Image,
   Text,
   TextInput,
+  Button,
   InputField,
   TouchableOpacity,
 } from "react-native";
+import ImagePicker from "react-native-image-picker";
 
 const Board = ({ data, navigation }) => {
-  const [value, onChangeText] = React.useState(
-    "봄 바람을 맞으면서 기분이 산뜻해졌다."
-  );
+  const [value, onChangeText] = React.useState("Useless Multiline Placeholder");
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImagePicker = () => {
+    const options = {
+      title: "Select Image",
+      storageOptions: {
+        skipBackup: true,
+        path: "images",
+      },
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log("사용자가 이미지를 취소");
+      } else if (response.error) {
+        console.log("이미지 에러: ", response.error);
+      } else {
+        const source = { uri: response.uri };
+        //서버로 이미지를 받아야돼서 프론트인 제가...어쩔 수 없었어요
+        // 이제 선택한 이미지를 서버로 업로드할 수 있습니다.
+        // 여기서 서버로 업로드하는 로직을 추가해야 합니다.
+
+        setSelectedImage(source);
+      }
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -22,7 +49,19 @@ const Board = ({ data, navigation }) => {
           style={styles.image}
         />
       </View>
-      <View>
+      {/* <View>
+        {selectedImage && (
+          <Image source={selectedImage} style={{ width: 200, height: 200 }} />
+        )}
+        <TouchableOpacity
+          style={styles.uploadButton}
+          onPress={handleImagePicker}
+        >
+          <Text style={styles.uploadButtonText}>이미지 업로드</Text>
+        </TouchableOpacity>
+      </View> */}
+
+      <View style={styles.inputContainer}>
         <Text style={styles.text}>위치</Text>
         <TextInput
           style={styles.soft1}
@@ -46,12 +85,12 @@ const Board = ({ data, navigation }) => {
           style={styles.soft}
         />
       </View>
-      <View style={styles.btnContainer}>
+      <View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("NotMain")}
         >
-          <Text style={styles.buttonText}>업로드하기</Text>
+          <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -63,58 +102,69 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 4,
   },
-  content: {},
+  content: {
+    marginBottom: 10,
+  },
+  // uploadButton: {
+  //   width: 150,
+  //   height: 40,
+  //   backgroundColor: "white",
+  //   borderRadius: 10,
+  //   padding: 10, // Padding 설정
+  //   alignItems: "center", // 가운데 정렬
+  //   marginTop: 5, // 버튼과 이미지 사이의 간격 조절
+  // },
+  // uploadButtonText: {
+  //   color: "#001C3E",
+  //   fontSize: 16,
+  //   fontWeight: "bold",
+  // },
   storyRow: {
     flexDirection: "row",
     marginTop: 13,
   },
   image: {
-    width: 101,
+    width: 130,
     height: 179,
     marginTop: 30,
   },
   text: {
-    color: "#034AA6",
+    color: "#001C3E",
   },
   hard: {},
   soft: {
-    width: 350,
-    height: 100,
+    width: 320,
     shadowColor: "rgba(0, 0, 0, 0.15)",
     shadowOpacity: 0.5,
     backgroundColor: "white",
     color: "#B2B2B2",
-    borderRadius: 20,
+    borderRadius: 30,
     textAlignVertical: "top",
   },
   soft1: {
-    width: 350,
-    height: 38,
+    marginBottom: 7,
+    width: 320,
+    height: 40,
     shadowColor: "rgba(0, 0, 0, 0.15)",
     shadowOpacity: 0.5,
     backgroundColor: "white",
-    borderRadius: 15,
+    borderRadius: 30,
     textAlignVertical: "top",
   },
-  btnContainer: {
-    alignItems: "center",
-  },
   button: {
-    width: 380,
-    height: 50,
-    backgroundColor: "#0A0A2A",
+    width: 330,
+    backgroundColor: "#001C3E",
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 20,
-    marginHorizontal: 20,
+    marginHorizontal: 30,
     alignItems: "center",
-    marginTop: "45%",
+    marginTop: "20%",
   },
   buttonText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
-    marginTop: "1%",
   },
 });
 
