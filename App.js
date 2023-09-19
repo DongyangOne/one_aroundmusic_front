@@ -1,50 +1,50 @@
-import React from "react";
-import { Text, View } from "react-native";
-import Swiper from "react-native-swiper";
-import Main from "./views/screens/Main";
-import Map from "./views/screens/Map";
-import Music from "./views/screens/Music";
-import Music2 from "./views/screens/Music2";
-import FilterScreen from "./views/screens/FilterScreen";
-import ArScreen from "./views/screens/ArScreen";
-import ArScreen1 from "./views/screens/ArScreen1";
-import ArScreen2 from "./views/screens/ArScreen2";
-import MyPage from "./views/screens/MyPage";
-import PopularKing from "./views/screens/PopularKing";
-import ListenKing from "./views/screens/ListenKing";
-import WKing from "./views/screens/WKing";
-import Listening from "./views/screens/Listening";
-import FriendList from "./views/screens/FriendList";
-import Board from "./views/screens/Board";
-import NotMain from "./views/screens/NotMain";
+import React from 'react';
+import {Text, View} from 'react-native';
+import Swiper from 'react-native-swiper';
+import Main from './views/screens/Main';
+import Map from './views/screens/Map';
+import Music from './views/screens/Music';
+import Music2 from './views/screens/Music2';
+import FilterScreen from './views/screens/FilterScreen';
+import ArScreen from './views/screens/ArScreen';
+import ArScreen1 from './views/screens/ArScreen1';
+import ArScreen2 from './views/screens/ArScreen2';
+import MyPage from './views/screens/MyPage';
+import PopularKing from './views/screens/PopularKing';
+import ListenKing from './views/screens/ListenKing';
+import WKing from './views/screens/WKing';
+import Listening from './views/screens/Listening';
+import FriendList from './views/screens/FriendList';
+import Board from './views/screens/Board';
+import NotMain from './views/screens/NotMain';
 
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
 
 var styles = {
   wrapper: {},
   slide1: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#EDEDED",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#EDEDED',
   },
   slide2: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#EDEDED",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#EDEDED',
   },
   slide3: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#EDEDED",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#EDEDED',
   },
   text: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 };
 const Stack = createStackNavigator();
@@ -55,34 +55,34 @@ export default () => (
         <Stack.Screen
           name="Music"
           component={Music}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Filter"
           component={FilterScreen}
           options={{
             headerShown: true,
-            title: "필터",
-            headerTintColor: "white",
+            title: '필터',
+            headerTintColor: 'white',
             headerStyle: {
               backgroundColor: '#001C3E',
             },
-            headerTitleAlign: "center",
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
           name="Music2"
           component={Music2}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="MyPage"
           component={MyPage}
           options={{
             headerShown: true,
-            title: "마이페이지",
-            headerTintColor: "#034AA6",
-            headerTitleAlign: "center",
+            title: '마이페이지',
+            headerTintColor: '#034AA6',
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
@@ -90,12 +90,12 @@ export default () => (
           component={PopularKing}
           options={{
             headerShown: true,
-            title: "인기왕 리워드",
-            headerTintColor: "white", // Set text color to white
+            title: '인기왕 리워드',
+            headerTintColor: 'white', // Set text color to white
             headerStyle: {
-              backgroundColor: "#034AA6", // Set header background color to navy blue
+              backgroundColor: '#034AA6', // Set header background color to navy blue
             },
-            headerTitleAlign: "center",
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
@@ -103,12 +103,12 @@ export default () => (
           component={ListenKing}
           options={{
             headerShown: true,
-            title: "듣기왕 리워드",
-            headerTintColor: "white", // Set text color to white
+            title: '듣기왕 리워드',
+            headerTintColor: 'white', // Set text color to white
             headerStyle: {
-              backgroundColor: "#034AA6", // Set header background color to navy blue
+              backgroundColor: '#034AA6', // Set header background color to navy blue
             },
-            headerTitleAlign: "center",
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
@@ -116,32 +116,32 @@ export default () => (
           component={WKing}
           options={{
             headerShown: true,
-            title: "걷기왕 리워드",
-            headerTintColor: "white", // Set text color to white
+            title: '걷기왕 리워드',
+            headerTintColor: 'white', // Set text color to white
             headerStyle: {
-              backgroundColor: "#034AA6", // Set header background color to navy blue
+              backgroundColor: '#034AA6', // Set header background color to navy blue
             },
-            headerTitleAlign: "center",
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
           name="Listening"
           component={Listening}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="ArScreen2"
           component={ArScreen2}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Board"
           component={Board}
           options={{
             headerShown: true,
-            title: "게시물 작성",
-            headerTintColor: "#034AA6",
-            headerTitleAlign: "center",
+            title: '게시물 작성',
+            headerTintColor: '#034AA6',
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
@@ -163,16 +163,16 @@ export default () => (
         <Stack.Screen
           name="Main"
           component={Main}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="MyPage"
           component={MyPage}
           options={{
             headerShown: true,
-            title: "마이페이지",
-            headerTintColor: "#034AA6",
-            headerTitleAlign: "center",
+            title: '마이페이지',
+            headerTintColor: '#034AA6',
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
@@ -180,12 +180,12 @@ export default () => (
           component={PopularKing}
           options={{
             headerShown: true,
-            title: "인기왕 리워드",
-            headerTintColor: "white",
+            title: '인기왕 리워드',
+            headerTintColor: 'white',
             headerStyle: {
-              backgroundColor: "#000080",
+              backgroundColor: '#000080',
             },
-            headerTitleAlign: "center",
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
@@ -193,12 +193,12 @@ export default () => (
           component={WKing}
           options={{
             headerShown: true,
-            title: "걷기왕 리워드",
-            headerTintColor: "white",
+            title: '걷기왕 리워드',
+            headerTintColor: 'white',
             headerStyle: {
-              backgroundColor: "#000080",
+              backgroundColor: '#000080',
             },
-            headerTitleAlign: "center",
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
@@ -206,30 +206,30 @@ export default () => (
           component={ListenKing}
           options={{
             headerShown: true,
-            title: "듣기왕 리워드",
-            headerTintColor: "white",
+            title: '듣기왕 리워드',
+            headerTintColor: 'white',
             headerStyle: {
-              backgroundColor: "#000080",
+              backgroundColor: '#000080',
             },
-            headerTitleAlign: "center",
+            headerTitleAlign: 'center',
           }}
         />
         <Stack.Screen
           name="FriendList"
           component={FriendList}
           options={{
-            title: "친구",
+            title: '친구',
             headerStyle: {
-              backgroundColor: "#001C3E",
+              backgroundColor: '#001C3E',
             },
-            headerTintColor: "#ffffff",
-            headerTitleAlign: "center",
+            headerTintColor: '#ffffff',
+            headerTitleAlign: 'center',
           }}
         />
       </Stack.Navigator>
     </NavigationContainer>
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="ArScreen" component={ArScreen} />
         <Stack.Screen name="ArScreen1" component={ArScreen1} />
