@@ -1,37 +1,44 @@
-import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import React from 'react';
+import {View, StyleSheet, Image, ScrollView} from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
-const MainStory = ({ id, src, story }) => {
+const MainStory = ({data}) => {
   return (
-    <View style={styles.storyRow}>
-      <View>
-        <Image source={src} style={styles.image}></Image>
-        <Text style={styles.text}>{id}</Text>
+    <ScrollView
+      style={styles.scroll}
+      nestedScrollEnabled={true}
+      horizontal={true}
+    >
+      <View style={styles.storyRow}>
+        {data.map(item => (
+          <View style={styles.story}>
+            <TouchableWithoutFeedback>
+              <Image source={item.src} style={styles.image}></Image>
+            </TouchableWithoutFeedback>
+          </View>
+        ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {},
   storyRow: {
-    flexDirection: "row",
-    marginTop: 13,
-    height: 80,
+    flexDirection: 'row',
+    backgroundColor: '#001C3E',
+    height: 100,
+    width: '100%',
   },
   image: {
-    width: 50,
-    height: 50,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     marginLeft: 18,
-    borderWidth: 3,
-    borderColor: "#B6CBE5",
-  },
-  text: {
-    marginLeft: 25,
+    marginTop: 18,
+    borderWidth: 1,
+    borderColor: 'white',
+    padding: 4,
   },
 });
 

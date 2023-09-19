@@ -4,7 +4,10 @@ import {ScrollView} from 'react-native-virtualized-view';
 import Header from '../components/Header';
 import MainStory from '../components/MainStory';
 import Contents from '../components/Contents';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native-gesture-handler';
 
 export const DATA = [
   {
@@ -30,11 +33,31 @@ export const DATA = [
     id: 'yong',
     src: require('../../assets/555.jpeg'),
   },
+  {
+    id: 'yong',
+    src: require('../../assets/555.jpeg'),
+  },
+  {
+    id: 'yong',
+    src: require('../../assets/555.jpeg'),
+  },
+  {
+    id: 'yong',
+    src: require('../../assets/555.jpeg'),
+  },
+  {
+    id: 'yong',
+    src: require('../../assets/555.jpeg'),
+  },
+  {
+    id: 'yong',
+    src: require('../../assets/555.jpeg'),
+  },
 ];
 
-const FriendItem = ({id, src, story}) => (
+const FriendItem = ({src}) => (
   <View>
-    <MainStory id={id} src={src} story={story} />
+    <MainStory src={src} />
   </View>
 );
 const ContentsItem = ({id, src, story}) => (
@@ -47,16 +70,9 @@ const Main = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header onPress={() => navigation.navigate('MyPage')} />
-      <ScrollView>
-        <View>
-          <FlatList
-            style={styles.story}
-            data={DATA}
-            renderItem={({item}) => (
-              <FriendItem id={item.id} src={item.src} story={item.story} />
-            )}
-            numColumns={5}
-          />
+      <ScrollView nestedScrollEnabled={true}>
+        <View style={styles.story_wrap}>
+          <MainStory data={DATA} />
           {/* <FlatList
             data={DATA}
             renderItem={({ item }) => (
@@ -74,9 +90,8 @@ const Main = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  story: {
-    backgroundColor: '#001C3E',
-    height: 100,
+  story_wrap: {
+    width: '100%',
   },
 });
 
