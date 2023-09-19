@@ -88,7 +88,10 @@ export default () => (
           options={{
             headerShown: true,
             title: "인기왕 리워드",
-            headerTintColor: "#034AA6",
+            headerTintColor: "white", // Set text color to white
+            headerStyle: {
+              backgroundColor: "#034AA6", // Set header background color to navy blue
+            },
             headerTitleAlign: "center",
           }}
         />
@@ -98,7 +101,10 @@ export default () => (
           options={{
             headerShown: true,
             title: "듣기왕 리워드",
-            headerTintColor: "#034AA6",
+            headerTintColor: "white", // Set text color to white
+            headerStyle: {
+              backgroundColor: "#034AA6", // Set header background color to navy blue
+            },
             headerTitleAlign: "center",
           }}
         />
@@ -107,8 +113,11 @@ export default () => (
           component={WKing}
           options={{
             headerShown: true,
-            title: "듣기왕 리워드",
-            headerTintColor: "#034AA6",
+            title: "걷기왕 리워드",
+            headerTintColor: "white", // Set text color to white
+            headerStyle: {
+              backgroundColor: "#034AA6", // Set header background color to navy blue
+            },
             headerTitleAlign: "center",
           }}
         />
@@ -169,7 +178,10 @@ export default () => (
           options={{
             headerShown: true,
             title: "인기왕 리워드",
-            headerTintColor: "#034AA6",
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "#000080",
+            },
             headerTitleAlign: "center",
           }}
         />
@@ -179,7 +191,10 @@ export default () => (
           options={{
             headerShown: true,
             title: "걷기왕 리워드",
-            headerTintColor: "#034AA6",
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "#000080",
+            },
             headerTitleAlign: "center",
           }}
         />
@@ -189,7 +204,10 @@ export default () => (
           options={{
             headerShown: true,
             title: "듣기왕 리워드",
-            headerTintColor: "#034AA6",
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "#000080",
+            },
             headerTitleAlign: "center",
           }}
         />

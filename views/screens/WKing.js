@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, View, TouchableOpacity, Text } from "react-native";
+
+const RoundedShadowBox = ({ children }) => {
+  return (
+    <View style={styles.roundedShadowBox}>
+      {children}
+    </View>
+  );
+};
+
 const WKing = ({ navigation }) => {
   const [images, setImages] = useState([
     require("../../assets/workReward1.png"),
@@ -11,30 +20,29 @@ const WKing = ({ navigation }) => {
     require("../../assets/workReward2.png"),
     require("../../assets/workReward3.png"),
   ]);
+  
   const imageStyles = [
     {
       width: 80,
       height: 80,
-      marginTop: "25%",
-      marginLeft: 20,
+      marginTop: "50%",
+      marginRight: 35,
     }, // 스타일1
     {
       width: 150,
       height: 150,
-      marginTop: "27%",
-      marginLeft: 18,
+      marginTop: "15%",
       alignItems: "center",
     }, // 스타일2
-    { width: 80, height: 80, marginTop: "25%", marginLeft: 15 }, // 스타일3
+    { width: 80, height: 80, marginTop: "50%", marginLeft: 35 }, // 스타일3
   ];
+
   const handleLeftImageClick = () => {
-    // 첫 번째 이미지를 클릭하면 배열의 마지막 요소를 배열의 맨 앞으로 이동
     setImages(prevImages => [prevImages.pop(), ...prevImages]);
     setAbc(prevImages => [prevImages.pop(), ...prevImages]);
   };
 
   const handleRightImageClick = () => {
-    // 마지막 이미지를 클릭하면 배열의 첫 번째 요소를 배열의 맨 뒤로 이동
     setImages(prevImages => [...prevImages.slice(1), prevImages[0]]);
     setAbc(prevImages => [...prevImages.slice(1), prevImages[0]]);
   };
@@ -42,14 +50,16 @@ const WKing = ({ navigation }) => {
   const handleGoBack = () => {
     navigation.goBack();
   };
+
   return (
     <>
-      <View style={styles.container}>
-        <TouchableOpacity>
+        <View style={styles.centeredContainer}>
           <Image style={styles.LogoMain} source={abc[1]} />
-        </TouchableOpacity>
-      </View>
+        </View>
 
+      <View style={styles.centeredContainer}>
+      </View>
+      <RoundedShadowBox>
       <TouchableOpacity style={styles.serve}>
         <TouchableOpacity onPress={handleLeftImageClick}>
           <Image style={imageStyles[0]} source={images[0]} />
@@ -61,27 +71,32 @@ const WKing = ({ navigation }) => {
           <Image style={imageStyles[2]} source={images[2]} />
         </TouchableOpacity>
       </TouchableOpacity>
+      </RoundedShadowBox>
       <TouchableOpacity style={styles.button} onPress={handleGoBack}>
         <Text style={styles.buttonText}>적용하기</Text>
       </TouchableOpacity>
     </>
   );
 };
-export default WKing;
+
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     marginTop: "30%",
   },
   LogoMain: {
-    width: 180,
-    height: 180,
+    marginTop: 100,
+    marginBottom: 50,
+    width: 150,
+    height: 150, 
+    alignSelf: "center", 
   },
   serve: {
     flexDirection: "row",
+    justifyContent: "center",
   },
   button: {
-    backgroundColor: "#034AA6",
+    backgroundColor: "#000080",
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 5,
@@ -94,4 +109,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  centeredContainer: {
+    alignItems: "center",
+  },
+  centeredImage: {
+    width: 60, 
+    height: 60,
+  },
+  roundedShadowBox: {
+    width: 320,
+    marginLeft: 50,
+    marginTop: 30,
+    overflow: "hidden",
+    borderRadius: 10,
+    backgroundColor: "white",
+    elevation: 5,
+    padding: 10,
+    margin: 10,
+  },
 });
+
+export default WKing;
