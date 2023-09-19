@@ -21,23 +21,24 @@ const FilterDetailButton = ({ title }) => {
 const styles = StyleSheet.create({
   filterBtn: {
     backgroundColor: "#ffffff",
-    width: 70,
+    width: 65,
     height: 30,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 15,
+    borderRadius: 10,
+    marginLeft:2,
     flexDirection: "row",
   },
   text: {
-    fontSize: 15,
+    fontSize: 14,
     color: "#656565",
   },
   clickText: {
-    fontSize: 15,
+    fontSize: 14,
     color: "#ffffff",
   },
   clickedButton: {
-    backgroundColor: "#034AA6",
+    backgroundColor: "#001C3E",
   },
 });
 

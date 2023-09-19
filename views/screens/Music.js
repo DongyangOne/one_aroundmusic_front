@@ -1,11 +1,18 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, View, FlatList, Image } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  FlatList,
+  Image,
+  Text,
+} from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
 import Header from "../components/Header";
 import FilterButton from "../components/FilterButton";
 import SongList from "../components/SongList";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import FilterTagButton from "../components/FilterTagButton";
 const FILTER = [
   {
     id: 1,
@@ -32,7 +39,15 @@ const FILTER = [
 const DATA = [
   {
     id: 1,
-    tag: "#태그",
+    tag: "#10대",
+  },
+  {
+    id: 2,
+    tag: "#여성",
+  },
+  {
+    id: 3,
+    tag: "#봄",
   },
 ];
 
@@ -100,76 +115,122 @@ const SONG = [
 const Music = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header onPress={() => navigation.navigate("MyPage")} />
-
-      <View style={{ flexDirection: "row" }}>
-        <FlatList
-          style={styles.filter}
-          data={FILTER}
-          renderItem={({ item }) => (
-            <FilterButton
-              color="#EBEBEB"
-              textColor="#656565"
-              title={item.title}
-              onPress={() => navigation.navigate("Filter")}
-            />
-          )}
-          numColumns={5}
-        />
-        <TouchableOpacity onPress={() => navigation.navigate("Filter")}>
-          <Image
-            style={{ marginTop: 34, width: 20, height: 20, marginRight: 20 }}
-            source={require("../../assets/filterIcon.png")}
-          />
-        </TouchableOpacity>
+      <View style={styles.header}>
+        <Header onPress={() => navigation.navigate("MyPage")} />
       </View>
-
-      <FlatList
-        style={styles.selected}
-        data={DATA}
-        renderItem={({ item }) => (
-          <FilterButton color="#034AA6" textColor="#ffffff" title={item.tag} />
-        )}
-        numColumns={3}
-      />
-      <ScrollView style={styles.scrollView}>
-        <FlatList
-          data={SONG}
-          renderItem={({ item }) => (
-            <SongList
-              image={item.image}
-              title={item.title}
-              singer={item.singer}
-              date={item.date}
+      <View style={styles.next}>
+        <View style={styles.nextI}>
+          <FlatList
+            style={styles.filter}
+            data={FILTER}
+            renderItem={({ item }) => (
+              <FilterButton
+                color="#F2F3F6"
+                textColor="#3F3F3F"
+                title={item.title}
+                onPress={() => navigation.navigate("Filter")}
+              />
+            )}
+            numColumns={5}
+          />
+          <TouchableOpacity
+            style={styles.filter}
+            onPress={() => navigation.navigate("Filter")}
+          >
+            <Image
+              style={{
+                marginTop: 8,
+                paddingLeft: 15,
+                width: 20,
+                height: 20,
+                marginRight: 20,
+              }}
+              source={require("../../assets/filterIcon.png")}
             />
-          )}
-        />
-      </ScrollView>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.tagListContainer}>
+          <FlatList
+            data={DATA}
+            renderItem={({ item }) => (
+              <FilterTagButton
+                color="#2F4560"
+                textColor="#ffffff"
+                title={item.tag}
+              />
+            )}
+            numColumns={3}
+          />
+        </View>
+        {/*빈칸*/}
+        {/**음악 스크롤 뷰 페이지 */}
+        <View style={styles.musicScroll}>
+          <ScrollView style={styles.ScrollView}>
+            <View style={styles.space}></View>
+            <View style={styles.start}>
+              <View style={styles.music}>
+                <FlatList
+                  data={SONG}
+                  renderItem={({ item }) => (
+                    <SongList
+                      image={item.image}
+                      title={item.title}
+                      singer={item.singer}
+                      date={item.date}
+                    />
+                  )}
+                />
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  scrollView: {
-    marginTop: 27,
-    width: 400,
-    height: 650,
-    marginLeft: 16,
+  container: {
+    backgroundColor: "#001C3E",
+    flex: 1,
   },
-  text: {
-    fontSize: 42,
+  next: {
+    flex: 1,
+    backgroundColor: "#001C3E",
   },
-  filter: {
+  nextI: {
+    backgroundColor: "#001C3E",
     flexDirection: "row",
-    marginTop: 30,
-    marginLeft: 16,
-    height: 30,
   },
-  selected: {
-    height: 30,
-    marginTop: 16,
-    marginLeft: 16,
+  tagListContainer: {
+    backgroundColor: "#001C3E",
+    marginTop: 5,
+  },
+  all: {
+    flex: 1,
+  },
+  musicScroll: {
+    flex: 1,
+    backgroundColor: "pink",
+    marginTop: 30,
+  },
+  ScrollView: {
+    flex: 1,
+    backgroundColor: "#001C3E",
+  },
+  space: {
+    flex: 3,
+    backgroundColor: "#001C3E",
+    height: 50,
+  },
+  start: {
+    flex: 8,
+    backgroundColor: "white",
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
+  },
+  music: {
+    top: -60,
   },
 });
 

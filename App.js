@@ -63,7 +63,10 @@ export default () => (
           options={{
             headerShown: true,
             title: "필터",
-            headerTintColor: "#034AA6",
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: '#001C3E',
+            },
             headerTitleAlign: "center",
           }}
         />
