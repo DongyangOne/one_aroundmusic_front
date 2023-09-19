@@ -37,7 +37,7 @@ const MyPage = ({ navigation }) => {
       </View>
 
       {/* Margins */}
-      <View style={styles.MiddleMargin}></View>
+      {/* <View style={styles.MiddleMargin}></View> */}
 
       {/* Start blah, blah king*/}
       {/* ========================== */}
@@ -46,50 +46,49 @@ const MyPage = ({ navigation }) => {
        * onPress={() => navigation.navigate("PopularKing")
        */}
       {/* White Famous-King box */}
-      <View style={styles.king}>
-        <Text style={styles.kingTitle}>인기왕</Text>
-        <View styles={styles.kingLogoCont}>
-          <Image
-            style={styles.kingLogo}
-            source={require("../../assets/MyPage_medal_famous.png")}
-          />
-        </View>
-        <View></View>
-        <Text style={styles.kingCode}>1022C</Text>
-        <View styles={styles.kingNextCont}>
-          <Image
-            style={styles.kingNext}
-            source={require("../../assets/MyPage_next.png")}
-          />
-        </View>
-      </View>
-
-      {/* the area, filled with 남색 */}
       <View style={styles.kingContainer}>
-        <View>
-          <TouchableOpacity
-            style={styles.reward}
-            onPress={() => navigation.navigate("PopularKing")}
-          >
+        <View style={styles.king}>
+          <Text style={styles.kingTitle}>인기왕</Text>
+          <View styles={styles.kingLogoCont}>
             <Image
-              source={require("../../assets/MyPage_king_popular.png")}
-              style={styles.rewardLogo}
+              style={styles.kingLogo}
+              source={require("../../assets/MyPage_medal_famous.png")}
             />
-            <Text style={styles.rewardText}>인기왕 리워드 보러가기</Text>
-          </TouchableOpacity>
+          </View>
+          <View></View>
+          <Text style={styles.kingCode}>1022C</Text>
+          <View styles={styles.kingNextCont}>
+            <Image
+              style={styles.kingNext}
+              source={require("../../assets/MyPage_next.png")}
+            />
+          </View>
+        </View>
+        {/* the area, filled with 남색 */}
+        <View style={styles.kingContainer_deprecated}>
+          <View>
+            <TouchableOpacity
+              style={styles.reward}
+              onPress={() => navigation.navigate("PopularKing")}
+            >
+              <Image
+                source={require("../../assets/MyPage_king_popular.png")}
+                style={styles.rewardLogo}
+              />
+              <Text style={styles.rewardText}>인기왕 리워드 보러가기</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
               source={require("../../assets/MyPage_midLine.png")}
             />
           </View>
-        </View>
 
-        {/** 걷기왕
-         * Blue color, 200C, position-mark logo
-         * onPress={() => navigation.navigate("WKing")
-         */}
-        <View>
+          {/** 걷기왕
+           * Blue color, 200C, position-mark logo
+           * onPress={() => navigation.navigate("WKing")
+           */}
           <View style={styles.king}>
             <Text style={styles.kingTitle}>걷기왕</Text>
             <View styles={styles.kingLogoCont}>
@@ -123,40 +122,40 @@ const MyPage = ({ navigation }) => {
               source={require("../../assets/MyPage_midLine.png")}
             />
           </View>
-        </View>
 
-        {/** 듣기왕
-         * Green color, 1112C, play-button logo
-         * onPress={() => navigation.navigate("ListenKing")
-         */}
-        <View>
-          <View style={styles.king}>
-            <Text style={styles.kingTitle}>듣기왕</Text>
-            <View styles={styles.kingLogoCont}>
-              <Image
-                style={styles.kingLogo}
-                source={require("../../assets/MyPage_medal_listen.png")}
-              />
+          {/** 듣기왕
+           * Green color, 1112C, play-button logo
+           * onPress={() => navigation.navigate("ListenKing")
+           */}
+          <View>
+            <View style={styles.king}>
+              <Text style={styles.kingTitle}>듣기왕</Text>
+              <View styles={styles.kingLogoCont}>
+                <Image
+                  style={styles.kingLogo}
+                  source={require("../../assets/MyPage_medal_listen.png")}
+                />
+              </View>
+              <View></View>
+              <Text style={styles.kingCode}>1112C</Text>
+              <View styles={styles.kingNextCont}>
+                <Image
+                  style={styles.kingNext}
+                  source={require("../../assets/MyPage_next.png")}
+                />
+              </View>
             </View>
-            <View></View>
-            <Text style={styles.kingCode}>1112C</Text>
-            <View styles={styles.kingNextCont}>
+            <TouchableOpacity
+              style={styles.reward}
+              onPress={() => navigation.navigate("ListenKing")}
+            >
               <Image
-                style={styles.kingNext}
-                source={require("../../assets/MyPage_next.png")}
+                source={require("../../assets/MyPage_king_listen.png")}
+                style={styles.rewardLogo}
               />
-            </View>
+              <Text style={styles.rewardText}>듣기왕 리워드 보러가기</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.reward}
-            onPress={() => navigation.navigate("ListenKing")}
-          >
-            <Image
-              source={require("../../assets/MyPage_king_listen.png")}
-              style={styles.rewardLogo}
-            />
-            <Text style={styles.rewardText}>듣기왕 리워드 보러가기</Text>
-          </TouchableOpacity>
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
@@ -174,21 +173,28 @@ const styles = StyleSheet.create({
   // MyPage whole container
   contain: {
     flex: 1,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     color: "#fff",
-    // backgroundColor: "#041c3c",
+    backgroundColor: "#041c3c",
   },
   // Top area
   myPage: {
+    flex: 1,
     backgroundColor: "#fff",
     flexDirection: "row",
+    paddingVertical: "auto",
+    // alignItems: "center",
+    // justifyContent: "center",
+
     // backgroundColor: "#0ff",
+    // bottom: "0%",
   },
   // Friend Button
   friendBtn: {
     width: 140,
     height: 27,
-    marginTop: 17,
+    // marginTop: 17,
+    marginTop: 27,
     marginLeft: 25,
     textAlign: "left",
     borderColor: "#034AA6",
@@ -207,7 +213,8 @@ const styles = StyleSheet.create({
   // user ID
   id: {
     fontSize: 24,
-    marginTop: 20,
+    // marginTop: 20,
+    marginTop: 10,
     marginLeft: 25,
     color: "#071c3c",
   },
@@ -218,16 +225,20 @@ const styles = StyleSheet.create({
     marginLeft: 34,
   },
   // for Middle margin area
-  MiddleMargin: {
-    marginTop: 30,
-  },
+  // MiddleMargin: {
+  //   marginTop: 30,
+  // },
   // king Whole Container
   kingContainer: {
+    flex: 3,
+    // flexDirection: "column",
     backgroundColor: "#041c3c",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    top: -40,
-    paddingVertical: 40,
+    // top: -40,
+    // paddingTop: 40,
+    top: -20,
+    paddingTop: 20,
     zIndex: 10,
   },
   // blah, blah king box style
@@ -271,6 +282,7 @@ const styles = StyleSheet.create({
   },
   // reward container
   reward: {
+    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 40,
@@ -291,6 +303,7 @@ const styles = StyleSheet.create({
   },
   // looooong arrow container
   rewardLine: {
+    // flex: 1,
     marginHorizontal: 35,
     marginTop: -10,
     marginBottom: 10,
