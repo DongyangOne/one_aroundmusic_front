@@ -85,12 +85,12 @@ const Board = ({ data, navigation }) => {
           style={styles.soft}
         />
       </View>
-      <View>
+      <View style={styles.BtnBox}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("NotMain")}
         >
-          <Text style={styles.buttonText}>적용하기</Text>
+          <Text style={styles.buttonText}>업로드하기</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -98,6 +98,7 @@ const Board = ({ data, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  BtnBox: { marginTop: "40%" },
   container: {
     alignItems: "center",
     marginTop: 4,
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     backgroundColor: "white",
     color: "#B2B2B2",
-    borderRadius: 30,
+    borderRadius: 10,
     textAlignVertical: "top",
   },
   soft1: {
@@ -148,18 +149,18 @@ const styles = StyleSheet.create({
     shadowColor: "rgba(0, 0, 0, 0.15)",
     shadowOpacity: 0.5,
     backgroundColor: "white",
-    borderRadius: 30,
+    borderRadius: 10,
     textAlignVertical: "top",
   },
   button: {
+    alignSelf: "flex-end",
     width: 330,
     backgroundColor: "#001C3E",
     paddingVertical: 8,
     paddingHorizontal: 30,
-    borderRadius: 20,
+    borderRadius: 10,
     marginHorizontal: 30,
     alignItems: "center",
-    marginTop: "20%",
   },
   buttonText: {
     color: "white",
