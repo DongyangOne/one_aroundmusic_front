@@ -12,11 +12,11 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Header = ({onPress}) => {
   return (
-    <TouchableOpacity style={styles.wrap} onPress={onPress}>
-      <View style={styles.image}>
+    <View style={styles.wrap}>
+      <TouchableOpacity onPress={onPress} style={styles.image}>
         <Image source={require('../../assets/myPage.png')} />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
   },
   image: {
     marginRight: 18,
+    width: 30,
+    height: 30,
   },
 });
 
