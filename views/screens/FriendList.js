@@ -10,17 +10,18 @@ import {
   ScrollView,
 } from "react-native";
 import FriendsItem from "../components/FriendsItem";
+import FriendsItem2 from "../components/FriendsItem2";
 
 const FriendList = () => {
-  const [mode, setMode] = useState("내 친구");
+  const [mode, setMode] = useState("유저 목록");
 
   return (
-    <View style={styles.container}>
+    <View style={styles.center}>
       <View style={styles.mode}>
         <TouchableOpacity
           style={[
             styles.myFriend,
-            mode == "내 친구"
+            mode == "유저 목록"
               ? {
                   backgroundColor: "#001C3E",
                 }
@@ -30,14 +31,14 @@ const FriendList = () => {
                   borderWidth: 0,
                 },
           ]}
-          onPress={() => setMode("내 친구")}
+          onPress={() => setMode("유저 목록")}
         >
           <Text
             style={
-              mode == "내 친구" ? { color: "white" } : { color: "#001C3E" }
+              mode == "유저 목록" ? { color: "white" } : { color: "#001C3E" }
             }
           >
-            내 친구
+            유저 목록
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -62,6 +63,7 @@ const FriendList = () => {
           </Text>
         </TouchableOpacity>
       </View>
+
       <View style={styles.search}>
         <TextInput style={styles.input} />
         <Image
@@ -69,16 +71,28 @@ const FriendList = () => {
           style={styles.searchIcon}
         />
       </View>
-      <View>
+      <View style={styles.userBox}>
         <Text style={styles.title}>{mode}</Text>
+
         <ScrollView style={styles.scrollView}>
           <FlatList
-            data={mode == "내 친구" ? FRIENDSLIST : REQUEST}
+            data={mode == "유저 목록" ? FRIENDSLIST : REQUEST}
             renderItem={({ item }) => (
               <FriendsItem
                 name={item.name}
                 image={item.image}
-                state={mode == "내 친구" ? "친구 끊기" : "수락 하기"}
+                state={mode == "유저 목록" ? "친구 끊기" : "수락 하기"}
+              />
+            )}
+          />
+
+          <FlatList
+            data={mode == "유저 목록" ? FRIENDSLIST2 : 0}
+            renderItem={({ item }) => (
+              <FriendsItem2
+                name={item.name}
+                image={item.image}
+                state={mode == "유저 목록" ? "친구 요청" : "수락 하기"}
               />
             )}
           />
@@ -152,57 +166,102 @@ const styles = StyleSheet.create({
     width: 400,
     height: "80%",
   },
+  userBox: {
+    width: 100,
+    height: 550,
+  },
+  center: {
+    FlexDirection: "center",
+  },
 });
 
 const FRIENDSLIST = [
   {
     id: 1,
-    name: "김주만",
+    name: "김남준",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 2,
-    name: "한민규",
+    name: "김석진",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 3,
-    name: "이세진",
+    name: "민윤기",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 4,
-    name: "최수진",
+    name: "정호석",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 5,
-    name: "이예빈",
+    name: "박지민",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 6,
-    name: "여남경",
+    name: "김태형",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 7,
-    name: "유예린",
+    name: "전정국",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 8,
-    name: "유병재",
+    name: "김남준",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 9,
-    name: "유재석",
+    name: "김석진",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 10,
-    name: "조정석",
+    name: "민윤기",
+    image: require("../../assets/111.jpeg"),
+  },
+];
+
+const FRIENDSLIST2 = [
+  {
+    id: 1,
+    name: "김남준",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 2,
+    name: "김석진",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 3,
+    name: "민윤기",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 4,
+    name: "정호석",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 5,
+    name: "박지민",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 6,
+    name: "김태형",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 7,
+    name: "전정국",
     image: require("../../assets/111.jpeg"),
   },
 ];
@@ -210,37 +269,57 @@ const FRIENDSLIST = [
 const REQUEST = [
   {
     id: 1,
-    name: "한민규",
+    name: "김남준",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 2,
-    name: "한민규",
+    name: "김석진",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 3,
-    name: "한민규",
+    name: "민윤기",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 4,
-    name: "한민규",
+    name: "정호석",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 5,
-    name: "한민규",
+    name: "김남준",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 6,
-    name: "한민규",
+    name: "김석진",
     image: require("../../assets/111.jpeg"),
   },
   {
     id: 7,
-    name: "한민규",
+    name: "민윤기",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 8,
+    name: "정호석",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 9,
+    name: "박지민",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 10,
+    name: "김태형",
+    image: require("../../assets/111.jpeg"),
+  },
+  {
+    id: 11,
+    name: "전정국",
     image: require("../../assets/111.jpeg"),
   },
 ];
