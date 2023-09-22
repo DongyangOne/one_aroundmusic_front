@@ -1,21 +1,21 @@
-import { Image } from "react-native";
-import { Marker } from "react-native-maps";
+import {Image} from 'react-native';
+import {Marker} from 'react-native-maps';
 
-function ArMarker(props) {
+function ArMarker({location, size, onPress}) {
   return (
     <Marker
-      style={{ width: props.size.width, height: props.size.height }}
+      style={{width: size.width, height: size.width}}
       coordinate={{
-        latitude: props.location.latitude,
-        longitude: props.location.longitude,
+        latitude: location.latitude,
+        longitude: location.longitude,
       }}
-      onPress={props.onPress}
+      onPress={onPress}
     >
       <Image
-        source={require("../../assets/arLocation.png")}
+        source={require('../../assets/arLocation.png')}
         style={{
-          width: props.size.width - 50,
-          height: props.size.height - 50,
+          width: size.width,
+          height: size.height,
         }}
       />
     </Marker>
