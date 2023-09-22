@@ -6,38 +6,35 @@ import {
   ScrollView,
   StatusBar,
   Image,
-  View
+  View,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Header = ({ onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      <View style={styles.view}>
-      <Image source={require("../../assets/myPage.png")} style={styles.image} />
-      </View>
-    </TouchableOpacity>
+    <View style={styles.wrap}>
+      <TouchableOpacity onPress={onPress} style={styles.image}>
+        <Image source={require("../../assets/myPage.png")} />
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor:"#001C3E",
-    height :70
-  },
-  view:{
-    flexDirection:"column",
-    alignItems:'flex-end',
-    justifyContent:'center'
+  wrap: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    backgroundColor: "#001C3E",
+    height: 60,
   },
   image: {
     width: 30,
     height: 30,
-    alignItems:'center',
-    justifyContent:'center',
-    marginTop:20,
-    marginRight:10
-
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    marginRight: 10,
   },
 });
 
