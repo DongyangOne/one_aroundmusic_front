@@ -1,20 +1,26 @@
-import React from "react";
-import { SafeAreaView, View, StyleSheet, Image, Text } from "react-native";
+import React from 'react';
+import {SafeAreaView, View, StyleSheet, Image, Text} from 'react-native';
 
-const Contents = ({ data }) => {
+const Contents = ({data}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View>
           <Image source={data[0].story} style={styles.image}></Image>
-          <Text style={styles.text}>햇빛이 따스한 오후 커피 한 잔</Text>
-          <Text style={styles.date}>2023.08.05</Text>
+          <View style={styles.textView}>
+            <Text style={styles.text}>햇빛이 따스한 오후 커피 한 잔</Text>
+            <Text style={styles.date}>2023.08.05</Text>
+          </View>
           <Image source={data[1].story} style={styles.image}></Image>
-          <Text style={styles.text}>교회에도 봄이 왔다. 개강이 설렌다.</Text>
-          <Text style={styles.date}>2023.03.01</Text>
+          <View style={styles.textView}>
+            <Text style={styles.text}>교회에도 봄이 왔다. 개강이 설렌다.</Text>
+            <Text style={styles.date}>2023.03.01</Text>
+          </View>
           <Image source={data[2].story} style={styles.image}></Image>
-          <Text style={styles.text}>집에 가고싶다..</Text>
-          <Text style={styles.date}>2022.12.14</Text>
+          <View style={styles.textView}>
+            <Text style={styles.text}>집에 가고싶다..</Text>
+            <Text style={styles.date}>2022.12.14</Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -25,25 +31,30 @@ const styles = StyleSheet.create({
   container: {},
   content: {},
   storyRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 13,
   },
   image: {
-    width: 350,
+    width: '100%',
     height: 520,
-    marginTop: 30,
+  },
+  textView: {
+    backgroundColor: '#001C3E',
+    height: 100,
   },
   text: {
     marginLeft: 25,
     marginTop: 15,
+
     fontSize: 12,
-    color: "black",
+    color: 'white',
+    fontWeight: 'bold',
   },
   date: {
     marginLeft: 25,
     marginTop: 6,
     fontSize: 10,
-    color: "black",
+    color: 'white',
   },
 });
 
