@@ -1,7 +1,7 @@
 import { Image, StyleSheet, View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const FriendsItem2 = ({ name, image, state }) => {
+const FriendsItem3 = ({ name, image, state, onPress }) => {
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
@@ -9,7 +9,7 @@ const FriendsItem2 = ({ name, image, state }) => {
         <Text style={styles.name}>{name}</Text>
       </View>
       <View style={styles.button}>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={onPress}>
           <Text style={styles.btnText}>{state}</Text>
         </TouchableOpacity>
       </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   btn: {
     width: 100,
     height: 30,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#001C3E",
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     }),
   },
   btnText: {
-    color: "#000000",
+    color: "white",
     fontSize: 12,
   },
 });
 
-export default FriendsItem2;
+export default FriendsItem3;
