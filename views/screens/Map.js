@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -50,7 +50,7 @@ async function requestPermission() {
     }
     if (Platform.OS === 'android') {
       return await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       );
     }
   } catch (e) {
@@ -58,11 +58,11 @@ async function requestPermission() {
   }
 }
 
-const Map = ({navigation}) => {
+const Map = ({ navigation }) => {
   const [location, setLocation] = useState();
   useEffect(() => {
     requestPermission().then(result => {
-      console.log({result});
+      console.log({ result });
       if (result === 'granted') {
         Geolocation.getCurrentPosition(
           pos => {
@@ -75,7 +75,7 @@ const Map = ({navigation}) => {
             enableHighAccuracy: true,
             timeout: 3600,
             maximumAge: 3600,
-          }
+          },
         );
       }
     });
@@ -92,7 +92,7 @@ const Map = ({navigation}) => {
   return (
     <>
       <MapView
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         initialRegion={{
           latitude: location.latitude,
           longitude: location.longitude,
@@ -113,15 +113,14 @@ const Map = ({navigation}) => {
         zoomTapEnabled={false}
         zoomControlEnabled={false}
         pitchEnabled={false}
-        moveOnMarkerPress={false}
-      >
+        moveOnMarkerPress={false}>
         {DATA.map(item => (
           <ArMarker
             location={{
               latitude: item.latitude,
               longitude: item.longitude,
             }}
-            size={{width: 50, height: 50}}
+            size={{ width: 50, height: 50 }}
             onPress={() => {
               navigation.navigate('ArScreen');
             }}

@@ -28,6 +28,7 @@
     "react-native-screens": "^3.24.0",
     "react-native-swiper": "^1.6.0",
     "react-native-swiper-view": "^1.2.0",
+    "react-native-toast-message": "^2.1.6",
     "react-native-virtualized-view": "^1.0.0"
   },
   "devDependencies": {
