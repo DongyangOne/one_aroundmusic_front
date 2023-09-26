@@ -12,16 +12,19 @@ function StartingPage({ navigation }) {
   }, []);
 
   async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
+    // Check if your device supports Google Playad
     try {
       await GoogleSignin.hasPlayServices({
         showPlayServicesUpdateDialog: true,
       });
       const { idToken } = await GoogleSignin.signIn();
-      console.log('idToekn : ', idToken);
+
+      navigation.navigate('Main');
       if (idToken) {
         const googleCredential = auth.GoogleAuthProvider.credential(idToken);
         const res = await auth().signInWithCredential(googleCredential);
+        console.log('res : ', res);
+        console.log('googleCredential : ', googleCredential);
       }
     } catch (error) {
       console.error('ERROR : ', error);
@@ -31,7 +34,7 @@ function StartingPage({ navigation }) {
   return (
     <Button
       title="Google Sign-In"
-      onPress={() => onGoogleButtonPress().then(navigation.navigate('Main'))}
+      onPress={() => onGoogleButtonPress().then(console.log('good'))}
     />
   );
 }
