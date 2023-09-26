@@ -65,7 +65,7 @@ export default () => (
             title: "필터",
             headerTintColor: "white",
             headerStyle: {
-              backgroundColor: '#001C3E',
+              backgroundColor: "#001C3E",
             },
             headerTitleAlign: "center",
           }}
@@ -228,6 +228,7 @@ export default () => (
         />
       </Stack.Navigator>
     </NavigationContainer>
+    
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Map" component={Map} />

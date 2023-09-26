@@ -25,17 +25,17 @@ async function requestPermission() {
   }
 }
 
-const Map = ({ navigation }) => {
+const Map = ({ route }) => {
   const [location, setLocation] = useState();
   useEffect(() => {
-    requestPermission().then(result => {
+    requestPermission().then((result) => {
       console.log({ result });
       if (result === "granted") {
         Geolocation.getCurrentPosition(
-          pos => {
+          (pos) => {
             setLocation(pos.coords);
           },
-          error => {
+          (error) => {
             console.log(error);
           },
           {
@@ -83,6 +83,8 @@ const Map = ({ navigation }) => {
         moveOnMarkerPress={false}
       >
         <ArMarker
+          /* Map.js에서 Maker로 이미지 주소 전달하려면
+          img={require("../../assets/workReward1.png")} */
           location={{
             latitude: location.latitude - 0.0005,
             longitude: location.longitude - 0.0005,
