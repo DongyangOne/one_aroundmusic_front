@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import { Text, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Main from './views/screens/Main';
 import Map from './views/screens/Map';
@@ -18,8 +18,9 @@ import FriendList from './views/screens/FriendList';
 import Board from './views/screens/Board';
 import NotMain from './views/screens/NotMain';
 
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import StartingPage from './views/screens/StartingPage';
 
 var styles = {
   wrapper: {},
@@ -55,7 +56,7 @@ export default () => (
         <Stack.Screen
           name="Music"
           component={Music}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Filter"
@@ -73,7 +74,7 @@ export default () => (
         <Stack.Screen
           name="Music2"
           component={Music2}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyPage"
@@ -127,12 +128,12 @@ export default () => (
         <Stack.Screen
           name="Listening"
           component={Listening}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ArScreen2"
           component={ArScreen2}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Board"
@@ -161,9 +162,14 @@ export default () => (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          name="Start"
+          component={StartingPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Main"
           component={Main}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyPage"
@@ -229,7 +235,7 @@ export default () => (
       </Stack.Navigator>
     </NavigationContainer>
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="ArScreen" component={ArScreen} />
         <Stack.Screen name="ArScreen1" component={ArScreen1} />
