@@ -1,78 +1,78 @@
-import React from 'react';
-import {StyleSheet, SafeAreaView, FlatList, View} from 'react-native';
-import {ScrollView} from 'react-native-virtualized-view';
-import Header from '../components/Header';
-import MainStory from '../components/MainStory';
-import Contents from '../components/Contents';
+import React from "react";
+import { StyleSheet, SafeAreaView, FlatList, View } from "react-native";
+import { ScrollView } from "react-native-virtualized-view";
+import Header from "../components/Header";
+import MainStory from "../components/MainStory";
+import Contents from "../components/Contents";
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
+} from "react-native-gesture-handler";
 
 export const DATA = [
   {
-    id: '또치',
-    src: require('../../assets/111.jpeg'),
-    story: require('../../assets/contents1.jpeg'),
+    id: "또치",
+    src: require("../../assets/111.jpeg"),
+    story: require("../../assets/contents1.jpeg"),
   },
   {
-    id: '이지금',
-    src: require('../../assets/222.jpeg'),
-    story: require('../../assets/contents2.jpeg'),
+    id: "이지금",
+    src: require("../../assets/222.jpeg"),
+    story: require("../../assets/contents2.jpeg"),
   },
   {
-    id: 'jung',
-    src: require('../../assets/333.jpeg'),
-    story: require('../../assets/contents3.jpeg'),
+    id: "jung",
+    src: require("../../assets/333.jpeg"),
+    story: require("../../assets/contents3.jpeg"),
   },
   {
-    id: 'jin',
-    src: require('../../assets/444.jpeg'),
+    id: "jin",
+    src: require("../../assets/444.jpeg"),
   },
   {
-    id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    id: "yong",
+    src: require("../../assets/555.jpeg"),
   },
   {
-    id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    id: "yong",
+    src: require("../../assets/555.jpeg"),
   },
   {
-    id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    id: "yong",
+    src: require("../../assets/555.jpeg"),
   },
   {
-    id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    id: "yong",
+    src: require("../../assets/555.jpeg"),
   },
   {
-    id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    id: "yong",
+    src: require("../../assets/555.jpeg"),
   },
   {
-    id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    id: "yong",
+    src: require("../../assets/555.jpeg"),
   },
 ];
 
-const FriendItem = ({src}) => (
+const FriendItem = ({ src }) => (
   <View>
     <MainStory src={src} />
   </View>
 );
-const ContentsItem = ({id, src, story}) => (
+const ContentsItem = ({ id, src, story }) => (
   <View>
     <Contents id={id} src={src} story={story} />
   </View>
 );
 
-const Main = ({navigation}) => {
+const Main = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header onPress={() => navigation.navigate('MyPage')} />
+      <Header onPress={() => navigation.navigate("MyPage")} />
       <ScrollView nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>
-          <MainStory data={DATA} />
+          <MainStory data={DATA} frame={route.params} />
           {/* <FlatList
             data={DATA}
             renderItem={({ item }) => (
@@ -91,7 +91,7 @@ const Main = ({navigation}) => {
 
 const styles = StyleSheet.create({
   story_wrap: {
-    width: '100%',
+    width: "100%",
   },
 });
 

@@ -1,23 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Platform,
   PermissionsAndroid,
-} from "react-native";
-import MapView from "react-native-maps";
-import Geolocation from "react-native-geolocation-service";
-import ArMarker from "../components/Marker";
+} from 'react-native';
+import MapView from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
+import ArMarker from '../components/Marker';
+
+export const DATA = [
+  {
+    //고척스카이돔
+    latitude: 37.498063,
+    longitude: 126.867021,
+  },
+  {
+    //노들소공원
+    latitude: 37.499863,
+    longitude: 126.867,
+  },
+  {
+    //제주몰빵
+    latitude: 37.500472,
+    longitude: 126.867713,
+  },
+  {
+    //히어로 실내 낚시카페 대방점
+    latitude: 37.499957,
+    longitude: 126.925655,
+  },
+  {
+    //누리학교
+    latitude: 37.499946,
+    longitude: 126.92652,
+  },
+  {
+    //대림초등학교
+    latitude: 37.500584,
+    longitude: 126.925425,
+  },
+];
 
 async function requestPermission() {
   try {
-    if (Platform.OS === "ios") {
-      return await Geolocation.requestAuthorization("always");
+    if (Platform.OS === 'ios') {
+      return await Geolocation.requestAuthorization('always');
     }
-    if (Platform.OS === "android") {
+    if (Platform.OS === 'android') {
       return await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       );
     }
   } catch (e) {
@@ -30,7 +63,7 @@ const Map = ({ navigation }) => {
   useEffect(() => {
     requestPermission().then(result => {
       console.log({ result });
-      if (result === "granted") {
+      if (result === 'granted') {
         Geolocation.getCurrentPosition(
           pos => {
             setLocation(pos.coords);
@@ -42,7 +75,7 @@ const Map = ({ navigation }) => {
             enableHighAccuracy: true,
             timeout: 3600,
             maximumAge: 3600,
-          }
+          },
         );
       }
     });
@@ -80,29 +113,19 @@ const Map = ({ navigation }) => {
         zoomTapEnabled={false}
         zoomControlEnabled={false}
         pitchEnabled={false}
-        moveOnMarkerPress={false}
-      >
-        <ArMarker
-          location={{
-            latitude: location.latitude - 0.0005,
-            longitude: location.longitude - 0.0005,
-          }}
-          size={{ width: 200, height: 200 }}
-          onPress={() => {
-            navigation.navigate("ArScreen");
-          }}
-        />
-
-        <ArMarker
-          location={{
-            latitude: location.latitude + 0.0005,
-            longitude: location.longitude + 0.0005,
-          }}
-          size={{ width: 150, height: 150 }}
-          onPress={() => {
-            navigation.navigate("ArScreen1");
-          }}
-        />
+        moveOnMarkerPress={false}>
+        {DATA.map(item => (
+          <ArMarker
+            location={{
+              latitude: item.latitude,
+              longitude: item.longitude,
+            }}
+            size={{ width: 50, height: 50 }}
+            onPress={() => {
+              navigation.navigate('ArScreen');
+            }}
+          />
+        ))}
       </MapView>
     </>
   );
@@ -111,7 +134,7 @@ const Map = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {},
   scrollView: {
-    backgroundColor: "pink",
+    backgroundColor: 'pink',
     marginHorizontal: 20,
   },
   text: {
