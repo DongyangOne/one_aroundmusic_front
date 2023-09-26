@@ -1,4 +1,5 @@
 # one_aroundmusic_front
+
 2023졸업작품 ARoundMusic FrontEnd 저장소입니다.
 
 ### node version
@@ -11,7 +12,7 @@ v6.14.18
 
 ### java version
 
-jdk 11
+jdk 11버전
 
 ---
 
