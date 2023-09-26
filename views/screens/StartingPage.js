@@ -1,32 +1,37 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-native';
-import { exp } from 'react-native/Libraries/Animated/Easing';
-GoogleSignin.configure({
-  webClientId: '',
-});
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-function StartingPage() {
+function StartingPage({ navigation }) {
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '917140857338-8h09rrp06gu5o3d8hhrq18hjcqv62kl9.apps.googleusercontent.com',
+    });
+  }, []);
+
   async function onGoogleButtonPress() {
     // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+    try {
+      await GoogleSignin.hasPlayServices({
+        showPlayServicesUpdateDialog: true,
+      });
+      const { idToken } = await GoogleSignin.signIn();
+      console.log('idToekn : ', idToken);
+      if (idToken) {
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+        const res = await auth().signInWithCredential(googleCredential);
+      }
+    } catch (error) {
+      console.error('ERROR : ', error);
+    }
   }
 
   return (
     <Button
       title="Google Sign-In"
-      onPress={() =>
-        onGoogleButtonPress().then(() => console.log('Signed in with Google!'))
-      }
+      onPress={() => onGoogleButtonPress().then(navigation.navigate('Main'))}
     />
   );
 }
