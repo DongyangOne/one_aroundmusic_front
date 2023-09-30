@@ -68,11 +68,15 @@ const ContentsItem = ({ id, src, story }) => (
 
 const Main = ({ navigation, route }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Header onPress={() => navigation.navigate("MyPage")} />
+    <View>
+    {/* 마이페이지 헤더 */}
+      <Header onPress={() => navigation.navigate("MyPage")} /> 
       <ScrollView nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>
-          <MainStory data={DATA} frame={route.params} />
+          {/* 친구 스토리 */}
+          <MainStory data={DATA} />
+          {/* 나의 게시물 */}
+          <Contents data={DATA} />
           {/* <FlatList
             data={DATA}
             renderItem={({ item }) => (
@@ -85,7 +89,7 @@ const Main = ({ navigation, route }) => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+      </View>
   );
 };
 

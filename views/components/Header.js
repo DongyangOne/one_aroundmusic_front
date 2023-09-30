@@ -8,7 +8,7 @@ import {
   Image,
   View,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {TouchableOpacity} from 'react-native';
 
 const Header = ({ onPress }) => {
   return (

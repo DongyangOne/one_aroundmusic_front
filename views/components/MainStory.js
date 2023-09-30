@@ -6,22 +6,17 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native';
 import { IMG_SRC } from '../screens/ListenKing';
 
 const MainStory = ({ data, frame }) => {
   try {
-    // console.log(`frame: ${frame.setData}`); // console loooooooooooooog
     return (
-      <ScrollView
-        style={styles.scroll}
-        nestedScrollEnabled={true}
-        horizontal={true}>
         <View style={styles.storyRow}>
           {/* New Code */}
           {data.map((item, index) => (
             <View style={styles.story}>
-              <TouchableWithoutFeedback>
+              <TouchableOpacity>
                 {index == 0 ? (
                   <ImageBackground
                     source={IMG_SRC[frame.setData].src}
@@ -31,30 +26,23 @@ const MainStory = ({ data, frame }) => {
                 ) : (
                   <Image source={item.src} style={styles.image}></Image>
                 )}
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
             </View>
           ))}
         </View>
-      </ScrollView>
     );
   } catch (error) {
-    // console.log(`NO DATA IMPORTED`); // Console looooooooooooooooooooog
     return (
-      <ScrollView
-        style={styles.scroll}
-        nestedScrollEnabled={true}
-        horizontal={true}>
         <View style={styles.storyRow}>
           {/* Previous Code */}
           {data.map(item => (
             <View style={styles.story}>
-              <TouchableWithoutFeedback>
+              <TouchableOpacity>
                 <Image source={item.src} style={styles.image}></Image>
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
             </View>
           ))}
         </View>
-      </ScrollView>
     );
   }
 };
@@ -83,10 +71,6 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     marginLeft: 5,
     marginTop: 5,
-    // borderWidth: 1,
-    // borderColor: "white",
-    // backgroundColor: "#0ff", // Just for Test
-    // padding: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -94,8 +78,6 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    // marginLeft: 18,
-    // marginTop: 18,
     marginLeft: 1,
     borderWidth: 1,
     borderColor: 'white',
