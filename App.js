@@ -37,62 +37,6 @@ const styles = StyleSheet.create({
   text: {textAlign: 'center' },
 });
 
-export const DATA = [
-  {
-    id: "또치",
-    src: require("./assets/111.jpeg"),
-    story: require("./assets/contents1.jpeg"),
-  },
-  {
-    id: "이지금",
-    src: require("./assets/222.jpeg"),
-    story: require("./assets/contents2.jpeg"),
-  },
-  {
-    id: "jung",
-    src: require("./assets/333.jpeg"),
-    story: require("./assets/contents3.jpeg"),
-  },
-  {
-    id: "jin",
-    src: require("./assets/444.jpeg"),
-  },
-  {
-    id: "yong",
-    src: require("./assets/555.jpeg"),
-  },
-  {
-    id: "yong",
-    src: require("./assets/555.jpeg"),
-  },
-  {
-    id: "yong",
-    src: require("./assets/555.jpeg"),
-  },
-  {
-    id: "yong",
-    src: require("./assets/555.jpeg"),
-  },
-  {
-    id: "yong",
-    src: require("./assets/555.jpeg"),
-  },
-  {
-    id: "yong",
-    src: require("./assets/555.jpeg"),
-  },
-];
-
-const FriendItem = ({ src }) => (
-  <View>
-    <MainStory src={src} />
-  </View>
-);
-const ContentsItem = ({ id, src, story }) => (
-  <View>
-    <Contents id={id} src={src} story={story} />
-  </View>
-);
 
 export default () => (
   <View style={styles.container}>
@@ -109,7 +53,7 @@ export default () => (
             </View>
           </ScrollView>
         </View> */}
-        <Main/>
+        <Header/>
       </View>
       <View style={[styles.child, { backgroundColor: 'skyblue' }]}>
         <Map></Map>

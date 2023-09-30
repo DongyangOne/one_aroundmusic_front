@@ -1,13 +1,11 @@
-import React from "react";
+import {React, useState} from "react";
 import { StyleSheet, SafeAreaView, FlatList, View } from "react-native";
 import { ScrollView } from "react-native-virtualized-view";
 import Header from "../components/Header";
 import MainStory from "../components/MainStory";
 import Contents from "../components/Contents";
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from "react-native-gesture-handler";
+import {TouchableOpacity} from 'react-native';
+import MyPage from "../screens/MyPage";
 
 export const DATA = [
   {
@@ -68,28 +66,14 @@ const ContentsItem = ({ id, src, story }) => (
 
 const Main = ({ navigation, route }) => {
   return (
-    <View>
-    {/* 마이페이지 헤더 */}
-      <Header onPress={() => navigation.navigate("MyPage")} /> 
-      <ScrollView nestedScrollEnabled={true}>
-        <View style={styles.story_wrap}>
-          {/* 친구 스토리 */}
-          <MainStory data={DATA} />
-          {/* 나의 게시물 */}
-          <Contents data={DATA} />
-          {/* <FlatList
-            data={DATA}
-            renderItem={({ item }) => (
-              <ContentsItem id={item.id} src={item.src} story={item.story} />
-            )}
-            numColumns={3}
-          /> */}
-          <View>
-            <Contents data={DATA} />
-          </View>
-        </View>
-      </ScrollView>
+    <ScrollView nestedScrollEnabled={true}>
+      <View style={styles.story_wrap}>
+        {/* 친구 스토리 */}
+        <MainStory data={DATA} />
+        {/* 나의 게시물 */}
+        <Contents data={DATA} />
       </View>
+    </ScrollView>
   );
 };
 

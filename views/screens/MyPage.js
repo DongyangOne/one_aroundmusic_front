@@ -172,19 +172,20 @@ const MyPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   // MyPage whole container
   contain: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: "#fff",
     color: "#fff",
     backgroundColor: "#041c3c",
+    marginTop:0,
   },
   // Top area
   myPage: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "#fff",
     flexDirection: "row",
     paddingVertical: "auto",
-    // alignItems: "center",
-    // justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
 
     // backgroundColor: "#0ff",
     // bottom: "0%",
@@ -231,13 +232,13 @@ const styles = StyleSheet.create({
   // king Whole Container
   kingContainer: {
     flex: 3,
-    // flexDirection: "column",
+    flexDirection: "column",
     backgroundColor: "#041c3c",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     // top: -40,
-    // paddingTop: 40,
-    top: -20,
+    paddingTop: 40,
+    top: -0,
     paddingTop: 20,
     zIndex: 10,
   },

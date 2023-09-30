@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import {
   StyleSheet,
   Text,
@@ -9,31 +9,44 @@ import {
   View,
 } from "react-native";
 import {TouchableOpacity} from 'react-native';
+import MyPage from "../screens/MyPage";
+import Main from "../screens/Main";
 
-const Header = ({ onPress }) => {
+const Header = () => {
+  const [currentPage, setCurrentPage] = useState('main');
+
+  const navigateToPage = (pageName) => {
+    setCurrentPage(pageName);
+  };
+
   return (
     <View style={styles.wrap}>
-      <TouchableOpacity onPress={onPress} style={styles.image}>
-        <Image source={require("../../assets/myPage.png")} />
+      <TouchableOpacity onPress={() => navigateToPage('myPage')}>
+        <Image source={require("../../assets/myPage.png")} style={styles.image}/>
       </TouchableOpacity>
+      {currentPage === 'main' && <Main />}
+      {currentPage === 'myPage' && <MyPage />}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrap: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    // marginTop: 30,
+    // flexDirection: "row",
+    // justifyContent: "flex-end",
     alignItems: "center",
     backgroundColor: "#001C3E",
-    height: 60,
+    marginTop:20,
+  //   height: 60,
+  
   },
   image: {
     marginRight: 18,
     width: 30,
     height: 30,
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "flex-end",
     marginTop: 20,
     marginRight: 10,
   },
