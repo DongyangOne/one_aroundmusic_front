@@ -1,18 +1,18 @@
-import React from "react";
+import {React, useState} from "react";
 import {
   StyleSheet,
   SafeAreaView,
   View,
   FlatList,
   Image,
+  ScrollView,
   Text,
+  TouchableOpacity,
 } from "react-native";
-import { ScrollView } from "react-native-virtualized-view";
-import Header from "../components/Header";
 import FilterButton from "../components/FilterButton";
 import SongList from "../components/SongList";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import FilterTagButton from "../components/FilterTagButton";
+import FilterScreen from "../screens/FilterScreen";
 const FILTER = [
   {
     id: 1,
@@ -35,6 +35,7 @@ const FILTER = [
     title: "계절",
   },
 ];
+const EX = "hi";
 
 const DATA = [
   {
@@ -112,26 +113,36 @@ const SONG = [
   },
 ];
 
-const Music = ({ navigation }) => {
+const Music = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Header onPress={() => navigation.navigate("MyPage")} />
-      </View>
+    // <SafeAreaView style={styles.container}>
+      <ScrollView nestedScrollEnabled={true}>
       <View style={styles.next}>
         <View style={styles.nextI}>
-          <FlatList
-            style={styles.filter}
-            data={FILTER}
-            renderItem={({ item }) => (
-              <FilterButton
-                color="#F2F3F6"
-                textColor="#3F3F3F"
-                title={item.title}
-                onPress={() => navigation.navigate("Filter")}
-              />
-            )}
-            numColumns={5}
+          <FilterButton
+            color="#F2F3F6"
+            textColor="#3F3F3F"
+            title={FILTER[0].title}
+          />
+           <FilterButton
+            color="#F2F3F6"
+            textColor="#3F3F3F"
+            title={FILTER[1].title}
+          />
+           <FilterButton
+            color="#F2F3F6"
+            textColor="#3F3F3F"
+            title={FILTER[2].title}
+          />
+           <FilterButton
+            color="#F2F3F6"
+            textColor="#3F3F3F"
+            title={FILTER[3].title}
+          />
+           <FilterButton
+            color="#F2F3F6"
+            textColor="#3F3F3F"
+            title={FILTER[4].title}
           />
           <TouchableOpacity
             style={styles.filter}
@@ -150,82 +161,77 @@ const Music = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.tagListContainer}>
-          <FlatList
-            data={DATA}
-            renderItem={({ item }) => (
-              <FilterTagButton
+          <FilterTagButton
                 color="#2F4560"
                 textColor="#ffffff"
-                title={item.tag}
-              />
-            )}
-            numColumns={3}
+                title={DATA[0].tag}
+          />
+          <FilterTagButton
+                color="#2F4560"
+                textColor="#ffffff"
+                title={DATA[1].tag}
+          />
+          <FilterTagButton
+                color="#2F4560"
+                textColor="#ffffff"
+                title={DATA[2].tag}
           />
         </View>
         {/*빈칸*/}
         {/**음악 스크롤 뷰 페이지 */}
         <View style={styles.musicScroll}>
-          <ScrollView style={styles.ScrollView}>
-            <View style={styles.space}></View>
+              <SongList song={SONG}/>
+            {/* <View style={styles.space}></View>
             <View style={styles.start}>
-              <View style={styles.music}>
-                <FlatList
-                  data={SONG}
-                  renderItem={({ item }) => (
-                    <SongList
-                      image={item.image}
-                      title={item.title}
-                      singer={item.singer}
-                      date={item.date}
-                    />
-                  )}
-                />
-              </View>
-            </View>
-          </ScrollView>
-        </View>
+            </View> */}
+          </View>
       </View>
-    </SafeAreaView>
+      </ScrollView>
+    // </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#001C3E",
+    // backgroundColor: "#001C3E",
     flex: 1,
+    alignItems: "center",
+    width: "100%",
   },
   next: {
     flex: 1,
-    backgroundColor: "#001C3E",
+    // backgroundColor: "#001C3E",
   },
   nextI: {
-    backgroundColor: "#001C3E",
+    margin: 20,
+    // backgroundColor: "#001C3E",
     flexDirection: "row",
   },
   tagListContainer: {
-    backgroundColor: "#001C3E",
-    marginTop: 5,
+    // backgroundColor: "#001C3E",
+    margin: 15,
+    flexDirection: "row",
   },
   all: {
     flex: 1,
   },
   musicScroll: {
     flex: 1,
-    backgroundColor: "pink",
+    // backgroundColor: "pink",
     marginTop: 30,
   },
   ScrollView: {
     flex: 1,
-    backgroundColor: "#001C3E",
+    // backgroundColor: "#001C3E",
   },
   space: {
     flex: 3,
-    backgroundColor: "#001C3E",
+    // backgroundColor: "#001C3E",
     height: 50,
   },
   start: {
     flex: 8,
-    backgroundColor: "white",
+    // backgroundColor: "white",
     borderTopEndRadius: 20,
     borderTopStartRadius: 20,
   },

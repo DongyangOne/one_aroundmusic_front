@@ -13,22 +13,22 @@ import MyPage from "../screens/MyPage";
 import Main from "../screens/Main";
 import Music from "../screens/Music";
 
-const Header = (props) => {
-  const [currentPage, setCurrentPage] = useState("main");
+const Header2 = (props) => {
+  const [currentPage, setCurrentPage] = useState("music");
   const navigateToPage = (pageName) => {
     setCurrentPage(pageName);
   };
 
   return (
-    <View>
+    <View >
       <View style={styles.wrap}>
       <TouchableOpacity onPress={() => navigateToPage('myPage')}>
         <Image source={require("../../assets/myPage.png")} style={styles.image}/>
       </TouchableOpacity>
       </View>
-      {currentPage === 'main' && <Main />}
+      {/* {currentPage === 'main' && <Main />} */}
       {currentPage === 'myPage' && <MyPage />}
-      {/* {currentPage === 'music' && <Music />} */}
+      {currentPage === 'music' && <Music />}
     </View>
   );
 
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default Header2;

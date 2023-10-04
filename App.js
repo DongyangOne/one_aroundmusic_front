@@ -18,6 +18,7 @@ import FriendList from './views/screens/FriendList';
 import Board from './views/screens/Board';
 import NotMain from './views/screens/NotMain';
 import Header from "./views/components/Header";
+import Header2 from "./views/components/Header2";
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -32,31 +33,24 @@ import { ScrollView } from 'react-native-virtualized-view';
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: 'white' },
-  child: { width, justifyContent: 'center' },
-  text: {textAlign: 'center' },
+  container: { flex: 1 },
+   child: { width },
+  // text: {textAlign: 'center' },
 });
 
 
 export default () => (
   <View style={styles.container}>
-    <SwiperFlatList index={1} showPagination>
-      <View style={[styles.child, { backgroundColor: 'tomato' }]}>
+    <SwiperFlatList index={0} showPagination>
+      <View style={[styles.child, {  }]}>
         {/* <Text style={styles.text}>1</Text> */}
+        <Header2/>
       </View>
-      <View style={[styles.child, { backgroundColor: 'thistle' }]}>
-        {/* <Header/>
-        <View>
-          <ScrollView>
-          <View>
-              <Contents data={DATA} />
-            </View>
-          </ScrollView>
-        </View> */}
+      <View style={[styles.child, { backgroundColor: '' }]}>
         <Header/>
       </View>
       <View style={[styles.child, { backgroundColor: 'skyblue' }]}>
-        <Map></Map>
+        {/* <Map></Map> */}
       </View>
       <View style={[styles.child, { backgroundColor: 'teal' }]}>
         <Text style={styles.text}>4</Text>
