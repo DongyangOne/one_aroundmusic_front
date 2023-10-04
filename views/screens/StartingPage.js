@@ -1,3 +1,72 @@
+/* import React, { useState } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { authorize, refresh, revoke } from 'react-native-app-auth';
+
+const StartingPage = () => {
+  const [authState, setAuthState] = useState(null);
+
+  const config = {
+    issuer: 'https://accounts.spotify.com',
+    clientId: '577d38d2462848bd84a005b4fa7f34a8',
+    redirectUrl: 'http://localhost:8081/callback',
+    scopes: ['user-library-read', 'playlist-read-private'], // 필요한 스코프 추가
+  };
+
+  const handleLogin = async () => {
+    try {
+      const result = await authorize(config);
+      console.log('hi');
+      setAuthState(result);
+    } catch (error) {
+      console.error('Spotify 로그인 오류:', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    if (authState) {
+      try {
+        await revoke(config, {
+          tokenToRevoke: authState.accessToken,
+          sendClientId: true,
+        });
+        setAuthState(null);
+      } catch (error) {
+        console.error('Spotify 로그아웃 오류:', error);
+      }
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Spotify 로그인 예제</Text>
+      {!authState ? (
+        <Button title="Spotify로 로그인" onPress={handleLogin} />
+      ) : (
+        <>
+          <Text>Access Token: {authState.accessToken}</Text>
+          <Text>Refresh Token: {authState.refreshToken}</Text>
+          <Button title="로그아웃" onPress={handleLogout} />
+        </>
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+}); */
+
+//export default StartingPage;
+
 import React, { useState } from 'react';
 import { Button, SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import axios from 'axios';
@@ -47,6 +116,8 @@ const styles = StyleSheet.create({
 });
 
 export default StartingPage;
+
+//=============================================================
 
 // useEffect(() => {
 //   GoogleSignin.configure({

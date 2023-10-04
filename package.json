@@ -22,6 +22,7 @@
     "firebase": "^10.4.0",
     "react": "18.1.0",
     "react-native": "0.70.1",
+    "react-native-app-auth": "^7.1.0",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "^2.12.1",
     "react-native-image-picker": "^7.0.0",
@@ -31,7 +32,10 @@
     "react-native-swiper": "^1.6.0",
     "react-native-swiper-view": "^1.2.0",
     "react-native-toast-message": "^2.1.6",
-    "react-native-virtualized-view": "^1.0.0"
+    "react-native-virtualized-view": "^1.0.0",
+    "react-native-webview": "^13.6.0",
+    "react-native-youtube-iframe": "^2.3.0",
+    "ytmusic-api": "^4.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

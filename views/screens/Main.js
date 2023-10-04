@@ -67,7 +67,7 @@ const ContentsItem = ({ id, src, story }) => (
 );
 
 const Main = ({ navigation, route }) => {
-  const getData = async () => {
+  /*   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('accessToken');
       if (value !== null) {
@@ -80,7 +80,7 @@ const Main = ({ navigation, route }) => {
     }
   };
 
-  getData();
+  getData(); */
   return (
     <SafeAreaView style={styles.container}>
       <Header onPress={() => navigation.navigate('MyPage')} />
