@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 
-import Header from "../components/Header";
+import Header from '../components/Header';
 
 const MyPage = ({ navigation }) => {
   const [friend, setFriend] = useState(0); // save user's number of friends
-  const [userId, setUserId] = useState("Guest"); // save userID (like MiRae23)
+  const [userId, setUserId] = useState('Guest'); // save userID (like MiRae23)
 
   useEffect(() => {
     // Load userID
@@ -19,14 +19,14 @@ const MyPage = ({ navigation }) => {
         {/* Profile picture */}
         <Image
           style={styles.profile}
-          source={require("../../assets/profile.png")}
+          source={require('../../assets/profile.png')}
         />
         <View>
           {/** FUNCTION IMPLEMENT:
            * Load the logged-in user's ID */}
           <Text style={styles.id}>{userId}</Text>
           {/* Friend button area */}
-          <TouchableOpacity onPress={() => navigation.navigate("FriendList")}>
+          <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
             <View style={styles.friendBtn}>
               {/** FUNCTION IMPLEMENT:
                * Count the logged-in user's number of friends */}
@@ -52,7 +52,7 @@ const MyPage = ({ navigation }) => {
           <View styles={styles.kingLogoCont}>
             <Image
               style={styles.kingLogo}
-              source={require("../../assets/MyPage_medal_famous.png")}
+              source={require('../../assets/MyPage_medal_famous.png')}
             />
           </View>
           <View></View>
@@ -60,7 +60,7 @@ const MyPage = ({ navigation }) => {
           <View styles={styles.kingNextCont}>
             <Image
               style={styles.kingNext}
-              source={require("../../assets/MyPage_next.png")}
+              source={require('../../assets/MyPage_next.png')}
             />
           </View>
         </View>
@@ -69,10 +69,9 @@ const MyPage = ({ navigation }) => {
           <View>
             <TouchableOpacity
               style={styles.reward}
-              onPress={() => navigation.navigate("PopularKing")}
-            >
+              onPress={() => navigation.navigate('PopularKing')}>
               <Image
-                source={require("../../assets/MyPage_king_popular.png")}
+                source={require('../../assets/MyPage_king_popular.png')}
                 style={styles.rewardLogo}
               />
               <Text style={styles.rewardText}>인기왕 리워드 보러가기</Text>
@@ -81,7 +80,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require("../../assets/MyPage_midLine.png")}
+              source={require('../../assets/MyPage_midLine.png')}
             />
           </View>
 
@@ -94,7 +93,7 @@ const MyPage = ({ navigation }) => {
             <View styles={styles.kingLogoCont}>
               <Image
                 style={styles.kingLogo}
-                source={require("../../assets/MyPage_medal_walk.png")}
+                source={require('../../assets/MyPage_medal_walk.png')}
               />
             </View>
             <View></View>
@@ -102,16 +101,15 @@ const MyPage = ({ navigation }) => {
             <View styles={styles.kingNextCont}>
               <Image
                 style={styles.kingNext}
-                source={require("../../assets/MyPage_next.png")}
+                source={require('../../assets/MyPage_next.png')}
               />
             </View>
           </View>
           <TouchableOpacity
             style={styles.reward}
-            onPress={() => navigation.navigate("WKing")}
-          >
+            onPress={() => navigation.navigate('WKing')}>
             <Image
-              source={require("../../assets/MyPage_king_walk.png")}
+              source={require('../../assets/MyPage_king_walk.png')}
               style={styles.rewardLogo}
             />
             <Text style={styles.rewardText}>걷기왕 리워드 보러가기</Text>
@@ -119,7 +117,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require("../../assets/MyPage_midLine.png")}
+              source={require('../../assets/MyPage_midLine.png')}
             />
           </View>
 
@@ -133,7 +131,7 @@ const MyPage = ({ navigation }) => {
               <View styles={styles.kingLogoCont}>
                 <Image
                   style={styles.kingLogo}
-                  source={require("../../assets/MyPage_medal_listen.png")}
+                  source={require('../../assets/MyPage_medal_listen.png')}
                 />
               </View>
               <View></View>
@@ -141,16 +139,15 @@ const MyPage = ({ navigation }) => {
               <View styles={styles.kingNextCont}>
                 <Image
                   style={styles.kingNext}
-                  source={require("../../assets/MyPage_next.png")}
+                  source={require('../../assets/MyPage_next.png')}
                 />
               </View>
             </View>
             <TouchableOpacity
               style={styles.reward}
-              onPress={() => navigation.navigate("ListenKing")}
-            >
+              onPress={() => navigation.navigate('ListenKing')}>
               <Image
-                source={require("../../assets/MyPage_king_listen.png")}
+                source={require('../../assets/MyPage_king_listen.png')}
                 style={styles.rewardLogo}
               />
               <Text style={styles.rewardText}>듣기왕 리워드 보러가기</Text>
@@ -159,7 +156,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require("../../assets/MyPage_midLine.png")}
+              source={require('../../assets/MyPage_midLine.png')}
             />
           </View>
         </View>
@@ -173,50 +170,41 @@ const styles = StyleSheet.create({
   // MyPage whole container
   contain: {
     flex: 1,
-    // backgroundColor: "#fff",
-    color: "#fff",
-    backgroundColor: "#041c3c",
+    color: '#fff',
+    backgroundColor: '#041c3c',
   },
   // Top area
   myPage: {
     flex: 1,
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    paddingVertical: "auto",
-    // alignItems: "center",
-    // justifyContent: "center",
-
-    // backgroundColor: "#0ff",
-    // bottom: "0%",
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    paddingVertical: 'auto',
   },
   // Friend Button
   friendBtn: {
     width: 140,
     height: 27,
-    // marginTop: 17,
     marginTop: 27,
     marginLeft: 25,
-    textAlign: "left",
-    borderColor: "#034AA6",
+    textAlign: 'left',
+    borderColor: '#034AA6',
     borderWidth: 1,
     borderRadius: 13,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   // Friend button innerText
   text: {
     fontSize: 12,
-    color: "#071c3c",
-    textAlign: "left",
-    // color: "#034AA6",
+    color: '#071c3c',
+    textAlign: 'left',
   },
   // user ID
   id: {
     fontSize: 24,
-    // marginTop: 20,
     marginTop: 10,
     marginLeft: 25,
-    color: "#071c3c",
+    color: '#071c3c',
   },
   // Profile picture
   profile: {
@@ -231,12 +219,9 @@ const styles = StyleSheet.create({
   // king Whole Container
   kingContainer: {
     flex: 3,
-    // flexDirection: "column",
-    backgroundColor: "#041c3c",
+    backgroundColor: '#041c3c',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    // top: -40,
-    // paddingTop: 40,
     top: -20,
     paddingTop: 20,
     zIndex: 10,
@@ -245,11 +230,11 @@ const styles = StyleSheet.create({
   king: {
     zIndex: 50,
     height: 80,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#fff",
-    borderColor: "#041c3c",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    borderColor: '#041c3c',
     borderWidth: 1,
     borderRadius: 25,
     marginHorizontal: 25,
@@ -257,12 +242,12 @@ const styles = StyleSheet.create({
   // king inner title text (like 인기왕, 걷기왕, 듣기왕)
   kingTitle: {
     fontSize: 23,
-    color: "#000",
+    color: '#000',
     marginLeft: 25,
   },
   // Badge Picture Container
   kingLogoCont: {
-    alignItems: "left",
+    alignItems: 'left',
   },
   // Badge Picture logo size
   kingLogo: {
@@ -272,7 +257,7 @@ const styles = StyleSheet.create({
   // king code
   kingCode: {
     fontSize: 11,
-    color: "#000",
+    color: '#000',
   },
   // Next Button (Arrow picture)
   kingNext: {
@@ -282,9 +267,8 @@ const styles = StyleSheet.create({
   },
   // reward container
   reward: {
-    // flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginHorizontal: 40,
   },
   // reward mini logo (like heart, position-mark, play-button etc.)
@@ -295,7 +279,7 @@ const styles = StyleSheet.create({
   },
   // ~~~ 리워드 보러가기
   rewardText: {
-    color: "#ccc",
+    color: '#ccc',
     width: 299,
     height: 23,
     marginRight: 10,
@@ -303,7 +287,6 @@ const styles = StyleSheet.create({
   },
   // looooong arrow container
   rewardLine: {
-    // flex: 1,
     marginHorizontal: 35,
     marginTop: -10,
     marginBottom: 10,
@@ -311,7 +294,7 @@ const styles = StyleSheet.create({
   // looooong arrow picture
   rewardLinePic: {
     width: 350,
-    resizeMode: "center",
+    resizeMode: 'center',
   },
 });
 
