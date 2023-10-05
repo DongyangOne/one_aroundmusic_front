@@ -1,6 +1,9 @@
-import React, { useState, useNavigate } from 'react';
+import React, { useState, useNavigate, useEffect } from 'react';
 import { Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
+import { TOKEN } from '../components/MainStory';
 import Main from './Main';
 
 const RoundedShadowBox = ({ children }) => {
@@ -26,6 +29,11 @@ export const IMG_SRC = [
 ];
 
 const ListenKing = ({ navigation }) => {
+  const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
+
+  let fixed = 8; // null
+
+  // console.log(IMG_SRC[0]);
   const [images, setImages] = useState([
     require('../../assets/listen1.png'), // Black Circle Outline
     require('../../assets/listen2.png'), // Rainbow Circle (Default)
@@ -38,7 +46,7 @@ const ListenKing = ({ navigation }) => {
   ]);
 
   /** Currently selected ListenKing */
-  const [selection, setSelection] = useState(1);
+  const [selection, setSelection] = useState(8);
 
   const NOW_SET = dir => {
     // console.log(selection);
@@ -51,10 +59,10 @@ const ListenKing = ({ navigation }) => {
      */
     if (dir == 'r') {
       temp++;
-      if (temp > 2) temp = 0;
+      if (temp > fixed + 1) temp = fixed - 1;
     } else if (dir == 'l') {
       temp--;
-      if (temp < 0) temp = 2;
+      if (temp < fixed - 1) temp = fixed + 1;
     } else {
       console.log(`dir: ${dir}. ERROR Occurred!`);
       return;
@@ -96,9 +104,30 @@ const ListenKing = ({ navigation }) => {
 
   /** Go to the main screen */
   const handleGoHome = () => {
-    navigation.navigate('Main', {
-      setData: selection,
-    });
+    axios
+      .patch(
+        `${serverURL}/api/reward`, // URL
+        {
+          // Data
+          'rewardType': 'listen',
+          'select_id': selection,
+        },
+        {
+          // Authorization
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        },
+      )
+      .then(response => {
+        console.log(
+          `[ListenKing] Send SUCCESSFUL! >> ${JSON.stringify(response.data)}`,
+        );
+        navigation.navigate('Main', { setData: selection });
+      })
+      .catch(e => {
+        console.error(`PATCH Error >> ${e}`);
+      });
   };
 
   return (
