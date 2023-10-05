@@ -46,7 +46,54 @@ const ListenKing = ({ navigation }) => {
   ]);
 
   /** Currently selected ListenKing */
+  // const [selection, setSelection] = useState(8); // CORRECT
   const [selection, setSelection] = useState(8);
+
+  useEffect(() => {
+    const loadDATAs = () => {
+      const getData = async () => {
+        try {
+          // 토큰에 문제가 없다면
+          if (TOKEN !== null) {
+            console.info(`TOKEN Load SUCCESSFUL`);
+            // console.log(`[ListenKing] TOKEN >> ${TOKEN}`);
+            // Axios 이용하여 데이터 불러오기
+            axios
+              .get(`${serverURL}/api/reward/listen`, {
+                headers: {
+                  Authorization: `Bearer ${TOKEN}`,
+                },
+              })
+              .then(response => {
+                // 서버에서 불러온 데이터 저장하기
+                loadData = response.data;
+                // 선택된 id값 temp에 저장
+                const temp = parseInt(loadData.data.selectedReward.id);
+                // console.log(`temp >> ${temp}`);
+                // 불러온 id 값 별로 분기 (왼쪽, 오른쪽 이미지 선택해서 바뀌는것처럼)
+                try {
+                  if (temp == 7) handleLeftImageClick();
+                  else if (temp == 9) handleRightImageClick();
+                  // else if (temp == 8) console.info(`Default Value: <8>`);
+                } catch (e) {
+                  console.error(`ERR with Switch Reward >> ${e}`);
+                }
+                // console.info(`DONE!`);
+              })
+              .catch(e => {
+                console.error(`GET ERROR >> ${e}`);
+              });
+          } else {
+            console.info('No data found');
+          }
+        } catch (e) {
+          console.error(`Error with Reading Data >> ${e}`);
+        }
+      };
+      getData();
+    };
+    loadDATAs();
+  }, []);
 
   const NOW_SET = dir => {
     // console.log(selection);
