@@ -213,12 +213,7 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   scrollView: {
-    width: 400,
-    height: '80%',
-  },
-  userBox: {
-    width: 100,
-    height: 550,
+    height: '71%',
   },
   center: {
     FlexDirection: 'center',
