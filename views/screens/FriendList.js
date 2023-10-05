@@ -10,8 +10,6 @@ import {
   ScrollView,
 } from 'react-native';
 import FriendsItem from '../components/FriendsItem';
-import FriendsItem2 from '../components/FriendsItem2';
-import FriendsItem3 from '../components/FriendsItem3';
 
 const FriendList = () => {
   const [mode, setMode] = useState('유저 목록');
@@ -105,9 +103,11 @@ const FriendList = () => {
             <FlatList
               data={REQUEST}
               renderItem={({ item }) => (
-                <FriendsItem3
+                <FriendsItem
                   name={item.name}
                   image={item.image}
+                  color="#001C3E"
+                  textColor="white"
                   state="수락 하기"
                   onPress={() => {
                     handleAccept(item);
@@ -123,6 +123,8 @@ const FriendList = () => {
                 <FriendsItem
                   name={item.name}
                   image={item.image}
+                  color="#001C3E"
+                  textColor="white"
                   state="친구 끊기"
                 />
               )}
@@ -132,9 +134,11 @@ const FriendList = () => {
             <FlatList
               data={FRIENDSLIST2}
               renderItem={({ item }) => (
-                <FriendsItem2
+                <FriendsItem
                   name={item.name}
                   image={item.image}
+                  color="#ffffff"
+                  textColor="#000000"
                   state="친구 신청"
                 />
               )}
@@ -209,12 +213,7 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   scrollView: {
-    width: 400,
-    height: '80%',
-  },
-  userBox: {
-    width: 100,
-    height: 550,
+    height: '71%',
   },
   center: {
     FlexDirection: 'center',

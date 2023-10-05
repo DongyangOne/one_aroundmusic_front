@@ -17,7 +17,7 @@ import Listening from './views/screens/Listening';
 import FriendList from './views/screens/FriendList';
 import Board from './views/screens/Board';
 import NotMain from './views/screens/NotMain';
-
+import MusicPlay from './views/screens/MusicPlay';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import StartingPage from './views/screens/StartingPage';
@@ -59,6 +59,11 @@ export default () => (
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="MusicPlay"
+          component={MusicPlay}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Filter"
           component={FilterScreen}
           options={{
@@ -66,7 +71,7 @@ export default () => (
             title: '필터',
             headerTintColor: 'white',
             headerStyle: {
-              backgroundColor: "#001C3E",
+              backgroundColor: '#001C3E',
             },
             headerTitleAlign: 'center',
           }}
@@ -81,6 +86,7 @@ export default () => (
             headerTitleAlign: 'center',
           }}
         />
+
         <Stack.Screen
           name="PopularKing"
           component={PopularKing}
@@ -230,7 +236,7 @@ export default () => (
         />
       </Stack.Navigator>
     </NavigationContainer>
-    
+
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Map" component={Map} />
