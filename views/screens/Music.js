@@ -134,14 +134,14 @@ const Music = ({ navigation }) => {
                 color="#F2F3F6"
                 textColor="#3F3F3F"
                 title={item.title}
-                onPress={() => navigation.navigate('Filter')}
+                onPress={() => navigation.push('Filter')}
               />
             )}
             numColumns={5}
           />
           <TouchableOpacity
             style={styles.filter}
-            onPress={() => navigation.navigate('Filter')}>
+            onPress={() => navigation.push('Filter')}>
             <Image
               style={{
                 marginTop: 8,
@@ -189,6 +189,8 @@ const Music = ({ navigation }) => {
               </View>
             </View>
           </ScrollView>
+          <Header style={styles.footer} onPress={() => navigation.push('MyPage')} onPressMain={() => navigation.push('Main')} />
+
         </View>
       </View>
     </SafeAreaView>
