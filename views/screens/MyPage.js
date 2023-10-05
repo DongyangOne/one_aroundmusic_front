@@ -182,9 +182,9 @@ const styles = StyleSheet.create({
   },
   // Friend Button
   friendBtn: {
+    marginTop: 10,
     width: 140,
     height: 27,
-    marginTop: 27,
     marginLeft: 25,
     textAlign: 'left',
     borderColor: '#034AA6',
@@ -201,8 +201,8 @@ const styles = StyleSheet.create({
   },
   // user ID
   id: {
+    marginTop: 30,
     fontSize: 24,
-    marginTop: 10,
     marginLeft: 25,
     color: '#071c3c',
   },
