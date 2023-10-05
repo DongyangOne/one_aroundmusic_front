@@ -72,11 +72,6 @@ export default () => (
           }}
         />
         <Stack.Screen
-          name="Music2"
-          component={Music2}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="MyPage"
           component={MyPage}
           options={{
@@ -152,13 +147,9 @@ export default () => (
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name="ArScreen"
-          component={ArScreen}
-          options={{ headerShown: false }}
-        /> */}
       </Stack.Navigator>
     </NavigationContainer>
+
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
