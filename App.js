@@ -120,14 +120,14 @@ export default () => (
             headerTitleAlign: 'center',
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Listening"
           component={Listening}
           options={{ headerShown: false }}
-        />
+        /> */}
         <Stack.Screen
-          name="ArScreen2"
-          component={ArScreen2}
+          name="ArScreen"
+          component={ArScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -141,10 +141,15 @@ export default () => (
           }}
         />
         <Stack.Screen
-          name="NotMain"
-          component={NotMain}
+          name="FriendList"
+          component={FriendList}
           options={{
-            headerShown: false,
+            title: '친구',
+            headerStyle: {
+              backgroundColor: '#001C3E',
+            },
+            headerTintColor: '#ffffff',
+            headerTitleAlign: 'center',
           }}
         />
       </Stack.Navigator>
