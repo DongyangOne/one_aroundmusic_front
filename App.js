@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Main from './views/screens/Main';
 import Map from './views/screens/Map';

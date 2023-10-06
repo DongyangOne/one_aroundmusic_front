@@ -135,6 +135,7 @@ const MusicPlay = ({ navigation, route }) => {
       )}
       <Button title="공유하기" onPress={shareAr} />
       {/*       </ImageBackground> */}
+
     </View>
   );
 };

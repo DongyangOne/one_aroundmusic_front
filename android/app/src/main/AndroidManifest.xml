@@ -38,6 +38,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
             <!-- Add the following line for cardboard -->
             <category android:name="com.google.intent.category.CARDBOARD" />
+            <data android:scheme="com.awesomeproject" />
             <!-- Add the following line for daydream -->
             <category android:name="com.google.intent.category.DAYDREAM" />
         </intent-filter>

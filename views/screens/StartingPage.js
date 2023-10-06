@@ -1,26 +1,65 @@
-/* import React, { useState } from 'react';
+/*  스포티 파이 로그인
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { authorize, refresh, revoke } from 'react-native-app-auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { authorize, revoke } from 'react-native-app-auth';
 
-const StartingPage = () => {
-  const [authState, setAuthState] = useState(null);
+const StartingPage = ({ navigation }) => {
+  // navigation props 추가
+  const [authState, setAuthState] = useState(null); // authState와 setAuthState 정의
 
-  const config = {
-    issuer: 'https://accounts.spotify.com',
-    clientId: '577d38d2462848bd84a005b4fa7f34a8',
-    redirectUrl: 'http://localhost:8081/callback',
-    scopes: ['user-library-read', 'playlist-read-private'], // 필요한 스코프 추가
-  };
+  useEffect(() => {
+    const checkTokenValidity = async () => {
+      const accessToken = await AsyncStorage.getItem('token');
+      const expirationDate = await AsyncStorage.getItem('expirationDate');
+      console.log('acess token', accessToken);
+      console.log('expiration date', expirationDate);
 
-  const handleLogin = async () => {
+      if (accessToken && expirationDate) {
+        const currentTime = Date.now();
+        if (currentTime < parseInt(expirationDate)) {
+          navigation.replace('Main');
+        } else {
+          AsyncStorage.removeItem('token');
+          AsyncStorage.removeItem('expirationDate');
+        }
+      }
+    };
+
+    checkTokenValidity();
+  }, [navigation]); // dependency array에 navigation 추가
+
+  async function authenticate() {
+    const config = {
+      clientId: '577d38d2462848bd84a005b4fa7f34a8', // available on the app page
+      redirectUrl: 'com.awesomeproject://callback', // the redirect you defined after creating the app
+      scopes: [
+        'user-read-email',
+        'playlist-modify-public',
+        'user-read-private',
+      ],
+      serviceConfiguration: {
+        authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+        tokenEndpoint: 'https://accounts.spotify.com/api/token',
+      },
+    };
+
     try {
-      const result = await authorize(config);
-      console.log('hi');
-      setAuthState(result);
+      const result = await authorize(config); // authAsync -> authorize로 수정
+      console.log(result);
+      if (result.accessToken) {
+        const expirationDate = new Date(
+          result.accessTokenExpirationDate,
+        ).getTime();
+        await AsyncStorage.setItem('token', result.accessToken);
+        await AsyncStorage.setItem('expirationDate', expirationDate.toString());
+        navigation.navigate('Main');
+        setAuthState(result); // authState 업데이트
+      }
     } catch (error) {
-      console.error('Spotify 로그인 오류:', error);
+      console.error(error);
     }
-  };
+  }
 
   const handleLogout = async () => {
     if (authState) {
@@ -39,15 +78,7 @@ const StartingPage = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Spotify 로그인 예제</Text>
-      {!authState ? (
-        <Button title="Spotify로 로그인" onPress={handleLogin} />
-      ) : (
-        <>
-          <Text>Access Token: {authState.accessToken}</Text>
-          <Text>Refresh Token: {authState.refreshToken}</Text>
-          <Button title="로그아웃" onPress={handleLogout} />
-        </>
-      )}
+      <Button title="Spotify로 로그인" onPress={authenticate} />
     </View>
   );
 };
@@ -59,13 +90,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
+    color: 'black',
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
   },
-}); */
+  text: {
+    color: 'black',
+  },
+});
 
-//export default StartingPage;
+export default StartingPage; */
+
+// 로컬 로그인================================================================================
 
 import React, { useState } from 'react';
 import { Button, SafeAreaView, StyleSheet, TextInput } from 'react-native';
@@ -117,7 +154,7 @@ const styles = StyleSheet.create({
 
 export default StartingPage;
 
-//=============================================================
+//구글 로그인 =============================================================
 
 // useEffect(() => {
 //   GoogleSignin.configure({
