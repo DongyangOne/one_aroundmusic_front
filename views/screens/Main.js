@@ -71,7 +71,7 @@ const Main = ({ navigation, route }) => {
     try {
       const value = await AsyncStorage.getItem('accessToken');
       if (value !== null) {
-        console.log(value);
+        console.log(value);x`
       } else {
         console.log('No data found');
       }

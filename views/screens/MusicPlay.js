@@ -51,7 +51,6 @@ const MusicPlay = ({ navigation, route }) => {
           })
         }
       />
-      {/*       </ImageBackground> */}
     </View>
   );
 };
