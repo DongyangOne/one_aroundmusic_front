@@ -122,7 +122,7 @@ function StartingPage({ navigation }) {
         },
       );
       await AsyncStorage.setItem('accessToken', response.data.data.access);
-      navigation.navigate('Main');
+      navigation.replace('Main');
     } catch (error) {
       console.error('Error:', error);
     }

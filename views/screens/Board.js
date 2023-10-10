@@ -88,7 +88,7 @@ const Board = ({ data, navigation }) => {
       <View style={styles.BtnBox}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("NotMain")}
+          onPress={() => navigation.navigate("ListenKing")}
         >
           <Text style={styles.buttonText}>업로드하기</Text>
         </TouchableOpacity>

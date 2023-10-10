@@ -86,7 +86,7 @@ const FilterScreen = ({ navigation }) => {
         />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Music2")}
+          onPress={() => navigation.navigate("Music")}
         >
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
