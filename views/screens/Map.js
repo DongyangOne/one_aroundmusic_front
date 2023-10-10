@@ -116,6 +116,7 @@ const Map = ({ navigation }) => {
         moveOnMarkerPress={false}>
         {DATA.map(item => (
           <ArMarker
+            key={`${item.latitude}-${item.longitude}`}
             location={{
               latitude: item.latitude,
               longitude: item.longitude,

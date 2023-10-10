@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <!-- Other camera related features -->
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" tools:replace="required"/>
@@ -34,14 +35,19 @@
         android:windowSoftInputMode="adjustResize"
         android:exported="true">
         <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
             <!-- Add the following line for cardboard -->
             <category android:name="com.google.intent.category.CARDBOARD" />
-            <data android:scheme="com.awesomeproject" />
             <!-- Add the following line for daydream -->
             <category android:name="com.google.intent.category.DAYDREAM" />
         </intent-filter>
+        <intent-filter> 
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+      <data android:scheme="awesomeproject" />
+</intent-filter>
       </activity>
       <meta-data android:name="com.google.ar.core" android:value="optional" />
       <meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only"/>

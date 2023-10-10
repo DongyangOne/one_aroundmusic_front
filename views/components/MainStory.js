@@ -65,7 +65,7 @@ const MainStory = ({ data, frame }) => {
         <View style={styles.storyRow}>
           {/* New Code */}
           {data.map((item, index) => (
-            <View style={styles.story}>
+            <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
                 {index == 0 ? (
                   <ImageBackground
@@ -94,8 +94,8 @@ const MainStory = ({ data, frame }) => {
         horizontal={true}>
         <View style={styles.storyRow}>
           {/* Previous Code */}
-          {data.map(item => (
-            <View style={styles.story}>
+          {data.map((item, index) => (
+            <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
                 <Image source={item.src} style={styles.image}></Image>
               </TouchableWithoutFeedback>

@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
   View,
   FlatList,
-  Image,
   Text,
+  ActivityIndicator,
+  Image,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-virtualized-view';
 import Header from '../components/Header';
 import FilterButton from '../components/FilterButton';
 import SongList from '../components/SongList';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import FilterTagButton from '../components/FilterTagButton';
+import { TouchableOpacity } from 'react-native';
 const FILTER = [
   {
     id: 1,
@@ -51,74 +52,38 @@ const DATA = [
   },
 ];
 
-const SONG = [
-  {
-    title: '신호등',
-    singer: '이무진',
-    date: '2022 . 04 . 22',
-    image: require('../../assets/music1.jpg'),
-  },
-  {
-    title: 'Super Shy',
-    singer: 'NewJeans',
-    date: '2023 . 07 . 21',
-    image: require('../../assets/album/album5.png'),
-  },
-  {
-    title: '퀸카(Queencard)',
-    singer: '(여자)아이들',
-    date: '2023 . 05 . 15',
-    image: require('../../assets/album/album6.png'),
-  },
-  {
-    title: 'I AM',
-    singer: 'IVE(아이브)',
-    date: '2023 . 04 . 22',
-    image: require('../../assets/album/album4.png'),
-  },
-  {
-    title: 'Spicy',
-    singer: 'aespa',
-    date: '2023 . 05 . 08',
-    image: require('../../assets/album/album8.png'),
-  },
-  {
-    id: 3,
-    title: '벚꽃엔딩',
-    singer: '버스커 버스커',
-    date: '2013 . 04 . 22',
-    image: require('../../assets/album/album3.png'),
-  },
-  {
-    id: 1,
-    title: '봄봄봄',
-    singer: '로이킴',
-    date: '2013 . 04 . 22',
-    image: require('../../assets/album/album1.png'),
-  },
-  {
-    id: 2,
-    title: '봄이좋냐',
-    singer: '10cm',
-    date: '2013 . 04 . 22',
-    image: require('../../assets/album/album2.png'),
-  },
-  {
-    id: 3,
-    title: '벚꽃엔딩',
-    singer: '버스커 버스커',
-    date: '2013 . 04 . 22',
-    image: require('../../assets/album/album3.png'),
-  },
-];
-
 const Music = ({ navigation }) => {
-  const handleMusicClick = (title, singer) => {
-    navigation.navigate('MusicPlay', {
-      title: title,
-      singer: singer,
-    });
-  };
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await fetch(
+            'https://api.spotify.com/v1/playlists/37i9dQZF1DWT9uTRZAYj0c/tracks',
+            {
+              headers: {
+                Authorization: 'Bearer ' + token,
+              },
+            },
+          );
+          const data = await response.json();
+          setTracks(data.items);
+          setLoading(false);
+        } catch (error) {
+          console.error(error);
+          setLoading(false);
+        }
+      } else {
+        navigation.navigate('StartingPage');
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -158,7 +123,7 @@ const Music = ({ navigation }) => {
           <FlatList
             data={DATA}
             renderItem={({ item }) => (
-              <FilterTagButton
+              <FilterButton
                 color="#2F4560"
                 textColor="#ffffff"
                 title={item.tag}
@@ -167,31 +132,36 @@ const Music = ({ navigation }) => {
             numColumns={3}
           />
         </View>
-        {/*빈칸*/}
-        {/**음악 스크롤 뷰 페이지 */}
-        <View style={styles.musicScroll}>
+        {loading ? (
+          <ActivityIndicator size="large" color="#ffffff" />
+        ) : (
           <ScrollView style={styles.ScrollView}>
             <View style={styles.space}></View>
             <View style={styles.start}>
               <View style={styles.music}>
                 <FlatList
-                  data={SONG}
+                  data={tracks}
+                  keyExtractor={item => item.track.id}
                   renderItem={({ item }) => (
                     <SongList
-                      image={item.image}
-                      title={item.title}
-                      singer={item.singer}
-                      date={item.date}
-                      onPress={() => handleMusicClick(item.title, item.singer)}
+                      image={{ uri: item.track.album.images[0].url }}
+                      title={item.track.name}
+                      singer={item.track.artists[0].name}
+                      date={item.track.album.release_date}
+                      onPress={() =>
+                        navigation.navigate('MusicPlay', {
+                          title: item.track.name,
+                          singer: item.track.artists[0].name,
+                          trackId: item.track.id,
+                        })
+                      }
                     />
                   )}
                 />
               </View>
             </View>
           </ScrollView>
-          <Header style={styles.footer} onPress={() => navigation.push('MyPage')} onPressMain={() => navigation.push('Main')} />
-
-        </View>
+        )}
       </View>
     </SafeAreaView>
   );
