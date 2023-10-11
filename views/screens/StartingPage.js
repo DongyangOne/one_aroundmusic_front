@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+/* import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, FlatList, Image } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,17 +9,10 @@ const StartingPage = ({ navigation }) => {
 
   async function authenticate() {
     const config = {
-      response_type: 'code',
-      clientId: '577d38d2462848bd84a005b4fa7f34a8',
+      clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
+      clientSecret: '1cc39cad57494e2ba5d9e56421f83314',
       redirectUrl: 'awesomeproject://main',
-
-      scopes: [
-        'user-read-private',
-        'user-read-email',
-        'user-read-playback-state',
-        'user-modify-playback-state',
-        'streaming',
-      ],
+      scopes: ['user-read-private', 'user-read-email', 'streaming'],
       serviceConfiguration: {
         authorizationEndpoint: 'https://accounts.spotify.com/authorize',
         tokenEndpoint: 'https://accounts.spotify.com/api/token',
@@ -30,6 +23,7 @@ const StartingPage = ({ navigation }) => {
       const result = await authorize(config);
       if (result.accessToken) {
         await AsyncStorage.setItem('token', result.accessToken);
+        console.log(result);
         setAuthState(result);
         navigation.navigate('Main');
       }
@@ -77,10 +71,10 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
   },
-});
+}); */
 // 로컬 로그인================================================================================
 
-/* import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Button, SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -128,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartingPage; */
+export default StartingPage;
