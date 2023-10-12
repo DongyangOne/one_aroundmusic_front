@@ -63,39 +63,6 @@ async function requestPermission() {
 const Map = ({ navigation }) => {
   const [location, setLocation] = useState();
   const [data, setData] = useState([]);
-  useEffect(async () => {
-    token = await AsyncStorage.getItem('accessToken');
-    await axios
-      .get('http://125.133.34.224:8001/api/marker', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(response => {
-        setData(response.data.data.marker);
-      })
-      .catch(err => {
-        console.log(err.response.data);
-      });
-    requestPermission().then(result => {
-      console.log({ result });
-      if (result === 'granted') {
-        Geolocation.getCurrentPosition(
-          pos => {
-            setLocation(pos.coords);
-          },
-          error => {
-            console.log(error);
-          },
-          {
-            enableHighAccuracy: true,
-            timeout: 3600,
-            maximumAge: 3600,
-          },
-        );
-      }
-    });
-  }, []);
 
   if (!location) {
     return (

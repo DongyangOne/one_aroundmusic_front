@@ -56,33 +56,33 @@ const Music = ({ navigation }) => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = await AsyncStorage.getItem('token');
-      if (token) {
-        try {
-          const response = await fetch(
-            'https://api.spotify.com/v1/playlists/37i9dQZF1DWT9uTRZAYj0c/tracks',
-            {
-              headers: {
-                Authorization: 'Bearer ' + token,
-              },
-            },
-          );
-          const data = await response.json();
-          setTracks(data.items);
-          setLoading(false);
-        } catch (error) {
-          console.error(error);
-          setLoading(false);
-        }
-      } else {
-        navigation.navigate('StartingPage');
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const token = await AsyncStorage.getItem('token');
+  //     if (token) {
+  //       try {
+  //         const response = await fetch(
+  //           'https://api.spotify.com/v1/playlists/37i9dQZF1DWT9uTRZAYj0c/tracks',
+  //           {
+  //             headers: {
+  //               Authorization: 'Bearer ' + token,
+  //             },
+  //           },
+  //         );
+  //         const data = await response.json();
+  //         setTracks(data.items);
+  //         setLoading(false);
+  //       } catch (error) {
+  //         console.error(error);
+  //         setLoading(false);
+  //       }
+  //     } else {
+  //       navigation.navigate('StartingPage');
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <SafeAreaView style={styles.container}>
