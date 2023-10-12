@@ -14,6 +14,8 @@ import Header from '../components/Header';
 import FilterButton from '../components/FilterButton';
 import SongList from '../components/SongList';
 import { TouchableOpacity } from 'react-native';
+import { Black, Pink, White, Yellow } from '../../constant/Color';
+import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
 const FILTER = [
   {
     id: 1,
@@ -97,7 +99,7 @@ const Music = ({ navigation }) => {
             renderItem={({ item }) => (
               <FilterButton
                 color="#F2F3F6"
-                textColor="#3F3F3F"
+                textColor="#5E5E5E"
                 title={item.title}
                 onPress={() => navigation.push('Filter')}
               />
@@ -105,18 +107,9 @@ const Music = ({ navigation }) => {
             numColumns={5}
           />
           <TouchableOpacity
-            style={styles.filter}
+            style={styles.filterIcon}
             onPress={() => navigation.push('Filter')}>
-            <Image
-              style={{
-                marginTop: 8,
-                paddingLeft: 15,
-                width: 20,
-                height: 20,
-                marginRight: 20,
-              }}
-              source={require('../../assets/filterIcon.png')}
-            />
+            <SVGComponentFilter />
           </TouchableOpacity>
         </View>
         <View style={styles.tagListContainer}>
@@ -125,7 +118,7 @@ const Music = ({ navigation }) => {
             renderItem={({ item }) => (
               <FilterButton
                 color="#2F4560"
-                textColor="#ffffff"
+                textColor="#DE91A9"
                 title={item.tag}
               />
             )}
@@ -169,23 +162,27 @@ const Music = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
     flex: 1,
   },
   next: {
     flex: 1,
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
   },
   nextI: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
     flexDirection: 'row',
   },
   tagListContainer: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
     marginTop: 5,
   },
   all: {
     flex: 1,
+  },
+  filterIcon: {
+    marginRight: 15,
+    marginTop: 2,
   },
   musicScroll: {
     flex: 1,
@@ -194,11 +191,11 @@ const styles = StyleSheet.create({
   },
   ScrollView: {
     flex: 1,
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
   },
   space: {
     flex: 3,
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
     height: 50,
   },
   start: {

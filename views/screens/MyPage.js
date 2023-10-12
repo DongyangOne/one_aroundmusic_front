@@ -10,7 +10,10 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authorize } from 'react-native-app-auth';
 import Header from '../components/Header';
-
+import SVGComponentHeart from '../components/SVG/SVGComponentHeart';
+import SVGComponentLoca from '../components/SVG/SVGComponentLoca';
+import SVGComponentPlay from '../components/SVG/SVGComponentPlay';
+import { Black, Pink, White, Yellow } from '../../constant/Color';
 const MyPage = ({ navigation }) => {
   const [friend, setFriend] = useState(0);
   const [userId, setUserId] = useState('Guest');
@@ -98,7 +101,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require('../../assets/MyPage_midLine.png')}
+              source={require('../../assets/Arrow8.png')}
             />
           </View>
           <View style={styles.king}>
@@ -130,7 +133,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require('../../assets/MyPage_midLine.png')}
+              source={require('../../assets/Arrow8.png')}
             />
           </View>
 
@@ -165,7 +168,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require('../../assets/MyPage_midLine.png')}
+              source={require('../../assets/Arrow8.png')}
             />
           </View>
         </View>
@@ -180,7 +183,7 @@ const styles = StyleSheet.create({
   contain: {
     flex: 1,
     color: '#fff',
-    backgroundColor: '#041c3c',
+    backgroundColor: '#ADADAD',
   },
   // Top area
   myPage: {
@@ -191,7 +194,7 @@ const styles = StyleSheet.create({
   },
   spotify: {
     alignItems: 'center',
-    backgroundColor: 'green',
+    backgroundColor: '#4AB154',
     padding: 10,
     marginLeft: '14%',
   },
@@ -226,6 +229,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 104,
     marginLeft: 34,
+    marginTop: 30,
   },
   // for Middle margin area
   // MiddleMargin: {
@@ -234,7 +238,7 @@ const styles = StyleSheet.create({
   // king Whole Container
   kingContainer: {
     flex: 3,
-    backgroundColor: '#041c3c',
+    backgroundColor: '#ADADAD',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     top: -20,
@@ -294,7 +298,7 @@ const styles = StyleSheet.create({
   },
   // ~~~ 리워드 보러가기
   rewardText: {
-    color: '#ccc',
+    color: '#0A0A0A',
     width: 299,
     height: 23,
     marginRight: 10,
@@ -310,6 +314,7 @@ const styles = StyleSheet.create({
   rewardLinePic: {
     width: 350,
     resizeMode: 'center',
+    color: '#0A0A0A',
   },
 });
 
