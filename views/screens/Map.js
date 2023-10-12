@@ -12,39 +12,6 @@ import ArMarker from '../components/Marker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const DATA = [
-  {
-    //고척스카이돔
-    latitude: 37.498063,
-    longitude: 126.867021,
-  },
-  {
-    //노들소공원
-    latitude: 37.499863,
-    longitude: 126.867684,
-  },
-  {
-    //제주몰빵
-    latitude: 37.500472,
-    longitude: 126.867713,
-  },
-  {
-    //히어로 실내 낚시카페 대방점
-    latitude: 37.499957,
-    longitude: 126.925655,
-  },
-  {
-    //누리학교
-    latitude: 37.499946,
-    longitude: 126.92652,
-  },
-  {
-    //대림초등학교
-    latitude: 37.500584,
-    longitude: 126.925425,
-  },
-];
-
 async function requestPermission() {
   try {
     if (Platform.OS === 'ios') {
