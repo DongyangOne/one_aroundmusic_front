@@ -27,8 +27,6 @@ const MainStory = ({ data, frame }) => {
           const value = await AsyncStorage.getItem('accessToken');
           if (value !== null) {
             TOKEN = value;
-            // console.info(`TOKEN Saved!`);
-            // console.log(`TOKEN >> ${TOKEN}`);
             axios
               .get(`${serverURL}/api/reward/listen`, {
                 headers: {
@@ -39,7 +37,6 @@ const MainStory = ({ data, frame }) => {
                 loadData = response.data;
                 const temp = parseInt(loadData.data.selectedReward.id);
                 setItemFrame(temp - 7);
-                // console.info(`DONE!`);
               })
               .catch(e => {
                 console.error(`GET ERROR >> ${e}`);
@@ -63,15 +60,12 @@ const MainStory = ({ data, frame }) => {
         nestedScrollEnabled={true}
         horizontal={true}>
         <View style={styles.storyRow}>
-          {/* New Code */}
           {data.map((item, index) => (
             <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
                 {index == 0 ? (
                   <ImageBackground
-                    // source={IMG_SRC[frame.setData].src}
                     source={IMG_SRC[itemFrame].src}
-                    // source={itemFrame}
                     style={styles.imageBg}>
                     <Image source={data[0].src} style={styles.imageSe}></Image>
                   </ImageBackground>
@@ -85,8 +79,6 @@ const MainStory = ({ data, frame }) => {
       </ScrollView>
     );
   } catch (error) {
-    // console.info(`! NO DATA IMPORTED >> ${error}`); // Console looooooooooooooooooooog
-    // console.log(`${error}`);
     return (
       <ScrollView
         style={styles.scroll}
@@ -111,7 +103,7 @@ const styles = StyleSheet.create({
   container: {},
   storyRow: {
     flexDirection: 'row',
-    backgroundColor: 'white', // 이 부분을 수정합니다.
+    backgroundColor: 'white',
     height: 100,
     width: '100%',
   },
@@ -136,10 +128,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginRight: 15,
     marginBottom: 1,
-    // borderWidth: 1,
-    // borderColor: "white",
-    // backgroundColor: "#0ff", // Just for Test
-    // padding: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -147,8 +135,6 @@ const styles = StyleSheet.create({
     width: 58,
     height: 58,
     borderRadius: 28,
-    // marginLeft: 18,
-    //marginTop: 4,
     marginLeft: 1,
     borderWidth: 1,
     borderColor: 'white',

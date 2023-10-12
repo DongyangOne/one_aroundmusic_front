@@ -8,7 +8,6 @@ import {
   View,
   PermissionsAndroid,
 } from 'react-native';
-import { Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
@@ -95,24 +94,6 @@ const MusicPlay = ({ route, navigation }) => {
       }
     });
   }, []);
-
-  // const openSpotify = async () => {
-  //   const appUrl = `spotify:track:${trackId}`;
-  //   const webUrl = `https://open.spotify.com/track/${trackId}`;
-  //   const supported = await Linking.canOpenURL(appUrl);
-
-  //   if (supported) {
-  //     await Linking.openURL(appUrl);
-  //   } else {
-  //     await Linking.openURL(webUrl);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   openSpotify();
-  // }, []);
-
-  //google api key 요청
 
   return (
     <View style={styles.container}>

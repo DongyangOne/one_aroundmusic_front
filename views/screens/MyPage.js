@@ -32,7 +32,6 @@ const MyPage = ({ navigation }) => {
       const result = await authorize(config);
       if (result.accessToken) {
         await AsyncStorage.setItem('token', result.accessToken);
-        console.log(result);
         setAuthState(result);
         navigation.navigate('Main');
       }

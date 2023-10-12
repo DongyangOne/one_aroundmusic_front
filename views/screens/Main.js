@@ -64,8 +64,6 @@ const Main = ({ navigation, route }) => {
     setOpen(true);
   };
 
-  console.log(open);
-
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   story_line: {
-    borderWidth: 0.15, // 선의 너비
+    borderWidth: 0.15,
     borderColor: Pink,
   },
 });
