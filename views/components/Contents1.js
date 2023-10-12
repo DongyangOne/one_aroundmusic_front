@@ -1,5 +1,5 @@
-import React from "react";
-import { SafeAreaView, View, StyleSheet, Image, Text } from "react-native";
+import React from 'react';
+import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
 
 const Contents1 = ({ data }) => {
   return (
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {},
   content: {},
   storyRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 13,
   },
   image: {
@@ -40,13 +40,13 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginTop: 15,
     fontSize: 12,
-    color: "black",
+    color: 'black',
   },
   date: {
     marginLeft: 25,
     marginTop: 6,
     fontSize: 10,
-    color: "black",
+    color: 'black',
   },
 });
 
