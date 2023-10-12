@@ -5,6 +5,7 @@ import Map from './views/screens/Map';
 import Music from './views/screens/Music';
 import FilterScreen from './views/screens/FilterScreen';
 import ArScreen from './views/screens/ArScreen';
+import ArScreen2 from './views/screens/ArScreen2';
 import MyPage from './views/screens/MyPage';
 import PopularKing from './views/screens/PopularKing';
 import ListenKing from './views/screens/ListenKing';
@@ -152,6 +153,11 @@ export default () => (
         <Stack.Screen
           name="Header"
           component={Header}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ArScreen2"
+          component={ArScreen2}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
