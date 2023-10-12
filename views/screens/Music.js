@@ -65,7 +65,7 @@ const Music = ({ navigation }) => {
             'https://api.spotify.com/v1/playlists/37i9dQZF1DWT9uTRZAYj0c/tracks',
             {
               headers: {
-                Authorization: 'Bearer ' + token,
+                Authorization: `Bearer ${token}`,
               },
             },
           );
@@ -156,6 +156,7 @@ const Music = ({ navigation }) => {
                       onPress={() =>
                         navigation.navigate('MusicPlay', {
                           title: item.track.name,
+                          image: item.track.album.images[0].url,
                           singer: item.track.artists[0].name,
                           trackId: item.track.id,
                         })
