@@ -10,7 +10,6 @@ import {
   Pressable,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
 const Header = ({ onPress, onPressMain, onPressMusic }) => {
   return (
     <View style={styles.wrap}>
@@ -21,7 +20,7 @@ const Header = ({ onPress, onPressMain, onPressMusic }) => {
       <View style={styles.icon}>
         <TouchableOpacity onPress={onPressMusic} style={styles.image}>
           <Image
-            style={styles.music}
+            style={styles.person}
             source={require('../../assets/musicIcon.png')}
           />
         </TouchableOpacity>
@@ -52,11 +51,12 @@ const styles = StyleSheet.create({
     marginLeft: '35%',
   },
   title: {
-    color: 'white',
+    color: '#001C3E',
     fontSize: 25,
     marginLeft: '4%',
     marginTop: '2%',
     fontFamily: 'Yeongdeok-Sea',
+    color: '',
   },
   titleBack: {
     marginLeft: '2%',
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: '20%',
     marginRight: '5%',
+    color: '',
   },
   person: {
     width: 35,
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginTop: '38%',
     marginRight: '2%',
+    color: '#001C3E',
   },
 });
 

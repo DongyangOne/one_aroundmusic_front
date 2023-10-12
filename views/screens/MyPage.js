@@ -43,6 +43,12 @@ const MyPage = ({ navigation }) => {
 
   return (
     <View style={styles.contain}>
+      <Header
+        style={styles.footer}
+        onPress={() => navigation.push('MyPage')}
+        onPressMain={() => navigation.push('Main')}
+        onPressMusic={() => navigation.push('Music')}
+      />
       <View style={styles.myPage}>
         <Image
           style={styles.profile}
