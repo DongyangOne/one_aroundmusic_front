@@ -81,7 +81,7 @@ const Music = ({ navigation }) => {
         navigation.navigate('StartingPage');
       }
     };
-
+  });
   //   fetchData();
   // }, []);
 
