@@ -36,7 +36,6 @@ const FILTER = [
     title: '계절',
   },
 ];
-
 const DATA = [
   {
     id: 1,
@@ -51,11 +50,9 @@ const DATA = [
     tag: '#봄',
   },
 ];
-
 const Music = ({ navigation }) => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       const token = await AsyncStorage.getItem('token');
@@ -65,7 +62,7 @@ const Music = ({ navigation }) => {
             'https://api.spotify.com/v1/playlists/37i9dQZF1DWT9uTRZAYj0c/tracks',
             {
               headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: 'Bearer ' + token,
               },
             },
           );
@@ -81,9 +78,10 @@ const Music = ({ navigation }) => {
         navigation.navigate('StartingPage');
       }
     };
-  });
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
+  //
+  // }, );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -172,7 +170,6 @@ const Music = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#001C3E',
@@ -217,5 +214,4 @@ const styles = StyleSheet.create({
     top: -60,
   },
 });
-
 export default Music;

@@ -17,7 +17,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import StartingPage from './views/screens/StartingPage';
 import { useAuth, useDialog } from './views/screens/MyContext';
-
+import ArScreen2 from './views/screens/ArScreen2';
 const Stack = createStackNavigator();
 
 const linking = {
@@ -63,6 +63,11 @@ const MainApp = () => {
           <Stack.Screen
             name="MusicPlay"
             component={MusicPlay}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ArScreen2"
+            component={ArScreen2}
             options={{ headerShown: false }}
           />
           <Stack.Screen
