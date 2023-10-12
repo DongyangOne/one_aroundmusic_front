@@ -38,11 +38,7 @@ export default () => (
           component={StartingPage}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Main"
-          component={Main}
-          options={{ headerShown: false }}
-        />
+        
 
         <Stack.Screen
           name="Music"
