@@ -9,6 +9,8 @@ import {
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import ArMarker from '../components/Marker';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const DATA = [
   {
@@ -19,7 +21,7 @@ export const DATA = [
   {
     //노들소공원
     latitude: 37.499863,
-    longitude: 126.867,
+    longitude: 126.867684,
   },
   {
     //제주몰빵
@@ -60,7 +62,21 @@ async function requestPermission() {
 
 const Map = ({ navigation }) => {
   const [location, setLocation] = useState();
-  useEffect(() => {
+  const [data, setData] = useState([]);
+  useEffect(async () => {
+    token = await AsyncStorage.getItem('accessToken');
+    await axios
+      .get('http://125.133.34.224:8001/api/marker', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        setData(response.data.data.marker);
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      });
     requestPermission().then(result => {
       console.log({ result });
       if (result === 'granted') {
@@ -114,7 +130,7 @@ const Map = ({ navigation }) => {
         zoomControlEnabled={false}
         pitchEnabled={false}
         moveOnMarkerPress={false}>
-        {DATA.map(item => (
+        {data.map(item => (
           <ArMarker
             key={`${item.latitude}-${item.longitude}`}
             location={{

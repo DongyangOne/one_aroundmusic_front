@@ -1,23 +1,22 @@
 import React from 'react';
 import Swiper from 'react-native-swiper';
-import Main from './views/screens/Main';
-import Map from './views/screens/Map';
-import Music from './views/screens/Music';
-import FilterScreen from './views/screens/FilterScreen';
-import ArScreen from './views/screens/ArScreen';
-import ArScreen1 from './views/screens/ArScreen1';
-import MyPage from './views/screens/MyPage';
-import PopularKing from './views/screens/PopularKing';
-import ListenKing from './views/screens/ListenKing';
-import WKing from './views/screens/WKing';
-import FriendList from './views/screens/FriendList';
-import Board from './views/screens/Board';
-import Header from './views/components/Header';
-import MusicPlay from './views/screens/MusicPlay';
+import Main from './Main';
+import Map from './Map';
+import Music from './Music';
+import FilterScreen from './FilterScreen';
+import ArScreen from './ArScreen';
+import MyPage from './MyPage';
+import PopularKing from './PopularKing';
+import ListenKing from './ListenKing';
+import WKing from './WKing';
+import FriendList from './FriendList';
+import Board from './Board';
+import Header from '../components/Header';
+import MusicPlay from './MusicPlay';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import StartingPage from './views/screens/StartingPage';
+import StartingPage from './StartingPage';
 import { Linking } from 'react-native';
 
 const Stack = createStackNavigator();
@@ -36,11 +35,6 @@ export default () => (
   <Swiper style={styles.wrapper} loop={false} index={0}>
     <NavigationContainer Linking={linking}>
       <Stack.Navigator>
-        {/* <Stack.Screen
-          name="Start"
-          component={StartingPage}
-          options={{ headerShown: false }}
-        /> */}
         <Stack.Screen
           name="Main"
           component={Main}
@@ -164,7 +158,6 @@ export default () => (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="ArScreen" component={ArScreen} />
-        <Stack.Screen name="ArScreen1" component={ArScreen1} />
         <Stack.Screen
           name="Header"
           component={Header}
