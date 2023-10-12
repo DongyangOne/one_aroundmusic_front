@@ -87,7 +87,11 @@ const Music = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Header onPress={() => navigation.navigate('MyPage')} />
+        <Header
+          style={styles.footer}
+          onPress={() => navigation.push('MyPage')}
+          onPressMain={() => navigation.push('Main')}
+        />
       </View>
       <View style={styles.next}>
         <View style={styles.nextI}>
