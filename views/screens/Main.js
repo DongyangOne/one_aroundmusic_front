@@ -63,20 +63,21 @@ const ContentsItem = ({ id, src, story }) => (
 );
 
 const Main = ({ navigation, route }) => {
-  /*   const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('accessToken');
-      if (value !== null) {
-        console.log(value);x`
-      } else {
-        console.log('No data found');
-      }
-    } catch (e) {
-      console.error('Error reading data', e);
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem('accessToken');
+  //     if (value !== null) {
+  //       console.log(value);
+  //     } else {
+  //       console.log('No data found');
+  //     }
+  //   } catch (e) {
+  //     console.error('Error reading data', e);
+  //   }
+  // };
 
-  getData(); */
+  // getData();
+
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -95,6 +96,7 @@ const Main = ({ navigation, route }) => {
             )}
             numColumns={3}
           /> */}
+          <View style={styles.story_line}></View>
           <View>
             <Contents data={DATA} />
           </View>
@@ -107,6 +109,10 @@ const Main = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   story_wrap: {
     width: '100%',
+  },
+  story_line: {
+    borderWidth: 0.3, // 선의 너비
+    borderColor: '#3A4552',
   },
 });
 

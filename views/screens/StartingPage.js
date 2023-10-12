@@ -76,7 +76,15 @@ const styles = StyleSheet.create({
 // 로컬 로그인================================================================================
 
 import React, { useState } from 'react';
-import { Button, SafeAreaView, StyleSheet, TextInput } from 'react-native';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Pressable,
+} from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 function StartingPage({ navigation }) {
@@ -122,39 +130,39 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontSize: 30,
-    margin: '4%',
+    marginBottom: '3%',
     fontFamily: 'Yeongdeok-Sea',
   },
   bigbox: {
     justifyContent: 'center',
-    height: '95%',
+    height: '90%',
   },
   box: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: '2%',
-    height: '50%',
+    //margin: '2%',
+    height: '57%',
   },
   input: {
-    height: '11%',
+    height: 40,
     margin: '2%',
     borderWidth: 1,
     padding: 'auto',
     color: 'black',
     flexDirection: 'row',
-    width: '95%',
+    width: '60%',
   },
   btn: {
     paddingVertical: '3%',
     borderRadius: 4,
-    width: '95%',
-    height: '13%',
+    width: '60%',
+    height: '11%',
     backgroundColor: '#001C3E',
     margin: '1%',
   },
   btnText: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 13,
     //justifyContent: 'center',
     textAlign: 'center',
   },
