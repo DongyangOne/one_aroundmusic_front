@@ -1,3 +1,4 @@
+//스포티 파이 로그인 구현
 /* import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, FlatList, Image } from 'react-native';
 import axios from 'axios';
