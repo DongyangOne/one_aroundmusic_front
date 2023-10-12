@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
-
+import { Black, Pink, White, Yellow } from '../../constant/Color';
 const Contents = ({ data }) => {
   return (
     <SafeAreaView style={styles.container}>
@@ -31,17 +31,17 @@ const Contents = ({ data }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: '#001C3E' },
+  container: { backgroundColor: 'white' },
   content: {
     marginTop: '2%',
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
   },
   storyRow: {
     flexDirection: 'row',
     marginTop: 13,
   },
   background: {
-    borderColor: '#001C3E',
+    borderColor: 'white',
   },
   image: {
     width: '100%',
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     marginTop: '2%',
   },
   box: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white',
     height: '2%',
   },
   textView: {

@@ -46,7 +46,7 @@
   <action android:name="android.intent.action.VIEW" />
   <category android:name="android.intent.category.DEFAULT" />
   <category android:name="android.intent.category.BROWSABLE" />
-      <data android:scheme="awesomeproject" />
+      <data android:scheme="awesomeproject"  />
 </intent-filter>
       </activity>
       <meta-data android:name="com.google.ar.core" android:value="optional" />

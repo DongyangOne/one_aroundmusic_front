@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, SafeAreaView, FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 import Header from '../components/Header';
 import MainStory from '../components/MainStory';
 import Contents from '../components/Contents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Black, Pink, White, Yellow } from '../../constant/Color';
+import { useDialog } from './MyContext';
 export const DATA = [
   {
     id: '또치',
@@ -51,32 +53,18 @@ export const DATA = [
   },
 ];
 
-const FriendItem = ({ src }) => (
-  <View>
-    <MainStory src={src} />
-  </View>
-);
-const ContentsItem = ({ id, src, story }) => (
-  <View>
-    <Contents id={id} src={src} story={story} />
-  </View>
-);
-
 const Main = ({ navigation, route }) => {
-  // const getData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem('accessToken');
-  //     if (value !== null) {
-  //       console.log(value);
-  //     } else {
-  //       console.log('No data found');
-  //     }
-  //   } catch (e) {
-  //     console.error('Error reading data', e);
-  //   }
-  // };
+  const { open, setOpen } = useDialog(false);
 
-  // getData();
+  useEffect(() => {
+    handleOpen();
+  }, []);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  console.log(open);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -86,16 +74,9 @@ const Main = ({ navigation, route }) => {
         onPressMain={() => navigation.push('Main')}
         onPressMusic={() => navigation.push('Music')}
       />
-      <ScrollView nestedScrollEnabled={true}>
+      <ScrollView style={styles.container} nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>
           <MainStory data={DATA} frame={route.params} />
-          {/* <FlatList
-            data={DATA}
-            renderItem={({ item }) => (
-              <ContentsItem id={item.id} src={item.src} story={item.story} />
-            )}
-            numColumns={3}
-          /> */}
           <View style={styles.story_line}></View>
           <View>
             <Contents data={DATA} />
@@ -107,12 +88,16 @@ const Main = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
   story_wrap: {
     width: '100%',
+    backgroundColor: 'white',
   },
   story_line: {
-    borderWidth: 0.3, // 선의 너비
-    borderColor: '#3A4552',
+    borderWidth: 0.15, // 선의 너비
+    borderColor: Pink,
   },
 });
 

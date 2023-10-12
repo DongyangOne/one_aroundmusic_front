@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   container: {},
   storyRow: {
     flexDirection: 'row',
-    backgroundColor: '#001C3E',
+    backgroundColor: 'white', // 이 부분을 수정합니다.
     height: 100,
     width: '100%',
   },
@@ -124,6 +124,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     padding: 4,
+  },
+  scroll: {
+    backgroundColor: 'white',
   },
   imageBg: {
     width: 78,
