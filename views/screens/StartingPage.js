@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+/* import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, FlatList, Image } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -77,11 +77,19 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
   },
-});
+}); */
 // 로컬 로그인================================================================================
 
-/* import React, { useState } from 'react';
-import { Button, SafeAreaView, StyleSheet, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Pressable,
+} from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 function StartingPage({ navigation }) {
@@ -105,27 +113,64 @@ function StartingPage({ navigation }) {
   };
 
   return (
-    <SafeAreaView>
-      <TextInput style={styles.input} onChangeText={setEmail} value={email} />
-      <TextInput
-        style={styles.input}
-        onChangeText={setSocialToken}
-        value={socialToken}
-        secureTextEntry={true}
-      />
-      <Button title="로그인" onPress={handleLogin} />
+    <SafeAreaView style={styles.bigbox}>
+      <View style={styles.box}>
+        <Text style={styles.title}>Around Music</Text>
+        <TextInput style={styles.input} onChangeText={setEmail} value={email} />
+        <TextInput
+          style={styles.input}
+          onChangeText={setSocialToken}
+          value={socialToken}
+          secureTextEntry={true}
+        />
+        <Pressable style={styles.btn} onPress={handleLogin}>
+          <Text style={styles.btnText}>로그인</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  title: {
     color: 'black',
+    fontSize: 30,
+    margin: '4%',
+    fontFamily: 'Yeongdeok-Sea',
+  },
+  bigbox: {
+    justifyContent: 'center',
+    height: '95%',
+  },
+  box: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '2%',
+    height: '50%',
+  },
+  input: {
+    height: '11%',
+    margin: '2%',
+    borderWidth: 1,
+    padding: 'auto',
+    color: 'black',
+    flexDirection: 'row',
+    width: '95%',
+  },
+  btn: {
+    paddingVertical: '3%',
+    borderRadius: 4,
+    width: '95%',
+    height: '13%',
+    backgroundColor: '#001C3E',
+    margin: '1%',
+  },
+  btnText: {
+    color: 'white',
+    fontSize: 15,
+    //justifyContent: 'center',
+    textAlign: 'center',
   },
 });
 
-export default StartingPage; */
+export default StartingPage;
