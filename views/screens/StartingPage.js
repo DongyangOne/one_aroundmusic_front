@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
 
 import React, { useState } from 'react';
 import {
-  Button,
   SafeAreaView,
   StyleSheet,
   TextInput,
@@ -87,6 +86,9 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Black, Pink, White, Yellow } from '../../constant/Color';
+import LottieView from 'lottie-react-native';
+
 function StartingPage({ navigation }) {
   const [email, setEmail] = useState('ex@gmail.com');
   const [socialToken, setSocialToken] = useState('string');
@@ -108,19 +110,40 @@ function StartingPage({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.bigbox}>
-      <View style={styles.box}>
+    <SafeAreaView style={styles.outBox}>
+      <View style={styles.topBox}>
         <Text style={styles.title}>Around Music</Text>
-        <TextInput style={styles.input} onChangeText={setEmail} value={email} />
-        <TextInput
-          style={styles.input}
-          onChangeText={setSocialToken}
-          value={socialToken}
-          secureTextEntry={true}
+        <LottieView
+          style={{
+            width: '100%',
+            height: '70%',
+            marginBottom: -130,
+          }}
+          source={require('../../lottie/intro.json')}
+          autoPlay
+          loop
         />
-        <Pressable style={styles.btn} onPress={handleLogin}>
-          <Text style={styles.btnText}>로그인</Text>
-        </Pressable>
+      </View>
+      <View style={styles.bottomBox}>
+        <View style={styles.bottomInnerBox}>
+          <View style={styles.bottomEmptyBox} />
+          <View style={styles.bottomLoginBox}>
+            <TextInput
+              style={styles.input}
+              onChangeText={setEmail}
+              value={email}
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={setSocialToken}
+              value={socialToken}
+              secureTextEntry={true}
+            />
+            <Pressable style={styles.btn} onPress={handleLogin}>
+              <Text style={styles.btnText}>로그인</Text>
+            </Pressable>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -129,43 +152,55 @@ function StartingPage({ navigation }) {
 const styles = StyleSheet.create({
   title: {
     color: 'black',
-    fontSize: 30,
-    marginBottom: '3%',
+    fontSize: 48,
     fontFamily: 'Yeongdeok-Sea',
   },
-  bigbox: {
+  outBox: {
     justifyContent: 'center',
-    height: '90%',
+    flex: 1,
   },
-  box: {
+  topBox: {
     justifyContent: 'center',
     alignItems: 'center',
-    //margin: '2%',
-    height: '57%',
+    flex: 2,
   },
   input: {
-    height: 40,
-    margin: '2%',
     borderWidth: 1,
+    borderColor: White,
     padding: 'auto',
     color: 'black',
     flexDirection: 'row',
-    width: '60%',
+    width: '80%',
+    marginBottom: 20,
+    borderRadius: 5,
   },
   btn: {
     paddingVertical: '3%',
-    borderRadius: 4,
-    width: '60%',
-    height: '11%',
-    backgroundColor: '#001C3E',
-    margin: '1%',
+    width: '80%',
+    backgroundColor: Yellow,
+    borderRadius: 5,
   },
   btnText: {
-    color: 'white',
-    fontSize: 13,
-    //justifyContent: 'center',
+    color: Black,
+    fontSize: 15,
     textAlign: 'center',
   },
+  bottomBox: {
+    backgroundColor: Pink,
+    flex: 1,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+  },
+  bottomInnerBox: {
+    flex: 1,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    backgroundColor: Pink,
+  },
+  bottomEmptyBox: {
+    flex: 1,
+  },
+  bottomLoginBox: { flex: 9, alignItems: 'center' },
 });
 
 export default StartingPage;
