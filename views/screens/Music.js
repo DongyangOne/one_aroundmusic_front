@@ -82,8 +82,8 @@ const Music = ({ navigation }) => {
       }
     };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <SafeAreaView style={styles.container}>
