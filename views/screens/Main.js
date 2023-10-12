@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   story_line: {
-    borderWidth: 0.1, // 선의 너비
-    borderColor: '#3A4552', // 투명한 선
+    borderWidth: 0.3, // 선의 너비
+    borderColor: '#3A4552',
   },
 });
 
