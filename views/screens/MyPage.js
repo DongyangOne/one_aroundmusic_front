@@ -1,51 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
-
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Image,
+  Button,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { authorize } from 'react-native-app-auth';
 import Header from '../components/Header';
 
 const MyPage = ({ navigation }) => {
-  const [friend, setFriend] = useState(0); // save user's number of friends
-  const [userId, setUserId] = useState('Guest'); // save userID (like MiRae23)
+  const [friend, setFriend] = useState(0);
+  const [userId, setUserId] = useState('Guest');
+  const [authState, setAuthState] = useState(null);
 
-  useEffect(() => {
-    // Load userID
-    // Load the user's number of friends
-    // console.log("Load Friend List");
-  }, []);
+  async function authenticate() {
+    const config = {
+      clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
+      clientSecret: '1cc39cad57494e2ba5d9e56421f83314',
+      redirectUrl: 'awesomeproject://main',
+      scopes: ['user-read-private', 'user-read-email', 'streaming'],
+      serviceConfiguration: {
+        authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+        tokenEndpoint: 'https://accounts.spotify.com/api/token',
+      },
+    };
+
+    try {
+      const result = await authorize(config);
+      if (result.accessToken) {
+        await AsyncStorage.setItem('token', result.accessToken);
+        console.log(result);
+        setAuthState(result);
+        navigation.navigate('Main');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <View style={styles.contain}>
       <View style={styles.myPage}>
-        {/* Profile picture */}
         <Image
           style={styles.profile}
           source={require('../../assets/profile.png')}
         />
         <View>
-          {/** FUNCTION IMPLEMENT:
-           * Load the logged-in user's ID */}
           <Text style={styles.id}>{userId}</Text>
-          {/* Friend button area */}
+          <TouchableOpacity style={styles.spotify} onPress={authenticate}>
+            <Text style={{ color: 'white' }}>스포티파이 로그인</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
             <View style={styles.friendBtn}>
-              {/** FUNCTION IMPLEMENT:
-               * Count the logged-in user's number of friends */}
               <Text style={styles.text}>내 친구 {friend}</Text>
             </View>
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* Margins */}
-      {/* <View style={styles.MiddleMargin}></View> */}
-
-      {/* Start blah, blah king*/}
-      {/* ========================== */}
-      {/** 인기왕
-       * Red color, 1022Ç, Heart logo
-       * onPress={() => navigation.navigate("PopularKing")
-       */}
-      {/* White Famous-King box */}
       <View style={styles.kingContainer}>
         <View style={styles.king}>
           <Text style={styles.kingTitle}>인기왕</Text>
@@ -64,7 +78,6 @@ const MyPage = ({ navigation }) => {
             />
           </View>
         </View>
-        {/* the area, filled with 남색 */}
         <View style={styles.kingContainer_deprecated}>
           <View>
             <TouchableOpacity
@@ -83,11 +96,6 @@ const MyPage = ({ navigation }) => {
               source={require('../../assets/MyPage_midLine.png')}
             />
           </View>
-
-          {/** 걷기왕
-           * Blue color, 200C, position-mark logo
-           * onPress={() => navigation.navigate("WKing")
-           */}
           <View style={styles.king}>
             <Text style={styles.kingTitle}>걷기왕</Text>
             <View styles={styles.kingLogoCont}>
@@ -121,10 +129,6 @@ const MyPage = ({ navigation }) => {
             />
           </View>
 
-          {/** 듣기왕
-           * Green color, 1112C, play-button logo
-           * onPress={() => navigation.navigate("ListenKing")
-           */}
           <View>
             <View style={styles.king}>
               <Text style={styles.kingTitle}>듣기왕</Text>
@@ -179,6 +183,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'row',
     paddingVertical: 'auto',
+  },
+  spotify: {
+    alignItems: 'center',
+    backgroundColor: 'green',
+    padding: 10,
+    marginLeft: '14%',
   },
   // Friend Button
   friendBtn: {

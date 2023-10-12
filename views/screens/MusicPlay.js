@@ -1,9 +1,10 @@
-import React from 'react';
-import { Button, Linking } from 'react-native';
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
+import { Linking } from 'react-native';
 
 const MusicPlay = ({ route }) => {
   const { trackId } = route.params;
-  console.log(trackId);
+
   const openSpotify = async () => {
     const appUrl = `spotify:track:${trackId}`;
     const webUrl = `https://open.spotify.com/track/${trackId}`;
@@ -16,7 +17,11 @@ const MusicPlay = ({ route }) => {
     }
   };
 
-  return <Button title="Play on Spotify" onPress={openSpotify} />;
+  useEffect(() => {
+    openSpotify();
+  }, []);
+
+  return <View />;
 };
 
 export default MusicPlay;

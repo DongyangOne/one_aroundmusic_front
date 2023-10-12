@@ -4,10 +4,6 @@ import { ScrollView } from 'react-native-virtualized-view';
 import Header from '../components/Header';
 import MainStory from '../components/MainStory';
 import Contents from '../components/Contents';
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const DATA = [
   {
@@ -83,6 +79,12 @@ const Main = ({ navigation, route }) => {
   getData(); */
   return (
     <SafeAreaView style={styles.container}>
+      <Header
+        style={styles.footer}
+        onPress={() => navigation.push('MyPage')}
+        onPressMain={() => navigation.push('Main')}
+        onPressMusic={() => navigation.push('Music')}
+      />
       <ScrollView nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>
           <MainStory data={DATA} frame={route.params} />
@@ -98,7 +100,6 @@ const Main = ({ navigation, route }) => {
           </View>
         </View>
       </ScrollView>
-      <Header style={styles.footer} onPress={() => navigation.push('MyPage')} onPressMain={() => navigation.push('Main')} onPressMusic={() => navigation.push('Music')}/>
     </SafeAreaView>
   );
 };
