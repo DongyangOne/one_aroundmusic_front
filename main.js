@@ -37,7 +37,11 @@ const MainApp = () => {
   //   const a = false
 
   return (
-    <Swiper style={styles.wrapper} loop={false} index={0}>
+    <Swiper
+      showsPagination={false}
+      style={styles.wrapper}
+      loop={false}
+      index={0}>
       <NavigationContainer Linking={linking}>
         <Stack.Navigator>
           <Stack.Screen
@@ -65,7 +69,7 @@ const MainApp = () => {
             name="MyPage"
             component={MyPage}
             options={{
-              headerShown: true,
+              headerShown: false,
               title: '마이페이지',
               headerTintColor: '#034AA6',
               headerTitleAlign: 'center',
