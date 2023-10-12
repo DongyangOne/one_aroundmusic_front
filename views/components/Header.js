@@ -7,64 +7,77 @@ import {
   StatusBar,
   Image,
   View,
+  Pressable,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Header = ({ onPress, onPressMain, onPressMusic }) => {
   return (
     <View style={styles.wrap}>
-      <TouchableOpacity onPress={onPressMain} style={styles.image}>
-        <Image style={styles.home} source={require('../../assets/home.png')} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={onPress} style={styles.image}>
-        <Image
-          style={styles.person}
-          source={require('../../assets/myPage.png')}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={onPressMusic} style={styles.image}>
-        <Image
-          style={styles.person}
-          source={require('../../assets/musicIcon.png')}
-        />
-      </TouchableOpacity>
+      <Pressable style={styles.titleBack} onPress={onPressMain}>
+        <Text style={styles.title}>Around Music</Text>
+      </Pressable>
+
+      <View style={styles.icon}>
+        <TouchableOpacity onPress={onPressMusic} style={styles.image}>
+          <Image
+            style={styles.music}
+            source={require('../../assets/musicIcon.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onPress} style={styles.image}>
+          <Image
+            style={styles.person}
+            source={require('../../assets/myPage.png')}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrap: {
-    // position: 'absolute',
-    // flexDirection: 'row',
-    // // left: 0,
-    // right: 0,
-    // // // bottom: 10,
-    // justifyContent: 'flex-end',
-    // // backgroundColor: '#001C3E',
-    // height: 80,
-    // // flex: 0.1,
-    // alignItems: 'center',
-    // backgroundColor: '#001C3E',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    //justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: '#001C3E',
     height: 60,
   },
+  icon: {
+    flexDirection: 'row',
+    //justifyContent: 'flex-end',
+    height: 60,
+    backgroundColor: '#001C3E',
+    marginLeft: '35%',
+  },
+  title: {
+    color: 'white',
+    fontSize: 25,
+    marginLeft: '4%',
+    marginTop: '2%',
+    fontFamily: 'Yeongdeok-Sea',
+  },
+  titleBack: {
+    marginLeft: '2%',
+    marginTop: '2%',
+  },
   image: {
-    marginRight: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
-    marginRight: 10,
+    marginTop: '20%',
+    marginRight: '5%',
   },
   person: {
+    width: 35,
+    height: 35,
+    marginTop: '10%',
+  },
+  music: {
     width: 30,
     height: 30,
-  },
-  home: {
-    width: 26,
-    height: 26,
+    marginTop: '38%',
+    marginRight: '2%',
   },
 });
 

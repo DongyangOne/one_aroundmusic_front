@@ -13,7 +13,7 @@ import FriendsItem from '../components/FriendsItem';
 
 const FriendList = () => {
   const [mode, setMode] = useState('유저 목록');
-  // const [userList, setUserList] = useState(FRIENDSLIST);
+  const [userList, setUserList] = useState(FRIENDSLIST);
   const [acceptedUsers, setAcceptedUsers] = useState([]);
 
   const handleAccept = item => {
