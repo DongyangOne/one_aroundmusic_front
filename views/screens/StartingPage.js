@@ -76,7 +76,15 @@ const styles = StyleSheet.create({
 // 로컬 로그인================================================================================
 
 import React, { useState } from 'react';
-import { Button, SafeAreaView, StyleSheet, TextInput } from 'react-native';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Pressable,
+} from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 function StartingPage({ navigation }) {
