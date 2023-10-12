@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import MainStory from '../components/MainStory';
 import Contents from '../components/Contents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Black, Pink, White, Yellow } from '../../constant/Color';
 export const DATA = [
   {
     id: '또치',
@@ -86,7 +87,7 @@ const Main = ({ navigation, route }) => {
         onPressMain={() => navigation.push('Main')}
         onPressMusic={() => navigation.push('Music')}
       />
-      <ScrollView nestedScrollEnabled={true}>
+      <ScrollView style={styles.container} nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>
           <MainStory data={DATA} frame={route.params} />
           {/* <FlatList
@@ -107,12 +108,16 @@ const Main = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
   story_wrap: {
     width: '100%',
+    backgroundColor: 'white',
   },
   story_line: {
-    borderWidth: 0.3, // 선의 너비
-    borderColor: '#3A4552',
+    borderWidth: 0.15, // 선의 너비
+    borderColor: Pink,
   },
 });
 

@@ -70,6 +70,7 @@ const Music = ({ navigation }) => {
             },
           );
           const data = await response.json();
+          console.log(data.items[0]);
           setTracks(data.items);
           setLoading(false);
         } catch (error) {
