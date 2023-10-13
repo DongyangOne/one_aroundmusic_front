@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   contain: {
     flex: 1,
     color: '#fff',
-    backgroundColor: '#ADADAD',
+    backgroundColor: '#E6E6E6',
   },
   // Top area
   myPage: {
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     height: 27,
     marginLeft: 25,
     textAlign: 'left',
-    borderColor: '#034AA6',
+    borderColor: '#E6E6E6',
     borderWidth: 1,
     borderRadius: 13,
     justifyContent: 'center',
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   // Friend button innerText
   text: {
     fontSize: 12,
-    color: '#071c3c',
+    color: '#151515',
     textAlign: 'left',
   },
   // user ID
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 24,
     marginLeft: 25,
-    color: '#071c3c',
+    color: '#424242',
   },
   // Profile picture
   profile: {
@@ -238,12 +238,13 @@ const styles = StyleSheet.create({
   // king Whole Container
   kingContainer: {
     flex: 3,
-    backgroundColor: '#ADADAD',
+    backgroundColor: '#E6E6E6',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     top: -20,
     paddingTop: 20,
     zIndex: 10,
+     justifyContent:'center',
   },
   // blah, blah king box style
   king: {
@@ -254,14 +255,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     borderColor: '#041c3c',
-    borderWidth: 1,
+    // borderWidth: 1,
     borderRadius: 25,
+    elevation: 5,
     marginHorizontal: 25,
   },
   // king inner title text (like 인기왕, 걷기왕, 듣기왕)
   kingTitle: {
     fontSize: 23,
-    color: '#000',
+    color: '#424242',
     marginLeft: 25,
   },
   // Badge Picture Container
@@ -309,10 +311,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 35,
     marginTop: -10,
     marginBottom: 10,
+    alignItems:'center'
   },
   // looooong arrow picture
   rewardLinePic: {
-    width: 350,
+    width: '97%',
     resizeMode: 'center',
     color: '#0A0A0A',
   },
