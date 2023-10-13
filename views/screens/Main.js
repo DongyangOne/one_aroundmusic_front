@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   story_line: {
-    borderWidth: 0.15,
+    borderWidth: 0.18,
     borderColor: Pink,
   },
 });

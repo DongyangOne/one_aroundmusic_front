@@ -34,18 +34,23 @@ const Contents = ({ content }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        {data.map(item => (
-          <View>
-            <Image
-              source={require('../../assets/contents1.jpeg')}
-              style={styles.image}
-            />
-            <View style={styles.textView}>
-              <Text style={styles.text}>{item.content}</Text>
-              <Text style={styles.date}>2023.08.05</Text>
+        {data.map(
+          (
+            item,
+            index, // index parameter added
+          ) => (
+            <View key={index}>
+              <Image
+                source={require('../../assets/contents1.jpeg')}
+                style={styles.image}
+              />
+              <View style={styles.textView}>
+                <Text style={styles.text}>{item.content}</Text>
+                <Text style={styles.date}>2023.08.05</Text>
+              </View>
             </View>
-          </View>
-        ))}
+          ),
+        )}
       </View>
     </SafeAreaView>
   );
