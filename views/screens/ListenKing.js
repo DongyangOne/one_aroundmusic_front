@@ -219,26 +219,20 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    // marginTop: "10%",
   },
   LogoMain: {
     marginTop: "20%",
     marginBottom: 50,
     width: 150,
     height: 150,
-    // alignSelf: "center",
   },
   serve: {
     flexDirection: "row",
-    // justifyContent: "center",
-    // alignItems:'center',
   },
   button: {
     backgroundColor: "#000080",
     paddingVertical: 8,
-    //  paddingHorizontal: 30,
     borderRadius: 5,
-    // marginHorizontal: 30,
     alignItems: "center",
     marginTop: "20%",
     width: "85%"
@@ -249,7 +243,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   centeredContainer: {
-    // alignItems: "center",
   },
   centeredImage: {
     width: 60,
@@ -257,14 +250,10 @@ const styles = StyleSheet.create({
   },
   roundedShadowBox: {
     width: 320,
-    // marginLeft: 50,
-    // marginTop: 30,
     overflow: "hidden",
     borderRadius: 10,
     backgroundColor: "white",
     elevation: 5,
-    // padding: 10,
-    // margin: 10,
     alignItems:'center',
   },
 

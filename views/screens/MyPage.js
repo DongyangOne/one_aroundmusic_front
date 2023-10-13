@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     height: 27,
     marginLeft: 25,
     textAlign: 'left',
-    borderColor: '#034AA6',
+    borderColor: '#E6E6E6',
     borderWidth: 1,
     borderRadius: 13,
     justifyContent: 'center',
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   // Friend button innerText
   text: {
     fontSize: 12,
-    color: '#071c3c',
+    color: '#151515',
     textAlign: 'left',
   },
   // user ID
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 24,
     marginLeft: 25,
-    color: '#071c3c',
+    color: '#151515',
   },
   // Profile picture
   profile: {
@@ -255,14 +255,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     borderColor: '#041c3c',
-    borderWidth: 1,
+    // borderWidth: 1,
     borderRadius: 25,
+    elevation: 5,
     marginHorizontal: 25,
   },
   // king inner title text (like 인기왕, 걷기왕, 듣기왕)
   kingTitle: {
     fontSize: 23,
-    color: '#000',
+    color: '#1C1C1C',
     marginLeft: 25,
   },
   // Badge Picture Container
