@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { Image, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const RoundedShadowBox = ({ children }) => {
@@ -64,7 +64,7 @@ const WKing = () => {
   };
 
   return (
-    <>
+    <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
         <Image style={styles.LogoMain} source={abc[1]} />
       </View>
@@ -83,8 +83,8 @@ const WKing = () => {
           </TouchableOpacity>
         </TouchableOpacity>
       </RoundedShadowBox>
-      <View style={styles.btnBox}>
-        <TouchableOpacity
+      {/* <View style={styles.btnBox}> */}
+      <TouchableOpacity
           style={styles.button}
           onPress={() => {
             handleActionClick(selection);
@@ -92,8 +92,8 @@ const WKing = () => {
         >
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
-      </View>
-    </>
+      {/* </View> */}
+    </SafeAreaView>
   );
 };
 
@@ -103,44 +103,37 @@ const imageStyles = [
     height: 80,
     marginTop: "50%",
     marginRight: 35,
-  }, // 스타일1
+  }, 
   {
     width: 150,
     height: 150,
     marginTop: "10%",
     alignItems: "center",
-  }, // 스타일2
+  },
   { width: 80, height: 80, marginTop: "50%", marginLeft: 35 }, // 스타일3
 ];
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // 화면 전체를 채우도록 수정
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "center", // 화면 가운데 정렬
   },
   LogoMain: {
-    marginTop: "10%",
+    marginTop: "20%",
     marginBottom: 50,
     width: 150,
     height: 150,
-    alignSelf: "center",
   },
   serve: {
     flexDirection: "row",
-    justifyContent: "center",
-  },
-  btnBox: {
-    alignItems: "center",
   },
   button: {
-    alignItems: "center",
-    width: 320,
     backgroundColor: "#000080",
     paddingVertical: 8,
-    paddingHorizontal: 30,
     borderRadius: 5,
-    marginTop: "10%",
+    alignItems: "center",
+    marginTop: "20%",
+    width: "85%"
   },
   buttonText: {
     color: "white",
@@ -148,21 +141,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   centeredContainer: {
-    marginTop: "10%",
-    alignItems: "center",
   },
   centeredImage: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
   },
   roundedShadowBox: {
     width: 320,
-    marginTop: 60,
     overflow: "hidden",
     borderRadius: 10,
     backgroundColor: "white",
     elevation: 5,
-    alignSelf: "center",
+    alignItems:'center',
   },
 });
 export default WKing;

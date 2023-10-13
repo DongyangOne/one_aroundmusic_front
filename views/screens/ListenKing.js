@@ -1,5 +1,5 @@
 import React, { useState, useNavigate, useEffect } from 'react';
-import { Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { Image, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -178,7 +178,7 @@ const ListenKing = ({ navigation }) => {
   };
 
   return (
-    <>
+    <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
         <Image style={styles.LogoMain} source={abc[1]} />
       </View>
@@ -204,49 +204,52 @@ const ListenKing = ({ navigation }) => {
         </TouchableOpacity>
       </RoundedShadowBox>
       <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          // handleGoBack();
-          handleGoHome(selection); // Move to main screen
-        }}>
-        <Text style={styles.buttonText}>적용하기</Text>
-      </TouchableOpacity>
-    </>
+          style={styles.button}
+          onPress={() => {
+            handleActionClick(selection);
+          }}
+        >
+          <Text style={styles.buttonText}>적용하기</Text>
+        </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    marginTop: '30%',
+    justifyContent: "center",
+    alignItems: "center",
+    // marginTop: "10%",
   },
   LogoMain: {
-    marginTop: 100,
+    marginTop: "20%",
     marginBottom: 50,
     width: 150,
     height: 150,
-    alignSelf: 'center',
+    // alignSelf: "center",
   },
   serve: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    // justifyContent: "center",
+    // alignItems:'center',
   },
   button: {
-    backgroundColor: '#000080',
+    backgroundColor: "#000080",
     paddingVertical: 8,
-    paddingHorizontal: 30,
+    //  paddingHorizontal: 30,
     borderRadius: 5,
-    marginHorizontal: 30,
-    alignItems: 'center',
-    marginTop: '30%',
+    // marginHorizontal: 30,
+    alignItems: "center",
+    marginTop: "20%",
+    width: "85%"
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   centeredContainer: {
-    alignItems: 'center',
+    // alignItems: "center",
   },
   centeredImage: {
     width: 60,
@@ -254,15 +257,17 @@ const styles = StyleSheet.create({
   },
   roundedShadowBox: {
     width: 320,
-    marginLeft: 50,
-    marginTop: 30,
-    overflow: 'hidden',
+    // marginLeft: 50,
+    // marginTop: 30,
+    overflow: "hidden",
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     elevation: 5,
-    padding: 10,
-    margin: 10,
+    // padding: 10,
+    // margin: 10,
+    alignItems:'center',
   },
+
 });
 
 export default ListenKing;
