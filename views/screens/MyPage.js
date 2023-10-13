@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 24,
     marginLeft: 25,
-    color: '#151515',
+    color: '#424242',
   },
   // Profile picture
   profile: {
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   // king inner title text (like 인기왕, 걷기왕, 듣기왕)
   kingTitle: {
     fontSize: 23,
-    color: '#1C1C1C',
+    color: '#424242',
     marginLeft: 25,
   },
   // Badge Picture Container

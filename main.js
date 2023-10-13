@@ -117,7 +117,7 @@ const MainApp = () => {
             options={{
               title: '친구',
               headerStyle: {
-                backgroundColor: '#001C3E',
+                backgroundColor: '#4AB154',
               },
               headerTintColor: '#ffffff',
               headerTitleAlign: 'center',
@@ -129,7 +129,7 @@ const MainApp = () => {
             options={{
               headerShown: true,
               title: '인기왕 리워드',
-              headerTintColor: 'white',
+              headerTintColor: '#ffff',
               headerStyle: {
                 backgroundColor: '#000080',
               },
@@ -142,7 +142,7 @@ const MainApp = () => {
             options={{
               headerShown: true,
               title: '걷기왕 리워드',
-              headerTintColor: 'white',
+              headerTintColor: '#ffff',
               headerStyle: {
                 backgroundColor: '#000080',
               },
