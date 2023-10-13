@@ -91,10 +91,7 @@ const MyPage = ({ navigation }) => {
             <TouchableOpacity
               style={styles.reward}
               onPress={() => navigation.navigate('PopularKing')}>
-              <Image
-                source={require('../../assets/MyPage_king_popular.png')}
-                style={styles.rewardLogo}
-              />
+              <SVGComponentHeart />
               <Text style={styles.rewardText}>인기왕 리워드 보러가기</Text>
             </TouchableOpacity>
           </View>
@@ -124,10 +121,7 @@ const MyPage = ({ navigation }) => {
           <TouchableOpacity
             style={styles.reward}
             onPress={() => navigation.navigate('WKing')}>
-            <Image
-              source={require('../../assets/MyPage_king_walk.png')}
-              style={styles.rewardLogo}
-            />
+            <SVGComponentLoca />
             <Text style={styles.rewardText}>걷기왕 리워드 보러가기</Text>
           </TouchableOpacity>
           <View style={styles.rewardLine}>
@@ -158,10 +152,7 @@ const MyPage = ({ navigation }) => {
             <TouchableOpacity
               style={styles.reward}
               onPress={() => navigation.navigate('ListenKing')}>
-              <Image
-                source={require('../../assets/MyPage_king_listen.png')}
-                style={styles.rewardLogo}
-              />
+              <SVGComponentPlay />
               <Text style={styles.rewardText}>듣기왕 리워드 보러가기</Text>
             </TouchableOpacity>
           </View>
@@ -244,7 +235,7 @@ const styles = StyleSheet.create({
     top: -20,
     paddingTop: 20,
     zIndex: 10,
-     justifyContent:'center',
+    justifyContent: 'center',
   },
   // blah, blah king box style
   king: {
@@ -311,7 +302,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 35,
     marginTop: -10,
     marginBottom: 10,
-    alignItems:'center'
+    alignItems: 'center',
   },
   // looooong arrow picture
   rewardLinePic: {
