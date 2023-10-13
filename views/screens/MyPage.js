@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   contain: {
     flex: 1,
     color: '#fff',
-    backgroundColor: '#ADADAD',
+    backgroundColor: '#E6E6E6',
   },
   // Top area
   myPage: {
@@ -238,12 +238,13 @@ const styles = StyleSheet.create({
   // king Whole Container
   kingContainer: {
     flex: 3,
-    backgroundColor: '#ADADAD',
+    backgroundColor: '#E6E6E6',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     top: -20,
     paddingTop: 20,
     zIndex: 10,
+     justifyContent:'center',
   },
   // blah, blah king box style
   king: {
@@ -309,10 +310,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 35,
     marginTop: -10,
     marginBottom: 10,
+    alignItems:'center'
   },
   // looooong arrow picture
   rewardLinePic: {
-    width: 350,
+    width: '97%',
     resizeMode: 'center',
     color: '#0A0A0A',
   },
