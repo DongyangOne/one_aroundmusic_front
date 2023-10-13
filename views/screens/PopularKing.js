@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { Image, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from "react-native";
 
 const RoundedShadowBox = ({ children }) => {
   return (
@@ -52,7 +52,7 @@ const PopularKing = ({ navigation }) => {
   };
 
   return (
-    <>
+    <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
         <Image style={styles.LogoMain} source={abc[1]} />
       </View>
@@ -73,34 +73,31 @@ const PopularKing = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleGoBack}>
         <Text style={styles.buttonText}>적용하기</Text>
       </TouchableOpacity>
-    </>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: "30%",
   },
   LogoMain: {
-    marginTop: 100,
+    marginTop: "20%",
     marginBottom: 50,
     width: 150,
     height: 150,
-    alignSelf: "center",
   },
   serve: {
     flexDirection: "row",
-    justifyContent: "center",
   },
   button: {
     backgroundColor: "#000080",
     paddingVertical: 8,
-    paddingHorizontal: 30,
     borderRadius: 5,
-    marginHorizontal: 30,
     alignItems: "center",
-    marginTop: "30%",
+    marginTop: "20%",
+    width: "85%"
   },
   buttonText: {
     color: "white",
@@ -108,7 +105,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   centeredContainer: {
-    alignItems: "center",
   },
   centeredImage: {
     width: 60,
@@ -116,14 +112,11 @@ const styles = StyleSheet.create({
   },
   roundedShadowBox: {
     width: 320,
-    marginLeft: 50,
-    marginTop: 30,
     overflow: "hidden",
     borderRadius: 10,
     backgroundColor: "white",
     elevation: 5,
-    padding: 10,
-    margin: 10,
+    alignItems:'center',
   },
 });
 
