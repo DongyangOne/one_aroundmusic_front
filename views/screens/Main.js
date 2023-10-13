@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, SafeAreaView, FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view';
 import Header from '../components/Header';
 import MainStory from '../components/MainStory';
 import Contents from '../components/Contents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { Black, Pink, White, Yellow } from '../../constant/Color';
 import { useDialog } from './MyContext';
 export const DATA = [
@@ -76,9 +77,7 @@ const Main = ({ navigation, route }) => {
         <View style={styles.story_wrap}>
           <MainStory data={DATA} frame={route.params} />
           <View style={styles.story_line}></View>
-          <View>
-            <Contents data={DATA} />
-          </View>
+          <Contents data={DATA} />
         </View>
       </ScrollView>
     </SafeAreaView>

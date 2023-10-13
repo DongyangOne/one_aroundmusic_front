@@ -1,30 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { Black, Pink, White, Yellow } from '../../constant/Color';
-const Contents = ({ data }) => {
+const Contents = ({ content }) => {
+  const [data, setData] = useState([
+    {
+      content: '',
+      img: '',
+    },
+  ]);
+  const fetchData = async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+    axios
+      .get('http://125.133.34.224:8001/api/board', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(res => {
+        console.log(res.data.data);
+        setData(res.data.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <View>
-          <Image source={data[0].story} style={styles.image}></Image>
-          <View style={styles.textView}>
-            <Text style={styles.text}>햇빛이 따스한 오후 커피 한 잔</Text>
-            <Text style={styles.date}>2023.08.05</Text>
+        {data.map(item => (
+          <View>
+            <Image
+              source={require('../../assets/contents1.jpeg')}
+              style={styles.image}
+            />
+            <View style={styles.textView}>
+              <Text style={styles.text}>{item.content}</Text>
+              <Text style={styles.date}>2023.08.05</Text>
+            </View>
           </View>
-          <View style={styles.box}></View>
-          <Image source={data[1].story} style={styles.image}></Image>
-          <View style={styles.textView}>
-            <Text style={styles.text}>교회에도 봄이 왔다. 개강이 설렌다.</Text>
-            <Text style={styles.date}>2023.03.01</Text>
-          </View>
-          <View style={styles.box}></View>
-          <Image source={data[2].story} style={styles.image}></Image>
-          <View style={styles.textView}>
-            <Text style={styles.text}>집에 가고싶다..</Text>
-            <Text style={styles.date}>2022.12.14</Text>
-          </View>
-          <View style={styles.box}></View>
-        </View>
+        ))}
       </View>
     </SafeAreaView>
   );
@@ -50,13 +71,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     marginTop: '2%',
   },
-  box: {
-    backgroundColor: 'white',
-    height: '2%',
-  },
   textView: {
     backgroundColor: '#ffffff',
-    height: '3%',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
@@ -71,7 +87,7 @@ const styles = StyleSheet.create({
   date: {
     marginLeft: 13,
     marginTop: 2,
-    marginBottom: 6,
+    marginBottom: '10%',
     fontSize: 10,
     color: '#001C3E',
   },

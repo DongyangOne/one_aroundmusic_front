@@ -1,5 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import React from 'react';
+import { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -10,26 +12,51 @@ import {
   Button,
   InputField,
   TouchableOpacity,
-} from "react-native";
-import ImagePicker from "react-native-image-picker";
+} from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 
 const Board = ({ data, navigation }) => {
-  const [value, onChangeText] = React.useState("Useless Multiline Placeholder");
+  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
+  const [location, setLocation] = useState();
+  const [content, setContent] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const uploadContent = async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const requestData = {
+      content: content,
+      location: location,
+      img: require('../../assets/contents1.jpeg'),
+    };
+    axios
+      .post('http://125.133.34.224:8001/api/board', requestData, config)
+      .then(res => {
+        console.log(res.data);
+        navigation.navigate('Main');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   const handleImagePicker = () => {
     const options = {
-      title: "Select Image",
+      title: 'Select Image',
       storageOptions: {
         skipBackup: true,
-        path: "images",
+        path: 'images',
       },
     };
-    ImagePicker.showImagePicker(options, (response) => {
+    ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
-        console.log("사용자가 이미지를 취소");
+        console.log('사용자가 이미지를 취소');
       } else if (response.error) {
-        console.log("이미지 에러: ", response.error);
+        console.log('이미지 에러: ', response.error);
       } else {
         const source = { uri: response.uri };
         //서버로 이미지를 받아야돼서 프론트인 제가...어쩔 수 없었어요
@@ -45,7 +72,7 @@ const Board = ({ data, navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Image
-          source={require("../../assets/boardWrite.png")}
+          source={require('../../assets/boardWrite.png')}
           style={styles.image}
         />
       </View>
@@ -55,8 +82,7 @@ const Board = ({ data, navigation }) => {
         )}
         <TouchableOpacity
           style={styles.uploadButton}
-          onPress={handleImagePicker}
-        >
+          onPress={handleImagePicker}>
           <Text style={styles.uploadButtonText}>이미지 업로드</Text>
         </TouchableOpacity>
       </View> */}
@@ -65,31 +91,30 @@ const Board = ({ data, navigation }) => {
         <Text style={styles.text}>위치</Text>
         <TextInput
           style={styles.soft1}
-          placeholder="서울시 구로구 고척동 234-5"
+          placeholder="현재 위치를 입력하세요"
           placeholderTextColor="#B2B2B2"
-        ></TextInput>
+          onChange={event => {
+            setLocation(event.nativeEvent.text);
+          }}
+        />
         <Text style={styles.text}>태그</Text>
         <TextInput
           style={styles.soft1}
           placeholder="#10대  #봄   #산뜻하다"
           placeholderTextColor="#B2B2B2"
-        ></TextInput>
+        />
         <Text style={styles.text}>짧은 글</Text>
         <TextInput
-          editable
-          multiline
           numberOfLines={4}
           maxLength={40}
-          onChangeText={(text) => onChangeText(text)}
-          value={value}
+          onChange={event => {
+            setContent(event.nativeEvent.text);
+          }}
           style={styles.soft}
         />
       </View>
       <View style={styles.BtnBox}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("ListenKing")}
-        >
+        <TouchableOpacity style={styles.button} onPress={uploadContent}>
           <Text style={styles.buttonText}>업로드하기</Text>
         </TouchableOpacity>
       </View>
@@ -98,9 +123,9 @@ const Board = ({ data, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  BtnBox: { marginTop: "40%" },
+  BtnBox: { marginTop: '40%' },
   container: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 4,
   },
   content: {
@@ -121,7 +146,7 @@ const styles = StyleSheet.create({
   //   fontWeight: "bold",
   // },
   storyRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 13,
   },
   image: {
@@ -130,42 +155,44 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   text: {
-    color: "#001C3E",
+    color: '#001C3E',
   },
   hard: {},
   soft: {
     width: 320,
-    shadowColor: "rgba(0, 0, 0, 0.15)",
+    shadowColor: 'rgba(0, 0, 0, 0.15)',
     shadowOpacity: 0.5,
-    backgroundColor: "white",
-    color: "#B2B2B2",
+    backgroundColor: 'white',
+    color: '#B2B2B2',
     borderRadius: 10,
-    textAlignVertical: "top",
+    textAlignVertical: 'top',
+    color: 'black',
   },
   soft1: {
     marginBottom: 7,
     width: 320,
     height: 40,
-    shadowColor: "rgba(0, 0, 0, 0.15)",
+    shadowColor: 'rgba(0, 0, 0, 0.15)',
     shadowOpacity: 0.5,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 10,
-    textAlignVertical: "top",
+    textAlignVertical: 'top',
+    color: 'black',
   },
   button: {
-    alignSelf: "flex-end",
+    alignSelf: 'flex-end',
     width: 330,
-    backgroundColor: "#001C3E",
+    backgroundColor: '#001C3E',
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
     marginHorizontal: 30,
-    alignItems: "center",
+    alignItems: 'center',
   },
   buttonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 
