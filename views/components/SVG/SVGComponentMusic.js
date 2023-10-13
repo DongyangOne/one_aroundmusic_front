@@ -23,4 +23,5 @@ const SVGComponentMusic = props => (
     />
   </Svg>
 );
+
 export default SVGComponentMusic;

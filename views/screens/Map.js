@@ -30,20 +30,26 @@ async function requestPermission() {
 const Map = ({ navigation }) => {
   const [location, setLocation] = useState();
   const [data, setData] = useState([]);
-  useEffect(async () => {
-    token = await AsyncStorage.getItem('accessToken');
-    await axios
-      .get('http://125.133.34.224:8001/api/marker', {
-        headers: {
-          Authorization: `Bearer ${token}`,
+  const fetchData = async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+    try {
+      const response = await axios.get(
+        'http://125.133.34.224:8001/api/marker',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
-      .then(response => {
-        setData(response.data.data.marker);
-      })
-      .catch(err => {
-        console.log(err.response.data);
-      });
+      );
+      setData(response.data.data.marker);
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+
     requestPermission().then(result => {
       console.log({ result });
       if (result === 'granted') {
@@ -99,7 +105,7 @@ const Map = ({ navigation }) => {
         moveOnMarkerPress={false}>
         {data.map(item => (
           <ArMarker
-            key={`${item.latitude}-${item.longitude}`}
+            key={`${item.id}`}
             location={{
               latitude: item.latitude,
               longitude: item.longitude,

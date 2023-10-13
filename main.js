@@ -32,9 +32,6 @@ const linking = {
 
 const MainApp = () => {
   const { open, setOpen } = useDialog(false);
-  console.log(open);
-
-  //   const a = false
 
   return (
     <Swiper

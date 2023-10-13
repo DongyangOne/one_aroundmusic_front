@@ -35,7 +35,6 @@ const MusicPlay = ({ route, navigation }) => {
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
 
   const shareAr = async () => {
-    // 전송할 데이터
     const requestData = {
       youtubeId: trackId,
       title: title,
@@ -43,21 +42,17 @@ const MusicPlay = ({ route, navigation }) => {
       latitude: location.latitude,
       longitude: location.longitude,
     };
-    // 토큰 저장
     const token = await AsyncStorage.getItem('accessToken');
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-    // 토큰이 존재할 시 데이터 전송하는 axios 실행
     if (token) {
       console.log(token, requestData);
       axios
         .post('http://125.133.34.224:8001/api/ar', requestData, config)
         .then(response => {
-          // 데이터 전송 성공 시 화면 이동 및 response 출력
-          console.log(response);
           navigation.navigate('ArScreen2', {
             youtubeId: trackId,
             title: title,
@@ -79,8 +74,6 @@ const MusicPlay = ({ route, navigation }) => {
         Geolocation.getCurrentPosition(
           pos => {
             setLocation(pos.coords);
-            // // 데이터를 가져온 후 처리
-            // fetchData();
           },
           error => {
             console.log(error);
