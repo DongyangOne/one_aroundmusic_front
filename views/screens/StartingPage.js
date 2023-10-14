@@ -89,7 +89,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Black, Pink, White, Yellow } from '../../constant/Color';
 import LottieView from 'lottie-react-native';
 
-import { useDialog } from './MyContext';
+import { useDialog } from '../../context/AuthContext';
 
 function StartingPage({ navigation }) {
   const [email, setEmail] = useState('ex@gmail.com');

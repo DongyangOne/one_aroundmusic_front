@@ -1,13 +1,13 @@
 import { React } from 'react';
 
-import { MyProvider, DialogProvider } from './views/screens/MyContext';
+import { AuthProvider } from './context/AuthContext';
 import MainApp from './main';
 
 const App = () => {
   return (
-    <DialogProvider>
+    <AuthProvider>
       <MainApp />
-    </DialogProvider>
+    </AuthProvider>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 const Context = createContext({});
 
-export function DialogProvider({ children }) {
+export function AuthProvider({ children }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -10,6 +10,6 @@ export function DialogProvider({ children }) {
   );
 }
 
-export function useDialog() {
+export function useAuth() {
   return useContext(Context);
 }

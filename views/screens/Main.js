@@ -7,7 +7,7 @@ import Contents from '../components/Contents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Black, Pink, White, Yellow } from '../../constant/Color';
-import { useDialog } from './MyContext';
+import { useDialog } from '../../context/AuthContext';
 export const DATA = [
   {
     id: '또치',
