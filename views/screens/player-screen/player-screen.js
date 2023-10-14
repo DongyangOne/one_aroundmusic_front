@@ -17,14 +17,14 @@ const PlayerScreenView = ({ audioUrl }) => {
     setSound(sound);
   }, []);
 
-  const play = () => {
+  const handlePlay = () => {
     if (sound) {
       sound.play();
       setIsPlay(true);
     }
   };
 
-  const stop = () => {
+  const handleStop = () => {
     if (sound && isPlay) {
       sound.pause();
       setIsPlay(false);
@@ -33,8 +33,8 @@ const PlayerScreenView = ({ audioUrl }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Button title="Play" onPress={play} />
-      <Button title="Stop" onPress={stop} />
+      <Button title="Play" onPress={handlePlay} />
+      <Button title="Stop" onPress={handleStop} />
     </View>
   );
 };
