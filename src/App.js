@@ -2,7 +2,7 @@
 import { React } from 'react';
 
 // ** Context Imports
-import { AuthProvider } from './src/context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 
 // ** Component Imports
 import MainApp from './Main';

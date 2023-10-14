@@ -2,7 +2,7 @@
 import { React } from 'react';
 
 // ** Menu Imports
-import { MapMenuList, MenuList } from './src/constant/MenuList';
+import { MapMenuList, MenuList } from './constant/MenuList';
 
 // ** Navigation Imports
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,7 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 // ** Utils Imports
 import Swiper from 'react-native-swiper';
-import { useAuth } from './src/context/AuthContext';
+import { useAuth } from './context/AuthContext';
 
 const Stack = createStackNavigator();
 
