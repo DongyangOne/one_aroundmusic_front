@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Black, Pink, White, Yellow } from '../../constant/Color';
+import { Black, Pink, White, Yellow } from '../constant/Color';
 const FilterButton = ({ title, color, textColor, onPress }) => {
   return (
     <TouchableOpacity

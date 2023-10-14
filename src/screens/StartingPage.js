@@ -86,7 +86,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Black, Pink, White, Yellow } from '../../constant/Color';
+import { Black, Pink, White, Yellow } from '../constant/Color';
 import LottieView from 'lottie-react-native';
 
 import { useAuth } from '../../src/context/AuthContext';
@@ -121,7 +121,7 @@ function StartingPage({ navigation }) {
             height: '70%',
             marginBottom: -130,
           }}
-          source={require('../../lottie/intro.json')}
+          source={require('../lottie/intro.json')}
           autoPlay
           loop
         />

@@ -41,7 +41,7 @@ const Contents = ({ content }) => {
           ) => (
             <View key={index}>
               <Image
-                source={require('../../../assets/contents1.jpeg')}
+                source={require('../../assets/contents1.jpeg')}
                 style={styles.image}
               />
               <View style={styles.textView}>

@@ -91,7 +91,7 @@ const FriendList = () => {
       <View style={styles.search}>
         <TextInput style={styles.input} />
         <Image
-          source={require('../../../assets/searchIcon.png')}
+          source={require('../../assets/searchIcon.png')}
           style={styles.searchIcon}
         />
       </View>

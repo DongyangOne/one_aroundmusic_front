@@ -7,67 +7,51 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 const RoundedShadowBox = ({ children }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
 };
-//이 더미데이터를 Map에 이동 -> Marker로 이동해서 바뀌게 해야함
-//navigation오류 같음
-export const ImgData = [
-  { id: 1, src: require('../../../assets/workReward1.png') },
-  { id: 2, src: require('../../../assets/workReward2.png') },
-  { id: 3, src: require('../../../assets/workReward3.png') },
-];
 
-const WKing = () => {
-  const navigation = useNavigation();
-  const [selection, setSelection] = useState(1); // 초기에 중간 이미지를 보여주기 위한 인덱스
-
+const PopularKing = ({ navigation }) => {
   const [images, setImages] = useState([
-    require('../../../assets/workReward1.png'),
-    require('../../../assets/workReward2.png'),
-    require('../../../assets/workReward3.png'),
+    require('../../assets/border1.png'),
+    require('../../assets/border2.png'),
+    require('../../assets/border3.png'),
   ]);
-
   const [abc, setAbc] = useState([
-    require('../../../assets/workReward1.png'),
-    require('../../../assets/workReward2.png'),
-    require('../../../assets/workReward3.png'),
+    require('../../assets/ward1.png'),
+    require('../../assets/ward2.png'),
+    require('../../assets/ward3.png'),
   ]);
 
-  const SCROLL_SET = dir => {
-    let temp = selection;
-    if (dir == 'r') {
-      temp++;
-      if (temp > 2) temp = 0;
-    } else if (dir == 'l') {
-      temp--;
-    } else {
-      console.log('dir: ${dir}. 에러 발생');
-      return;
-    }
-    setSelection(temp);
-  };
+  const imageStyles = [
+    {
+      width: 80,
+      height: 80,
+      marginTop: '50%',
+      marginRight: 35,
+    }, // 스타일1
+    {
+      width: 150,
+      height: 150,
+      marginTop: '15%',
+      alignItems: 'center',
+    }, // 스타일2
+    { width: 80, height: 80, marginTop: '50%', marginLeft: 35 }, // 스타일3
+  ];
 
   const handleLeftImageClick = () => {
     setImages(prevImages => [prevImages.pop(), ...prevImages]);
     setAbc(prevImages => [prevImages.pop(), ...prevImages]);
-    SCROLL_SET('l');
   };
 
   const handleRightImageClick = () => {
     setImages(prevImages => [...prevImages.slice(1), prevImages[0]]);
     setAbc(prevImages => [...prevImages.slice(1), prevImages[0]]);
-    SCROLL_SET('r');
   };
 
-  const handleActionClick = () => {
-    navigation.navigate('Map', {
-      setData: selection,
-    });
-
-    alert('적용되었습니다.');
+  const handleGoBack = () => {
+    navigation.goBack();
   };
 
   return (
@@ -76,13 +60,12 @@ const WKing = () => {
         <Image style={styles.LogoMain} source={abc[1]} />
       </View>
 
-      <View style={styles.centeredContainer}></View>
       <RoundedShadowBox>
         <TouchableOpacity style={styles.serve}>
           <TouchableOpacity onPress={handleLeftImageClick}>
             <Image style={imageStyles[0]} source={images[0]} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleRightImageClick}>
+          <TouchableOpacity>
             <Image style={imageStyles[1]} source={images[1]} />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleRightImageClick}>
@@ -90,34 +73,12 @@ const WKing = () => {
           </TouchableOpacity>
         </TouchableOpacity>
       </RoundedShadowBox>
-      {/* <View style={styles.btnBox}> */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          handleActionClick(selection);
-        }}>
+      <TouchableOpacity style={styles.button} onPress={handleGoBack}>
         <Text style={styles.buttonText}>적용하기</Text>
       </TouchableOpacity>
-      {/* </View> */}
     </SafeAreaView>
   );
 };
-
-const imageStyles = [
-  {
-    width: 80,
-    height: 80,
-    marginTop: '50%',
-    marginRight: 35,
-  },
-  {
-    width: 150,
-    height: 150,
-    marginTop: '10%',
-    alignItems: 'center',
-  },
-  { width: 80, height: 80, marginTop: '50%', marginLeft: 35 }, // 스타일3
-];
 
 const styles = StyleSheet.create({
   container: {
@@ -160,4 +121,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default WKing;
+
+export default PopularKing;

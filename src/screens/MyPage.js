@@ -54,7 +54,7 @@ const MyPage = ({ navigation }) => {
       <View style={styles.myPage}>
         <Image
           style={styles.profile}
-          source={require('../../../assets/profile.png')}
+          source={require('../../assets/profile.png')}
         />
         <View>
           <Text style={styles.id}>{userId}</Text>
@@ -74,7 +74,7 @@ const MyPage = ({ navigation }) => {
           <View styles={styles.kingLogoCont}>
             <Image
               style={styles.kingLogo}
-              source={require('../../../assets/MyPage_medal_famous.png')}
+              source={require('../../assets/MyPage_medal_famous.png')}
             />
           </View>
           <View></View>
@@ -82,7 +82,7 @@ const MyPage = ({ navigation }) => {
           <View styles={styles.kingNextCont}>
             <Image
               style={styles.kingNext}
-              source={require('../../../assets/MyPage_next.png')}
+              source={require('../../assets/MyPage_next.png')}
             />
           </View>
         </View>
@@ -98,7 +98,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require('../../../assets/Arrow8.png')}
+              source={require('../../assets/Arrow8.png')}
             />
           </View>
           <View style={styles.king}>
@@ -106,7 +106,7 @@ const MyPage = ({ navigation }) => {
             <View styles={styles.kingLogoCont}>
               <Image
                 style={styles.kingLogo}
-                source={require('../../../assets/MyPage_medal_walk.png')}
+                source={require('../../assets/MyPage_medal_walk.png')}
               />
             </View>
             <View></View>
@@ -114,7 +114,7 @@ const MyPage = ({ navigation }) => {
             <View styles={styles.kingNextCont}>
               <Image
                 style={styles.kingNext}
-                source={require('../../../assets/MyPage_next.png')}
+                source={require('../../assets/MyPage_next.png')}
               />
             </View>
           </View>
@@ -127,7 +127,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require('../../../assets/Arrow8.png')}
+              source={require('../../assets/Arrow8.png')}
             />
           </View>
 
@@ -137,7 +137,7 @@ const MyPage = ({ navigation }) => {
               <View styles={styles.kingLogoCont}>
                 <Image
                   style={styles.kingLogo}
-                  source={require('../../../assets/MyPage_medal_listen.png')}
+                  source={require('../../assets/MyPage_medal_listen.png')}
                 />
               </View>
               <View></View>
@@ -145,7 +145,7 @@ const MyPage = ({ navigation }) => {
               <View styles={styles.kingNextCont}>
                 <Image
                   style={styles.kingNext}
-                  source={require('../../../assets/MyPage_next.png')}
+                  source={require('../../assets/MyPage_next.png')}
                 />
               </View>
             </View>
@@ -159,7 +159,7 @@ const MyPage = ({ navigation }) => {
           <View style={styles.rewardLine}>
             <Image
               style={styles.rewardLinePic}
-              source={require('../../../assets/Arrow8.png')}
+              source={require('../../assets/Arrow8.png')}
             />
           </View>
         </View>

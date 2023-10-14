@@ -10,7 +10,7 @@ import {
   Pressable,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Black, Pink, White, Yellow } from '../../constant/Color';
+import { Black, Pink, White, Yellow } from '../constant/Color';
 import SVGComponentMusic from './SVG/SVGComponentMusic';
 import SVGComponentPerson from './SVG/SVGComponentPerson';
 const Header = ({ onPress, onPressMain, onPressMusic }) => {

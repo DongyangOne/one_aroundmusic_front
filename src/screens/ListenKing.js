@@ -21,17 +21,17 @@ export const IMG_SRC = [
   {
     // Black Circle Outline
     id: 'reward_black',
-    src: require('../../../assets/listen1.png'),
+    src: require('../../assets/listen1.png'),
   },
   {
     // Rainbow Circle (Default)
     id: 'reward_rainbow',
-    src: require('../../../assets/listen2.png'),
+    src: require('../../assets/listen2.png'),
   },
   {
     // Purple Circle
     id: 'reward_purple',
-    src: require('../../../assets/listen3.png'),
+    src: require('../../assets/listen3.png'),
   },
 ];
 
@@ -42,14 +42,14 @@ const ListenKing = ({ navigation }) => {
 
   // console.log(IMG_SRC[0]);
   const [images, setImages] = useState([
-    require('../../../assets/listen1.png'), // Black Circle Outline
-    require('../../../assets/listen2.png'), // Rainbow Circle (Default)
-    require('../../../assets/listen3.png'), // Purple Circle
+    require('../../assets/listen1.png'), // Black Circle Outline
+    require('../../assets/listen2.png'), // Rainbow Circle (Default)
+    require('../../assets/listen3.png'), // Purple Circle
   ]);
   const [abc, setAbc] = useState([
-    require('../../../assets/listenReward1.png'),
-    require('../../../assets/listenReward2.png'),
-    require('../../../assets/listenReward3.png'),
+    require('../../assets/listenReward1.png'),
+    require('../../assets/listenReward2.png'),
+    require('../../assets/listenReward3.png'),
   ]);
 
   /** Currently selected ListenKing */

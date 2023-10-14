@@ -27,15 +27,15 @@ export default Arscreen2 = ({ navigation, route }) => {
           height={0.5}
           width={0.5}
           position={[0, 0.5, -1.5]}
-          placeholderSource={require('../../../assets/music3.png')}
+          placeholderSource={require('../../assets/music3.png')}
           source={{ uri: data.image }}
         />
         <ViroImage
           height={0.2}
           width={0.2}
           position={[0, 0.13, -1.5]}
-          placeholderSource={require('../../../assets/play.png')}
-          source={require('../../../assets/play.png')}
+          placeholderSource={require('../../assets/play.png')}
+          source={require('../../assets/play.png')}
         />
       </ViroARScene>
     );
@@ -59,7 +59,7 @@ export default Arscreen2 = ({ navigation, route }) => {
         <TouchableOpacity onPress={ShareMusic}>
           <Image
             style={styles.tinyLogo}
-            source={require('../../../assets/Bottom.png')}
+            source={require('../../assets/Bottom.png')}
           />
         </TouchableOpacity>
       </View>

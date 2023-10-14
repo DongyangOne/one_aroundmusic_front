@@ -1,19 +1,19 @@
 // ** Component Imports
-import Header from '../views/components/Header';
-import ArScreen from '../views/screens/ArScreen';
-import ArScreen2 from '../views/screens/ArScreen2';
-import Board from '../views/screens/Board';
-import FilterScreen from '../views/screens/FilterScreen';
-import FriendList from '../views/screens/FriendList';
-import ListenKing from '../views/screens/ListenKing';
-import Main from '../views/screens/Main';
-import Map from '../views/screens/Map';
-import Music from '../views/screens/Music';
-import MusicPlay from '../views/screens/MusicPlay';
-import MyPage from '../views/screens/MyPage';
-import PopularKing from '../views/screens/PopularKing';
-import StartingPage from '../views/screens/StartingPage';
-import WKing from '../views/screens/WKing';
+import Header from '../components/Header';
+import ArScreen from '../screens/ArScreen';
+import ArScreen2 from '../screens/ArScreen2';
+import Board from '../screens/Board';
+import FilterScreen from '../screens/FilterScreen';
+import FriendList from '../screens/FriendList';
+import ListenKing from '../screens/ListenKing';
+import Main from '../screens/Main';
+import Map from '../screens/Map';
+import Music from '../screens/Music';
+import MusicPlay from '../screens/MusicPlay';
+import MyPage from '../screens/MyPage';
+import PopularKing from '../screens/PopularKing';
+import StartingPage from '../screens/StartingPage';
+import WKing from '../screens/WKing';
 
 export const MenuList = [
   {
