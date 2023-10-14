@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, FlatList, View } from 'react-native';
+// ** React Imports
+import React, { useEffect } from 'react';
+
+// ** RN Imports
+import { StyleSheet, SafeAreaView, View } from 'react-native';
+
+// ** Utils Imports
 import { ScrollView } from 'react-native-virtualized-view';
+import { useAuth } from '../../context/AuthContext';
+
+// ** Component Imports
 import Header from '../components/Header';
 import MainStory from '../components/MainStory';
 import Contents from '../components/Contents';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+
+// ** Constant Imports
 import { Pink } from '../../constant/Color';
 
-import { useAuth } from '../../src/context/AuthContext';
 export const DATA = [
   {
     id: '또치',
@@ -56,7 +63,7 @@ export const DATA = [
 ];
 
 const Main = ({ navigation, route }) => {
-  const { open, setOpen } = useDialog(false);
+  const { open, setOpen } = useAuth(false);
 
   useEffect(() => {
     handleOpen();

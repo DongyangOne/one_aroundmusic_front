@@ -39,7 +39,7 @@ const linking = {
 };
 
 const MainApp = () => {
-  const { open, setOpen } = useAuth(false);
+  const { open } = useAuth(false);
 
   return (
     <Swiper
@@ -59,7 +59,6 @@ const MainApp = () => {
             component={Main}
             options={{ headerShown: false }}
           />
-
           <Stack.Screen
             name="Music"
             component={Music}
