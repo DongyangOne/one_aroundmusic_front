@@ -13,10 +13,11 @@ import FriendList from './views/screens/FriendList';
 import Board from './views/screens/Board';
 import Header from './views/components/Header';
 import MusicPlay from './views/screens/MusicPlay';
+import PlayerScreen from './views/screens/player-screen';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import StartingPage from './views/screens/StartingPage';
-import { useAuth, useDialog } from './views/screens/MyContext';
+import { useAuth } from './context/AuthContext';
 import ArScreen2 from './views/screens/ArScreen2';
 const Stack = createStackNavigator();
 
@@ -31,7 +32,7 @@ const linking = {
 };
 
 const MainApp = () => {
-  const { open, setOpen } = useDialog(false);
+  const { open, setOpen } = useAuth(false);
 
   return (
     <Swiper
