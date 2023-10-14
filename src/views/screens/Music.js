@@ -14,7 +14,7 @@ import Header from '../components/Header';
 import FilterButton from '../components/FilterButton';
 import SongList from '../components/SongList';
 import { TouchableOpacity } from 'react-native';
-import { Black, Pink, White, Yellow } from '../../constant/Color';
+
 import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
 const FILTER = [
   {

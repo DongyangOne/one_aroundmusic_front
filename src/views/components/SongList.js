@@ -21,7 +21,7 @@ const SongList = ({ title, image, singer, date, onPress }) => {
               }}>
               <Image
                 style={{ width: 25, height: 30 }}
-                source={require('../../assets/playButton.png')}
+                source={require('../../../assets/playButton.png')}
               />
             </View>
           </View>

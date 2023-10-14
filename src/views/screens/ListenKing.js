@@ -1,5 +1,12 @@
 import React, { useState, useNavigate, useEffect } from 'react';
-import { Image, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  SafeAreaView,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -14,17 +21,17 @@ export const IMG_SRC = [
   {
     // Black Circle Outline
     id: 'reward_black',
-    src: require('../../assets/listen1.png'),
+    src: require('../../../assets/listen1.png'),
   },
   {
     // Rainbow Circle (Default)
     id: 'reward_rainbow',
-    src: require('../../assets/listen2.png'),
+    src: require('../../../assets/listen2.png'),
   },
   {
     // Purple Circle
     id: 'reward_purple',
-    src: require('../../assets/listen3.png'),
+    src: require('../../../assets/listen3.png'),
   },
 ];
 
@@ -35,14 +42,14 @@ const ListenKing = ({ navigation }) => {
 
   // console.log(IMG_SRC[0]);
   const [images, setImages] = useState([
-    require('../../assets/listen1.png'), // Black Circle Outline
-    require('../../assets/listen2.png'), // Rainbow Circle (Default)
-    require('../../assets/listen3.png'), // Purple Circle
+    require('../../../assets/listen1.png'), // Black Circle Outline
+    require('../../../assets/listen2.png'), // Rainbow Circle (Default)
+    require('../../../assets/listen3.png'), // Purple Circle
   ]);
   const [abc, setAbc] = useState([
-    require('../../assets/listenReward1.png'),
-    require('../../assets/listenReward2.png'),
-    require('../../assets/listenReward3.png'),
+    require('../../../assets/listenReward1.png'),
+    require('../../../assets/listenReward2.png'),
+    require('../../../assets/listenReward3.png'),
   ]);
 
   /** Currently selected ListenKing */
@@ -204,59 +211,56 @@ const ListenKing = ({ navigation }) => {
         </TouchableOpacity>
       </RoundedShadowBox>
       <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            handleActionClick(selection);
-          }}
-        >
-          <Text style={styles.buttonText}>적용하기</Text>
-        </TouchableOpacity>
+        style={styles.button}
+        onPress={() => {
+          handleActionClick(selection);
+        }}>
+        <Text style={styles.buttonText}>적용하기</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   LogoMain: {
-    marginTop: "20%",
+    marginTop: '20%',
     marginBottom: 50,
     width: 150,
     height: 150,
   },
   serve: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   button: {
-    backgroundColor: "#000080",
+    backgroundColor: '#000080',
     paddingVertical: 8,
     borderRadius: 5,
-    alignItems: "center",
-    marginTop: "20%",
-    width: "85%"
+    alignItems: 'center',
+    marginTop: '20%',
+    width: '85%',
   },
   buttonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-  centeredContainer: {
-  },
+  centeredContainer: {},
   centeredImage: {
     width: 60,
     height: 60,
   },
   roundedShadowBox: {
     width: 320,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderRadius: 10,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     elevation: 5,
-    alignItems:'center',
+    alignItems: 'center',
   },
-
 });
 
 export default ListenKing;

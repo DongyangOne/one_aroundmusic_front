@@ -31,7 +31,7 @@ const Board = ({ data, navigation }) => {
     const requestData = {
       content: content,
       location: location,
-      img: require('../../assets/contents1.jpeg'),
+      img: require('../../../assets/contents1.jpeg'),
     };
     axios
       .post('http://125.133.34.224:8001/api/board', requestData, config)
@@ -72,7 +72,7 @@ const Board = ({ data, navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Image
-          source={require('../../assets/boardWrite.png')}
+          source={require('../../../assets/boardWrite.png')}
           style={styles.image}
         />
       </View>

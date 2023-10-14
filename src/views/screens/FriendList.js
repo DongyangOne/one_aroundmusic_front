@@ -91,7 +91,7 @@ const FriendList = () => {
       <View style={styles.search}>
         <TextInput style={styles.input} />
         <Image
-          source={require('../../assets/searchIcon.png')}
+          source={require('../../../assets/searchIcon.png')}
           style={styles.searchIcon}
         />
       </View>
@@ -224,61 +224,61 @@ const styles = StyleSheet.create({
 //   {
 //     id: 1,
 //     name: '김남준',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 2,
 //     name: '김석진',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 3,
 //     name: '민윤기',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 4,
 //     name: '정호석',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 5,
 //     name: '박지민',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 6,
 //     name: '김태형',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 7,
 //     name: '전정국',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 8,
 //     name: '김남준',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 9,
 //     name: '김석진',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 //   {
 //     id: 10,
 //     name: '민윤기',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 끊기',
 //   },
 // ];
@@ -287,43 +287,43 @@ const styles = StyleSheet.create({
 //   {
 //     id: 1,
 //     name: '김남준2',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 신청',
 //   },
 //   {
 //     id: 2,
 //     name: '김석진2',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 신청',
 //   },
 //   {
 //     id: 3,
 //     name: '민윤기2',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 신청',
 //   },
 //   {
 //     id: 4,
 //     name: '정호석2',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 신청',
 //   },
 //   {
 //     id: 5,
 //     name: '박지민2',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 신청',
 //   },
 //   {
 //     id: 6,
 //     name: '김태형2',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 신청',
 //   },
 //   {
 //     id: 7,
 //     name: '전정국2',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '친구 신청',
 //   },
 // ];
@@ -332,67 +332,67 @@ const styles = StyleSheet.create({
 //   {
 //     id: 1,
 //     name: '김남준3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 2,
 //     name: '김석진3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 3,
 //     name: '민윤기3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 4,
 //     name: '정호석3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 5,
 //     name: '김남준3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 6,
 //     name: '김석진3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 7,
 //     name: '민윤기3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 8,
 //     name: '정호석3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 9,
 //     name: '박지민3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 10,
 //     name: '김태형3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 //   {
 //     id: 11,
 //     name: '전정국3',
-//     image: require('../../assets/111.jpeg'),
+//     image: require('../../../assets/111.jpeg'),
 //     status: '수락 하기',
 //   },
 // ];

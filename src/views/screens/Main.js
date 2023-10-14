@@ -6,51 +6,52 @@ import MainStory from '../components/MainStory';
 import Contents from '../components/Contents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { Black, Pink, White, Yellow } from '../../constant/Color';
-import { useDialog } from '../../context/AuthContext';
+import { Pink } from '../../constant/Color';
+
+import { useAuth } from '../../src/context/AuthContext';
 export const DATA = [
   {
     id: '또치',
-    src: require('../../assets/111.jpeg'),
-    story: require('../../assets/contents1.jpeg'),
+    src: require('../../../assets/111.jpeg'),
+    story: require('../../../assets/contents1.jpeg'),
   },
   {
     id: '이지금',
-    src: require('../../assets/222.jpeg'),
-    story: require('../../assets/contents2.jpeg'),
+    src: require('../../../assets/222.jpeg'),
+    story: require('../../../assets/contents2.jpeg'),
   },
   {
     id: 'jung',
-    src: require('../../assets/333.jpeg'),
-    story: require('../../assets/contents3.jpeg'),
+    src: require('../../../assets/333.jpeg'),
+    story: require('../../../assets/contents3.jpeg'),
   },
   {
     id: 'jin',
-    src: require('../../assets/444.jpeg'),
+    src: require('../../../assets/444.jpeg'),
   },
   {
     id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    src: require('../../../assets/555.jpeg'),
   },
   {
     id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    src: require('../../../assets/555.jpeg'),
   },
   {
     id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    src: require('../../../assets/555.jpeg'),
   },
   {
     id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    src: require('../../../assets/555.jpeg'),
   },
   {
     id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    src: require('../../../assets/555.jpeg'),
   },
   {
     id: 'yong',
-    src: require('../../assets/555.jpeg'),
+    src: require('../../../assets/555.jpeg'),
   },
 ];
 

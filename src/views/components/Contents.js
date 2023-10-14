@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { Black, Pink, White, Yellow } from '../../constant/Color';
+
 const Contents = ({ content }) => {
   const [data, setData] = useState([
     {
@@ -41,7 +41,7 @@ const Contents = ({ content }) => {
           ) => (
             <View key={index}>
               <Image
-                source={require('../../assets/contents1.jpeg')}
+                source={require('../../../assets/contents1.jpeg')}
                 style={styles.image}
               />
               <View style={styles.textView}>

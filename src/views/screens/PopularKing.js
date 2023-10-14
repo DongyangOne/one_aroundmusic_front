@@ -1,40 +1,43 @@
-import React, { useState } from "react";
-import { Image, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from "react-native";
+import React, { useState } from 'react';
+import {
+  Image,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  SafeAreaView,
+} from 'react-native';
 
 const RoundedShadowBox = ({ children }) => {
-  return (
-    <View style={styles.roundedShadowBox}>
-      {children}
-    </View>
-  );
+  return <View style={styles.roundedShadowBox}>{children}</View>;
 };
 
 const PopularKing = ({ navigation }) => {
   const [images, setImages] = useState([
-    require("../../assets/border1.png"),
-    require("../../assets/border2.png"),
-    require("../../assets/border3.png"),
+    require('../../../assets/border1.png'),
+    require('../../../assets/border2.png'),
+    require('../../../assets/border3.png'),
   ]);
   const [abc, setAbc] = useState([
-    require("../../assets/ward1.png"),
-    require("../../assets/ward2.png"),
-    require("../../assets/ward3.png"),
+    require('../../../assets/ward1.png'),
+    require('../../../assets/ward2.png'),
+    require('../../../assets/ward3.png'),
   ]);
 
   const imageStyles = [
     {
       width: 80,
       height: 80,
-      marginTop: "50%",
+      marginTop: '50%',
       marginRight: 35,
     }, // 스타일1
     {
       width: 150,
       height: 150,
-      marginTop: "15%",
-      alignItems: "center",
+      marginTop: '15%',
+      alignItems: 'center',
     }, // 스타일2
-    { width: 80, height: 80, marginTop: "50%", marginLeft: 35 }, // 스타일3
+    { width: 80, height: 80, marginTop: '50%', marginLeft: 35 }, // 스타일3
   ];
 
   const handleLeftImageClick = () => {
@@ -79,44 +82,43 @@ const PopularKing = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   LogoMain: {
-    marginTop: "20%",
+    marginTop: '20%',
     marginBottom: 50,
     width: 150,
     height: 150,
   },
   serve: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   button: {
-    backgroundColor: "#000080",
+    backgroundColor: '#000080',
     paddingVertical: 8,
     borderRadius: 5,
-    alignItems: "center",
-    marginTop: "20%",
-    width: "85%"
+    alignItems: 'center',
+    marginTop: '20%',
+    width: '85%',
   },
   buttonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-  centeredContainer: {
-  },
+  centeredContainer: {},
   centeredImage: {
     width: 60,
     height: 60,
   },
   roundedShadowBox: {
     width: 320,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderRadius: 10,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     elevation: 5,
-    alignItems:'center',
+    alignItems: 'center',
   },
 });
 

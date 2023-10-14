@@ -11,7 +11,7 @@ function ArMarker({ location, size, onPress }) {
       }}
       onPress={onPress}>
       <Image
-        source={require('../../assets/arLocation.png')}
+        source={require('../../../assets/arLocation.png')}
         style={{
           width: size.width,
           height: size.height,

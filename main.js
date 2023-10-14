@@ -1,24 +1,31 @@
-import { React, creacteContext } from 'react';
-import Swiper from 'react-native-swiper';
-import Main from './views/screens/Main';
-import Map from './views/screens/Map';
-import Music from './views/screens/Music';
-import FilterScreen from './views/screens/FilterScreen';
-import ArScreen from './views/screens/ArScreen';
-import MyPage from './views/screens/MyPage';
-import PopularKing from './views/screens/PopularKing';
-import ListenKing from './views/screens/ListenKing';
-import WKing from './views/screens/WKing';
-import FriendList from './views/screens/FriendList';
-import Board from './views/screens/Board';
-import Header from './views/components/Header';
-import MusicPlay from './views/screens/MusicPlay';
-import PlayerScreen from './views/screens/player-screen';
+// ** React Imports
+import { React } from 'react';
+
+// ** Component Imports
+import Main from './src/views/screens/Main';
+import Map from './src/views/screens/Map';
+import Music from './src/views/screens/Music';
+import FilterScreen from './src/views/screens/FilterScreen';
+import ArScreen from './src/views/screens/ArScreen';
+import MyPage from './src/views/screens/MyPage';
+import PopularKing from './src/views/screens/PopularKing';
+import ListenKing from './src/views/screens/ListenKing';
+import WKing from './src/views/screens/WKing';
+import FriendList from './src/views/screens/FriendList';
+import Board from './src/views/screens/Board';
+import Header from './src/views/components/Header';
+import MusicPlay from './src/views/screens/MusicPlay';
+import StartingPage from './src/views/screens/StartingPage';
+import ArScreen2 from './src/views/screens/ArScreen2';
+
+// ** Navigation Imports
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import StartingPage from './views/screens/StartingPage';
-import { useAuth } from './context/AuthContext';
-import ArScreen2 from './views/screens/ArScreen2';
+
+// ** Utils Imports
+import Swiper from 'react-native-swiper';
+import { useAuth } from './src/context/AuthContext';
+
 const Stack = createStackNavigator();
 
 const linking = {
