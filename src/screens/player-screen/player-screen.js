@@ -23,9 +23,6 @@ const PlayerScreenView = ({ route, navigation }) => {
   const { singer } = route.params;
   const { image } = route.params;
   const { href } = route.params;
-  const parts = href.split(':');
-  const url = parts[parts.length - 1];
-  const spotifyWebLink = `https://open.spotify.com/track/${url}`;
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
 
   async function requestPermission() {
