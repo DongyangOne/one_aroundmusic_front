@@ -1,3 +1,6 @@
+// ** React Imports
+import { useEffect, useState } from 'react';
+
 // ** Component Imports
 import PlayerScreenView from './player-screen';
 
