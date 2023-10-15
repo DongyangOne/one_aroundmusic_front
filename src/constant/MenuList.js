@@ -14,7 +14,7 @@ import MyPage from '../screens/MyPage';
 import PopularKing from '../screens/PopularKing';
 import StartingPage from '../screens/StartingPage';
 import WKing from '../screens/WKing';
-
+import PlayerScreen from '../screens/player-screen';
 export const MenuList = [
   {
     name: 'Start',
@@ -36,6 +36,12 @@ export const MenuList = [
     component: MusicPlay,
     options: { headerShown: false },
   },
+  {
+    name: 'PlayerScreen',
+    component: PlayerScreen,
+    options: { headerShown: false },
+  },
+
   {
     name: 'ArScreen2',
     component: ArScreen2,

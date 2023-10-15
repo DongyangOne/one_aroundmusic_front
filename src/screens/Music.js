@@ -70,6 +70,7 @@ const Music = ({ navigation }) => {
           );
           const data = await response.json();
           setTracks(data.items);
+          console.log(data.items[1].track);
           setLoading(false);
         } catch (error) {
           console.error(error);
@@ -142,11 +143,12 @@ const Music = ({ navigation }) => {
                       singer={item.track.artists[0].name}
                       date={item.track.album.release_date}
                       onPress={() =>
-                        navigation.navigate('MusicPlay', {
+                        navigation.navigate('PlayerScreen', {
                           title: item.track.name,
                           image: item.track.album.images[0].url,
                           singer: item.track.artists[0].name,
                           trackId: item.track.id,
+                          href: item.track.preview_url,
                         })
                       }
                     />

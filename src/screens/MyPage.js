@@ -18,7 +18,6 @@ const MyPage = ({ navigation }) => {
   const [friend, setFriend] = useState(0);
   const [userId, setUserId] = useState('Guest');
   const [authState, setAuthState] = useState(null);
-
   async function authenticate() {
     const config = {
       clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
@@ -35,6 +34,7 @@ const MyPage = ({ navigation }) => {
       const result = await authorize(config);
       if (result.accessToken) {
         await AsyncStorage.setItem('token', result.accessToken);
+        console.log(result.accessToken);
         setAuthState(result);
         navigation.navigate('Main');
       }

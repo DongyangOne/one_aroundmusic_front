@@ -88,12 +88,24 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Black, Pink, White, Yellow } from '../constant/Color';
 import LottieView from 'lottie-react-native';
+import DeviceInfo from 'react-native-device-info';
 
 import { useAuth } from '../../src/context/AuthContext';
 
 function StartingPage({ navigation }) {
   const [email, setEmail] = useState('ex@gmail.com');
   const [socialToken, setSocialToken] = useState('string');
+  const getDeviceId = async () => {
+    try {
+      const deviceId = await DeviceInfo.getUniqueId();
+      await AsyncStorage.setItem('deviceId', deviceId);
+      console.log('Device ID: ', deviceId);
+    } catch (error) {
+      console.log('Error getting device ID: ', error);
+    }
+  };
+
+  getDeviceId();
 
   const handleLogin = async () => {
     try {
