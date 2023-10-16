@@ -1,66 +1,109 @@
-import React, { useState } from "react";
-import { Image, StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from 'react';
+import { Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RoundedShadowBox = ({ children }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
 };
-//이 더미데이터를 Map에 이동 -> Marker로 이동해서 바뀌게 해야함
-//navigation오류 같음
-export const ImgData = [
-  { id: 1, src: require("../../assets/workReward1.png") },
-  { id: 2, src: require("../../assets/workReward2.png") },
-  { id: 3, src: require("../../assets/workReward3.png") },
-];
 
-const WKing = () => {
-  const navigation = useNavigation();
-  const [selection, setSelection] = useState(1); // 초기에 중간 이미지를 보여주기 위한 인덱스
+const WKing = ({ navigation }) => {
+  const [rewardData, setRewardData] = useState(null);
+  const [selection, setSelection] = useState(0);
+  const [images, setImages] = useState([]);
+  const [abc, setAbc] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]); // 새로운 상태 추가
+  useEffect(() => {
+    async function fetchRewardData() {
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
+        console.log('토큰:', token);
+        const response = await axios.get(
+          'http://125.133.34.224:8001/api/reward/walk',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
 
-  const [images, setImages] = useState([
-    require("../../assets/workReward1.png"),
-    require("../../assets/workReward2.png"),
-    require("../../assets/workReward3.png"),
-  ]);
+        const walkData = response.data.data.rewards;
 
-  const [abc, setAbc] = useState([
-    require("../../assets/workReward1.png"),
-    require("../../assets/workReward2.png"),
-    require("../../assets/workReward3.png"),
-  ]);
+        if (walkData && walkData.length > 0) {
+          //이미지 데이터가 존재하면 설정
+          const imageUrls = walkData.map(item => item.reward);
+          setImages(walkData.map(item => item.reward));
+          setAbc(walkData.map(item => item.reward));
 
-  const SCROLL_SET = (dir) => {
+          setRewardData(walkData);
+          setImageUrls(imageUrls); // 이미지 URL 상태 업데이트
+        } else {
+          // 이미지 데이터가 없는 경우 처리
+          console.log('이미지 데이터가 비어있습니다.');
+        }
+      } catch (error) {
+        console.log('GET 요청 오류:', error);
+      }
+    }
+
+    fetchRewardData();
+  }, []);
+
+  const SCROLL_SET = dir => {
     let temp = selection;
-    if (dir == "r") {
+    if (dir === 'r') {
       temp++;
-      if (temp > 2) temp = 0;
-    } else if (dir == "l") {
+      if (temp > images.length - 1) temp = 0;
+    } else if (dir === 'l') {
       temp--;
+      if (temp < 0) temp = images.length - 1;
     } else {
-      console.log("dir: ${dir}. 에러 발생");
+      console.log(`dir: ${dir}. 에러 발생`);
       return;
     }
     setSelection(temp);
   };
 
   const handleLeftImageClick = () => {
-    setImages((prevImages) => [prevImages.pop(), ...prevImages]);
-    setAbc((prevImages) => [prevImages.pop(), ...prevImages]);
-    SCROLL_SET("l");
+    setImages(prevImages => [prevImages[2], ...prevImages.slice(0, 2)]);
+    setAbc(prevImages => [prevImages[2], ...prevImages.slice(0, 2)]);
+    SCROLL_SET('l');
   };
 
   const handleRightImageClick = () => {
-    setImages((prevImages) => [...prevImages.slice(1), prevImages[0]]);
-    setAbc((prevImages) => [...prevImages.slice(1), prevImages[0]]);
-    SCROLL_SET("r");
+    setImages(prevImages => [...prevImages.slice(1), prevImages[0]]);
+    setAbc(prevImages => [...prevImages.slice(1), prevImages[0]]);
+    SCROLL_SET('r');
   };
 
-  const handleActionClick = () => {
-    navigation.navigate("Map", {
-      setData: selection,
-    });
+  const handleActionClick = async selectedImage => {
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      const selectedImageID = rewardData[selectedImage].id;
+      console.log('선택한 리워드 객체 정보:', rewardData[selectedImage]);
+      const requestBody = {
+        rewardType: 'walk',
+        select_id: selectedImageID,
+      };
 
-    alert("적용되었습니다.");
+      const response = await axios.patch(
+        'http://125.133.34.224:8001/api/reward',
+        requestBody,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (response.data.success) {
+        alert('이미지가 성공적으로 업로드되었습니다.');
+      } else {
+        alert('이미지 업로드에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+    }
   };
 
   return (
@@ -68,7 +111,6 @@ const WKing = () => {
       <View style={styles.centeredContainer}>
         <Image style={styles.LogoMain} source={abc[1]} />
       </View>
-
       <View style={styles.centeredContainer}></View>
       <RoundedShadowBox>
         <TouchableOpacity style={styles.serve}>
@@ -83,13 +125,13 @@ const WKing = () => {
           </TouchableOpacity>
         </TouchableOpacity>
       </RoundedShadowBox>
+
       <View style={styles.btnBox}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
             handleActionClick(selection);
-          }}
-        >
+          }}>
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
@@ -101,68 +143,63 @@ const imageStyles = [
   {
     width: 80,
     height: 80,
-    marginTop: "50%",
+    marginTop: '50%',
     marginRight: 35,
-  }, // 스타일1
+  },
   {
     width: 150,
     height: 150,
-    marginTop: "10%",
-    alignItems: "center",
-  }, // 스타일2
-  { width: 80, height: 80, marginTop: "50%", marginLeft: 35 }, // 스타일3
+    marginTop: '10%',
+    alignItems: 'center',
+  },
+  { width: 80, height: 80, marginTop: '50%', marginLeft: 35 },
 ];
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // 화면 전체를 채우도록 수정
-    alignItems: "center",
-    justifyContent: "center", // 화면 가운데 정렬
+    flex: 1,
+    alignItems: 'center',
   },
   LogoMain: {
-    marginTop: "10%",
-    marginBottom: 50,
-    width: 150,
-    height: 150,
-    alignSelf: "center",
+    marginTop: '10%',
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
   },
   serve: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   btnBox: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   button: {
-    alignItems: "center",
+    alignItems: 'center',
     width: 320,
-    backgroundColor: "#000080",
+    backgroundColor: '#000080',
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 5,
-    marginTop: "10%",
+    marginTop: '5%',
   },
   buttonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   centeredContainer: {
-    marginTop: "10%",
-    alignItems: "center",
-  },
-  centeredImage: {
-    width: 70,
-    height: 70,
+    marginTop: '5%',
+    alignItems: 'center',
   },
   roundedShadowBox: {
     width: 320,
     marginTop: 60,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderRadius: 10,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     elevation: 5,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });
+
 export default WKing;
