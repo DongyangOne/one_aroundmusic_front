@@ -19,7 +19,7 @@ const Contents = ({ content }) => {
         },
       })
       .then(res => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setData(res.data.data);
       })
       .catch(err => {
