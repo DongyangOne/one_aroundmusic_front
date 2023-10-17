@@ -17,7 +17,7 @@ import axios from 'axios';
 
 const PlayerScreenView = ({ route, navigation }) => {
   const [sound, setSound] = useState(null);
-  const [isPlay, setIsPlay] = useState(false);
+  const [isPlay, setIsPlay] = useState(true);
   const { trackId } = route.params;
   const { title } = route.params;
   const { singer } = route.params;
