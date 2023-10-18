@@ -14,7 +14,8 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
-
+import SVGComponentPlayBtn from '../../components/SVG/SVGComponentPlayBtn';
+import SVGComponentStopBtn from '../../components/SVG/SVGComponentStopBtn';
 const PlayerScreenView = ({ route, navigation }) => {
   const [sound, setSound] = useState(null);
   const [isPlay, setIsPlay] = useState(true);
@@ -132,11 +133,12 @@ const PlayerScreenView = ({ route, navigation }) => {
 
           {/* stop.png 누르면 handleStop으로 ( 노래 정지 ) 
           play.png 누르면 handlePlay로 ( 노래 재생 )  */}
+
           <TouchableOpacity
+            style={styles.box}
             onPress={() => {
               setIsPlaying(prevIsPlaying => !prevIsPlaying);
             }}>
-            {/* Use the custom SVG components based on the isPlaying state */}
             {isPlaying ? <SVGComponentStopBtn /> : <SVGComponentPlayBtn />}
           </TouchableOpacity>
           <TouchableOpacity onPress={shareAr} style={styles.shareBtn}>
@@ -176,6 +178,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 24,
     marginTop: 31,
+  },
+  box: {
+    marginTop: '3%',
+    height: 60,
   },
   singer: {
     color: '#D9D9D9',
