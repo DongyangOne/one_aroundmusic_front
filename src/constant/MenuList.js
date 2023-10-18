@@ -155,7 +155,7 @@ export const MapMenuList = [
   },
   {
     name: 'ArScreen',
-    component: ArScreen,
+    component: ArScreen2,
     options: {},
   },
   {
