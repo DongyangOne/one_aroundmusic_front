@@ -4,6 +4,7 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  Viro360Image,
 } from 'react-native';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import {
@@ -21,7 +22,7 @@ let loadData = null; // DB에서 불러온 데이터 저장
 export let TOKEN = null;
 let temp;
 
-const WorldSceneAR = ({ data, frame }) => {
+const WorldSceneAR = () => {
   const [itemFrame, setItemFrame] = useState();
   const [selectId, setSelectId] = useState();
 
@@ -57,8 +58,8 @@ const WorldSceneAR = ({ data, frame }) => {
 
   /** Attempt 5 */
   const setData = async () => {
-    text = `/reward/pop/border${temp - 6}.png`;
-    // console.log(`text >> ${text}`);
+    text = `/reward/pop/border${temp - 42}.png`;
+    console.log(`text >> ${text}`);
     setItemFrame(await storage().ref(text).getDownloadURL());
   };
 
@@ -68,6 +69,7 @@ const WorldSceneAR = ({ data, frame }) => {
 
   return (
     <ViroARScene>
+      <Viro360Image source={{ uri: itemFrame }} />
       <ViroImage
         height={0.5}
         width={0.5}

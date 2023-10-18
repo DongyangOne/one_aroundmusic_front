@@ -53,7 +53,7 @@ const MainStory = ({ data, frame }) => {
   /** Attempt 5 */
   const setData = async () => {
     text = `/reward/listen/listen${temp - 6}.png`;
-    // console.log(`text >> ${text}`);
+    console.log(`text >> ${text}`);
     setItemFrame(await storage().ref(text).getDownloadURL());
   };
 
