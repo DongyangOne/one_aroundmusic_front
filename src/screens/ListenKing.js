@@ -9,108 +9,67 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
-import { TOKEN } from '../components/MainStory';
+import storage from '@react-native-firebase/storage';
+import { Pink, White } from '../constant/Color';
 import Main from './Main';
 
 const RoundedShadowBox = ({ children }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
 };
 
-export const IMG_SRC = [
-  {
-    // Black Circle Outline
-    id: 'reward_black',
-    src: require('../../assets/listen1.png'),
-  },
-  {
-    // Rainbow Circle (Default)
-    id: 'reward_rainbow',
-    src: require('../../assets/listen2.png'),
-  },
-  {
-    // Purple Circle
-    id: 'reward_purple',
-    src: require('../../assets/listen3.png'),
-  },
-];
-
 const ListenKing = ({ navigation }) => {
-  const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
+  const serverURL = 'http://125.133.34.224:8001';
+  let fixed = 8;
 
-  let fixed = 8; // null
-
-  // console.log(IMG_SRC[0]);
-  const [images, setImages] = useState([
-    require('../../assets/listen1.png'), // Black Circle Outline
-    require('../../assets/listen2.png'), // Rainbow Circle (Default)
-    require('../../assets/listen3.png'), // Purple Circle
-  ]);
-  const [abc, setAbc] = useState([
-    require('../../assets/listenReward1.png'),
-    require('../../assets/listenReward2.png'),
-    require('../../assets/listenReward3.png'),
-  ]);
-
-  /** Currently selected ListenKing */
-  // const [selection, setSelection] = useState(8); // CORRECT
+  const [images, setImages] = useState([0, 0, 0]);
+  const [abc, setAbc] = useState([0, 0, 0]);
   const [selection, setSelection] = useState(8);
 
+  const loadData = async () => {
+    let imgDataBeta = [0, 0, 0];
+    for (i = 0; i < 3; i++) {
+      imgDataBeta[i] = await storage()
+        .ref(`/reward/listen/listen${i + 1}.png`)
+        .getDownloadURL();
+    }
+    setAbc(imgDataBeta);
+    setImages(imgDataBeta);
+
+    const TOKEN = await AsyncStorage.getItem('accessToken');
+    try {
+      if (TOKEN) {
+        axios
+          .get(`${serverURL}/api/reward/listen`, {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          })
+          .then(response => {
+            const temp = parseInt(response.data.data.selectedReward.id);
+            try {
+              if (temp == 7) handleLeftImageClick();
+              else if (temp == 9) handleRightImageClick();
+            } catch (e) {
+              console.error(`ERR with Switch Reward >> ${e}`);
+            }
+          })
+          .catch(e => {
+            console.error(`GET ERROR >> ${e}`);
+          });
+      } else {
+        console.info('No data found');
+      }
+    } catch (e) {
+      console.error(`Error with Reading Data >> ${e}`);
+    }
+  };
+
   useEffect(() => {
-    const loadDATAs = () => {
-      const getData = async () => {
-        try {
-          // 토큰에 문제가 없다면
-          if (TOKEN !== null) {
-            console.info(`TOKEN Load SUCCESSFUL`);
-            // console.log(`[ListenKing] TOKEN >> ${TOKEN}`);
-            // Axios 이용하여 데이터 불러오기
-            axios
-              .get(`${serverURL}/api/reward/listen`, {
-                headers: {
-                  Authorization: `Bearer ${TOKEN}`,
-                },
-              })
-              .then(response => {
-                // 서버에서 불러온 데이터 저장하기
-                loadData = response.data;
-                // 선택된 id값 temp에 저장
-                const temp = parseInt(loadData.data.selectedReward.id);
-                // console.log(`temp >> ${temp}`);
-                // 불러온 id 값 별로 분기 (왼쪽, 오른쪽 이미지 선택해서 바뀌는것처럼)
-                try {
-                  if (temp == 7) handleLeftImageClick();
-                  else if (temp == 9) handleRightImageClick();
-                  // else if (temp == 8) console.info(`Default Value: <8>`);
-                } catch (e) {
-                  console.error(`ERR with Switch Reward >> ${e}`);
-                }
-                // console.info(`DONE!`);
-              })
-              .catch(e => {
-                console.error(`GET ERROR >> ${e}`);
-              });
-          } else {
-            console.info('No data found');
-          }
-        } catch (e) {
-          console.error(`Error with Reading Data >> ${e}`);
-        }
-      };
-      getData();
-    };
-    loadDATAs();
+    loadData();
   }, []);
 
   const NOW_SET = dir => {
-    // console.log(selection);
     let temp = selection;
-    /** 'dir' means Direction
-     * An index determining the direction of increase/decrease
-     * (Which way to increse/decrease index)
-     * r: Right
-     * l: Left
-     */
     if (dir == 'r') {
       temp++;
       if (temp > fixed + 1) temp = fixed - 1;
@@ -130,14 +89,14 @@ const ListenKing = ({ navigation }) => {
       height: 80,
       marginTop: '50%',
       marginRight: 35,
-    }, // 스타일1
+    },
     {
       width: 150,
       height: 150,
       marginTop: '15%',
       alignItems: 'center',
-    }, // 스타일2
-    { width: 80, height: 80, marginTop: '50%', marginLeft: 35 }, // 스타일3
+    },
+    { width: 80, height: 80, marginTop: '50%', marginLeft: 35 },
   ];
 
   const handleLeftImageClick = () => {
@@ -152,31 +111,21 @@ const ListenKing = ({ navigation }) => {
     NOW_SET('r');
   };
 
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
-
-  /** Go to the main screen */
-  const handleGoHome = () => {
+  const handleActionClick = () => {
     axios
       .patch(
-        `${serverURL}/api/reward`, // URL
+        `${serverURL}/api/reward`,
         {
-          // Data
           'rewardType': 'listen',
           'select_id': selection,
         },
         {
-          // Authorization
           headers: {
             Authorization: `Bearer ${TOKEN}`,
           },
         },
       )
       .then(response => {
-        console.log(
-          `[ListenKing] Send SUCCESSFUL! >> ${JSON.stringify(response.data)}`,
-        );
         navigation.navigate('Main', { setData: selection });
       })
       .catch(e => {
@@ -187,7 +136,7 @@ const ListenKing = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
-        <Image style={styles.LogoMain} source={abc[1]} />
+        <Image style={styles.LogoMain} source={{ uri: images[1] }} />
       </View>
 
       <View style={styles.centeredContainer}></View>
@@ -197,16 +146,16 @@ const ListenKing = ({ navigation }) => {
             onPress={() => {
               handleLeftImageClick();
             }}>
-            <Image style={imageStyles[0]} source={images[0]} />
+            <Image style={imageStyles[0]} source={{ uri: images[0] }} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <Image style={imageStyles[1]} source={images[1]} />
+            <Image style={imageStyles[1]} source={{ uri: images[1] }} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               handleRightImageClick();
             }}>
-            <Image style={imageStyles[2]} source={images[2]} />
+            <Image style={imageStyles[2]} source={{ uri: images[2] }} />
           </TouchableOpacity>
         </TouchableOpacity>
       </RoundedShadowBox>
@@ -236,7 +185,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: '#000080',
+    backgroundColor: Pink,
     paddingVertical: 8,
     borderRadius: 5,
     alignItems: 'center',
@@ -244,7 +193,7 @@ const styles = StyleSheet.create({
     width: '85%',
   },
   buttonText: {
-    color: 'white',
+    color: White,
     fontSize: 16,
     fontWeight: 'bold',
   },

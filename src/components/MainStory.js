@@ -7,50 +7,53 @@ import {
   ImageBackground,
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { IMG_SRC } from '../screens/ListenKing';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import storage from '@react-native-firebase/storage';
 
-const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
-let loadData = null; // DB에서 불러온 데이터 저장
-
-export let TOKEN = null;
+const serverURL = 'http://125.133.34.224:8001';
+let loadData = null;
+let TOKEN = null;
+let temp;
 
 const MainStory = ({ data, frame }) => {
-  const [itemFrame, setItemFrame] = useState(null);
+  const [itemFrame, setItemFrame] = useState();
+  const [selectId, setSelectId] = useState();
+
+  const getData = async () => {
+    try {
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      if (TOKEN) {
+        axios
+          .get(`${serverURL}/api/reward/listen`, {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          })
+          .then(response => {
+            loadData = response.data;
+            temp = loadData.data.selectedReward.id;
+            setSelectId(temp);
+            setData();
+          })
+          .catch(e => {
+            console.error(`GET ERROR >> ${e}`);
+          });
+      } else {
+        console.log('No data found');
+      }
+    } catch (e) {
+      console.error(`Error with Reading Data >> ${e}`);
+    }
+  };
+
+  const setData = async () => {
+    text = `/reward/listen/listen${temp - 6}.png`;
+    setItemFrame(await storage().ref(text).getDownloadURL());
+  };
 
   useEffect(() => {
-    const loadDATAs = () => {
-      const getData = async () => {
-        try {
-          const value = await AsyncStorage.getItem('accessToken');
-          if (value !== null) {
-            TOKEN = value;
-            axios
-              .get(`${serverURL}/api/reward/listen`, {
-                headers: {
-                  Authorization: `Bearer ${TOKEN}`,
-                },
-              })
-              .then(response => {
-                loadData = response.data;
-                const temp = parseInt(loadData.data.selectedReward.id);
-                setItemFrame(temp - 7);
-              })
-              .catch(e => {
-                console.error(`GET ERROR >> ${e}`);
-              });
-          } else {
-            console.log('No data found');
-          }
-        } catch (e) {
-          console.error(`Error with Reading Data >> ${e}`);
-        }
-      };
-      getData();
-    };
-    loadDATAs();
+    getData();
   }, []);
 
   try {
@@ -65,7 +68,7 @@ const MainStory = ({ data, frame }) => {
               <TouchableWithoutFeedback>
                 {index == 0 ? (
                   <ImageBackground
-                    source={IMG_SRC[itemFrame].src}
+                    source={{ uri: itemFrame }}
                     style={styles.imageBg}>
                     <Image source={data[0].src} style={styles.imageSe}></Image>
                   </ImageBackground>
@@ -85,7 +88,6 @@ const MainStory = ({ data, frame }) => {
         nestedScrollEnabled={true}
         horizontal={true}>
         <View style={styles.storyRow}>
-          {/* Previous Code */}
           {data.map((item, index) => (
             <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
