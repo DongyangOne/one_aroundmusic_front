@@ -9,7 +9,6 @@ import ListenKing from '../screens/ListenKing';
 import Main from '../screens/Main';
 import Map from '../screens/Map';
 import Music from '../screens/Music';
-import MusicPlay from '../screens/MusicPlay';
 import MyPage from '../screens/MyPage';
 import PopularKing from '../screens/PopularKing';
 import StartingPage from '../screens/StartingPage';
@@ -29,11 +28,6 @@ export const MenuList = [
   {
     name: 'Music',
     component: Music,
-    options: { headerShown: false },
-  },
-  {
-    name: 'MusicPlay',
-    component: MusicPlay,
     options: { headerShown: false },
   },
   {
