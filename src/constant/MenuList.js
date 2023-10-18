@@ -15,6 +15,7 @@ import PopularKing from '../screens/PopularKing';
 import StartingPage from '../screens/StartingPage';
 import WKing from '../screens/WKing';
 import PlayerScreen from '../screens/player-screen';
+import { Black, Pink, White, Yellow } from '../constant/Color';
 export const MenuList = [
   {
     name: 'Start',
@@ -133,7 +134,8 @@ export const MenuList = [
       title: '듣기왕 리워드',
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: '#000080',
+        // backgroundColor: '#000080',
+        backgroundColor: Pink, 
       },
       headerTitleAlign: 'center',
     },
