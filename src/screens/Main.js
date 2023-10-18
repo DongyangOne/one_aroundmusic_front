@@ -79,7 +79,7 @@ const Main = ({ navigation, route }) => {
         style={styles.footer}
         onPress={() => navigation.push('MyPage')}
         onPressMain={() => navigation.push('Main')}
-        onPressMusic={() => navigation.push('Music')}
+        onPressMusic={() => navigation.push('PlayerScreen')}
       />
       <ScrollView style={styles.container} nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>
