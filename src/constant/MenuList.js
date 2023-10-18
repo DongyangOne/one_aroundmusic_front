@@ -119,9 +119,9 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '걷기왕 리워드',
-      headerTintColor: '#ffff',
+      headerTintColor: Pink,
       headerStyle: {
-        backgroundColor: '#000080',
+        backgroundColor: White,
       },
       headerTitleAlign: 'center',
     },
@@ -135,7 +135,7 @@ export const MenuList = [
       headerTintColor: 'white',
       headerStyle: {
         // backgroundColor: '#000080',
-        backgroundColor: Pink, 
+        backgroundColor: Pink,
       },
       headerTitleAlign: 'center',
     },

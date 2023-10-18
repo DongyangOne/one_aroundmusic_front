@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   StyleSheet,
@@ -8,33 +8,55 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Pink, White } from '../constant/Color';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import storage from '@react-native-firebase/storage';
+import { response } from 'express';
 
-const RoundedShadowBox = ({ children }) => {
+const RoundedShadowBox = ({ children, selectedImage }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
 };
-//이 더미데이터를 Map에 이동 -> Marker로 이동해서 바뀌게 해야함
-//navigation오류 같음
-export const ImgData = [
-  { id: 1, src: require('../../assets/workReward1.png') },
-  { id: 2, src: require('../../assets/workReward2.png') },
-  { id: 3, src: require('../../assets/workReward3.png') },
-];
 
 const WKing = () => {
   const navigation = useNavigation();
   const [selection, setSelection] = useState(1); // 초기에 중간 이미지를 보여주기 위한 인덱스
 
-  const [images, setImages] = useState([
-    require('../../assets/workReward1.png'),
-    require('../../assets/workReward2.png'),
-    require('../../assets/workReward3.png'),
-  ]);
+  const [images, setImages] = useState([0, 0, 0]);
+  const [abc, setAbc] = useState([0, 0, 0]);
 
-  const [abc, setAbc] = useState([
-    require('../../assets/workReward1.png'),
-    require('../../assets/workReward2.png'),
-    require('../../assets/workReward3.png'),
-  ]);
+  useEffect(() => {
+    async function fetchRewardData() {
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
+        // 토큰 값을 콘솔에 출력
+        console.log('토큰:', token);
+        const response = await axios.get(
+          'http://125.133.34.224:8001/api/reward/walk',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        const imageUrls = await Promise.all(
+          response.data.data.rewards.map(async reward => {
+            const imageUrl = await storage()
+              .ref(reward.reward)
+              .getDownloadURL();
+            return imageUrl;
+          }),
+        );
+
+        setAbc(imageUrls);
+        setImages(imageUrls);
+      } catch (error) {
+        console.log('GET 요청 오류:', error);
+      }
+    }
+    fetchRewardData();
+  }, []);
 
   const SCROLL_SET = dir => {
     let temp = selection;
@@ -49,73 +71,92 @@ const WKing = () => {
     }
     setSelection(temp);
   };
-
-  const handleLeftImageClick = () => {
-    setImages(prevImages => [prevImages.pop(), ...prevImages]);
-    setAbc(prevImages => [prevImages.pop(), ...prevImages]);
-    SCROLL_SET('l');
-  };
-
-  const handleRightImageClick = () => {
-    setImages(prevImages => [...prevImages.slice(1), prevImages[0]]);
-    setAbc(prevImages => [...prevImages.slice(1), prevImages[0]]);
-    SCROLL_SET('r');
-  };
-
-  const handleActionClick = () => {
-    navigation.navigate('Map', {
-      setData: selection,
+  const handleImageClick = index => {
+    // 이미지 클릭 시 해당 이미지를 가운데로 이동
+    setImages(prevImages => {
+      const newImages = [...prevImages];
+      newImages[1] = prevImages[index];
+      if (index === 0) {
+        newImages[0] = prevImages[2];
+        newImages[2] = prevImages[1];
+      } else if (index === 2) {
+        newImages[2] = prevImages[0];
+        newImages[0] = prevImages[1];
+      } else {
+        newImages[0] = prevImages[0];
+        newImages[2] = prevImages[2];
+      }
+      return newImages;
     });
+    setSelection(1); // 클릭한 이미지를 가운데로 설정
+  };
 
-    alert('적용되었습니다.');
+  const handleActionClick = async () => {
+    try {
+      const token = await AsyncStorage.getItem('accessToken');
+      const selectedImagePath = images[selection];
+
+      // 이미지 선택 값과 함께 서버에 데이터 보내기
+      const response = await axios.post(
+        'http://125.133.34.224:8001/api/reward',
+        {
+          selectedImage: selectedImagePath,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (response.data.success) {
+        alert('이미지가 성공적으로 저장되었습니다.');
+        navigation.navigate('MyPage', { selectedImagePath });
+      } else {
+        alert('이미지 저장에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('이미지 저장 오류:', error);
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
-        <Image style={styles.LogoMain} source={abc[1]} />
+        <Image style={styles.LogoMain} source={{ uri: images[selection] }} />
       </View>
 
-      <View style={styles.centeredContainer}></View>
-      <RoundedShadowBox>
+      <RoundedShadowBox selectedImage={images[selection]}>
         <TouchableOpacity style={styles.serve}>
-          <TouchableOpacity onPress={handleLeftImageClick}>
-            <Image style={imageStyles[0]} source={images[0]} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleRightImageClick}>
-            <Image style={imageStyles[1]} source={images[1]} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleRightImageClick}>
-            <Image style={imageStyles[2]} source={images[2]} />
-          </TouchableOpacity>
+          {images.map((imageUrl, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => handleImageClick(index)}>
+              <Image style={imageStyles[index]} source={{ uri: imageUrl }} />
+            </TouchableOpacity>
+          ))}
         </TouchableOpacity>
       </RoundedShadowBox>
-      {/* <View style={styles.btnBox}> */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          handleActionClick(selection);
-        }}>
+
+      <TouchableOpacity style={styles.button} onPress={handleActionClick}>
         <Text style={styles.buttonText}>적용하기</Text>
       </TouchableOpacity>
-      {/* </View> */}
     </SafeAreaView>
   );
 };
-
 const imageStyles = [
   {
     width: 80,
     height: 80,
     marginTop: '50%',
     marginRight: 35,
-  },
+  }, // 스타일1
   {
     width: 150,
     height: 150,
-    marginTop: '10%',
+    marginTop: '15%',
     alignItems: 'center',
-  },
+  }, // 스타일2
   { width: 80, height: 80, marginTop: '50%', marginLeft: 35 }, // 스타일3
 ];
 
@@ -134,7 +175,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: '#000080',
+    backgroundColor: Pink,
     paddingVertical: 8,
     borderRadius: 5,
     alignItems: 'center',
@@ -160,4 +201,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
 export default WKing;
