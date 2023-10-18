@@ -6,11 +6,14 @@ import {
   TouchableOpacity,
   Platform,
   PermissionsAndroid,
+  Text,
 } from 'react-native';
 import {
   ViroARScene,
   ViroImage,
   ViroARSceneNavigator,
+  ViroDirectionalLight,
+  ViroAmbientLight,
 } from '@viro-community/react-viro';
 
 export default Arscreen2 = ({ navigation, route }) => {
@@ -46,6 +49,10 @@ export default Arscreen2 = ({ navigation, route }) => {
     navigation.navigate('Board');
   };
 
+  const Back = () => {
+    navigation.navigate('MusicPlay');
+  };
+
   return (
     <View style={styles.f1}>
       <ViroARSceneNavigator
@@ -53,13 +60,24 @@ export default Arscreen2 = ({ navigation, route }) => {
         initialScene={{
           scene: WorldSceneAR,
         }}
-        style={styles.f1}
       />
       <View style={styles.con}>
+        <TouchableOpacity onPress={Back}>
+          <Image
+            style={styles.backBtn}
+            source={require('../../assets/ARbackBtn.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={Back}>
+          <Image
+            style={styles.playBtn}
+            source={require('../../assets/ARplayBtn.png')}
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={ShareMusic}>
           <Image
-            style={styles.tinyLogo}
-            source={require('../../assets/Bottom.png')}
+            style={styles.shareBtn}
+            source={require('../../assets/ARshareBtn.png')}
           />
         </TouchableOpacity>
       </View>
@@ -67,16 +85,33 @@ export default Arscreen2 = ({ navigation, route }) => {
   );
 };
 var styles = StyleSheet.create({
-  f1: { flex: 1 },
-  con: {
-    width: '100%',
-    height: 100,
+  f1: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
   },
-  tinyLogo: {
-    width: 200,
-    height: 90,
+  con: {
+    width: 168,
+    height: 76,
+    justifyContent: 'space-between',
+    backgroundColor: 'none',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 77,
+    alignItems: 'center',
+  },
+  playBtn: {
+    width: 56,
+    height: 56,
+  },
+  shareBtn: {
+    width: 41,
+    height: 41,
+    marginTop: 35,
+  },
+  backBtn: {
+    width: 41,
+    height: 41,
+    marginTop: 35,
   },
 });
