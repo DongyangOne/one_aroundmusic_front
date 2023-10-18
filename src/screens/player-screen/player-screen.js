@@ -25,6 +25,13 @@ const PlayerScreenView = ({ route, navigation }) => {
   const { href } = route.params;
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
   const [isPlaying, setIsPlaying] = useState(false);
+  useEffect(() => {
+    if (isPlaying) {
+      handlePlay();
+    } else {
+      handleStop();
+    }
+  }, [isPlaying]);
 
   async function requestPermission() {
     try {
@@ -117,31 +124,27 @@ const PlayerScreenView = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.ImageBackground} source={{ uri: image }} />
-      <ImageBackground style={styles.ImageBackground}>
+      <ImageBackground style={styles.ImageBackground} source={{ uri: image }}>
         <View style={styles.black}>
           <Image style={styles.image} source={{ uri: image }} />
-          <Image style={styles.image} />
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.singer}>{singer}</Text>
 
           {/* stop.png 누르면 handleStop으로 ( 노래 정지 ) 
           play.png 누르면 handlePlay로 ( 노래 재생 )  */}
-          <Image
-            source={
-              isPlaying
-                ? require('../../../assets/stop.png')
-                : require('../../../assets/play.png')
-            }
-            style={styles.playButton}
+          <TouchableOpacity
             onPress={() => {
-              if (isPlaying) {
-                handleStop();
-              } else {
-                handlePlay();
+              setIsPlaying(prevIsPlaying => !prevIsPlaying);
+            }}>
+            <Image
+              source={
+                isPlaying
+                  ? require('../../../assets/stop.png')
+                  : require('../../../assets/play.png')
               }
-            }}
-          />
+              style={styles.playButton}
+            />
+          </TouchableOpacity>
           <TouchableOpacity onPress={shareAr} style={styles.shareBtn}>
             <Text style={styles.btnText}>Share</Text>
           </TouchableOpacity>
