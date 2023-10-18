@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Svg, { Image } from 'react-native-svg';
-const SVGComponent = props => (
+const SVGComponentPlayBtn = props => (
   <Svg
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
@@ -23,4 +23,4 @@ const SVGComponent = props => (
     />
   </Svg>
 );
-export default SVGComponent;
+export default SVGComponentPlayBtn;
