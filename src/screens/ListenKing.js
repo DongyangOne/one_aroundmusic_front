@@ -10,8 +10,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-
-import { TOKEN } from '../components/MainStory';
+import { Pink, White } from '../constant/Color';
 import Main from './Main';
 
 const RoundedShadowBox = ({ children }) => {
@@ -19,19 +18,14 @@ const RoundedShadowBox = ({ children }) => {
 };
 
 const ListenKing = ({ navigation }) => {
-  const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
-
-  let fixed = 8; // null
+  const serverURL = 'http://125.133.34.224:8001';
+  let fixed = 8;
 
   const [images, setImages] = useState([0, 0, 0]);
   const [abc, setAbc] = useState([0, 0, 0]);
-
-  /** Currently selected ListenKing */
   const [selection, setSelection] = useState(8);
 
   const loadData = async () => {
-    // console.info(`Loading Start`);
-
     let imgDataBeta = [0, 0, 0];
     for (i = 0; i < 3; i++) {
       imgDataBeta[i] = await storage()
@@ -40,10 +34,10 @@ const ListenKing = ({ navigation }) => {
     }
     setAbc(imgDataBeta);
     setImages(imgDataBeta);
-    // console.info(`Loading Complete`);
 
+    const TOKEN = await AsyncStorage.getItem('accessToken');
     try {
-      if (TOKEN !== null) {
+      if (TOKEN) {
         axios
           .get(`${serverURL}/api/reward/listen`, {
             headers: {
@@ -72,7 +66,6 @@ const ListenKing = ({ navigation }) => {
 
   useEffect(() => {
     loadData();
-    // console.log(images);
   }, []);
 
   const NOW_SET = dir => {
@@ -96,14 +89,14 @@ const ListenKing = ({ navigation }) => {
       height: 80,
       marginTop: '50%',
       marginRight: 35,
-    }, // 스타일1
+    },
     {
       width: 150,
       height: 150,
       marginTop: '15%',
       alignItems: 'center',
-    }, // 스타일2
-    { width: 80, height: 80, marginTop: '50%', marginLeft: 35 }, // 스타일3
+    },
+    { width: 80, height: 80, marginTop: '50%', marginLeft: 35 },
   ];
 
   const handleLeftImageClick = () => {
@@ -118,11 +111,10 @@ const ListenKing = ({ navigation }) => {
     NOW_SET('r');
   };
 
-  /** Go to the main screen */
   const handleActionClick = () => {
     axios
       .patch(
-        `${serverURL}/api/reward`, // URL
+        `${serverURL}/api/reward`,
         {
           'rewardType': 'listen',
           'select_id': selection,
@@ -134,11 +126,6 @@ const ListenKing = ({ navigation }) => {
         },
       )
       .then(response => {
-        console.log(
-          `[ListenKing] Send SUCCESSFUL! >> ${JSON.stringify(
-            response.data.message,
-          )}`,
-        );
         navigation.navigate('Main', { setData: selection });
       })
       .catch(e => {
@@ -198,7 +185,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: '#000080',
+    backgroundColor: Pink,
     paddingVertical: 8,
     borderRadius: 5,
     alignItems: 'center',
@@ -206,7 +193,7 @@ const styles = StyleSheet.create({
     width: '85%',
   },
   buttonText: {
-    color: 'white',
+    color: White,
     fontSize: 16,
     fontWeight: 'bold',
   },

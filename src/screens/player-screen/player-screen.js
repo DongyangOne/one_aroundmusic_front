@@ -132,7 +132,6 @@ const PlayerScreenView = ({ route, navigation }) => {
 
           {/* stop.png 누르면 handleStop으로 ( 노래 정지 ) 
           play.png 누르면 handlePlay로 ( 노래 재생 )  */}
-
           <TouchableOpacity
             onPress={() => {
               setIsPlaying(prevIsPlaying => !prevIsPlaying);
