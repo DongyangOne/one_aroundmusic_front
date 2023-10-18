@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   FlatList,
   Text,
@@ -10,10 +10,14 @@ import {
   ScrollView,
 } from 'react-native';
 import FriendsItem from '../components/FriendsItem';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FriendList = () => {
   const [mode, setMode] = useState('유저 목록');
-  const [userList, setUserList] = useState(FRIENDSLIST);
+  const [userList, setUserList] = useState([]); //친구가 되어있지 않은 userList
+  const [friendList, setFriendList] = useState([]); //친구가 되어있는 userList
+  const [reciveList, setReciveList] = useState([]); //친구 요청을 나에게 보낸 사람 리스트
   const [acceptedUsers, setAcceptedUsers] = useState([]);
 
   const handleAccept = item => {
@@ -43,6 +47,57 @@ const FriendList = () => {
     setMode('유저 목록');
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = await AsyncStorage.getItem('accessToken');
+      console.log(token);
+
+      //친구 리스트 조회
+      axios
+        .get('http://125.133.34.224:8001/api/friend', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(response => {
+          setFriendList(response.data.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      //친구관계 제외한 친구 리스트 조회
+      axios
+        .get('http://125.133.34.224:8001/api/friend/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(response => {
+          setUserList(response.data.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      //받은 친구 요청 리스트
+      axios
+        .get('http://125.133.34.224:8001/api/friend/recive', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(response => {
+          setReciveList(response.data.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <View style={styles.center}>
       <View style={styles.mode}>
@@ -51,18 +106,18 @@ const FriendList = () => {
             styles.myFriend,
             mode == '유저 목록'
               ? {
-                  backgroundColor: '#001C3E',
+                  backgroundColor: '#DE91A9',
                 }
               : {
                   backgroundColor: 'white',
-                  borderColor: '#001C3E',
+                  borderColor: '#DE91A9',
                   borderWidth: 0,
                 },
           ]}
           onPress={() => setMode('유저 목록')}>
           <Text
             style={
-              mode == '유저 목록' ? { color: 'white' } : { color: '#001C3E' }
+              mode == '유저 목록' ? { color: 'white' } : { color: '#DE91A9' }
             }>
             유저 목록
           </Text>
@@ -71,7 +126,7 @@ const FriendList = () => {
           style={[
             styles.request,
             mode == '친구 요청'
-              ? { backgroundColor: '#001C3E' }
+              ? { backgroundColor: '#DE91A9' }
               : {
                   backgroundColor: 'white',
                   borderColor: '#000000',
@@ -81,7 +136,7 @@ const FriendList = () => {
           onPress={() => setMode('친구 요청')}>
           <Text
             style={
-              mode == '친구 요청' ? { color: 'white' } : { color: '#001C3E' }
+              mode == '친구 요청' ? { color: 'white' } : { color: '#DE91A9' }
             }>
             친구요청
           </Text>
@@ -101,12 +156,12 @@ const FriendList = () => {
         <ScrollView style={styles.scrollView}>
           {mode === '친구 요청' && (
             <FlatList
-              data={REQUEST}
+              data={reciveList}
               renderItem={({ item }) => (
                 <FriendsItem
-                  name={item.name}
-                  image={item.image}
-                  color="#001C3E"
+                  name={item.nickname}
+                  image={item.profileImg}
+                  color="#DE91A9"
                   textColor="white"
                   state="수락 하기"
                   onPress={() => {
@@ -118,12 +173,12 @@ const FriendList = () => {
           )}
           {mode === '유저 목록' && (
             <FlatList
-              data={FRIENDSLIST}
+              data={friendList}
               renderItem={({ item }) => (
                 <FriendsItem
-                  name={item.name}
-                  image={item.image}
-                  color="#001C3E"
+                  name={item.nickname}
+                  image={item.profileImg}
+                  color="#DE91A9"
                   textColor="white"
                   state="친구 끊기"
                 />
@@ -132,11 +187,11 @@ const FriendList = () => {
           )}
           {mode === '유저 목록' && (
             <FlatList
-              data={FRIENDSLIST2}
+              data={userList}
               renderItem={({ item }) => (
                 <FriendsItem
-                  name={item.name}
-                  image={item.image}
+                  name={item.nickname}
+                  image={item.profileImg}
                   color="#ffffff"
                   textColor="#000000"
                   state="친구 신청"
@@ -187,7 +242,7 @@ const styles = StyleSheet.create({
   },
   search: {
     borderWidth: 1,
-    borderColor: '#C2C1C1',
+    borderColor: '#DE91A9',
     borderRadius: 10,
     width: '90%',
     height: 40,
@@ -213,188 +268,11 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   scrollView: {
-    height: '71%',
+    height: '80%',
   },
   center: {
     FlexDirection: 'center',
   },
 });
-
-// const FRIENDSLIST = [
-//   {
-//     id: 1,
-//     name: '김남준',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 2,
-//     name: '김석진',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 3,
-//     name: '민윤기',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 4,
-//     name: '정호석',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 5,
-//     name: '박지민',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 6,
-//     name: '김태형',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 7,
-//     name: '전정국',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 8,
-//     name: '김남준',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 9,
-//     name: '김석진',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-//   {
-//     id: 10,
-//     name: '민윤기',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 끊기',
-//   },
-// ];
-
-// const FRIENDSLIST2 = [
-//   {
-//     id: 1,
-//     name: '김남준2',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 신청',
-//   },
-//   {
-//     id: 2,
-//     name: '김석진2',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 신청',
-//   },
-//   {
-//     id: 3,
-//     name: '민윤기2',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 신청',
-//   },
-//   {
-//     id: 4,
-//     name: '정호석2',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 신청',
-//   },
-//   {
-//     id: 5,
-//     name: '박지민2',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 신청',
-//   },
-//   {
-//     id: 6,
-//     name: '김태형2',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 신청',
-//   },
-//   {
-//     id: 7,
-//     name: '전정국2',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '친구 신청',
-//   },
-// ];
-
-// const REQUEST = [
-//   {
-//     id: 1,
-//     name: '김남준3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 2,
-//     name: '김석진3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 3,
-//     name: '민윤기3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 4,
-//     name: '정호석3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 5,
-//     name: '김남준3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 6,
-//     name: '김석진3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 7,
-//     name: '민윤기3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 8,
-//     name: '정호석3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 9,
-//     name: '박지민3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 10,
-//     name: '김태형3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-//   {
-//     id: 11,
-//     name: '전정국3',
-//     image: require('../../../assets/111.jpeg'),
-//     status: '수락 하기',
-//   },
-// ];
 
 export default FriendList;
