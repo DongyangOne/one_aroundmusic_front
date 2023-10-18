@@ -21,29 +21,6 @@ const FriendList = () => {
   const [acceptedUsers, setAcceptedUsers] = useState([]);
 
   const handleAccept = item => {
-    // 수락한 유저를 acceptedUsers에 추가
-    setAcceptedUsers([...acceptedUsers, item]);
-
-    // if (mode === "친구 요청" ? "수락하기" : "") {
-    // "친구 요청" 화면에서 수락한 경우
-
-    // userList에서 해당 유저 제거
-    /* const updatedUserList = userList.filter((item) => item.id !== item.id);
-      setUserList(updatedUserList); */
-
-    // 해당 사용자의 상태를 "친구 끊기"로 변경
-    // const updatedUserListWithStatus = userList.map((item) => {
-    //   if (item.id === item.id) {
-    //     return { ...item, status: "친구 끊기" };
-    //   }
-    //   return item;
-    // });
-
-    // setUserList(updatedUserListWithStatus);
-
-    // 유저 목록으로 이동
-
-    // }
     setMode('유저 목록');
   };
 
