@@ -52,6 +52,7 @@ const Board = ({ data, navigation }) => {
         path: 'images',
       },
     };
+
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
         console.log('사용자가 이미지를 취소');
@@ -59,10 +60,7 @@ const Board = ({ data, navigation }) => {
         console.log('이미지 에러: ', response.error);
       } else {
         const source = { uri: response.uri };
-        //서버로 이미지를 받아야돼서 프론트인 제가...어쩔 수 없었어요
-        // 이제 선택한 이미지를 서버로 업로드할 수 있습니다.
-        // 여기서 서버로 업로드하는 로직을 추가해야 합니다.
-
+        // Now, you can display the selected image
         setSelectedImage(source);
       }
     });
@@ -70,11 +68,15 @@ const Board = ({ data, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Image
-          source={require('../../assets/boardWrite.png')}
-          style={styles.image}
-        />
+      <View>
+        {selectedImage && (
+          <Image source={selectedImage} style={{ width: 200, height: 200 }} />
+        )}
+        <TouchableOpacity
+          style={[styles.uploadButton, { width: 130, height: 180 }]}
+          onPress={handleImagePicker}>
+          <Text style={styles.uploadButtonText}>이미지 업로드</Text>
+        </TouchableOpacity>
       </View>
       {/* <View>
         {selectedImage && (

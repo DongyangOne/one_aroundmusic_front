@@ -14,7 +14,7 @@ import Header from '../components/Header';
 import FilterButton from '../components/FilterButton';
 import SongList from '../components/SongList';
 import { TouchableOpacity } from 'react-native';
-
+import { useRoute } from '@react-navigation/native';
 import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
 const FILTER = [
   {
@@ -38,23 +38,35 @@ const FILTER = [
     title: '계절',
   },
 ];
-const DATA = [
-  {
-    id: 1,
-    tag: '#10대',
-  },
-  {
-    id: 2,
-    tag: '#여성',
-  },
-  {
-    id: 3,
-    tag: '#봄',
-  },
-];
-const Music = ({ navigation }) => {
+const Music = ({ route, navigation }) => {
+  // Check if route.params is defined
+  let DATA = [];
+  if (route.params) {
+    const { selectedGenre, selectedSeason, selectedTime } = route.params;
+    if (selectedGenre) {
+      DATA.push({
+        id: 1,
+        tag: selectedGenre,
+      });
+    }
+
+    if (selectedSeason) {
+      DATA.push({
+        id: 2,
+        tag: selectedSeason,
+      });
+    }
+
+    if (selectedTime) {
+      DATA.push({
+        id: 3,
+        tag: selectedTime,
+      });
+    }
+  }
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       const token = await AsyncStorage.getItem('token');
@@ -162,6 +174,7 @@ const Music = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -183,7 +196,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   filterIcon: {
-    marginRight: 15,
+    marginRight: 10,
     marginTop: 2,
   },
   musicScroll: {
