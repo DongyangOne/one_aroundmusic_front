@@ -11,9 +11,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
 
-const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
-let loadData = null; // DB에서 불러온 데이터 저장
-export let TOKEN = null;
+const serverURL = 'http://125.133.34.224:8001';
+let loadData = null;
+let TOKEN = null;
 let temp;
 
 const MainStory = ({ data, frame }) => {
@@ -22,9 +22,8 @@ const MainStory = ({ data, frame }) => {
 
   const getData = async () => {
     try {
-      const value = await AsyncStorage.getItem('accessToken');
-      if (value !== null) {
-        TOKEN = value;
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      if (TOKEN) {
         axios
           .get(`${serverURL}/api/reward/listen`, {
             headers: {
@@ -33,8 +32,6 @@ const MainStory = ({ data, frame }) => {
           })
           .then(response => {
             loadData = response.data;
-            /** Attempt 3 */
-            // console.log(loadData);
             temp = loadData.data.selectedReward.id;
             setSelectId(temp);
             setData();
@@ -50,17 +47,14 @@ const MainStory = ({ data, frame }) => {
     }
   };
 
-  /** Attempt 5 */
   const setData = async () => {
     text = `/reward/listen/listen${temp - 6}.png`;
-    // console.log(`text >> ${text}`);
     setItemFrame(await storage().ref(text).getDownloadURL());
   };
 
   useEffect(() => {
     getData();
   }, []);
-  // }, [loadData]);
 
   try {
     return (
@@ -74,8 +68,7 @@ const MainStory = ({ data, frame }) => {
               <TouchableWithoutFeedback>
                 {index == 0 ? (
                   <ImageBackground
-                    // source={IMG_SRC[itemFrame].src} // 기존 코드
-                    source={{ uri: itemFrame }} // 신규 코드
+                    source={{ uri: itemFrame }}
                     style={styles.imageBg}>
                     <Image source={data[0].src} style={styles.imageSe}></Image>
                   </ImageBackground>
@@ -95,7 +88,6 @@ const MainStory = ({ data, frame }) => {
         nestedScrollEnabled={true}
         horizontal={true}>
         <View style={styles.storyRow}>
-          {/* Previous Code */}
           {data.map((item, index) => (
             <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>

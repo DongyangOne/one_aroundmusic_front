@@ -24,6 +24,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   const { image } = route.params;
   const { href } = route.params;
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   async function requestPermission() {
     try {
@@ -41,7 +42,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    console.log(href);
+    //console.log(href);
     const sound = new Sound(href, null);
 
     requestPermission().then(result => {
@@ -65,6 +66,7 @@ const PlayerScreenView = ({ route, navigation }) => {
     setSound(sound);
   }, []);
 
+  // 재생
   const handlePlay = () => {
     if (sound) {
       sound.play();
@@ -72,12 +74,14 @@ const PlayerScreenView = ({ route, navigation }) => {
     }
   };
 
+  // 정지
   const handleStop = () => {
     if (sound && isPlay) {
       sound.pause();
       setIsPlay(false);
     }
   };
+
   const shareAr = async () => {
     const requestData = {
       youtubeId: trackId,
@@ -113,13 +117,31 @@ const PlayerScreenView = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.ImageBackground} source={{ uri: image }}>
+      <ImageBackground style={styles.ImageBackground} source={{ uri: image }} />
+      <ImageBackground style={styles.ImageBackground}>
         <View style={styles.black}>
           <Image style={styles.image} source={{ uri: image }} />
+          <Image style={styles.image} />
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.singer}>{singer}</Text>
-          <Button title="Play" onPress={handlePlay} />
-          <Button title="Stop" onPress={handleStop} />
+
+          {/* stop.png 누르면 handleStop으로 ( 노래 정지 ) 
+          play.png 누르면 handlePlay로 ( 노래 재생 )  */}
+          <Image
+            source={
+              isPlaying
+                ? require('../../../assets/stop.png')
+                : require('../../../assets/play.png')
+            }
+            style={styles.playButton}
+            onPress={() => {
+              if (isPlaying) {
+                handleStop();
+              } else {
+                handlePlay();
+              }
+            }}
+          />
           <TouchableOpacity onPress={shareAr} style={styles.shareBtn}>
             <Text style={styles.btnText}>Share</Text>
           </TouchableOpacity>
@@ -130,6 +152,11 @@ const PlayerScreenView = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  playButton: {
+    width: 50,
+    height: 50,
+    marginTop: 20,
+  },
   container: {
     flex: 1,
   },
@@ -161,14 +188,14 @@ const styles = StyleSheet.create({
   shareBtn: {
     width: 251,
     height: 30,
-    backgroundColor: 'white',
+    backgroundColor: 'pink',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
   },
   btnText: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
   },
 });
