@@ -125,8 +125,6 @@ const PlayerScreenView = ({ route, navigation }) => {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.singer}>{singer}</Text>
 
-          {/* stop.png 누르면 handleStop으로 ( 노래 정지 ) 
-          play.png 누르면 handlePlay로 ( 노래 재생 )  */}
           <Image
             source={
               isPlaying
