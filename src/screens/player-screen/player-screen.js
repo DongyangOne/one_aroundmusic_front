@@ -136,14 +136,8 @@ const PlayerScreenView = ({ route, navigation }) => {
             onPress={() => {
               setIsPlaying(prevIsPlaying => !prevIsPlaying);
             }}>
-            <Image
-              source={
-                isPlaying
-                  ? require('../../../assets/stop.png')
-                  : require('../../../assets/play.png')
-              }
-              style={styles.playButton}
-            />
+            {/* Use the custom SVG components based on the isPlaying state */}
+            {isPlaying ? <SVGComponentStopBtn /> : <SVGComponentPlayBtn />}
           </TouchableOpacity>
           <TouchableOpacity onPress={shareAr} style={styles.shareBtn}>
             <Text style={styles.btnText}>Share</Text>
