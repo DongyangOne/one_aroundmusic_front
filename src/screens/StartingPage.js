@@ -156,6 +156,11 @@ function StartingPage({ navigation }) {
             <Pressable style={styles.btn} onPress={handleLogin}>
               <Text style={styles.btnText}>로그인</Text>
             </Pressable>
+            <Pressable
+              style={styles.btn2}
+              onPress={() => navigation.push('SignUp')}>
+              <Text style={styles.SingUpText}>회원가입</Text>
+            </Pressable>
           </View>
         </View>
       </View>
@@ -165,7 +170,7 @@ function StartingPage({ navigation }) {
 
 const styles = StyleSheet.create({
   title: {
-    color: 'black',
+    color: Black,
     fontSize: 48,
     fontFamily: 'Yeongdeok-Sea',
   },
@@ -182,26 +187,43 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: White,
     padding: 'auto',
-    color: 'black',
+    color: Black,
     flexDirection: 'row',
     width: '80%',
     marginBottom: 20,
     borderRadius: 5,
   },
   btn: {
-    paddingVertical: '3%',
+    paddingVertical: '1%',
     width: '80%',
-    backgroundColor: Yellow,
+    backgroundColor: 'white',
     borderRadius: 5,
+    marginTop: 5,
+    marginBottom: 2,
+    borderWidth: 1,
+    borderColor: 'white',
+  },
+  btn2: {
+    paddingVertical: '1%',
+    width: '80%',
+    backgroundColor: Pink,
+    borderRadius: 5,
+    marginBottom: 2,
   },
   btnText: {
-    color: Black,
-    fontSize: 15,
+    color: Pink,
+    fontSize: 18,
     textAlign: 'center',
+  },
+  SingUpText: {
+    color: 'white',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 6,
   },
   bottomBox: {
     backgroundColor: Pink,
-    flex: 1,
+    flex: 1.2,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
   },
@@ -212,7 +234,7 @@ const styles = StyleSheet.create({
     backgroundColor: Pink,
   },
   bottomEmptyBox: {
-    flex: 1,
+    flex: 1.2,
   },
   bottomLoginBox: { flex: 9, alignItems: 'center' },
 });
