@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import {
   ViroARScene,
   ViroImage,
   ViroARSceneNavigator,
 } from '@viro-community/react-viro';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import storage from '@react-native-firebase/storage';
 
-const WorldSceneAR = ({ data, frame }) => {
-  const [itemFrame, setItemFrame] = useState();
-  const [selectId, setSelectId] = useState();
+const serverURL = 'http://125.133.34.224:8001';
+let loadData = null;
+let TOKEN = null;
+let temp;
+
+const WorldSceneAR = () => {
+  const [itemFrame, setItemFrame] = useState(null);
+  const [selectId, setSelectId] = useState(null);
 
   const getData = async () => {
     try {
-      const TOKEN = await AsyncStorage.getItem('accessToken');
+      TOKEN = await AsyncStorage.getItem('accessToken');
       if (TOKEN) {
         axios
           .get(`${serverURL}/api/reward/pop`, {
@@ -38,7 +46,7 @@ const WorldSceneAR = ({ data, frame }) => {
   };
 
   const setData = async () => {
-    text = `/reward/pop/border${temp - 42}.png`;
+    let text = `/reward/pop/border${temp - 42}.png`;
     setItemFrame(await storage().ref(text).getDownloadURL());
   };
 
