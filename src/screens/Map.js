@@ -46,29 +46,29 @@ const Map = ({ navigation }) => {
       console.log(err.response.data);
     }
   };
-  const getAR = async() => {
-    console.log('hi')
+  const getAR = async () => {
+    console.log('hi');
     const token = await AsyncStorage.getItem('accessToken');
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-    if(token){
+    if (token) {
       console.log(token);
       axios
-        .get('http://125.133.34.224:8001/api/ar',config)
+        .get('http://125.133.34.224:8001/api/ar', config)
         .then(response => {
           console.log(response.dataqw);
-          navigation.navigate('ArScreen',{data:response.data});
+          navigation.navigate('ArScreen', { data: response.data });
         })
         .catch(error => {
           console.log('error.message');
-        })
+        });
     } else {
       console.log('not found token');
     }
-  }
+  };
 
   useEffect(() => {
     fetchData();

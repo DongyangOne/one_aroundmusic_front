@@ -12,7 +12,7 @@ import {
   InputField,
   TouchableOpacity,
 } from 'react-native';
-import { utils } from '@react-native-firebase/app';
+import axios from 'axios';
 import storage from '@react-native-firebase/storage';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { Black, Pink, White, Yellow } from '../constant/Color';
@@ -26,7 +26,10 @@ const Board = ({ data, navigation }) => {
   const [imageUrls, setImageUrls] = useState(null);
 
   const uploadContent = async () => {
+    const pathToFile = storage().ref(`/Board/${imageUrls}`);
+    await pathToFile.putFile(imageUrl);
     const token = await AsyncStorage.getItem('accessToken');
+    console.log(imageUrls);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -35,7 +38,7 @@ const Board = ({ data, navigation }) => {
     const requestData = {
       content: content,
       location: location,
-      img: require('../../assets/contents1.jpeg'),
+      img: imageUrls,
     };
     axios
       .post('http://125.133.34.224:8001/api/board', requestData, config)
@@ -68,11 +71,6 @@ const Board = ({ data, navigation }) => {
         setImageUrls(response.assets[0].fileName);
       }
     });
-  };
-  const pushImage = async () => {
-    const pathToFile = storage().ref(`/Board/${imageUrls}`);
-    await pathToFile.putFile(imageUrl);
-    navigation.navigate('Main');
   };
 
   return (
@@ -120,7 +118,7 @@ const Board = ({ data, navigation }) => {
         />
       </View>
       <View style={styles.BtnBox}>
-        <TouchableOpacity style={styles.uploadButton} onPress={pushImage}>
+        <TouchableOpacity style={styles.uploadButton} onPress={uploadContent}>
           <Text style={styles.buttonText}>업로드하기</Text>
         </TouchableOpacity>
       </View>

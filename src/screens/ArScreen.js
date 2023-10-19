@@ -6,8 +6,8 @@ import {
   ViroARSceneNavigator,
 } from '@viro-community/react-viro';
 
-const WorldSceneAR = (props) => {
-  console.log(props[0])
+const WorldSceneAR = props => {
+  console.log('이거:', props[0]);
   return (
     <ViroARScene>
       <ViroImage
@@ -15,7 +15,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[-4, 0.5, -3]}
         placeholderSource={require('../../assets/play.png')}
-        source={{uri: props[0].music.thumbnail}}
+        source={{ uri: props[0].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -29,7 +29,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[-0.5, -0.13, -1.5]}
         placeholderSource={require('../../assets/music3.png')}
-        source={{uri: props[1].music.thumbnail}}
+        source={{ uri: props[1].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -43,7 +43,7 @@ const WorldSceneAR = (props) => {
         width={0.8}
         position={[-5, -4, -2]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[2].music.thumbnail}}
+        source={{ uri: props[2].music.thumbnail }}
       />
       <ViroImage
         height={0.8}
@@ -57,7 +57,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[1.5, 4.4, -3]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[3].music.thumbnail}}
+        source={{ uri: props[3].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -71,7 +71,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[2, 0.4, -0.5]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[4].music.thumbnail}}
+        source={{ uri: props[4].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -85,7 +85,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[3, 0.5, -5]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[5].music.thumbnail}}
+        source={{ uri: props[5].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -99,7 +99,7 @@ const WorldSceneAR = (props) => {
         width={0.7}
         position={[4, 3, -5]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[6].music.thumbnail}}
+        source={{ uri: props[6].music.thumbnail }}
       />
       <ViroImage
         height={0.4}
@@ -113,7 +113,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[4, 0.7, 0]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[7].music.thumbnail}}
+        source={{ uri: props[7].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -127,7 +127,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[7, -4, 2]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[8].music.thumbnail}}
+        source={{ uri: props[8].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -141,7 +141,7 @@ const WorldSceneAR = (props) => {
         width={0.5}
         position={[0, 0.3, -2]}
         placeholderSource={require('../../assets/music1.jpg')}
-        source={{uri: props[9].music.thumbnail}}
+        source={{ uri: props[9].music.thumbnail }}
       />
       <ViroImage
         height={0.2}
@@ -154,16 +154,10 @@ const WorldSceneAR = (props) => {
   );
 };
 
-export default ArScreen = ({navigation, route}) => {
+export default ArScreen = ({ navigation, route }) => {
   const marker = {
     content: route.params.data.data,
-  }
-  console.log('dkdkdkdk');
-  console.log(marker.content[0].music.thumbnail);
-  // console.log(marker.content.data);
-  console.log()
-  // const test = marker.content.data[0].music.thumbnail;
-  // console.log(test);
+  };
 
   return (
     <ViroARSceneNavigator
