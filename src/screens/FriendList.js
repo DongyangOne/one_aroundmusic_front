@@ -10,6 +10,7 @@ import {
   ScrollView,
   FRIENDSLIST,
   FRIENDSLIST2,
+  ToastAndroid,
 } from 'react-native';
 import FriendsItem from '../components/FriendsItem';
 import axios from 'axios';
@@ -61,7 +62,6 @@ const FriendList = () => {
         },
       })
       .then(response => {
-        console.log(response.data.data);
         setReciveList(response.data.data);
       })
       .catch(error => {
@@ -83,6 +83,7 @@ const FriendList = () => {
       });
   };
 
+  //친구 요청 수락
   const acceptRequest = async id => {
     const token = await AsyncStorage.getItem('accessToken');
     axios
@@ -103,6 +104,7 @@ const FriendList = () => {
         fetchData();
       })
       .catch(err => {
+        ToastAndroid.show('친구 요청 수락을 실패했어요', ToastAndroid.SHORT);
         console.log(err);
       });
   };
@@ -122,11 +124,11 @@ const FriendList = () => {
           },
         },
       )
-      .then(response => {
-        console.log('친구 신청 보내기에 성공했다!');
+      .then(() => {
         fetchData();
       })
       .catch(error => {
+        ToastAndroid.show('친구 요청을 실패했어요', ToastAndroid.SHORT);
         console.log(error.response.data);
       });
   };
@@ -141,18 +143,22 @@ const FriendList = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(response => {
-        console.log('친구 삭제 성공');
+      .then(() => {
         fetchData();
       })
       .catch(error => {
+        ToastAndroid.show('친구 끊기에 실패했어요', ToastAndroid.SHORT);
         console.log(error.response.data);
       });
   };
 
   //페이지 렌더링 시 모든 리스트 로딩
   useEffect(() => {
-    fetchData();
+    try {
+      fetchData();
+    } catch {
+      ToastAndroid.show('친구 불러오기에 실패했어요.', ToastAndroid.SHORT);
+    }
   }, []);
 
   const userListF = userList.filter(itemList =>
@@ -172,7 +178,6 @@ const FriendList = () => {
   );
 
   const onChangeSearch = search => {
-    console.log(search.text);
     setSearch(search.text);
   };
 
