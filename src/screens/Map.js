@@ -59,7 +59,7 @@ const Map = ({ navigation }) => {
       axios
         .get('http://125.133.34.224:8001/api/ar', config)
         .then(response => {
-          console.log(response.data);
+
           navigation.navigate('ArScreen', { data: response.data });
         })
         .catch(error => {
