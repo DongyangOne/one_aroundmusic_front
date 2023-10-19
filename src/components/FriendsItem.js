@@ -2,10 +2,12 @@ import { Image, StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const FriendsItem = ({ name, image, state, color, textColor, onPress }) => {
+  const profile =
+    image == null ? require('../../assets/BasicProfile.png') : image;
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
-        <Image style={styles.profile} source={image}></Image>
+        <Image style={styles.profile} source={profile}></Image>
         <Text style={styles.name}>{name}</Text>
       </View>
       <View style={styles.button}>

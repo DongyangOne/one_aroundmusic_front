@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     height: 520,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    marginTop: '2%',
+    //marginTop: '0%',
   },
   textView: {
     backgroundColor: '#ffffff',
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   date: {
     marginLeft: 13,
     marginTop: 2,
-    marginBottom: '10%',
+    marginBottom: '18%',
     fontSize: 10,
     color: '#001C3E',
   },
