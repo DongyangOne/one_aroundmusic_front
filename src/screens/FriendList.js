@@ -21,6 +21,7 @@ const FriendList = () => {
   const [friendList, setFriendList] = useState([]); //친구가 되어있는 userList
   const [reciveList, setReciveList] = useState([]); //친구 요청을 나에게 보낸 사람 리스트
   const [sendList, setSendList] = useState([]);
+  const [search, setSearch] = useState('');
 
   const fetchData = async () => {
     const token = await AsyncStorage.getItem('accessToken');
@@ -150,10 +151,30 @@ const FriendList = () => {
   };
 
   //페이지 렌더링 시 모든 리스트 로딩
-
   useEffect(() => {
     fetchData();
   }, []);
+
+  const userListF = userList.filter(itemList =>
+    itemList.nickname.toUpperCase().includes(search.toUpperCase()),
+  );
+
+  const friendListF = friendList.filter(itemList =>
+    itemList.nickname.toUpperCase().includes(search.toUpperCase()),
+  );
+
+  const sendListF = sendList.filter(itemList =>
+    itemList.nickname.toUpperCase().includes(search.toUpperCase()),
+  );
+
+  const reciveListF = reciveList.filter(itemList =>
+    itemList.nickname.toUpperCase().includes(search.toUpperCase()),
+  );
+
+  const onChangeSearch = search => {
+    console.log(search.text);
+    setSearch(search.text);
+  };
 
   return (
     <View style={styles.center}>
@@ -201,9 +222,14 @@ const FriendList = () => {
       </View>
 
       <View style={styles.search}>
-        <TextInput style={styles.input} />
+        <TextInput
+          style={styles.input}
+          onChange={event => {
+            onChangeSearch(event.nativeEvent);
+          }}
+        />
         <Image
-          source={require('../../assets/searchIcon.png')}
+          source={require('../../assets/PinkSearch.png')}
           style={styles.searchIcon}
         />
       </View>
@@ -211,7 +237,7 @@ const FriendList = () => {
         <Text style={styles.title}>{mode}</Text>
         <ScrollView style={styles.scrollView}>
           {mode === '친구 요청' &&
-            reciveList.map(item => {
+            reciveListF.map(item => {
               return (
                 <FriendsItem
                   name={item.nickname}
@@ -225,7 +251,7 @@ const FriendList = () => {
             })}
 
           {mode === '친구 요청' &&
-            sendList.map(item => {
+            sendListF.map(item => {
               return (
                 <FriendsItem
                   key={item.id}
@@ -239,7 +265,7 @@ const FriendList = () => {
               );
             })}
           {mode === '유저 목록' &&
-            friendList.map(item => {
+            friendListF.map(item => {
               return (
                 <FriendsItem
                   key={item.id}
@@ -255,7 +281,7 @@ const FriendList = () => {
               );
             })}
           {mode === '유저 목록' &&
-            userList.map(item => {
+            userListF.map(item => {
               return (
                 <FriendsItem
                   key={item.id}
