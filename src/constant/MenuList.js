@@ -14,6 +14,7 @@ import PopularKing from '../screens/PopularKing';
 import StartingPage from '../screens/StartingPage';
 import WKing from '../screens/WKing';
 import PlayerScreen from '../screens/player-screen';
+import SignUp from '../screens/SignUp';
 import { Black, Pink, White, Yellow } from '../constant/Color';
 export const MenuList = [
   {
@@ -24,6 +25,11 @@ export const MenuList = [
   {
     name: 'Main',
     component: Main,
+    options: { headerShown: false },
+  },
+  {
+    name: 'SignUp',
+    component: SignUp,
     options: { headerShown: false },
   },
   {
@@ -153,7 +159,7 @@ export const MapMenuList = [
   },
   {
     name: 'ArScreen',
-    component: ArScreen2,
+    component: ArScreen,
     options: {},
   },
   {

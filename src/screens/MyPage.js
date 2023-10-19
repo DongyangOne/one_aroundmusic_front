@@ -7,21 +7,27 @@ import {
   Image,
   Button,
 } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authorize } from 'react-native-app-auth';
 import Header from '../components/Header';
 import SVGComponentHeart from '../components/SVG/SVGComponentHeart';
 import SVGComponentLoca from '../components/SVG/SVGComponentLoca';
 import SVGComponentPlay from '../components/SVG/SVGComponentPlay';
+import SignUp from '../screens/SignUp';
 
-const MyPage = ({ navigation }) => {
+const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
-  const [userId, setUserId] = useState('Guest');
+  const [nickname, setNickname] = useState('');
+  // const [userId, setUserId] = useState('Guest');
   const [authState, setAuthState] = useState(null);
+
+  // 빈 배열을 전달하여 한 번만 로딩
+
   async function authenticate() {
     const config = {
       clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
-      clientSecret: '1cc39cad57494e2ba5d9e56421f83314',
+
       redirectUrl: 'awesomeproject://main',
       scopes: ['user-read-private', 'user-read-email', 'streaming'],
       serviceConfiguration: {
@@ -57,7 +63,7 @@ const MyPage = ({ navigation }) => {
           source={require('../../assets/profile.png')}
         />
         <View>
-          <Text style={styles.id}>{userId}</Text>
+          <Text style={styles.id}>{nickname}</Text>
           <TouchableOpacity style={styles.spotify} onPress={authenticate}>
             <Text style={{ color: 'white' }}>스포티파이 로그인</Text>
           </TouchableOpacity>
