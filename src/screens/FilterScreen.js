@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   bu: {},
   button: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'pink',
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
@@ -140,7 +140,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    marginLeft: 2,
+    marginLeft: 4,
+    marginTop: 4,
     flexDirection: 'row',
   },
   text: {
