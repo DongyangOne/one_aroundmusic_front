@@ -21,9 +21,7 @@ const RoundedShadowBox = ({ children, selectedImage }) => {
 const WKing = () => {
   const navigation = useNavigation();
   const [selection, setSelection] = useState(1); // 초기에 중간 이미지를 보여주기 위한 인덱스
-
   const [images, setImages] = useState([0, 0, 0]);
-  const [abc, setAbc] = useState([0, 0, 0]);
 
   useEffect(() => {
     async function fetchRewardData() {
@@ -31,6 +29,7 @@ const WKing = () => {
         const token = await AsyncStorage.getItem('accessToken');
         // 토큰 값을 콘솔에 출력
         console.log('토큰:', token);
+        //get으로 이미지 요청받음
         const response = await axios.get(
           'http://125.133.34.224:8001/api/reward/walk',
           {
@@ -39,7 +38,7 @@ const WKing = () => {
             },
           },
         );
-
+        //받은 이미지를 화면에 띄움
         const imageUrls = await Promise.all(
           response.data.data.rewards.map(async reward => {
             const imageUrl = await storage()
@@ -49,7 +48,6 @@ const WKing = () => {
           }),
         );
 
-        setAbc(imageUrls);
         setImages(imageUrls);
       } catch (error) {
         console.log('GET 요청 오류:', error);
@@ -58,21 +56,8 @@ const WKing = () => {
     fetchRewardData();
   }, []);
 
-  const SCROLL_SET = dir => {
-    let temp = selection;
-    if (dir == 'r') {
-      temp++;
-      if (temp > 2) temp = 0;
-    } else if (dir == 'l') {
-      temp--;
-    } else {
-      console.log('dir: ${dir}. 에러 발생');
-      return;
-    }
-    setSelection(temp);
-  };
+  // 이미지 클릭 시 해당 이미지를 가운데로 이동
   const handleImageClick = index => {
-    // 이미지 클릭 시 해당 이미지를 가운데로 이동
     setImages(prevImages => {
       const newImages = [...prevImages];
       newImages[1] = prevImages[index];
@@ -100,7 +85,10 @@ const WKing = () => {
       const response = await axios.post(
         'http://125.133.34.224:8001/api/reward',
         {
-          selectedImage: selectedImagePath,
+          requestBody: {
+            'rewardType': 'walk',
+            'selected_id': 4,
+          },
         },
         {
           headers: {
