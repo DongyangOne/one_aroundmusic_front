@@ -72,8 +72,16 @@ const Map = ({ navigation }) => {
 
   if (!location) {
     return (
-      <View>
-        <Text>Splash Screen</Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}>
+        <Text style={{ height: 23, fontSize: 18 }}>
+          지도를 불러오고 있습니다 ...
+        </Text>
       </View>
     );
   }
