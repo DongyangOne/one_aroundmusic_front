@@ -6,7 +6,45 @@ import {
   ViroARSceneNavigator,
 } from '@viro-community/react-viro';
 
-const WorldSceneAR = () => {
+const WorldSceneAR = ({ data, frame }) => {
+  const [itemFrame, setItemFrame] = useState();
+  const [selectId, setSelectId] = useState();
+
+  const getData = async () => {
+    try {
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      if (TOKEN) {
+        axios
+          .get(`${serverURL}/api/reward/pop`, {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          })
+          .then(response => {
+            loadData = response.data;
+            temp = loadData.data.selectedReward.id;
+            setSelectId(temp);
+            setData();
+          })
+          .catch(e => {
+            console.error(`GET ERROR >> ${e}`);
+          });
+      } else {
+        console.log('No data found');
+      }
+    } catch (e) {
+      console.error(`Error with Reading Data >> ${e}`);
+    }
+  };
+
+  const setData = async () => {
+    text = `/reward/pop/border${temp - 42}.png`;
+    setItemFrame(await storage().ref(text).getDownloadURL());
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <ViroARScene>
       <ViroImage
