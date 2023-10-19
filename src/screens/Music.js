@@ -77,7 +77,7 @@ const Music = ({ navigation }) => {
           setLoading(false);
         }
       } else {
-        navigation.navigate('StartingPage');
+        navigation.navigate('Start');
       }
     };
     fetchData();

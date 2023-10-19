@@ -18,60 +18,138 @@ const FriendList = () => {
   const [userList, setUserList] = useState([]); //친구가 되어있지 않은 userList
   const [friendList, setFriendList] = useState([]); //친구가 되어있는 userList
   const [reciveList, setReciveList] = useState([]); //친구 요청을 나에게 보낸 사람 리스트
-  const [acceptedUsers, setAcceptedUsers] = useState([]);
+  const [sendList, setSendList] = useState([]);
 
-  const handleAccept = item => {
-    setMode('유저 목록');
+  const fetchData = async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+    //친구 리스트 조회
+    axios
+      .get('http://125.133.34.224:8001/api/friend', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        setFriendList(response.data.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    //친구관계 제외한 친구 리스트 조회
+    axios
+      .get('http://125.133.34.224:8001/api/friend/user', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        setUserList(response.data.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    //받은 친구 요청 리스트
+    axios
+      .get('http://125.133.34.224:8001/api/friend/recive', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        console.log(response.data.data);
+        setReciveList(response.data.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    //보낸 친구 요청 리스트
+    axios
+      .get('http://125.133.34.224:8001/api/friend/send', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        setSendList(response.data.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
+  const acceptRequest = async id => {
+    const token = await AsyncStorage.getItem('accessToken');
+    axios
+      .patch(
+        'http://125.133.34.224:8001/api/friend',
+        {
+          id: id,
+          accept: 'Y',
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then(response => {
+        console.log(response.data.data);
+        fetchData();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  //친구 요청 보내기 기능
+  const requestFriend = async id => {
+    const token = await AsyncStorage.getItem('accessToken');
+    axios
+      .post(
+        'http://125.133.34.224:8001/api/friend',
+        {
+          friendId: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then(response => {
+        console.log('친구 신청 보내기에 성공했다!');
+        fetchData();
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+  };
+
+  //친구 끊기 기능
+  const deleteFriend = async id => {
+    console.log(id);
+    const token = await AsyncStorage.getItem('accessToken');
+    axios
+      .delete(`http://125.133.34.224:8001/api/friend/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        console.log('친구 삭제 성공');
+        fetchData();
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+  };
+
+  //페이지 렌더링 시 모든 리스트 로딩
+
   useEffect(() => {
-    const fetchData = async () => {
-      const token = await AsyncStorage.getItem('accessToken');
-      console.log(token);
-
-      //친구 리스트 조회
-      axios
-        .get('http://125.133.34.224:8001/api/friend', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(response => {
-          setFriendList(response.data.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-
-      //친구관계 제외한 친구 리스트 조회
-      axios
-        .get('http://125.133.34.224:8001/api/friend/user', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(response => {
-          setUserList(response.data.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-
-      //받은 친구 요청 리스트
-      axios
-        .get('http://125.133.34.224:8001/api/friend/recive', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(response => {
-          setReciveList(response.data.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
-
     fetchData();
   }, []);
 
@@ -129,53 +207,67 @@ const FriendList = () => {
       </View>
       <View style={styles.userBox}>
         <Text style={styles.title}>{mode}</Text>
-
         <ScrollView style={styles.scrollView}>
-          {mode === '친구 요청' && (
-            <FlatList
-              data={reciveList}
-              renderItem={({ item }) => (
+          {mode === '친구 요청' &&
+            reciveList.map(item => {
+              return (
                 <FriendsItem
                   name={item.nickname}
                   image={item.profileImg}
                   color="#DE91A9"
                   textColor="white"
                   state="수락 하기"
-                  onPress={() => {
-                    handleAccept(item);
-                  }}
+                  onPress={() => acceptRequest(item.id)}
                 />
-              )}
-            />
-          )}
-          {mode === '유저 목록' && (
-            <FlatList
-              data={friendList}
-              renderItem={({ item }) => (
+              );
+            })}
+
+          {mode === '친구 요청' &&
+            sendList.map(item => {
+              return (
                 <FriendsItem
+                  key={item.id}
+                  name={item.nickname}
+                  image={item.profileImg}
+                  color="white"
+                  textColor="#DE91A9"
+                  state="요청중..."
+                  onPress={() => console.log(reciveList)}
+                />
+              );
+            })}
+          {mode === '유저 목록' &&
+            friendList.map(item => {
+              return (
+                <FriendsItem
+                  key={item.id}
                   name={item.nickname}
                   image={item.profileImg}
                   color="#DE91A9"
                   textColor="white"
                   state="친구 끊기"
+                  onPress={() => {
+                    deleteFriend(item.id);
+                  }}
                 />
-              )}
-            />
-          )}
-          {mode === '유저 목록' && (
-            <FlatList
-              data={userList}
-              renderItem={({ item }) => (
+              );
+            })}
+          {mode === '유저 목록' &&
+            userList.map(item => {
+              return (
                 <FriendsItem
+                  key={item.id}
                   name={item.nickname}
                   image={item.profileImg}
                   color="#ffffff"
                   textColor="#000000"
                   state="친구 신청"
+                  onPress={() => {
+                    requestFriend(item.id);
+                  }}
                 />
-              )}
-            />
-          )}
+              );
+            })}
         </ScrollView>
       </View>
     </View>
