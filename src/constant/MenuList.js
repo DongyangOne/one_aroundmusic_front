@@ -96,9 +96,9 @@ export const MenuList = [
     options: {
       title: '친구',
       headerStyle: {
-        backgroundColor: '#4AB154',
+        backgroundColor: '#ffffff',
       },
-      headerTintColor: '#ffffff',
+      headerTintColor: '#DE91A9',
       headerTitleAlign: 'center',
     },
   },
