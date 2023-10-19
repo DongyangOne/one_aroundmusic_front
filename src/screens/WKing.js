@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useNavigate, useEffect } from 'react';
 import {
   Image,
   StyleSheet,
@@ -7,138 +7,169 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Pink } from '../constant/Color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-
-const RoundedShadowBox = ({ children, selectedImage }) => {
+import { Pink, White } from '../constant/Color';
+const RoundedShadowBox = ({ children }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
 };
 
-const WKing = () => {
-  const navigation = useNavigation();
-  const [selection, setSelection] = useState(1); // 초기에 중간 이미지를 보여주기 위한 인덱스
-  const [images, setImages] = useState([]);
+const WKing = ({ navigation }) => {
+  const serverURL = 'http://125.133.34.224:8001';
+  let fixed = 2;
+
+  const [images, setImages] = useState([0, 0, 0]);
+  const [abc, setAbc] = useState([0, 0, 0]);
+  const [selection, setSelection] = useState(2);
+
+  const loadData = async () => {
+    let imgDataBeta = [0, 0, 0];
+    for (i = 0; i < 3; i++) {
+      imgDataBeta[i] = await storage()
+        .ref(`/reward/walk/walk${i + 1}.png`)
+        .getDownloadURL();
+    }
+    setAbc(imgDataBeta);
+    setImages(imgDataBeta);
+
+    const TOKEN = await AsyncStorage.getItem('accessToken');
+    try {
+      if (TOKEN) {
+        axios
+          .get(`${serverURL}/api/reward/walk`, {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          })
+          .then(response => {
+            const temp = parseInt(response.data.data.selectedReward.id);
+
+            try {
+              if (temp == 1) handleLeftImageClick();
+              else if (temp == 3) handleRightImageClick();
+            } catch (e) {
+              console.error(`ERR with Switch Reward >> ${e}`);
+            }
+            console.log(temp);
+          })
+          .catch(e => {
+            console.error(`GET ERROR >> ${e}`);
+          });
+      } else {
+        console.info('No data found');
+      }
+    } catch (e) {
+      console.error(`Error with Reading Data >> ${e}`);
+    }
+  };
 
   useEffect(() => {
-    async function fetchRewardData() {
-      try {
-        const token = await AsyncStorage.getItem('accessToken');
-        const response = await axios.get(
-          'http://125.133.34.224:8001/api/reward/walk',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        const imageUrls = await Promise.all(
-          response.data.data.rewards.map(async reward => {
-            const imageUrl = await storage()
-              .ref(reward.reward)
-              .getDownloadURL();
-            return imageUrl;
-          }),
-        );
-
-        setImages(imageUrls);
-      } catch (error) {
-        console.log('GET 요청 오류:', error);
-      }
-    }
-    fetchRewardData();
+    loadData();
   }, []);
 
-  // 이미지 클릭 시 해당 이미지를 가운데로 이동
-  const handleImageClick = index => {
-    setImages(prevImages => {
-      const newImages = [...prevImages];
-      newImages[1] = prevImages[index];
-      if (index === 0) {
-        newImages[0] = prevImages[2];
-        newImages[2] = prevImages[1];
-      } else if (index === 2) {
-        newImages[2] = prevImages[0];
-        newImages[0] = prevImages[1];
-      } else {
-        newImages[0] = prevImages[0];
-        newImages[2] = prevImages[2];
-      }
-      return newImages;
-    });
-    setSelection(1); // 클릭한 이미지를 가운데로 설정
+  const NOW_SET = dir => {
+    let temp = selection;
+    if (dir == 'r') {
+      temp++;
+      if (temp > fixed + 1) temp = fixed - 1;
+    } else if (dir == 'l') {
+      temp--;
+      if (temp < fixed - 1) temp = fixed + 1;
+    } else {
+      console.log(`dir: ${dir}. ERROR Occurred!`);
+      return;
+    }
+    setSelection(temp);
+  };
+
+  const imageStyles = [
+    {
+      width: 80,
+      height: 80,
+      marginTop: '50%',
+      marginRight: 35,
+    },
+    {
+      width: 150,
+      height: 150,
+      marginTop: '15%',
+      alignItems: 'center',
+    },
+    { width: 80, height: 80, marginTop: '50%', marginLeft: 35 },
+  ];
+
+  const handleLeftImageClick = () => {
+    setImages(prevImages => [prevImages.pop(), ...prevImages]);
+    setAbc(prevImages => [prevImages.pop(), ...prevImages]);
+    NOW_SET('l');
+  };
+
+  const handleRightImageClick = () => {
+    setImages(prevImages => [...prevImages.slice(1), prevImages[0]]);
+    setAbc(prevImages => [...prevImages.slice(1), prevImages[0]]);
+    NOW_SET('r');
   };
 
   const handleActionClick = async () => {
-    try {
-      const token = await AsyncStorage.getItem('accessToken');
-      const selectedImagePath = images[selection];
-
-      const response = await axios.post(
-        'http://125.133.34.224:8001/api/reward',
+    const TOKEN = await AsyncStorage.getItem('accessToken');
+    axios
+      .patch(
+        `${serverURL}/api/reward`,
         {
-          requestBody: {
-            rewardType: 'walk',
-            selected_id: 4,
-          },
+          'rewardType': 'walk',
+          'select_id': selection,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         },
-      );
-
-      if (response.data.success) {
-        alert('이미지가 성공적으로 저장되었습니다.');
-        navigation.navigate('MyPage', { selectedImagePath });
-      } else {
-        alert('이미지 저장에 실패했습니다.');
-      }
-    } catch (error) {
-      console.error('이미지 저장 오류:', error);
-    }
+      )
+      .then(response => {
+        navigation.navigate('Main', { setData: selection });
+      })
+      .catch(e => {
+        console.error(`PATCH Error >> ${e}`);
+      });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
-        <Image style={styles.LogoMain} source={{ uri: images[selection] }} />
+        <Image style={styles.LogoMain} source={{ uri: images[1] }} />
       </View>
 
-      <View style={styles.serve}>
-        {images.map((imageUrl, index) => (
-          <TouchableOpacity key={index} onPress={() => handleImageClick(index)}>
-            <Image style={imageStyles[index]} source={{ uri: imageUrl }} />
+      <View style={styles.centeredContainer}></View>
+      <RoundedShadowBox>
+        <TouchableOpacity style={styles.serve}>
+          <TouchableOpacity
+            onPress={() => {
+              handleLeftImageClick();
+            }}>
+            <Image style={imageStyles[0]} source={{ uri: images[0] }} />
           </TouchableOpacity>
-        ))}
-      </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleActionClick}>
+          <TouchableOpacity>
+            <Image style={imageStyles[1]} source={{ uri: images[1] }} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              handleRightImageClick();
+            }}>
+            <Image style={imageStyles[2]} source={{ uri: images[2] }} />
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </RoundedShadowBox>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          handleActionClick(selection);
+        }}>
         <Text style={styles.buttonText}>적용하기</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
-
-const imageStyles = [
-  {
-    width: 80,
-    height: 80,
-    marginTop: '50%',
-    marginRight: 35,
-  }, // 스타일1
-  {
-    width: 150,
-    height: 150,
-    marginTop: '15%',
-    alignItems: 'center',
-  }, // 스타일2
-  { width: 80, height: 80, marginTop: '50%', marginLeft: 35 }, // 스타일3
-];
 
 const styles = StyleSheet.create({
   container: {
@@ -163,11 +194,15 @@ const styles = StyleSheet.create({
     width: '85%',
   },
   buttonText: {
-    color: 'white',
+    color: White,
     fontSize: 16,
     fontWeight: 'bold',
   },
   centeredContainer: {},
+  centeredImage: {
+    width: 60,
+    height: 60,
+  },
   roundedShadowBox: {
     width: 320,
     overflow: 'hidden',
