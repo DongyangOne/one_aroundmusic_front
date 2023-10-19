@@ -19,23 +19,23 @@ import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
 const FILTER = [
   {
     id: 1,
-    title: '나이',
+    title: '장르',
   },
   {
     id: 2,
-    title: '성별',
-  },
-  {
-    id: 3,
-    title: '날씨',
-  },
-  {
-    id: 4,
     title: '시간',
   },
   {
-    id: 5,
+    id: 3,
     title: '계절',
+  },
+  {
+    id: 4,
+    title: 'K-pop',
+  },
+  {
+    id: 5,
+    title: '날씨',
   },
 ];
 const Music = ({ route, navigation }) => {
