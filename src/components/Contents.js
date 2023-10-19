@@ -2,54 +2,80 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import storage from '@react-native-firebase/storage';
+
+const serverURL = 'http://125.133.34.224:8001';
 
 const Contents = ({ content }) => {
-  const [data, setData] = useState([
-    {
-      content: '',
-      img: '',
-    },
-  ]);
-  const fetchData = async () => {
-    const token = await AsyncStorage.getItem('accessToken');
-    axios
-      .get('http://125.133.34.224:8001/api/board', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(res => {
-        // console.log(res.data.data);
-        setData(res.data.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  const [data, setData] = useState([]);
+  const [imgUrl, setImgUrl] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const getData = async () => {
+    try {
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      if (TOKEN) {
+        axios
+          .get(`${serverURL}/api/board`, {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          })
+          .then(response => {
+            setData(response.data.data.reverse());
+          })
+          .catch(e => {
+            console.error(`GET ERROR >> ${e}`);
+          });
+      } else {
+        console.log('No data found');
+      }
+    } catch (e) {
+      console.error(`Error with Reading Data >> ${e}`);
+    }
+  };
+
+  const loadImages = async () => {
+    let imgData = [];
+    for (let i = 0; i < data.length; i++) {
+      try {
+        const imageUrl = await storage()
+          .ref(`/Board/${data[i].img}`)
+          .getDownloadURL();
+        imgData.push(imageUrl);
+      } catch (error) {
+        console.error(`Image download failed: ${error}`);
+      }
+    }
+    setImgUrl(imgData);
+    setLoading(false); // 이미지 로딩이 완료됨을 표시
   };
 
   useEffect(() => {
-    fetchData();
+    getData();
   }, []);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      loadImages();
+    }
+  }, [data]);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        {data.map(
-          (
-            item,
-            index, // index parameter added
-          ) => (
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : (
+          data.map((item, index) => (
             <View key={index}>
-              <Image
-                source={require('../../assets/contents1.jpeg')}
-                style={styles.image}
-              />
+              <Image source={{ uri: imgUrl[index] }} style={styles.image} />
               <View style={styles.textView}>
                 <Text style={styles.text}>{item.content}</Text>
                 <Text style={styles.date}>2023.08.05</Text>
               </View>
             </View>
-          ),
+          ))
         )}
       </View>
     </SafeAreaView>
@@ -84,7 +110,6 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 12,
     marginTop: 12,
-
     fontSize: 12,
     color: '#001C3E',
     fontWeight: 'bold',

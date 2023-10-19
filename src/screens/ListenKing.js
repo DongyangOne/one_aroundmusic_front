@@ -36,6 +36,7 @@ const ListenKing = ({ navigation }) => {
     setImages(imgDataBeta);
 
     const TOKEN = await AsyncStorage.getItem('accessToken');
+    console.log(TOKEN);
     try {
       if (TOKEN) {
         axios
@@ -111,7 +112,8 @@ const ListenKing = ({ navigation }) => {
     NOW_SET('r');
   };
 
-  const handleActionClick = () => {
+  const handleActionClick = async () => {
+    const TOKEN = await AsyncStorage.getItem('accessToken');
     axios
       .patch(
         `${serverURL}/api/reward`,

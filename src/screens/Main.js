@@ -1,5 +1,5 @@
 // ** React Imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // ** RN Imports
 import { StyleSheet, SafeAreaView, View } from 'react-native';
@@ -67,11 +67,19 @@ const Main = ({ navigation, route }) => {
 
   useEffect(() => {
     handleOpen();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      const newData = [];
+      setMainData(newData);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const [mainData, setMainData] = useState(DATA);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -79,7 +87,7 @@ const Main = ({ navigation, route }) => {
         style={styles.footer}
         onPress={() => navigation.push('MyPage')}
         onPressMain={() => navigation.push('Main')}
-        onPressMusic={() => navigation.push('PlayerScreen')}
+        onPressMusic={() => navigation.push('Music')}
       />
       <ScrollView style={styles.container} nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>

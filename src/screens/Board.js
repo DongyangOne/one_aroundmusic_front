@@ -1,6 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import {
   SafeAreaView,
@@ -13,16 +12,24 @@ import {
   InputField,
   TouchableOpacity,
 } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import axios from 'axios';
+import storage from '@react-native-firebase/storage';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { Black, Pink, White, Yellow } from '../constant/Color';
+import FastImage from 'react-native-fast-image';
 
 const Board = ({ data, navigation }) => {
-  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
   const [location, setLocation] = useState();
   const [content, setContent] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrls, setImageUrls] = useState(null);
 
   const uploadContent = async () => {
+    const pathToFile = storage().ref(`/Board/${imageUrls}`);
+    await pathToFile.putFile(imageUrl);
     const token = await AsyncStorage.getItem('accessToken');
+    console.log(imageUrls);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -31,7 +38,7 @@ const Board = ({ data, navigation }) => {
     const requestData = {
       content: content,
       location: location,
-      img: require('../../assets/contents1.jpeg'),
+      img: imageUrls,
     };
     axios
       .post('http://125.133.34.224:8001/api/board', requestData, config)
@@ -44,48 +51,45 @@ const Board = ({ data, navigation }) => {
       });
   };
 
-  const handleImagePicker = () => {
+  const openImagePicker = () => {
     const options = {
-      title: 'Select Image',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
+      mediaType: 'photo',
+      includeBase64: false,
+      compressImageQuality: 0.8,
     };
-    ImagePicker.showImagePicker(options, response => {
-      if (response.didCancel) {
-        console.log('사용자가 이미지를 취소');
-      } else if (response.error) {
-        console.log('이미지 에러: ', response.error);
-      } else {
-        const source = { uri: response.uri };
-        //서버로 이미지를 받아야돼서 프론트인 제가...어쩔 수 없었어요
-        // 이제 선택한 이미지를 서버로 업로드할 수 있습니다.
-        // 여기서 서버로 업로드하는 로직을 추가해야 합니다.
 
-        setSelectedImage(source);
+    launchImageLibrary(options, async response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        let imageUri = response.uri || response.assets?.[0]?.uri;
+        setSelectedImage(imageUri);
+        console.log('아녕 :', selectedImage);
+        setImageUrl(response.assets[0]['uri']);
+        setImageUrls(response.assets[0].fileName);
       }
     });
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Image
-          source={require('../../assets/boardWrite.png')}
-          style={styles.image}
-        />
-      </View>
-      {/* <View>
-        {selectedImage && (
-          <Image source={selectedImage} style={{ width: 200, height: 200 }} />
+      <View>
+        {selectedImage ? (
+          <TouchableOpacity onPress={openImagePicker}>
+            <FastImage
+              source={{ uri: selectedImage }}
+              style={{ width: 200, height: 300 }}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={openImagePicker}>
+            <Text style={styles.buttonText}>이미지를 선택하세요</Text>
+          </TouchableOpacity>
         )}
-        <TouchableOpacity
-          style={styles.uploadButton}
-          onPress={handleImagePicker}>
-          <Text style={styles.uploadButtonText}>이미지 업로드</Text>
-        </TouchableOpacity>
-      </View> */}
+      </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.text}>위치</Text>
@@ -114,7 +118,7 @@ const Board = ({ data, navigation }) => {
         />
       </View>
       <View style={styles.BtnBox}>
-        <TouchableOpacity style={styles.button} onPress={uploadContent}>
+        <TouchableOpacity style={styles.uploadButton} onPress={uploadContent}>
           <Text style={styles.buttonText}>업로드하기</Text>
         </TouchableOpacity>
       </View>
@@ -123,7 +127,7 @@ const Board = ({ data, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  BtnBox: { marginTop: '40%' },
+  BtnBox: { marginTop: '15%' },
   container: {
     alignItems: 'center',
     marginTop: 4,
@@ -131,27 +135,24 @@ const styles = StyleSheet.create({
   content: {
     marginBottom: 10,
   },
-  // uploadButton: {
-  //   width: 150,
-  //   height: 40,
-  //   backgroundColor: "white",
-  //   borderRadius: 10,
-  //   padding: 10, // Padding 설정
-  //   alignItems: "center", // 가운데 정렬
-  //   marginTop: 5, // 버튼과 이미지 사이의 간격 조절
-  // },
-  // uploadButtonText: {
-  //   color: "#001C3E",
-  //   fontSize: 16,
-  //   fontWeight: "bold",
-  // },
+  uploadButton: {
+    alignSelf: 'flex-end',
+    width: 330,
+    backgroundColor: '#001C3E',
+    paddingVertical: 8,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginHorizontal: 30,
+    alignItems: 'center',
+  },
+
   storyRow: {
     flexDirection: 'row',
     marginTop: 13,
   },
   image: {
-    width: 130,
-    height: 179,
+    width: 200,
+    height: 200,
     marginTop: 30,
   },
   text: {
@@ -181,18 +182,21 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'flex-end',
-    width: 330,
-    backgroundColor: '#001C3E',
+    width: 150,
+    height: 300,
+    backgroundColor: Pink,
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
     marginHorizontal: 30,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
