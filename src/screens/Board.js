@@ -24,6 +24,30 @@ const Board = ({ data, navigation }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [imageUrls, setImageUrls] = useState(null);
+
+  const uploadContent = async () => {
+    const token = await AsyncStorage.getItem('accessToken');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const requestData = {
+      content: content,
+      location: location,
+      img: require('../../assets/contents1.jpeg'),
+    };
+    axios
+      .post('http://125.133.34.224:8001/api/board', requestData, config)
+      .then(res => {
+        console.log(res.data);
+        navigation.navigate('Main');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const openImagePicker = () => {
     const options = {
       mediaType: 'photo',

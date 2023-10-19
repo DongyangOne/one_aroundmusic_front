@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: White,
+    borderColor: Black,
     // padding: 'auto',
-    // color: 'black',
+    color: 'black',
     flexDirection: 'row',
     width: '70%',
     marginBottom: 20,
