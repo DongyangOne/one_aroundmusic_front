@@ -89,7 +89,7 @@ const Music = ({ route, navigation }) => {
           setLoading(false);
         }
       } else {
-        navigation.navigate('StartingPage');
+        navigation.navigate('Start');
       }
     };
     fetchData();
