@@ -50,7 +50,7 @@ export default Arscreen2 = ({ navigation, route }) => {
   };
 
   const Back = () => {
-    navigation.navigate('PlayerScreen');
+    navigation.goBack('PlayerScreen');
   };
 
   return (

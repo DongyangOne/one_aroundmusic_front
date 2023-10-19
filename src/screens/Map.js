@@ -59,7 +59,7 @@ const Map = ({ navigation }) => {
       axios
         .get('http://125.133.34.224:8001/api/ar', config)
         .then(response => {
-          console.log(response.dataqw);
+
           navigation.navigate('ArScreen', { data: response.data });
         })
         .catch(error => {
@@ -95,8 +95,16 @@ const Map = ({ navigation }) => {
 
   if (!location) {
     return (
-      <View>
-        <Text>Splash Screen</Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}>
+        <Text style={{ height: 23, fontSize: 18 }}>
+          지도를 불러오고 있습니다 ...
+        </Text>
       </View>
     );
   }
