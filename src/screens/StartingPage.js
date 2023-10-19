@@ -83,6 +83,7 @@ import {
   View,
   Text,
   Pressable,
+  ToastAndroid,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -119,7 +120,10 @@ function StartingPage({ navigation }) {
       await AsyncStorage.setItem('accessToken', response.data.data.access);
       navigation.replace('Main');
     } catch (error) {
-      console.error('Error:', error);
+      ToastAndroid.show(
+        '비밀번호 혹은 아이디를 확인하세요',
+        ToastAndroid.SHORT,
+      );
     }
   };
 

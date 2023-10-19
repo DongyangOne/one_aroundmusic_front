@@ -7,6 +7,7 @@ import {
   Text,
   ActivityIndicator,
   Image,
+  ToastAndroid,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ScrollView } from 'react-native-virtualized-view';
@@ -82,14 +83,17 @@ const Music = ({ route, navigation }) => {
           );
           const data = await response.json();
           setTracks(data.items);
-          console.log(data.items[1].track);
           setLoading(false);
         } catch (error) {
           console.error(error);
           setLoading(false);
         }
       } else {
-        navigation.navigate('Start');
+        ToastAndroid.show(
+          '스포티파이가 연동되지 않아 음악 리스트를 띄울 수 없습니다.',
+          ToastAndroid.SHORT,
+        );
+        // navigation.navigate('Start');
       }
     };
     fetchData();

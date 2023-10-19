@@ -11,6 +11,7 @@ import {
   TextInput,
   Text,
   Pressable,
+  ToastAndroid,
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,7 +26,10 @@ const SignUp = ({ navigation, route }) => {
     // 정규식을 사용하여 영어 알파벳만 허용
     const englishAlphabetCheck = /^[a-zA-Z\s]*$/; // 영어 알파벳과 공백 문자만 허용
     if (!englishAlphabetCheck.test(nickname)) {
-      alert('영어 알파벳만 입력하세요.'); // 경고 메시지 표시
+      ToastAndroid.show(
+        '닉네임은 영어로만 사용 가능합니다.',
+        ToastAndroid.SHORT,
+      );
       return; // 함수를 여기서 종료
     }
     try {
@@ -42,7 +46,9 @@ const SignUp = ({ navigation, route }) => {
       navigation.replace('Start');
       navigation.navigate('MyPage', { nickname: nickname });
     } catch (error) {
-      console.error('Error:', error);
+      if (error.response.status === 400) {
+        ToastAndroid.show('이미 가입된 아이디입니다.', ToastAndroid.SHORT);
+      }
     }
   };
   return (
@@ -83,7 +89,6 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: Black,
-    // padding: 'auto',
     color: 'black',
     flexDirection: 'row',
     width: '70%',
@@ -91,13 +96,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   bottomSingUpBox: {
-    // flex: 9,
     alignItems: 'center',
     height: 'auto',
   },
   btn: {
     paddingVertical: '3%',
-    // width: '60%',
+
     backgroundColor: 'pink',
     width: '70%',
     height: 47,
@@ -107,7 +111,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     textAlign: 'center',
-    // marginTop: 2,
   },
 });
 
