@@ -61,6 +61,8 @@ export const MenuList = [
       headerTintColor: 'pink',
       headerStyle: {
         backgroundColor: 'white',
+        borderBottomWidth: 1,
+        borderBottomColor: 'pink',
       },
       headerTitleAlign: 'center',
       gestureEnabled: false,
