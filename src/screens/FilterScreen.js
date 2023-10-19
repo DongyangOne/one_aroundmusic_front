@@ -67,23 +67,25 @@ const FilterScreen = ({ navigation }) => {
   };
 
   return (
-    <>
-      <View>
-        <Text style={styles.MainText}>장르</Text>
-        <View style={styles.buttonContainer}>
-          {createFilterButtons(DATAGENRE, setSelectedGenre, selectedGenre)}
+    <View style={styles.AllBack}>
+      <View style={styles.centerBtn}>
+        <View style={styles.bu}>
+          <Text style={styles.MainText}>장르</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATAGENRE, setSelectedGenre, selectedGenre)}
+          </View>
         </View>
-      </View>
-      <View>
-        <Text style={styles.MainText}>계절</Text>
-        <View style={styles.buttonContainer}>
-          {createFilterButtons(DATASEASON, setSelectedSeason, selectedSeason)}
+        <View>
+          <Text style={styles.MainText}>계절</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATASEASON, setSelectedSeason, selectedSeason)}
+          </View>
         </View>
-      </View>
-      <View>
-        <Text style={styles.MainText}>시간</Text>
-        <View style={styles.buttonContainer}>
-          {createFilterButtons(DATATIME, setSelectedTime, selectedTime)}
+        <View>
+          <Text style={styles.MainText}>시간</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATATIME, setSelectedTime, selectedTime)}
+          </View>
         </View>
       </View>
 
@@ -100,13 +102,16 @@ const FilterScreen = ({ navigation }) => {
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  AllBack: {
+    backgroundColor: 'white',
+  },
   MainText: {
-    color: '#001C3E',
+    color: 'pink',
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 23,
@@ -119,8 +124,9 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
   bu: {},
+  centerBtn: { marginTop: 10 },
   button: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'pink',
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
@@ -140,7 +146,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    marginLeft: 2,
+    marginLeft: 4,
+    marginTop: 4,
     flexDirection: 'row',
   },
   text: {
@@ -152,7 +159,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   clickedButton: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'pink',
   },
 });
 

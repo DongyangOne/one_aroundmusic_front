@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
   ScrollView: {
     flex: 1,
     backgroundColor: 'white',
+    marginTop: 10,
   },
   space: {
     flex: 3,
