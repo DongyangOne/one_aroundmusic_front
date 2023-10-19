@@ -8,11 +8,10 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Pink, White } from '../constant/Color';
+import { Pink } from '../constant/Color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-import { response } from 'express';
 
 const RoundedShadowBox = ({ children, selectedImage }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
@@ -21,15 +20,12 @@ const RoundedShadowBox = ({ children, selectedImage }) => {
 const WKing = () => {
   const navigation = useNavigation();
   const [selection, setSelection] = useState(1); // 초기에 중간 이미지를 보여주기 위한 인덱스
-  const [images, setImages] = useState([0, 0, 0]);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     async function fetchRewardData() {
       try {
         const token = await AsyncStorage.getItem('accessToken');
-        // 토큰 값을 콘솔에 출력
-        console.log('토큰:', token);
-        //get으로 이미지 요청받음
         const response = await axios.get(
           'http://125.133.34.224:8001/api/reward/walk',
           {
@@ -38,7 +34,7 @@ const WKing = () => {
             },
           },
         );
-        //받은 이미지를 화면에 띄움
+
         const imageUrls = await Promise.all(
           response.data.data.rewards.map(async reward => {
             const imageUrl = await storage()
@@ -81,13 +77,12 @@ const WKing = () => {
       const token = await AsyncStorage.getItem('accessToken');
       const selectedImagePath = images[selection];
 
-      // 이미지 선택 값과 함께 서버에 데이터 보내기
       const response = await axios.post(
         'http://125.133.34.224:8001/api/reward',
         {
           requestBody: {
-            'rewardType': 'walk',
-            'selected_id': 4,
+            rewardType: 'walk',
+            selected_id: 4,
           },
         },
         {
@@ -114,17 +109,13 @@ const WKing = () => {
         <Image style={styles.LogoMain} source={{ uri: images[selection] }} />
       </View>
 
-      <RoundedShadowBox selectedImage={images[selection]}>
-        <TouchableOpacity style={styles.serve}>
-          {images.map((imageUrl, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => handleImageClick(index)}>
-              <Image style={imageStyles[index]} source={{ uri: imageUrl }} />
-            </TouchableOpacity>
-          ))}
-        </TouchableOpacity>
-      </RoundedShadowBox>
+      <View style={styles.serve}>
+        {images.map((imageUrl, index) => (
+          <TouchableOpacity key={index} onPress={() => handleImageClick(index)}>
+            <Image style={imageStyles[index]} source={{ uri: imageUrl }} />
+          </TouchableOpacity>
+        ))}
+      </View>
 
       <TouchableOpacity style={styles.button} onPress={handleActionClick}>
         <Text style={styles.buttonText}>적용하기</Text>
@@ -132,6 +123,7 @@ const WKing = () => {
     </SafeAreaView>
   );
 };
+
 const imageStyles = [
   {
     width: 80,
@@ -176,10 +168,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   centeredContainer: {},
-  centeredImage: {
-    width: 60,
-    height: 60,
-  },
   roundedShadowBox: {
     width: 320,
     overflow: 'hidden',
