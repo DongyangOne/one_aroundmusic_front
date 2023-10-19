@@ -1,6 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import {
   SafeAreaView,
@@ -13,81 +12,62 @@ import {
   InputField,
   TouchableOpacity,
 } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import { utils } from '@react-native-firebase/app';
+import storage from '@react-native-firebase/storage';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { Black, Pink, White, Yellow } from '../constant/Color';
+import FastImage from 'react-native-fast-image';
 
 const Board = ({ data, navigation }) => {
-  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
   const [location, setLocation] = useState();
   const [content, setContent] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
-
-  const uploadContent = async () => {
-    const token = await AsyncStorage.getItem('accessToken');
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const requestData = {
-      content: content,
-      location: location,
-      img: require('../../assets/contents1.jpeg'),
-    };
-    axios
-      .post('http://125.133.34.224:8001/api/board', requestData, config)
-      .then(res => {
-        console.log(res.data);
-        navigation.navigate('Main');
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  const handleImagePicker = () => {
+  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrls, setImageUrls] = useState(null);
+  const openImagePicker = () => {
     const options = {
-      title: 'Select Image',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
+      mediaType: 'photo',
+      includeBase64: false,
+      compressImageQuality: 0.8,
     };
 
-    ImagePicker.showImagePicker(options, response => {
+    launchImageLibrary(options, async response => {
       if (response.didCancel) {
-        console.log('사용자가 이미지를 취소');
+        console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('이미지 에러: ', response.error);
+        console.log('ImagePicker Error: ', response.error);
       } else {
-        const source = { uri: response.uri };
-        // Now, you can display the selected image
-        setSelectedImage(source);
+        let imageUri = response.uri || response.assets?.[0]?.uri;
+        setSelectedImage(imageUri);
+        console.log('아녕 :', selectedImage);
+        setImageUrl(response.assets[0]['uri']);
+        setImageUrls(response.assets[0].fileName);
       }
     });
+  };
+  const pushImage = async () => {
+    const pathToFile = storage().ref(`/Board/${imageUrls}`);
+    await pathToFile.putFile(imageUrl);
+    navigation.navigate('Main');
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        {selectedImage && (
-          <Image source={selectedImage} style={{ width: 200, height: 200 }} />
+        {selectedImage ? (
+          <TouchableOpacity onPress={openImagePicker}>
+            <FastImage
+              source={{ uri: selectedImage }}
+              style={{ width: 200, height: 300 }}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={openImagePicker}>
+            <Text style={styles.buttonText}>이미지를 선택하세요</Text>
+          </TouchableOpacity>
         )}
-        <TouchableOpacity
-          style={[styles.uploadButton, { width: 130, height: 180 }]}
-          onPress={handleImagePicker}>
-          <Text style={styles.uploadButtonText}>이미지 업로드</Text>
-        </TouchableOpacity>
       </View>
-      {/* <View>
-        {selectedImage && (
-          <Image source={selectedImage} style={{ width: 200, height: 200 }} />
-        )}
-        <TouchableOpacity
-          style={styles.uploadButton}
-          onPress={handleImagePicker}>
-          <Text style={styles.uploadButtonText}>이미지 업로드</Text>
-        </TouchableOpacity>
-      </View> */}
 
       <View style={styles.inputContainer}>
         <Text style={styles.text}>위치</Text>
@@ -116,7 +96,7 @@ const Board = ({ data, navigation }) => {
         />
       </View>
       <View style={styles.BtnBox}>
-        <TouchableOpacity style={styles.button} onPress={uploadContent}>
+        <TouchableOpacity style={styles.uploadButton} onPress={pushImage}>
           <Text style={styles.buttonText}>업로드하기</Text>
         </TouchableOpacity>
       </View>
@@ -125,7 +105,7 @@ const Board = ({ data, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  BtnBox: { marginTop: '40%' },
+  BtnBox: { marginTop: '15%' },
   container: {
     alignItems: 'center',
     marginTop: 4,
@@ -133,27 +113,24 @@ const styles = StyleSheet.create({
   content: {
     marginBottom: 10,
   },
-  // uploadButton: {
-  //   width: 150,
-  //   height: 40,
-  //   backgroundColor: "white",
-  //   borderRadius: 10,
-  //   padding: 10, // Padding 설정
-  //   alignItems: "center", // 가운데 정렬
-  //   marginTop: 5, // 버튼과 이미지 사이의 간격 조절
-  // },
-  // uploadButtonText: {
-  //   color: "#001C3E",
-  //   fontSize: 16,
-  //   fontWeight: "bold",
-  // },
+  uploadButton: {
+    alignSelf: 'flex-end',
+    width: 330,
+    backgroundColor: '#001C3E',
+    paddingVertical: 8,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginHorizontal: 30,
+    alignItems: 'center',
+  },
+
   storyRow: {
     flexDirection: 'row',
     marginTop: 13,
   },
   image: {
-    width: 130,
-    height: 179,
+    width: 200,
+    height: 200,
     marginTop: 30,
   },
   text: {
@@ -183,18 +160,21 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'flex-end',
-    width: 330,
-    backgroundColor: '#001C3E',
+    width: 150,
+    height: 300,
+    backgroundColor: Pink,
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
     marginHorizontal: 30,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

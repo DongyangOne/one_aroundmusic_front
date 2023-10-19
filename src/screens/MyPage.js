@@ -21,7 +21,7 @@ const MyPage = ({ navigation }) => {
   async function authenticate() {
     const config = {
       clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
-      clientSecret: '1cc39cad57494e2ba5d9e56421f83314',
+
       redirectUrl: 'awesomeproject://main',
       scopes: ['user-read-private', 'user-read-email', 'streaming'],
       serviceConfiguration: {

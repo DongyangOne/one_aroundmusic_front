@@ -263,6 +263,7 @@ dependencies {
     implementation project(path: ':viro_renderer')
     implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
     implementation 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
+     implementation platform('com.google.firebase:firebase-bom:29.1.0') // 추가 (line:221)
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
