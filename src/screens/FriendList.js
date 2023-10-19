@@ -105,7 +105,6 @@ const FriendList = () => {
       })
       .catch(err => {
         ToastAndroid.show('친구 요청 수락을 실패했어요', ToastAndroid.SHORT);
-        console.log(err);
       });
   };
 
@@ -129,7 +128,6 @@ const FriendList = () => {
       })
       .catch(error => {
         ToastAndroid.show('친구 요청을 실패했어요', ToastAndroid.SHORT);
-        console.log(error.response.data);
       });
   };
 
@@ -148,7 +146,6 @@ const FriendList = () => {
       })
       .catch(error => {
         ToastAndroid.show('친구 끊기에 실패했어요', ToastAndroid.SHORT);
-        console.log(error.response.data);
       });
   };
 
