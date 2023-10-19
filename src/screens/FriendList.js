@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  FRIENDSLIST,
+  FRIENDSLIST2,
 } from 'react-native';
 import FriendsItem from '../components/FriendsItem';
 import axios from 'axios';

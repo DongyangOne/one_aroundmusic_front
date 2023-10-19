@@ -14,7 +14,8 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
-
+import SVGComponentPlayBtn from '../../components/SVG/SVGComponentPlayBtn';
+import SVGComponentStopBtn from '../../components/SVG/SVGComponentStopBtn';
 const PlayerScreenView = ({ route, navigation }) => {
   const [sound, setSound] = useState(null);
   const [isPlay, setIsPlay] = useState(true);
@@ -24,6 +25,14 @@ const PlayerScreenView = ({ route, navigation }) => {
   const { image } = route.params;
   const { href } = route.params;
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
+  const [isPlaying, setIsPlaying] = useState(false);
+  useEffect(() => {
+    if (isPlaying) {
+      handlePlay();
+    } else {
+      handleStop();
+    }
+  }, [isPlaying]);
 
   async function requestPermission() {
     try {
@@ -41,7 +50,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    console.log(href);
+    //console.log(href);
     const sound = new Sound(href, null);
 
     requestPermission().then(result => {
@@ -65,6 +74,7 @@ const PlayerScreenView = ({ route, navigation }) => {
     setSound(sound);
   }, []);
 
+  // 재생
   const handlePlay = () => {
     if (sound) {
       sound.play();
@@ -72,12 +82,14 @@ const PlayerScreenView = ({ route, navigation }) => {
     }
   };
 
+  // 정지
   const handleStop = () => {
     if (sound && isPlay) {
       sound.pause();
       setIsPlay(false);
     }
   };
+
   const shareAr = async () => {
     const requestData = {
       youtubeId: trackId,
@@ -118,8 +130,17 @@ const PlayerScreenView = ({ route, navigation }) => {
           <Image style={styles.image} source={{ uri: image }} />
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.singer}>{singer}</Text>
-          <Button title="Play" onPress={handlePlay} />
-          <Button title="Stop" onPress={handleStop} />
+
+          {/* stop.png 누르면 handleStop으로 ( 노래 정지 ) 
+          play.png 누르면 handlePlay로 ( 노래 재생 )  */}
+
+          <TouchableOpacity
+            style={styles.box}
+            onPress={() => {
+              setIsPlaying(prevIsPlaying => !prevIsPlaying);
+            }}>
+            {isPlaying ? <SVGComponentStopBtn /> : <SVGComponentPlayBtn />}
+          </TouchableOpacity>
           <TouchableOpacity onPress={shareAr} style={styles.shareBtn}>
             <Text style={styles.btnText}>Share</Text>
           </TouchableOpacity>
@@ -130,6 +151,11 @@ const PlayerScreenView = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  playButton: {
+    width: 50,
+    height: 50,
+    marginTop: 20,
+  },
   container: {
     flex: 1,
   },
@@ -153,6 +179,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 31,
   },
+  box: {
+    marginTop: '3%',
+    height: 60,
+  },
   singer: {
     color: '#D9D9D9',
     fontSize: 13,
@@ -161,14 +191,14 @@ const styles = StyleSheet.create({
   shareBtn: {
     width: 251,
     height: 30,
-    backgroundColor: 'white',
+    backgroundColor: 'pink',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
   },
   btnText: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
   },
 });

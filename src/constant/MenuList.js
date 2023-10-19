@@ -9,12 +9,12 @@ import ListenKing from '../screens/ListenKing';
 import Main from '../screens/Main';
 import Map from '../screens/Map';
 import Music from '../screens/Music';
-import MusicPlay from '../screens/MusicPlay';
 import MyPage from '../screens/MyPage';
 import PopularKing from '../screens/PopularKing';
 import StartingPage from '../screens/StartingPage';
 import WKing from '../screens/WKing';
 import PlayerScreen from '../screens/player-screen';
+import { Black, Pink, White, Yellow } from '../constant/Color';
 export const MenuList = [
   {
     name: 'Start',
@@ -29,11 +29,6 @@ export const MenuList = [
   {
     name: 'Music',
     component: Music,
-    options: { headerShown: false },
-  },
-  {
-    name: 'MusicPlay',
-    component: MusicPlay,
     options: { headerShown: false },
   },
   {
@@ -63,9 +58,9 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '필터',
-      headerTintColor: 'white',
+      headerTintColor: 'pink',
       headerStyle: {
-        backgroundColor: '#001C3E',
+        backgroundColor: 'white',
       },
       headerTitleAlign: 'center',
       gestureEnabled: false,
@@ -133,7 +128,8 @@ export const MenuList = [
       title: '듣기왕 리워드',
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: '#000080',
+        // backgroundColor: '#000080',
+        backgroundColor: Pink,
       },
       headerTitleAlign: 'center',
     },

@@ -14,47 +14,59 @@ import Header from '../components/Header';
 import FilterButton from '../components/FilterButton';
 import SongList from '../components/SongList';
 import { TouchableOpacity } from 'react-native';
-
+import { useRoute } from '@react-navigation/native';
 import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
 const FILTER = [
   {
     id: 1,
-    title: '나이',
+    title: '장르',
   },
   {
     id: 2,
-    title: '성별',
-  },
-  {
-    id: 3,
-    title: '날씨',
-  },
-  {
-    id: 4,
     title: '시간',
   },
   {
-    id: 5,
+    id: 3,
     title: '계절',
   },
-];
-const DATA = [
   {
-    id: 1,
-    tag: '#10대',
+    id: 4,
+    title: 'K-pop',
   },
   {
-    id: 2,
-    tag: '#여성',
-  },
-  {
-    id: 3,
-    tag: '#봄',
+    id: 5,
+    title: '날씨',
   },
 ];
-const Music = ({ navigation }) => {
+const Music = ({ route, navigation }) => {
+  // Check if route.params is defined
+  let DATA = [];
+  if (route.params) {
+    const { selectedGenre, selectedSeason, selectedTime } = route.params;
+    if (selectedGenre) {
+      DATA.push({
+        id: 1,
+        tag: selectedGenre,
+      });
+    }
+
+    if (selectedSeason) {
+      DATA.push({
+        id: 2,
+        tag: selectedSeason,
+      });
+    }
+
+    if (selectedTime) {
+      DATA.push({
+        id: 3,
+        tag: selectedTime,
+      });
+    }
+  }
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       const token = await AsyncStorage.getItem('token');
@@ -162,6 +174,7 @@ const Music = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -183,7 +196,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   filterIcon: {
-    marginRight: 15,
+    marginRight: 10,
     marginTop: 2,
   },
   musicScroll: {
@@ -194,6 +207,7 @@ const styles = StyleSheet.create({
   ScrollView: {
     flex: 1,
     backgroundColor: 'white',
+    marginTop: 10,
   },
   space: {
     flex: 3,
