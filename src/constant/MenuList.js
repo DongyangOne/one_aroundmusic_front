@@ -58,9 +58,9 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '필터',
-      headerTintColor: 'white',
+      headerTintColor: 'pink',
       headerStyle: {
-        backgroundColor: '#001C3E',
+        backgroundColor: 'white',
       },
       headerTitleAlign: 'center',
       gestureEnabled: false,
@@ -129,7 +129,7 @@ export const MenuList = [
       headerTintColor: 'white',
       headerStyle: {
         // backgroundColor: '#000080',
-        backgroundColor: Pink, 
+        backgroundColor: Pink,
       },
       headerTitleAlign: 'center',
     },
