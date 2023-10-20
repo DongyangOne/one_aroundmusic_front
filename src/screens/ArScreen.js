@@ -43,7 +43,6 @@ const WorldSceneAR = () => {
               .then(downloadURL => {
                 console.log(downloadURL);
                 setItemFrame(downloadURL);
-                console.log("안녕", downloadURL);
               })
               .catch(e => {
                 console.error(`GET DOWNLOAD URL ERROR >> ${e}`);
@@ -101,7 +100,7 @@ const WorldSceneAR = () => {
       <ViroImage
         height={0.2}
         width={0.2}
-        position={[0, 0.13, -1.5]}
+        position={[0, 0.03, -1.5]}
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
