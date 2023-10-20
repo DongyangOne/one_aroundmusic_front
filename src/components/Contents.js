@@ -66,6 +66,8 @@ const Contents = ({ content }) => {
       <View style={styles.content}>
         {loading ? (
           <Text>Loading...</Text>
+        ) : data.length === 0 ? ( // 데이터가 없을 때
+          <Text>데이터가 없습니다</Text>
         ) : (
           data.map((item, index) => (
             <View key={index}>

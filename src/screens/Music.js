@@ -82,8 +82,13 @@ const Music = ({ route, navigation }) => {
             },
           );
           const data = await response.json();
-          setTracks(data.items);
+          const filteredTracks = data.items.filter(
+            item => item.track.preview_url !== null,
+          );
+
+          setTracks(filteredTracks);
           setLoading(false);
+          console.log(data.items[0].track.preview_url);
         } catch (error) {
           console.error(error);
           setLoading(false);
