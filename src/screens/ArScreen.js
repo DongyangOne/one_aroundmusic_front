@@ -4,6 +4,7 @@ import {
   ViroARScene,
   ViroImage,
   ViroARSceneNavigator,
+  ImageBackground,
 } from '@viro-community/react-viro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -14,11 +15,13 @@ let loadData = null;
 let TOKEN = null;
 let temp;
 
+
 const WorldSceneAR = () => {
-  const [itemFrame, setItemFrame] = useState(null);
+  const [itemFrame, setItemFrame] = useState();
   const [selectId, setSelectId] = useState(null);
 
-  const getData = async () => {
+
+  const setData = async () => {
     try {
       TOKEN = await AsyncStorage.getItem('accessToken');
       if (TOKEN) {
@@ -32,7 +35,19 @@ const WorldSceneAR = () => {
             loadData = response.data;
             temp = loadData.data.selectedReward.id;
             setSelectId(temp);
-            setData();
+            let text = `/reward/pop/border${temp - 42}.png`;
+            console.log("dkssud", text);
+            storage()
+              .ref(text)
+              .getDownloadURL()
+              .then(downloadURL => {
+                console.log(downloadURL);
+                setItemFrame(downloadURL);
+                console.log("안녕", downloadURL);
+              })
+              .catch(e => {
+                console.error(`GET DOWNLOAD URL ERROR >> ${e}`);
+              });
           })
           .catch(e => {
             console.error(`GET ERROR >> ${e}`);
@@ -45,23 +60,20 @@ const WorldSceneAR = () => {
     }
   };
 
-  const setData = async () => {
-    let text = `/reward/pop/border${temp - 42}.png`;
-    setItemFrame(await storage().ref(text).getDownloadURL());
-  };
-
   useEffect(() => {
-    getData();
+    setData();
   }, []);
   return (
     <ViroARScene>
-      <ViroImage
-        height={0.5}
-        width={0.5}
-        position={[-1, 0.5, -3]}
-        placeholderSource={require('../../assets/music2.jpg')}
-        source={require('../../assets/music2.jpg')}
-      />
+      {itemFrame ? (
+  <ViroImage
+    height={0.5}
+    width={0.5}
+    position={[-1, 0.5, -3]}
+    placeholderSource={require('../../assets/music2.jpg')}
+    source={require('../../assets/music2.jpg')}
+  />
+) : null}
       <ViroImage
         height={0.2}
         width={0.2}
@@ -69,6 +81,15 @@ const WorldSceneAR = () => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+      <ViroImage
+        height={0.8}
+        width={0.8}
+        position={[0, 0.52, -1.6]}
+        source={{ uri: itemFrame }}
+      />
+      ) : null}
+      {itemFrame ? (
       <ViroImage
         height={0.5}
         width={0.5}
@@ -76,6 +97,7 @@ const WorldSceneAR = () => {
         placeholderSource={require('../../assets/music3.png')}
         source={require('../../assets/music3.png')}
       />
+      ) : null}
       <ViroImage
         height={0.2}
         width={0.2}
@@ -102,6 +124,7 @@ const WorldSceneAR = () => {
 };
 
 export default Arscreen = () => {
+
   return (
     <ViroARSceneNavigator
       autofocus={true}

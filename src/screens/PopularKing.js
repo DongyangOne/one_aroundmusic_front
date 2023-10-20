@@ -94,6 +94,7 @@ const PopularKing = ({ navigation }) => {
       width: 150,
       height: 150,
       marginTop: '15%',
+      marginBottom: '15%',
       alignItems: 'center',
     },
     { width: 80, height: 80, marginTop: '50%', marginLeft: 35 },
@@ -130,7 +131,7 @@ const PopularKing = ({ navigation }) => {
         console.log(
           `${JSON.stringify(response.data)}`,
         );
-        navigation.navigate('ArScreen', { setData: selection });
+        navigation.navigate('Main', { setData: selection });
       })
       .catch(e => {
         console.error(`PATCH Error >> ${e}`);
