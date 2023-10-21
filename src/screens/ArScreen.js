@@ -84,7 +84,7 @@ const WorldSceneAR = () => {
       <ViroImage
         height={0.8}
         width={0.8}
-        position={[0, 0.52, -1.6]}
+        position={[0, 0.51, -1.59]}
         source={{ uri: itemFrame }}
       />
       ) : null}
