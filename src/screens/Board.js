@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   uploadButton: {
     alignSelf: 'flex-end',
     width: 330,
-    backgroundColor: '#001C3E',
+    backgroundColor: Pink,
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,

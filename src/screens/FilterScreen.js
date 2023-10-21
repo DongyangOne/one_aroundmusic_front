@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { DATASEASON, DATAGENRE, DATATIME } from '../components/DummyData';
 
+import { Black, Pink, White, Yellow } from '../constant/Color';
 const FilterDetailButton = ({ title, isSelected, onPress }) => {
   return (
     <TouchableOpacity
@@ -108,10 +109,10 @@ const FilterScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   AllBack: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   MainText: {
-    color: 'pink',
+    color: Pink,
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 23,
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
   bu: {},
   centerBtn: { marginTop: 10 },
   button: {
-    backgroundColor: 'pink',
+    backgroundColor: Pink,
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
@@ -152,14 +153,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    color: '#656565',
+    color: '#000000',
   },
   clickText: {
     fontSize: 14,
     color: '#ffffff',
   },
   clickedButton: {
-    backgroundColor: 'pink',
+    backgroundColor: Pink,
   },
 });
 

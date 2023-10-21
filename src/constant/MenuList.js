@@ -64,11 +64,11 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '필터',
-      headerTintColor: 'pink',
+      headerTintColor: Pink,
       headerStyle: {
         backgroundColor: 'white',
-        borderBottomWidth: 1,
-        borderBottomColor: 'pink',
+        // borderBottomWidth: 1,
+        // borderBottomColor: Pink,
       },
       headerTitleAlign: 'center',
       gestureEnabled: false,
@@ -86,7 +86,7 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '게시물 작성',
-      headerTintColor: '#034AA6',
+      headerTintColor: Pink,
       headerTitleAlign: 'center',
     },
   },
@@ -134,10 +134,10 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '듣기왕 리워드',
-      headerTintColor: 'white',
+      headerTintColor: Pink,
       headerStyle: {
         // backgroundColor: '#000080',
-        backgroundColor: Pink,
+        backgroundColor: 'white',
       },
       headerTitleAlign: 'center',
     },
