@@ -21,6 +21,8 @@ export default Arscreen2 = ({ navigation, route }) => {
     image: route.params.thumbnailUrl,
     title: route.params.title,
     videoId: route.params.youtubeId,
+    href: route.params.href,
+    singer: route.params.singer,
   };
 
   const WorldSceneAR = () => {

@@ -24,6 +24,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   const { singer } = route.params;
   const { image } = route.params;
   const { href } = route.params;
+  console.log("href"+href);
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
   const [isPlaying, setIsPlaying] = useState(false);
   useEffect(() => {
@@ -50,7 +51,6 @@ const PlayerScreenView = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    //console.log(href);
     const sound = new Sound(href, null);
 
     requestPermission().then(result => {
@@ -97,6 +97,8 @@ const PlayerScreenView = ({ route, navigation }) => {
       thumbnail: image,
       latitude: location.latitude,
       longitude: location.longitude,
+      singer,
+      href,
     };
     const token = await AsyncStorage.getItem('accessToken');
     const config = {
@@ -113,6 +115,8 @@ const PlayerScreenView = ({ route, navigation }) => {
             youtubeId: trackId,
             title: title,
             thumbnailUrl: image,
+            href: href,
+            singer: singer,
           });
         })
         .catch(error => {
