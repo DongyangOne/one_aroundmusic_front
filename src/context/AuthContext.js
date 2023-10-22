@@ -1,3 +1,4 @@
+import { func } from 'prop-types';
 import React, { createContext, useContext, useState } from 'react';
 
 const Context = createContext({});
@@ -5,9 +6,10 @@ const Context = createContext({});
 export function AuthProvider({ children }) {
   const [open, setOpen] = useState(false);
   const [swipe, setSwipe] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <Context.Provider value={{ open, setOpen, swipe, setSwipe }}>{children}</Context.Provider>
+    <Context.Provider value={{ open, setOpen, swipe, setSwipe, isLogin, setIsLogin}}>{children}</Context.Provider>
   );
 }
 
@@ -16,5 +18,9 @@ export function useAuth() {
 }
 
 export function useSwipe(){
+  return useContext(Context);
+}
+
+export function useLogin(){
   return useContext(Context);
 }
