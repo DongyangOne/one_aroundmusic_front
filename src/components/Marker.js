@@ -4,21 +4,20 @@ import { Marker } from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
+import { url } from '../constant/Url';
 
 let loadData = null;
-let TOKEN = null;
 let temp;
 function ArMarker({ location, size, onPress }) {
   const [itemFrame, setItemFrame] = useState();
   const [selectId, setSelectId] = useState();
-  const serverURL = 'http://125.133.34.224:8001';
 
   const getData = async () => {
     try {
       const TOKEN = await AsyncStorage.getItem('accessToken');
       if (TOKEN) {
         axios
-          .get(`${serverURL}/api/reward/walk`, {
+          .get(`${url}/api/reward/walk`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },

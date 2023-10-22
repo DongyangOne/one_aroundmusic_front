@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-  Platform,
-  PermissionsAndroid,
-  Text,
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import {
   ViroARScene,
   ViroImage,
   ViroARSceneNavigator,
-  ViroDirectionalLight,
-  ViroAmbientLight,
 } from '@viro-community/react-viro';
 
 export default Arscreen2 = ({ navigation, route }) => {
@@ -21,6 +11,8 @@ export default Arscreen2 = ({ navigation, route }) => {
     image: route.params.thumbnailUrl,
     title: route.params.title,
     videoId: route.params.youtubeId,
+    href: route.params.href,
+    singer: route.params.singer,
   };
 
   const WorldSceneAR = () => {
@@ -44,7 +36,6 @@ export default Arscreen2 = ({ navigation, route }) => {
     );
   };
 
-  //공유하기 클릭 시 실행 axios
   const ShareMusic = async () => {
     navigation.navigate('Board');
   };

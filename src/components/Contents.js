@@ -3,8 +3,7 @@ import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-
-const serverURL = 'http://125.133.34.224:8001';
+import { url } from '../constant/Url';
 
 const Contents = ({ content }) => {
   const [data, setData] = useState([]);
@@ -16,7 +15,7 @@ const Contents = ({ content }) => {
       const TOKEN = await AsyncStorage.getItem('accessToken');
       if (TOKEN) {
         axios
-          .get(`${serverURL}/api/board`, {
+          .get(`${url}/api/board`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },

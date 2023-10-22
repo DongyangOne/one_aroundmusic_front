@@ -11,7 +11,7 @@ import Geolocation from 'react-native-geolocation-service';
 import ArMarker from '../components/Marker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { url } from '../constant/Url';
 async function requestPermission() {
   try {
     if (Platform.OS === 'ios') {
@@ -33,14 +33,11 @@ const Map = ({ navigation }) => {
   const fetchData = async () => {
     const token = await AsyncStorage.getItem('accessToken');
     try {
-      const response = await axios.get(
-        'http://125.133.34.224:8001/api/marker',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await axios.get(`${url}/api/marker`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
       setData(response.data.data.marker);
     } catch (err) {
       console.log(err.response.data);
@@ -57,7 +54,7 @@ const Map = ({ navigation }) => {
     if (token) {
       console.log(token);
       axios
-        .get('http://125.133.34.224:8001/api/ar', config)
+        .get(`${url}/api/ar`, config)
         .then(response => {
           navigation.navigate('ArScreen', { data: response.data });
         })

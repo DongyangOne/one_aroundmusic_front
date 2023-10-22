@@ -15,6 +15,7 @@ import {
 import FriendsItem from '../components/FriendsItem';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { url } from '../constant/Url';
 
 const FriendList = () => {
   const [mode, setMode] = useState('유저 목록');
@@ -28,7 +29,7 @@ const FriendList = () => {
     const token = await AsyncStorage.getItem('accessToken');
     //친구 리스트 조회
     axios
-      .get('http://125.133.34.224:8001/api/friend', {
+      .get(`${url}/api/friend`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,7 +43,7 @@ const FriendList = () => {
 
     //친구관계 제외한 친구 리스트 조회
     axios
-      .get('http://125.133.34.224:8001/api/friend/user', {
+      .get(`${url}/api/friend/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -56,7 +57,7 @@ const FriendList = () => {
 
     //받은 친구 요청 리스트
     axios
-      .get('http://125.133.34.224:8001/api/friend/recive', {
+      .get(`${url}/api/friend/recive`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -70,7 +71,7 @@ const FriendList = () => {
 
     //보낸 친구 요청 리스트
     axios
-      .get('http://125.133.34.224:8001/api/friend/send', {
+      .get(`${url}/api/friend/send`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -88,7 +89,7 @@ const FriendList = () => {
     const token = await AsyncStorage.getItem('accessToken');
     axios
       .patch(
-        'http://125.133.34.224:8001/api/friend',
+        `${url}/api/friend`,
         {
           id: id,
           accept: 'Y',
@@ -113,7 +114,7 @@ const FriendList = () => {
     const token = await AsyncStorage.getItem('accessToken');
     axios
       .post(
-        'http://125.133.34.224:8001/api/friend',
+        `${url}/api/friend`,
         {
           friendId: id,
         },
@@ -136,7 +137,7 @@ const FriendList = () => {
     console.log(id);
     const token = await AsyncStorage.getItem('accessToken');
     axios
-      .delete(`http://125.133.34.224:8001/api/friend/${id}`, {
+      .delete(`${url}/api/friend/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

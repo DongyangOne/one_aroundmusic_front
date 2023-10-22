@@ -1,7 +1,7 @@
 export const DATAGENRE = [
   {
     id: '1',
-    title: 'K-pop',
+    title: '팝',
   },
   {
     id: '2',
@@ -13,19 +13,19 @@ export const DATAGENRE = [
   },
   {
     id: '4',
-    title: '팝송',
+    title: '재즈',
   },
   {
     id: '5',
-    title: '록',
+    title: '락',
   },
   {
     id: '6',
-    title: 'R&B',
+    title: '알앤비',
   },
   {
     id: '7',
-    title: 'J-pop',
+    title: '7080',
   },
   {
     id: '8',
@@ -76,5 +76,42 @@ export const DATASEASON = [
   {
     id: '4',
     title: '겨울',
+  },
+];
+export const DATACOUNTRY = [
+  {
+    id: '1',
+    title: '한국',
+  },
+  {
+    id: '2',
+    title: '미국',
+  },
+  {
+    id: '3',
+    title: '일본',
+  },
+];
+
+export const FILTER = [
+  {
+    id: 1,
+    title: '장르',
+  },
+  {
+    id: 2,
+    title: '시간',
+  },
+  {
+    id: 3,
+    title: '계절',
+  },
+  {
+    id: 4,
+    title: 'K-pop',
+  },
+  {
+    id: 5,
+    title: '날씨',
   },
 ];

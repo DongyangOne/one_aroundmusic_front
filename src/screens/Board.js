@@ -5,20 +5,18 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
   Text,
   TextInput,
-  Button,
-  InputField,
   TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { Black, Pink, White, Yellow } from '../constant/Color';
+import { Pink } from '../constant/Color';
 import FastImage from 'react-native-fast-image';
+import { url } from '../constant/Url';
 
-const Board = ({ data, navigation }) => {
+const Board = ({ navigation }) => {
   const [location, setLocation] = useState();
   const [content, setContent] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -29,7 +27,6 @@ const Board = ({ data, navigation }) => {
     const pathToFile = storage().ref(`/Board/${imageUrls}`);
     await pathToFile.putFile(imageUrl);
     const token = await AsyncStorage.getItem('accessToken');
-    console.log(imageUrls);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,7 +38,7 @@ const Board = ({ data, navigation }) => {
       img: imageUrls,
     };
     axios
-      .post('http://125.133.34.224:8001/api/board', requestData, config)
+      .post(`${url}/api/board`, requestData, config)
       .then(res => {
         console.log(res.data);
         navigation.navigate('Main');

@@ -11,12 +11,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
 import { Pink, White } from '../constant/Color';
+import { url } from '../constant/Url';
 const RoundedShadowBox = ({ children }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
 };
 
 const WKing = ({ navigation }) => {
-  const serverURL = 'http://125.133.34.224:8001';
   let fixed = 2;
 
   const [images, setImages] = useState([0, 0, 0]);
@@ -37,7 +37,7 @@ const WKing = ({ navigation }) => {
     try {
       if (TOKEN) {
         axios
-          .get(`${serverURL}/api/reward/walk`, {
+          .get(`${url}/api/reward/walk`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },
@@ -115,7 +115,7 @@ const WKing = ({ navigation }) => {
     const TOKEN = await AsyncStorage.getItem('accessToken');
     axios
       .patch(
-        `${serverURL}/api/reward`,
+        `${url}/api/reward`,
         {
           'rewardType': 'walk',
           'select_id': selection,

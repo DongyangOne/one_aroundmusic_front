@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { DATASEASON, DATAGENRE, DATATIME } from '../components/DummyData';
+import {
+  DATASEASON,
+  DATAGENRE,
+  DATATIME,
+  DATACOUNTRY,
+} from '../components/DummyData';
 
 const FilterDetailButton = ({ title, isSelected, onPress }) => {
   return (
@@ -18,6 +23,7 @@ const FilterScreen = ({ navigation }) => {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [selectCountry, setSelectCountry] = useState(null);
 
   // 장르 버튼 스타일 변경을 위한 객체
   useEffect(() => {
@@ -55,6 +61,18 @@ const FilterScreen = ({ navigation }) => {
     });
   }, [selectedTime]);
 
+  //나라 버튼 스타일 번경을 위한 객체
+  useEffect(() => {
+    const countryButtonStyles = DATACOUNTRY.reduce((styles, item) => {
+      styles[item.title] = item.title === selectCountry;
+      return styles;
+    }, {});
+
+    DATACOUNTRY.forEach(item => {
+      item.isSelected = countryButtonStyles[item.title];
+    });
+  }, [selectCountry]);
+
   const createFilterButtons = (data, setSelectedFunction, selectedValue) => {
     return data.map(item => (
       <FilterDetailButton
@@ -87,6 +105,12 @@ const FilterScreen = ({ navigation }) => {
             {createFilterButtons(DATATIME, setSelectedTime, selectedTime)}
           </View>
         </View>
+        <View>
+          <Text style={styles.MainText}>나라</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATACOUNTRY, setSelectCountry, selectCountry)}
+          </View>
+        </View>
       </View>
 
       <View style={styles.bu}>
@@ -97,6 +121,7 @@ const FilterScreen = ({ navigation }) => {
               selectedGenre,
               selectedSeason,
               selectedTime,
+              selectCountry,
             })
           }>
           <Text style={styles.buttonText}>적용하기</Text>
