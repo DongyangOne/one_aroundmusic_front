@@ -74,6 +74,11 @@ const PlayerScreenView = ({ route, navigation }) => {
       }
     });
     setSound(sound);
+
+    return () => {
+      sound.pause();
+      setIsPlay(false);
+    };
   }, []);
 
   // 재생
@@ -93,6 +98,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   };
 
   const shareAr = async () => {
+    handleStop();
     const requestData = {
       youtubeId: trackId,
       title: title,
