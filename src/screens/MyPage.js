@@ -15,10 +15,11 @@ import SVGComponentHeart from '../components/SVG/SVGComponentHeart';
 import SVGComponentLoca from '../components/SVG/SVGComponentLoca';
 import SVGComponentPlay from '../components/SVG/SVGComponentPlay';
 import SignUp from '../screens/SignUp';
+import axios from 'axios';
 
 const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
-  const [nickname, setNickname] = useState(route.params?.nickname || '');
+  const [nickname, setNickname] = useState('');
   // const [userId, setUserId] = useState('Guest');
   const [authState, setAuthState] = useState(null);
 
@@ -48,7 +49,30 @@ const MyPage = ({ navigation, route }) => {
       console.error(error);
     }
   }
+  const fetchUserNickname = async () => {
+    try {
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      };
+      const response = await axios.get(
+        'http://125.133.34.224:8001/api/user/my',
+        config,
+      );
+      const fetchNickname = response.data.data.nickname;
+      setNickname(fetchNickname);
+      console.log(nickname, '님의 API요청 완료');
+    } catch (error) {
+      console.error('NICKNAME API요청 중 오류 발생 : ', error);
+      return null;
+    }
+  };
 
+  useEffect(() => {
+    fetchUserNickname();
+  }, []);
   return (
     <View style={styles.contain}>
       <Header
