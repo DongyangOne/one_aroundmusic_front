@@ -18,7 +18,7 @@ import SignUp from '../screens/SignUp';
 
 const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState(route.params?.nickname || '');
   // const [userId, setUserId] = useState('Guest');
   const [authState, setAuthState] = useState(null);
 
@@ -62,8 +62,9 @@ const MyPage = ({ navigation, route }) => {
           style={styles.profile}
           source={require('../../assets/profile.png')}
         />
+
         <View>
-          <Text style={styles.id}>{nickname}</Text>
+          <Text style={styles.id}>{nickname}님</Text>
           <TouchableOpacity style={styles.spotify} onPress={authenticate}>
             <Text style={{ color: 'white' }}>스포티파이 로그인</Text>
           </TouchableOpacity>
@@ -194,6 +195,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4AB154',
     padding: 10,
     marginLeft: '14%',
+    borderRadius: 13,
   },
   // Friend Button
   friendBtn: {
@@ -216,6 +218,7 @@ const styles = StyleSheet.create({
   },
   // user ID
   id: {
+    alignItems: 'center',
     marginTop: 30,
     fontSize: 24,
     marginLeft: 25,

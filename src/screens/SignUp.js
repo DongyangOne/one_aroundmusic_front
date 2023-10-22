@@ -42,7 +42,7 @@ const SignUp = ({ navigation, route }) => {
         email: email,
         socialToken: socialToken,
       });
-
+      console.log('닉네임 : ', nickname); 
       navigation.replace('Start');
       navigation.navigate('MyPage', { nickname: nickname });
     } catch (error) {
