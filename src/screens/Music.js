@@ -19,6 +19,30 @@ import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
 import API_URLS from '../constant/MusicList';
 import { FILTER } from '../components/DummyData';
 
+import { useSwipe } from '../context/AuthContext';
+
+const FILTER = [
+  {
+    id: 1,
+    title: '장르',
+  },
+  {
+    id: 2,
+    title: '시간',
+  },
+  {
+    id: 3,
+    title: '계절',
+  },
+  {
+    id: 4,
+    title: 'K-pop',
+  },
+  {
+    id: 5,
+    title: '날씨',
+  },
+];
 const Music = ({ route, navigation }) => {
   // Check if route.params is defined
   let DATA = [];
@@ -55,8 +79,26 @@ const Music = ({ route, navigation }) => {
       });
     }
   }
-
+  const { swipe, setSwipe } = useSwipe(false);
+  console.log(swipe);
   useEffect(() => {
+    handleSwipe();
+    const fetchData = async () => {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        try {
+          const response = await fetch(
+            'https://api.spotify.com/v1/playlists/37i9dQZF1DWT9uTRZAYj0c/tracks',
+            {
+              headers: {
+                Authorization: 'Bearer ' + token,
+              },
+            },
+          );
+          const data = await response.json();
+          const filteredTracks = data.items.filter(
+            item => item.track.preview_url !== null,
+          );
     const newMusicFilter =
       (route.params?.selectCountry || '') +
       (route.params?.selectedGenre || '') +
@@ -89,6 +131,28 @@ const Music = ({ route, navigation }) => {
         const filteredTracks = data.items.filter(
           item => item.track.preview_url !== null,
         );
+
+          setTracks(filteredTracks);
+          setLoading(false);
+          console.log(data.items[0].track.preview_url);
+        } catch (error) {
+          console.error(error);
+          setLoading(false);
+        }
+      } else {
+        ToastAndroid.show(
+          '스포티파이가 연동되지 않아 음악 리스트를 띄울 수 없습니다.',
+          ToastAndroid.SHORT,
+        );
+        // navigation.navigate('Start');
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleSwipe = () => {
+    setSwipe(false);
+  };
 
         setTracks(filteredTracks);
         setLoading(false);

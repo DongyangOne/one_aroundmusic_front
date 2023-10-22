@@ -26,6 +26,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   const { singer } = route.params;
   const { image } = route.params;
   const { href } = route.params;
+  console.log('href' + href);
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
   const [isPlaying, setIsPlaying] = useState(false);
   useEffect(() => {
@@ -52,7 +53,6 @@ const PlayerScreenView = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    //console.log(href);
     const sound = new Sound(href, null);
 
     requestPermission().then(result => {

@@ -167,4 +167,14 @@ export const MapMenuList = [
     component: Header,
     options: { headerShown: false },
   },
+  {
+    name: 'Music',
+    component: Music,
+    options: { headerShown: false },
+  },
+  {
+    name: 'PlayerScreen',
+    component: PlayerScreen,
+    options: { headerShown: false },
+  },
 ];

@@ -12,6 +12,8 @@ import ArMarker from '../components/Marker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { url } from '../constant/Url';
+import { useSwipe } from '../context/AuthContext';
+
 async function requestPermission() {
   try {
     if (Platform.OS === 'ios') {
@@ -30,6 +32,19 @@ async function requestPermission() {
 const Map = ({ navigation }) => {
   const [location, setLocation] = useState();
   const [data, setData] = useState([]);
+  const { swipe, setSwipe } = useSwipe(false);
+  console.log(handleSwipe);
+  useEffect(() => {
+    handleSwipe();
+    const unsubscribe = navigation.addListener('focus', () => {});
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const handleSwipe = () => {
+    setSwipe(true);
+  };
+
   const fetchData = async () => {
     const token = await AsyncStorage.getItem('accessToken');
     try {
@@ -43,6 +58,7 @@ const Map = ({ navigation }) => {
       console.log(err.response.data);
     }
   };
+
   const getAR = async () => {
     console.log('hi');
     const token = await AsyncStorage.getItem('accessToken');
@@ -68,7 +84,6 @@ const Map = ({ navigation }) => {
 
   useEffect(() => {
     fetchData();
-
     requestPermission().then(result => {
       console.log({ result });
       if (result === 'granted') {
