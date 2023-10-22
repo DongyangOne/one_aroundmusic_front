@@ -10,6 +10,7 @@ import {
   View,
   PermissionsAndroid,
   Button,
+  BackHandler
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
@@ -29,6 +30,21 @@ const PlayerScreenView = ({ route, navigation }) => {
   console.log('href' + href);
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
   const [isPlaying, setIsPlaying] = useState(false);
+  
+  const handlePressBack = () => {
+    if(navigation?.canGoBack()){
+      navigation.navigate('Map');
+      return true;
+    }
+    return false;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handlePressBack);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handlePressBack);
+    }
+  }, [handlePressBack]);
   useEffect(() => {
     if (isPlaying) {
       handlePlay();
