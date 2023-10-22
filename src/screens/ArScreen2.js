@@ -15,6 +15,13 @@ import {
   ViroDirectionalLight,
   ViroAmbientLight,
 } from '@viro-community/react-viro';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import storage from '@react-native-firebase/storage';
+const serverURL = 'http://125.133.34.224:8001';
+let loadData = null;
+let TOKEN = null;
+let temp;
 
 export default Arscreen2 = ({ navigation, route }) => {
   const data = {
@@ -24,8 +31,62 @@ export default Arscreen2 = ({ navigation, route }) => {
   };
 
   const WorldSceneAR = () => {
+    const [itemFrame, setItemFrame] = useState();
+    const [selectId, setSelectId] = useState(null);
+
+    const setData = async () => {
+      try {
+        TOKEN = await AsyncStorage.getItem('accessToken');
+        if (TOKEN) {
+          axios
+            .get(`${serverURL}/api/reward/pop`, {
+              headers: {
+                Authorization: `Bearer ${TOKEN}`,
+              },
+            })
+            .then(response => {
+              loadData = response.data;
+              temp = loadData.data.selectedReward.id;
+              setSelectId(temp);
+              let text = `/reward/pop/border${temp - 42}.png`;
+              console.log("dkssud", text);
+              storage()
+                .ref(text)
+                .getDownloadURL()
+                .then(downloadURL => {
+                  console.log(downloadURL);
+                  setItemFrame(downloadURL);
+                })
+                .catch(e => {
+                  console.error(`GET DOWNLOAD URL ERROR >> ${e}`);
+                });
+            })
+            .catch(e => {
+              console.error(`GET ERROR >> ${e}`);
+            });
+        } else {
+          console.log('No data found');
+        }
+      } catch (e) {
+        console.error(`Error with Reading Data >> ${e}`);
+      }
+    };
+  
+    useEffect(() => {
+      setData();
+    }, []);
+
+    
     return (
       <ViroARScene>
+        {itemFrame ? (
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[0, 0.5, -1.59]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
         <ViroImage
           height={0.5}
           width={0.5}
