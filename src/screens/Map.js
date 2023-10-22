@@ -11,6 +11,8 @@ import Geolocation from 'react-native-geolocation-service';
 import ArMarker from '../components/Marker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { url } from '../constant/Url';
+import { useSwipe } from '../context/AuthContext';
 
 async function requestPermission() {
   try {
@@ -30,26 +32,58 @@ async function requestPermission() {
 const Map = ({ navigation }) => {
   const [location, setLocation] = useState();
   const [data, setData] = useState([]);
+  const { swipe, setSwipe } = useSwipe(false);
+  console.log(handleSwipe);
+  useEffect(() => {
+    handleSwipe();
+    const unsubscribe = navigation.addListener('focus', () => {});
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const handleSwipe = () => {
+    setSwipe(true);
+  };
+
   const fetchData = async () => {
     const token = await AsyncStorage.getItem('accessToken');
     try {
-      const response = await axios.get(
-        'http://125.133.34.224:8001/api/marker',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await axios.get(`${url}/api/marker`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
       setData(response.data.data.marker);
     } catch (err) {
       console.log(err.response.data);
     }
   };
 
+  const getAR = async () => {
+    console.log('hi');
+    const token = await AsyncStorage.getItem('accessToken');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    if (token) {
+      console.log(token);
+      axios
+        .get(`${url}/api/ar`, config)
+        .then(response => {
+          navigation.navigate('ArScreen', { data: response.data });
+        })
+        .catch(error => {
+          console.log('error.message');
+        });
+    } else {
+      console.log('not found token');
+    }
+  };
+
   useEffect(() => {
     fetchData();
-
     requestPermission().then(result => {
       console.log({ result });
       if (result === 'granted') {
@@ -72,8 +106,16 @@ const Map = ({ navigation }) => {
 
   if (!location) {
     return (
-      <View>
-        <Text>Splash Screen</Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}>
+        <Text style={{ height: 23, fontSize: 18 }}>
+          지도를 불러오고 있습니다 ...
+        </Text>
       </View>
     );
   }
@@ -111,9 +153,7 @@ const Map = ({ navigation }) => {
               longitude: item.longitude,
             }}
             size={{ width: 50, height: 50 }}
-            onPress={() => {
-              navigation.navigate('ArScreen');
-            }}
+            onPress={getAR}
           />
         ))}
       </MapView>

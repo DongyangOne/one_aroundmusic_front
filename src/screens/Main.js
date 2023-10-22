@@ -1,12 +1,12 @@
 // ** React Imports
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // ** RN Imports
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 
 // ** Utils Imports
 import { ScrollView } from 'react-native-virtualized-view';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, useSwipe } from '../context/AuthContext';
 
 // ** Component Imports
 import Header from '../components/Header';
@@ -64,14 +64,28 @@ export const DATA = [
 
 const Main = ({ navigation, route }) => {
   const { open, setOpen } = useAuth(false);
+  const { swipe, setSwipe } = useSwipe(false);
 
   useEffect(() => {
     handleOpen();
-  }, []);
+    handleSwipe();
+    const unsubscribe = navigation.addListener('focus', () => {
+      const newData = [];
+      setMainData(newData);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const handleSwipe = () => {
+    setSwipe(true);
+  };
+
+  const [mainData, setMainData] = useState(DATA);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,7 +108,7 @@ const Main = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
   },
   story_wrap: {
     width: '100%',

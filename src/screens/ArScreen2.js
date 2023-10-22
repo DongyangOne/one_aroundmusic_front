@@ -1,12 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-  Platform,
-  PermissionsAndroid,
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import {
   ViroARScene,
   ViroImage,
@@ -18,6 +11,8 @@ export default Arscreen2 = ({ navigation, route }) => {
     image: route.params.thumbnailUrl,
     title: route.params.title,
     videoId: route.params.youtubeId,
+    href: route.params.href,
+    singer: route.params.singer,
   };
 
   const WorldSceneAR = () => {
@@ -41,9 +36,12 @@ export default Arscreen2 = ({ navigation, route }) => {
     );
   };
 
-  //공유하기 클릭 시 실행 axios
   const ShareMusic = async () => {
     navigation.navigate('Board');
+  };
+
+  const Back = () => {
+    navigation.goBack('PlayerScreen');
   };
 
   return (
@@ -53,13 +51,24 @@ export default Arscreen2 = ({ navigation, route }) => {
         initialScene={{
           scene: WorldSceneAR,
         }}
-        style={styles.f1}
       />
       <View style={styles.con}>
+        <TouchableOpacity onPress={Back}>
+          <Image
+            style={styles.backBtn}
+            source={require('../../assets/ARbackBtn.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={Back}>
+          <Image
+            style={styles.playBtn}
+            source={require('../../assets/ARplayBtn.png')}
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={ShareMusic}>
           <Image
-            style={styles.tinyLogo}
-            source={require('../../assets/Bottom.png')}
+            style={styles.shareBtn}
+            source={require('../../assets/ARshareBtn.png')}
           />
         </TouchableOpacity>
       </View>
@@ -67,16 +76,33 @@ export default Arscreen2 = ({ navigation, route }) => {
   );
 };
 var styles = StyleSheet.create({
-  f1: { flex: 1 },
-  con: {
-    width: '100%',
-    height: 100,
+  f1: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
   },
-  tinyLogo: {
-    width: 200,
-    height: 90,
+  con: {
+    width: 168,
+    height: 76,
+    justifyContent: 'space-between',
+    backgroundColor: 'none',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 77,
+    alignItems: 'center',
+  },
+  playBtn: {
+    width: 56,
+    height: 56,
+  },
+  shareBtn: {
+    width: 41,
+    height: 41,
+    marginTop: 35,
+  },
+  backBtn: {
+    width: 41,
+    height: 41,
+    marginTop: 35,
   },
 });

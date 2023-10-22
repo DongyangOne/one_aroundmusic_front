@@ -1,7 +1,53 @@
 import { Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Marker } from 'react-native-maps';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import storage from '@react-native-firebase/storage';
+import { url } from '../constant/Url';
 
+let loadData = null;
+let temp;
 function ArMarker({ location, size, onPress }) {
+  const [itemFrame, setItemFrame] = useState();
+  const [selectId, setSelectId] = useState();
+
+  const getData = async () => {
+    try {
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      if (TOKEN) {
+        axios
+          .get(`${url}/api/reward/walk`, {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          })
+          .then(response => {
+            loadData = response.data;
+            temp = loadData.data.selectedReward.id;
+            setSelectId(temp);
+            setData();
+          })
+          .catch(e => {
+            console.error(`GET ERROR >> ${e}`);
+          });
+      } else {
+        console.log('No data found');
+      }
+    } catch (e) {
+      console.error(`Error with Reading Data >> ${e}`);
+    }
+  };
+
+  const setData = async () => {
+    text = `/reward/walk/walk${temp}.png`;
+    setItemFrame(await storage().ref(text).getDownloadURL());
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <Marker
       style={{ width: size.width, height: size.width }}
@@ -11,7 +57,7 @@ function ArMarker({ location, size, onPress }) {
       }}
       onPress={onPress}>
       <Image
-        source={require('../../assets/arLocation.png')}
+        source={{ uri: itemFrame }}
         style={{
           width: size.width,
           height: size.height,

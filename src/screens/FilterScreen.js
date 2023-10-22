@@ -1,126 +1,191 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import {
-  StyleSheet,
-  Text,
-  FlatList,
-  View,
-  TouchableOpacity,
-} from "react-native";
-import FilterDetailButton from "../components/FilterDetailButton";
-import {
-  DATAAGE,
-  DATADATE,
   DATASEASON,
-  DATASEX,
+  DATAGENRE,
   DATATIME,
-} from "../components/DummyData";
+  DATACOUNTRY,
+} from '../components/DummyData';
 
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <FilterDetailButton title={title} />
-  </View>
-);
+import { Black, Pink, White, Yellow } from '../constant/Color';
+const FilterDetailButton = ({ title, isSelected, onPress }) => {
+  return (
+    <TouchableOpacity
+      style={[styles.filterBtn, isSelected ? styles.clickedButton : null]}
+      onPress={onPress}>
+      <Text style={[styles.text, isSelected ? styles.clickText : null]}>
+        {title}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 const FilterScreen = ({ navigation }) => {
-  const handleGoBack = () => {
-    navigation.goBack();
+  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedSeason, setSelectedSeason] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectCountry, setSelectCountry] = useState(null);
+
+  // 장르 버튼 스타일 변경을 위한 객체
+  useEffect(() => {
+    const genreButtonStyles = DATAGENRE.reduce((styles, item) => {
+      styles[item.title] = item.title === selectedGenre;
+      return styles;
+    }, {});
+
+    DATAGENRE.forEach(item => {
+      item.isSelected = genreButtonStyles[item.title];
+    });
+  }, [selectedGenre]);
+
+  // 계절 버튼 스타일 변경을 위한 객체
+  useEffect(() => {
+    const seasonButtonStyles = DATASEASON.reduce((styles, item) => {
+      styles[item.title] = item.title === selectedSeason;
+      return styles;
+    }, {});
+
+    DATASEASON.forEach(item => {
+      item.isSelected = seasonButtonStyles[item.title];
+    });
+  }, [selectedSeason]);
+
+  // 시간 버튼 스타일 변경을 위한 객체
+  useEffect(() => {
+    const timeButtonStyles = DATATIME.reduce((styles, item) => {
+      styles[item.title] = item.title === selectedTime;
+      return styles;
+    }, {});
+
+    DATATIME.forEach(item => {
+      item.isSelected = timeButtonStyles[item.title];
+    });
+  }, [selectedTime]);
+
+  //나라 버튼 스타일 번경을 위한 객체
+  useEffect(() => {
+    const countryButtonStyles = DATACOUNTRY.reduce((styles, item) => {
+      styles[item.title] = item.title === selectCountry;
+      return styles;
+    }, {});
+
+    DATACOUNTRY.forEach(item => {
+      item.isSelected = countryButtonStyles[item.title];
+    });
+  }, [selectCountry]);
+
+  const createFilterButtons = (data, setSelectedFunction, selectedValue) => {
+    return data.map(item => (
+      <FilterDetailButton
+        key={item.id}
+        title={item.title}
+        isSelected={item.title === selectedValue}
+        onPress={() => setSelectedFunction(item.title)}
+      />
+    ));
   };
 
-  const renderItem = ({ item }) => <Item title={item.title} />;
-
   return (
-    <>
-      <View>
-        <Text style={styles.MainText}>나이</Text>
-        <FlatList
-          data={DATAAGE}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          style={styles.flatList}
-          horizontal={false}
-          numColumns={5}
-        />
+    <View style={styles.AllBack}>
+      <View style={styles.centerBtn}>
+        <View style={styles.bu}>
+          <Text style={styles.MainText}>장르</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATAGENRE, setSelectedGenre, selectedGenre)}
+          </View>
+        </View>
+        <View>
+          <Text style={styles.MainText}>계절</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATASEASON, setSelectedSeason, selectedSeason)}
+          </View>
+        </View>
+        <View>
+          <Text style={styles.MainText}>시간</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATATIME, setSelectedTime, selectedTime)}
+          </View>
+        </View>
+        <View>
+          <Text style={styles.MainText}>나라</Text>
+          <View style={styles.buttonContainer}>
+            {createFilterButtons(DATACOUNTRY, setSelectCountry, selectCountry)}
+          </View>
+        </View>
       </View>
-      <View>
-        <Text style={styles.MainText}>성별</Text>
-        <FlatList
-          data={DATASEX}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          style={styles.flatList}
-          horizontal={false}
-          numColumns={5}
-        />
-      </View>
-      <View>
-        <Text style={styles.MainText}>날씨</Text>
-        <FlatList
-          data={DATADATE}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          style={styles.flatList}
-          horizontal={false}
-          numColumns={5}
-        />
-      </View>
-      <View>
-        <Text style={styles.MainText}>시간</Text>
-        <FlatList
-          data={DATATIME}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          style={styles.flatList}
-          horizontal={false}
-          numColumns={5}
-        />
-      </View>
-      <View>
-        <Text style={styles.MainText}>계절</Text>
-        <FlatList
-          data={DATASEASON}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          style={styles.flatList}
-          horizontal={false}
-          numColumns={5}
-        />
+
+      <View style={styles.bu}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Music")}
-        >
+          onPress={() =>
+            navigation.navigate('Music', {
+              selectedGenre,
+              selectedSeason,
+              selectedTime,
+              selectCountry,
+            })
+          }>
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 };
-export default FilterScreen;
 
-var styles = {
+const styles = StyleSheet.create({
+  AllBack: {
+    // backgroundColor: 'white',
+  },
   MainText: {
-    color: "#001C3E",
+    color: Pink,
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 23,
     marginLeft: 14,
     marginBottom: 10,
   },
-  item: {
-    marginLeft:6,
-    margin:3
+  buttonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginLeft: 6,
   },
+  centerBtn: { marginTop: 10 },
   button: {
-    backgroundColor: "#001C3E",
+    backgroundColor: Pink,
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
     marginHorizontal: 30,
-    alignItems: "center",
-    marginTop: "30%",
+    alignItems: 'center',
+    marginTop: '40%',
   },
   buttonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-};
+  filterBtn: {
+    backgroundColor: '#ffffff',
+    width: 65,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    marginLeft: 4,
+    marginTop: 4,
+    flexDirection: 'row',
+  },
+  text: {
+    fontSize: 14,
+    color: '#000000',
+  },
+  clickText: {
+    fontSize: 14,
+    color: '#ffffff',
+  },
+  clickedButton: {
+    backgroundColor: Pink,
+  },
+});
+
+export default FilterScreen;
