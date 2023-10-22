@@ -63,6 +63,11 @@ const PlayerScreenView = ({ route, navigation }) => {
       }
     });
     setSound(sound);
+
+    return () => {
+      sound.pause();
+      setIsPlay(false);
+    };
   }, []);
 
   const handlePlay = () => {
@@ -79,6 +84,7 @@ const PlayerScreenView = ({ route, navigation }) => {
     }
   };
   const shareAr = async () => {
+    handleStop();
     const requestData = {
       youtubeId: trackId,
       title: title,
