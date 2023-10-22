@@ -17,6 +17,8 @@ import SongList from '../components/SongList';
 import { TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
+import { useSwipe } from '../context/AuthContext';
+
 const FILTER = [
   {
     id: 1,
@@ -67,8 +69,10 @@ const Music = ({ route, navigation }) => {
   }
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const { swipe, setSwipe } = useSwipe(false);
+  console.log(swipe);
   useEffect(() => {
+    handleSwipe();
     const fetchData = async () => {
       const token = await AsyncStorage.getItem('token');
       if (token) {
@@ -103,6 +107,10 @@ const Music = ({ route, navigation }) => {
     };
     fetchData();
   }, []);
+
+  const handleSwipe = () => {
+    setSwipe(false);
+  };
 
   return (
     <SafeAreaView style={styles.container}>

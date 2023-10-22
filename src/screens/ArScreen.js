@@ -6,8 +6,25 @@ import {
   ViroARSceneNavigator,
   ViroARClickable
 } from '@viro-community/react-viro';
+import { useSwipe } from '../context/AuthContext';
 
 const WorldSceneAR =(props) => {
+  const { swipe, setSwipe } = useSwipe(false);
+
+  useEffect(() => {
+    handleSwipe();
+    const unsubscribe = navigation.addListener('focus', () => {
+      const newData = [];
+      setMainData(newData);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const handleSwipe = () => {
+    setSwipe(false);
+  };
+
   const handleImageClick = (abc) => {
     props.navigation.navigate('PlayerScreen', {
       title: abc.music.title,
