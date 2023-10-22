@@ -133,6 +133,7 @@ const FilterScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   AllBack: {
+    flex: 1,
     backgroundColor: 'white',
   },
   MainText: {
@@ -148,7 +149,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginLeft: 6,
   },
-  bu: {},
   centerBtn: { marginTop: 10 },
   button: {
     backgroundColor: 'pink',
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 30,
     alignItems: 'center',
-    marginTop: '60%',
+    marginTop: '40%',
   },
   buttonText: {
     color: 'white',

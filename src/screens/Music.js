@@ -18,7 +18,7 @@ import { TouchableOpacity } from 'react-native';
 import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
 import API_URLS from '../constant/MusicList';
 import { FILTER } from '../components/DummyData';
-
+import { useSwipe } from '../context/AuthContext';
 const Music = ({ route, navigation }) => {
   // Check if route.params is defined
   let DATA = [];

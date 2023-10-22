@@ -108,7 +108,7 @@ const Main = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
   },
   story_wrap: {
     width: '100%',

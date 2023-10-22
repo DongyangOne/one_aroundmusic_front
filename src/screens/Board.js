@@ -15,7 +15,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { Pink } from '../constant/Color';
 import FastImage from 'react-native-fast-image';
 import { url } from '../constant/Url';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const Board = ({ navigation }) => {
   const [location, setLocation] = useState();
   const [content, setContent] = useState();
@@ -71,78 +71,90 @@ const Board = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        {selectedImage ? (
-          <TouchableOpacity onPress={openImagePicker}>
-            <FastImage
-              source={{ uri: selectedImage }}
-              style={{ width: 200, height: 300 }}
-              resizeMode={FastImage.resizeMode.contain}
-            />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity style={styles.button} onPress={openImagePicker}>
-            <Text style={styles.buttonText}>이미지를 선택하세요</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+    <KeyboardAwareScrollView>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.imageContainer}>
+          {selectedImage ? (
+            <TouchableOpacity onPress={openImagePicker}>
+              <FastImage
+                source={{ uri: selectedImage }}
+                style={styles.image}
+                resizeMode={FastImage.resizeMode.contain}
+              />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={styles.button} onPress={openImagePicker}>
+              <Text style={styles.buttonText}>이미지를 선택하세요</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.text}>위치</Text>
+          <TextInput
+            style={styles.soft1}
+            placeholder="현재 위치를 입력하세요"
+            placeholderTextColor="#B2B2B2"
+            onChange={event => {
+              setLocation(event.nativeEvent.text);
+            }}
+          />
+          <Text style={styles.text}>태그</Text>
+          <TextInput
+            style={styles.soft1}
+            placeholder="#10대  #봄   #산뜻하다"
+            placeholderTextColor="#B2B2B2"
+          />
+          <Text style={styles.text}>짧은 글</Text>
+          <TextInput
+            numberOfLines={4}
+            maxLength={40}
+            onChange={event => {
+              setContent(event.nativeEvent.text);
+            }}
+            style={styles.soft}
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.text}>위치</Text>
-        <TextInput
-          style={styles.soft1}
-          placeholder="현재 위치를 입력하세요"
-          placeholderTextColor="#B2B2B2"
-          onChange={event => {
-            setLocation(event.nativeEvent.text);
-          }}
-        />
-        <Text style={styles.text}>태그</Text>
-        <TextInput
-          style={styles.soft1}
-          placeholder="#10대  #봄   #산뜻하다"
-          placeholderTextColor="#B2B2B2"
-        />
-        <Text style={styles.text}>짧은 글</Text>
-        <TextInput
-          numberOfLines={4}
-          maxLength={40}
-          onChange={event => {
-            setContent(event.nativeEvent.text);
-          }}
-          style={styles.soft}
-        />
-      </View>
-      <View style={styles.BtnBox}>
-        <TouchableOpacity style={styles.uploadButton} onPress={uploadContent}>
-          <Text style={styles.buttonText}>업로드하기</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        <View style={styles.BtnBox}>
+          <TouchableOpacity style={styles.uploadButton} onPress={uploadContent}>
+            <Text style={styles.buttonText}>업로드하기</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  BtnBox: { marginTop: '15%' },
+  BtnBox: { marginTop: '30%' },
   container: {
     alignItems: 'center',
-    marginTop: 4,
+    marginTop: 15,
+    flex: 1,
   },
   content: {
     marginBottom: 10,
   },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 15,
+  },
   uploadButton: {
     alignSelf: 'flex-end',
     width: 330,
-    backgroundColor: '#001C3E',
+    backgroundColor: Pink,
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
     marginHorizontal: 30,
     alignItems: 'center',
+    bottom: 50,
   },
-
+  inputContainer: {
+    top: 15,
+  },
   storyRow: {
     flexDirection: 'row',
     marginTop: 13,
