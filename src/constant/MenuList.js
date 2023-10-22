@@ -137,7 +137,7 @@ export const MenuList = [
       headerTintColor: Pink,
       headerStyle: {
         // backgroundColor: '#000080',
-        backgroundColor: 'white',
+        backgroundColor: White, 
       },
       headerTitleAlign: 'center',
     },
