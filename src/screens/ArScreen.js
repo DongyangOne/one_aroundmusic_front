@@ -138,7 +138,7 @@ const WorldSceneAR = props => {
           <ViroImage
             height={1}
             width={1}
-            position={[-4.84, -3.9, -2.01]}
+            position={[-4.85, -3.95, -2.01]}
             source={{ uri: itemFrame }}
           />
         ) : null}
@@ -161,7 +161,7 @@ const WorldSceneAR = props => {
           <ViroImage
             height={0.8}
             width={0.8}
-            position={[1.49, 4.31, -2.99]}
+            position={[1.49, 4.31, -3.02]}
             source={{ uri: itemFrame }}
           />
         ) : null}
@@ -272,6 +272,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[7, -4, 2.01]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
