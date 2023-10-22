@@ -98,7 +98,6 @@ const Main = ({ navigation, route }) => {
       <ScrollView style={styles.container} nestedScrollEnabled={true}>
         <View style={styles.story_wrap}>
           <MainStory data={DATA} frame={route.params} />
-          <View style={styles.story_line}></View>
           <Contents data={DATA} />
         </View>
       </ScrollView>
@@ -108,7 +107,7 @@ const Main = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
   },
   story_wrap: {
     width: '100%',
