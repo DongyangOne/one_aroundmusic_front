@@ -7,9 +7,61 @@ import {
   ViroARClickable,
 } from '@viro-community/react-viro';
 import { useSwipe } from '../context/AuthContext';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import storage from '@react-native-firebase/storage';
+
+const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
+let loadData = null; // DB에서 불러온 데이터 저장
+export let TOKEN = null;
+let temp;
 
 const WorldSceneAR = props => {
   const { swipe, setSwipe } = useSwipe(false);
+  const [itemFrame, setItemFrame] = useState();
+  const [selectId, setSelectId] = useState();
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('accessToken');
+      if (value !== null) {
+        TOKEN = value;
+        axios
+          .get(`${serverURL}/api/reward/listen`, {
+            headers: {
+              Authorization: `Bearer ${TOKEN}`,
+            },
+          })
+          .then(response => {
+            loadData = response.data;
+            /** Attempt 3 */
+            // console.log(loadData);
+            temp = loadData.data.selectedReward.id;
+            setSelectId(temp);
+            setData();
+          })
+          .catch(e => {
+            console.error(`GET ERROR >> ${e}`);
+          });
+      } else {
+        console.log('No data found');
+      }
+    } catch (e) {
+      console.error(`Error with Reading Data >> ${e}`);
+    }
+  };
+
+  /** Attempt 5 */
+  const setData = async () => {
+    text = `/reward/listen/listen${temp - 6}.png`;
+    // console.log(`text >> ${text}`);
+    setItemFrame(await storage().ref(text).getDownloadURL());
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   /*   useEffect(() => {
     handleSwipe();
