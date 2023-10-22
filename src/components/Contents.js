@@ -65,7 +65,9 @@ const Contents = ({ content }) => {
       <View style={styles.content}>
         {loading ? (
           <View style={styles.gray}>
-            <Text style={styles.loding}>Loading...</Text>
+            <Text style={styles.loding}>
+              시간이 약간 걸립니다. 잠시 기다려주세요.
+            </Text>
           </View>
         ) : data.length === 0 ? ( // 데이터가 없을 때
           <Text>데이터가 없습니다</Text>
