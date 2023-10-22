@@ -71,22 +71,22 @@ export default Arscreen2 = ({ navigation, route }) => {
         console.error(`Error with Reading Data >> ${e}`);
       }
     };
-  
+
     useEffect(() => {
       setData();
     }, []);
 
-    
+
     return (
       <ViroARScene>
         {itemFrame ? (
-        <ViroImage
-          height={0.8}
-          width={0.8}
-          position={[0.01, 0.48, -1.51]}
-          source={{ uri: itemFrame }}
-        />
-      ) : null}
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[0.01, 0.48, -1.51]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
         <ViroImage
           height={0.5}
           width={0.5}

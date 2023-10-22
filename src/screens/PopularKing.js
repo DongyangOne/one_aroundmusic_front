@@ -19,10 +19,11 @@ const RoundedShadowBox = ({ children }) => {
 
 const PopularKing = ({ navigation }) => {
   let fixed = 44;
+  let LOADING_MSG = '로딩 중...';
 
   const [images, setImages] = useState([0, 0, 0]);
   const [abc, setAbc] = useState([0, 0, 0]);
-  const [selection, setSelection] = useState(8);
+  const [selection, setSelection] = useState(44);
 
   const loadData = async () => {
     let imgDataBeta = [0, 0, 0];
@@ -137,7 +138,11 @@ const PopularKing = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
-        <Image style={styles.LogoMain} source={{ uri: images[1] }} />
+        {images[1] != 0 ? (
+          <Image style={styles.LogoMain} source={{ uri: images[1] }} />
+        ) : (
+          <Text style={styles.LogoText}>{LOADING_MSG}</Text>
+        )}
       </View>
 
       <View style={styles.centeredContainer}></View>
@@ -147,7 +152,11 @@ const PopularKing = ({ navigation }) => {
             onPress={() => {
               handleLeftImageClick();
             }}>
-            <Image style={imageStyles[0]} source={{ uri: images[0] }} />
+            {images[0] != 0 ? (
+              <Image style={imageStyles[0]} source={{ uri: images[0] }} />
+            ) : (
+              <Text style={styles.imageStylesText}>{LOADING_MSG}</Text>
+            )}
           </TouchableOpacity>
           <TouchableOpacity>
             <Image style={imageStyles[1]} source={{ uri: images[1] }} />
@@ -181,6 +190,14 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     width: 150,
     height: 150,
+  },
+  LogoText: {
+    marginTop: '20%',
+    marginBottom: 50,
+    width: 150,
+    height: 150,
+    textAlign: 'center',
+    fontSize: 20,
   },
   serve: {
     flexDirection: 'row',

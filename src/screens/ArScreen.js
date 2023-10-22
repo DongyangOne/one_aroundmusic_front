@@ -54,8 +54,8 @@ const WorldSceneAR = props => {
 
   /** Attempt 5 */
   const setData = async () => {
-    text = `/reward/listen/listen${temp - 42}.png`;
-    // console.log(`text >> ${text}`);
+    text = `/reward/reward/border${temp - 42}.png`;
+    console.log(`text >> ${text}`);
     setItemFrame(await storage().ref(text).getDownloadURL());
   };
 
@@ -88,6 +88,14 @@ const WorldSceneAR = props => {
   };
   return (
     <ViroARScene>
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[-3.99, 0.48, -3.01]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
