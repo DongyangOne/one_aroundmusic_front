@@ -28,7 +28,7 @@ const WorldSceneAR = props => {
       if (value !== null) {
         TOKEN = value;
         axios
-          .get(`${serverURL}/api/reward/listen`, {
+          .get(`${serverURL}/api/reward/pop`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },
@@ -54,7 +54,7 @@ const WorldSceneAR = props => {
 
   /** Attempt 5 */
   const setData = async () => {
-    text = `/reward/listen/listen${temp - 6}.png`;
+    text = `/reward/listen/listen${temp - 42}.png`;
     // console.log(`text >> ${text}`);
     setItemFrame(await storage().ref(text).getDownloadURL());
   };
