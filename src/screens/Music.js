@@ -15,35 +15,21 @@ import Header from '../components/Header';
 import FilterButton from '../components/FilterButton';
 import SongList from '../components/SongList';
 import { TouchableOpacity } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 import SVGComponentFilter from '../components/SVG/SVGComponentFilter';
-const FILTER = [
-  {
-    id: 1,
-    title: '장르',
-  },
-  {
-    id: 2,
-    title: '시간',
-  },
-  {
-    id: 3,
-    title: '계절',
-  },
-  {
-    id: 4,
-    title: 'K-pop',
-  },
-  {
-    id: 5,
-    title: '날씨',
-  },
-];
+import API_URLS from '../constant/MusicList';
+import { FILTER } from '../components/DummyData';
+import { useSwipe } from '../context/AuthContext';
 const Music = ({ route, navigation }) => {
   // Check if route.params is defined
   let DATA = [];
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [musicFilter, setMusicFilter] = useState(null);
+  const { swipe, setSwipe } = useSwipe(false);
+  console.log(swipe);
   if (route.params) {
-    const { selectedGenre, selectedSeason, selectedTime } = route.params;
+    const { selectedGenre, selectedSeason, selectedTime, selectCountry } =
+      route.params;
     if (selectedGenre) {
       DATA.push({
         id: 1,
@@ -64,46 +50,67 @@ const Music = ({ route, navigation }) => {
         tag: selectedTime,
       });
     }
+    if (selectCountry) {
+      DATA.push({
+        id: 4,
+        tag: selectCountry,
+      });
+    }
   }
-  const [tracks, setTracks] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = await AsyncStorage.getItem('token');
-      if (token) {
-        try {
-          const response = await fetch(
-            'https://api.spotify.com/v1/playlists/37i9dQZF1DWT9uTRZAYj0c/tracks',
-            {
-              headers: {
-                Authorization: 'Bearer ' + token,
-              },
-            },
-          );
-          const data = await response.json();
-          const filteredTracks = data.items.filter(
-            item => item.track.preview_url !== null,
-          );
+    handleSwipe();
+    const newMusicFilter =
+      (route.params?.selectCountry || '') +
+      (route.params?.selectedGenre || '') +
+      (route.params?.selectedSeason || '');
 
-          setTracks(filteredTracks);
-          setLoading(false);
-          console.log(data.items[0].track.preview_url);
-        } catch (error) {
-          console.error(error);
-          setLoading(false);
-        }
-      } else {
-        ToastAndroid.show(
-          '스포티파이가 연동되지 않아 음악 리스트를 띄울 수 없습니다.',
-          ToastAndroid.SHORT,
-        );
-        // navigation.navigate('Start');
-      }
-    };
+    // Log the updated musicFilter
+    console.log('장르:', newMusicFilter);
+
+    // Set the musicFilter
+    setMusicFilter(newMusicFilter);
+
     fetchData();
-  }, []);
+  }, [route.params]);
 
+  const fetchData = async () => {
+    const token = await AsyncStorage.getItem('token');
+    console.log('장르: ', musicFilter);
+    if (token) {
+      try {
+        const response = await fetch(
+          'https://api.spotify.com/v1/playlists/2MlsYqBrtrsZczJC4MyIqw/tracks',
+          {
+            headers: {
+              Authorization: 'Bearer ' + token,
+            },
+          },
+        );
+        const data = await response.json();
+
+        const filteredTracks = data.items.filter(
+          item => item.track.preview_url !== null,
+        );
+
+        setTracks(filteredTracks);
+        setLoading(false);
+        console.log(data.items[0].track.preview_url);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    } else {
+      ToastAndroid.show(
+        '스포티파이가 연동되지 않아 음악 리스트를 띄울 수 없습니다.',
+        ToastAndroid.SHORT,
+      );
+      // navigation.navigate('Start');
+    }
+  };
+  const handleSwipe = () => {
+    setSwipe(false);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -144,7 +151,7 @@ const Music = ({ route, navigation }) => {
                 title={item.tag}
               />
             )}
-            numColumns={3}
+            numColumns={4}
           />
         </View>
         {loading ? (

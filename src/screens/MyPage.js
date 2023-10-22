@@ -19,10 +19,7 @@ import SignUp from '../screens/SignUp';
 const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
   const [nickname, setNickname] = useState('');
-  // const [userId, setUserId] = useState('Guest');
   const [authState, setAuthState] = useState(null);
-
-  // 빈 배열을 전달하여 한 번만 로딩
 
   async function authenticate() {
     const config = {

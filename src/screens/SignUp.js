@@ -16,7 +16,7 @@ import {
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
-
+import { url } from '../constant/Url';
 const SignUp = ({ navigation, route }) => {
   const [nickname, setNickname] = useState('nickname');
   const [email, setEmail] = useState('ex@gmail.com');
@@ -30,21 +30,20 @@ const SignUp = ({ navigation, route }) => {
         '닉네임은 영어로만 사용 가능합니다.',
         ToastAndroid.SHORT,
       );
-      return; // 함수를 여기서 종료
+      return;
     }
     try {
       const deviceId = await DeviceInfo.getUniqueId();
       await AsyncStorage.setItem('deviceId', deviceId);
       console.log('Device ID: ', deviceId);
 
-      const response = await axios.post('http://125.133.34.224:8001/api/user', {
+      const response = await axios.post(`${url}/api/user`, {
         nickname: nickname,
         email: email,
         socialToken: socialToken,
       });
 
       navigation.replace('Start');
-      navigation.navigate('MyPage', { nickname: nickname });
     } catch (error) {
       if (error.response.status === 400) {
         ToastAndroid.show('이미 가입된 아이디입니다.', ToastAndroid.SHORT);

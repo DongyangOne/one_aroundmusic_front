@@ -3,9 +3,8 @@ import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-
-const serverURL = 'http://125.133.34.224:8001';
-
+import { url } from '../constant/Url';
+import { Pink, Black } from '../constant/Color';
 const Contents = ({ content }) => {
   const [data, setData] = useState([]);
   const [imgUrl, setImgUrl] = useState([]);
@@ -16,7 +15,7 @@ const Contents = ({ content }) => {
       const TOKEN = await AsyncStorage.getItem('accessToken');
       if (TOKEN) {
         axios
-          .get(`${serverURL}/api/board`, {
+          .get(`${url}/api/board`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },
@@ -65,16 +64,23 @@ const Contents = ({ content }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         {loading ? (
-          <Text>Loading...</Text>
+          <View style={styles.gray}>
+            <Text style={styles.loding}>
+              시간이 약간 걸립니다. 잠시 기다려주세요.
+            </Text>
+          </View>
         ) : data.length === 0 ? ( // 데이터가 없을 때
           <Text>데이터가 없습니다</Text>
         ) : (
           data.map((item, index) => (
-            <View key={index}>
+            <View style={styles.main} key={index}>
               <Image source={{ uri: imgUrl[index] }} style={styles.image} />
               <View style={styles.textView}>
                 <Text style={styles.text}>{item.content}</Text>
-                <Text style={styles.date}>2023.08.05</Text>
+                <Text style={styles.date}>
+                  {item.createdDate[0]}.{item.createdDate[1]}.
+                  {item.createdDate[2]}
+                </Text>
               </View>
             </View>
           ))
@@ -105,15 +111,22 @@ const styles = StyleSheet.create({
     //marginTop: '0%',
   },
   textView: {
-    backgroundColor: '#ffffff',
+    backgroundColor: 'white',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+  },
+  loding: {
+    color: Black,
+    backgroundColor: 'white',
+  },
+  main: {
+    backgroundColor: 'white',
   },
   text: {
     marginLeft: 12,
     marginTop: 12,
     fontSize: 12,
-    color: '#001C3E',
+    color: Pink,
     fontWeight: 'bold',
   },
   date: {
@@ -121,7 +134,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     marginBottom: '18%',
     fontSize: 10,
-    color: '#001C3E',
+    color: Pink,
   },
 });
 

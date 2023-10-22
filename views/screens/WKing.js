@@ -18,14 +18,11 @@ const WKing = ({ navigation }) => {
       try {
         const token = await AsyncStorage.getItem('accessToken');
         console.log('토큰:', token);
-        const response = await axios.get(
-          'http://125.133.34.224:8001/api/reward/walk',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await axios.get(`${url}/api/reward/walk`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         const walkData = response.data.data.rewards;
 
@@ -86,15 +83,11 @@ const WKing = ({ navigation }) => {
         select_id: selectedImageID,
       };
 
-      const response = await axios.patch(
-        'http://125.133.34.224:8001/api/reward',
-        requestBody,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await axios.patch(`${url}/api/reward`, requestBody, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
 
       if (response.data.success) {
         alert('이미지가 성공적으로 업로드되었습니다.');

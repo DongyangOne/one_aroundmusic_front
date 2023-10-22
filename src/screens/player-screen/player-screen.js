@@ -16,6 +16,8 @@ import Geolocation from 'react-native-geolocation-service';
 import axios from 'axios';
 import SVGComponentPlayBtn from '../../components/SVG/SVGComponentPlayBtn';
 import SVGComponentStopBtn from '../../components/SVG/SVGComponentStopBtn';
+import { url } from '../../constant/Url';
+
 const PlayerScreenView = ({ route, navigation }) => {
   const [sound, setSound] = useState(null);
   const [isPlay, setIsPlay] = useState(true);
@@ -24,6 +26,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   const { singer } = route.params;
   const { image } = route.params;
   const { href } = route.params;
+  console.log('href' + href);
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
   const [isPlaying, setIsPlaying] = useState(false);
   useEffect(() => {
@@ -50,7 +53,6 @@ const PlayerScreenView = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    //console.log(href);
     const sound = new Sound(href, null);
 
     requestPermission().then(result => {
@@ -97,6 +99,8 @@ const PlayerScreenView = ({ route, navigation }) => {
       thumbnail: image,
       latitude: location.latitude,
       longitude: location.longitude,
+      href: href,
+      singer: singer,
     };
     const token = await AsyncStorage.getItem('accessToken');
     const config = {
@@ -105,14 +109,17 @@ const PlayerScreenView = ({ route, navigation }) => {
       },
     };
     if (token) {
-      console.log(token, requestData);
+      console.log('이쪽:', token, requestData);
       axios
-        .post('http://125.133.34.224:8001/api/ar', requestData, config)
+        .post(`${url}/api/ar`, requestData, config)
         .then(response => {
+          console.log(response);
           navigation.navigate('ArScreen2', {
             youtubeId: trackId,
             title: title,
             thumbnailUrl: image,
+            href: href,
+            singer: singer,
           });
         })
         .catch(error => {
