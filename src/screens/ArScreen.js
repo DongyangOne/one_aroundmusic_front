@@ -20,7 +20,7 @@ let temp;
 const WorldSceneAR = props => {
   const { swipe, setSwipe } = useSwipe(false);
   const [itemFrame, setItemFrame] = useState();
-  const [selectId, setSelectId] = useState();
+  const [selectId, setSelectId] = useState(null);
 
   const getData = async () => {
     try {
@@ -54,7 +54,7 @@ const WorldSceneAR = props => {
 
   /** Attempt 5 */
   const setData = async () => {
-    text = `/reward/reward/border${temp - 42}.png`;
+    text = `/reward/pop/border${temp - 42}.png`;
     console.log(`text >> ${text}`);
     setItemFrame(await storage().ref(text).getDownloadURL());
   };
@@ -111,6 +111,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[-0.49, -0.15, -1.51]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -126,6 +134,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={1}
+            width={1}
+            position={[-4.84, -3.9, -2.01]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.8}
         width={0.8}
@@ -141,10 +157,18 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[1.49, 4.31, -2.99]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
-        position={[1.5, 4.4, -3]}
+        position={[1.5, 4.4, -3.01]}
         placeholderSource={require('../../assets/music1.jpg')}
         source={{ uri: props[3].music.thumbnail }}
         onClick={() => handleImageClick(props[3])}
@@ -156,6 +180,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[1.98, 0.34, -0.51]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -171,6 +203,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[2.98, 0.44, -5.01]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -186,6 +226,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={1.05}
+            width={1.05}
+            position={[3.98, 3.01, -5.01]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.7}
         width={0.7}
@@ -201,6 +249,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[3.98, 0.5, 0.99]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -231,6 +287,14 @@ const WorldSceneAR = props => {
         placeholderSource={require('../../assets/play.png')}
         source={require('../../assets/play.png')}
       />
+      {itemFrame ? (
+          <ViroImage
+            height={0.8}
+            width={0.8}
+            position={[0.01, 0.25, -2.01]}
+            source={{ uri: itemFrame }}
+          />
+        ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
