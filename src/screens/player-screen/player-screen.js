@@ -92,7 +92,9 @@ const PlayerScreenView = ({ route, navigation }) => {
   // 정지
   const handleStop = () => {
     if (sound && isPlay) {
-      sound.pause();
+      sound.pause(() => {
+        setIsPlaying(false);
+      });
       setIsPlay(false);
     }
   };
