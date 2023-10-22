@@ -36,25 +36,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 35,
     flex: 1,
-    backgroundColor: '#001C3E',
+    backgroundColor: 'pink',
     marginLeft: 40,
     marginTop: 15,
     marginRight: 25,
     elevation: 10,
+    borderRadius: 5,
   },
   musicBox: {
     flex: 1,
     margin: 15,
     flexDirection: 'row',
-    backgroundColor: '#001C3E',
+    backgroundColor: 'pink',
   },
   image: {
     width: 100,
     height: 100,
     left: -40,
+    borderRadius: 5,
   },
   play: {
-    backgroundColor: '#001C3E',
+    backgroundColor: 'pink',
     textAlign: 'center',
     justifyContent: 'center',
     flex: 1,
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
   },
   singerName: {
     fontSize: 12,
-    color: '#D0D0D0',
+    color: 'white',
   },
 });
 

@@ -9,12 +9,12 @@ import ListenKing from '../screens/ListenKing';
 import Main from '../screens/Main';
 import Map from '../screens/Map';
 import Music from '../screens/Music';
-import MusicPlay from '../screens/MusicPlay';
 import MyPage from '../screens/MyPage';
 import PopularKing from '../screens/PopularKing';
 import StartingPage from '../screens/StartingPage';
 import WKing from '../screens/WKing';
 import PlayerScreen from '../screens/player-screen';
+import SignUp from '../screens/SignUp';
 import { Black, Pink, White, Yellow } from '../constant/Color';
 export const MenuList = [
   {
@@ -28,13 +28,13 @@ export const MenuList = [
     options: { headerShown: false },
   },
   {
-    name: 'Music',
-    component: Music,
+    name: 'SignUp',
+    component: SignUp,
     options: { headerShown: false },
   },
   {
-    name: 'MusicPlay',
-    component: MusicPlay,
+    name: 'Music',
+    component: Music,
     options: { headerShown: false },
   },
   {
@@ -64,9 +64,11 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '필터',
-      headerTintColor: 'white',
+      headerTintColor: Pink,
       headerStyle: {
-        backgroundColor: '#001C3E',
+        backgroundColor: 'white',
+        // borderBottomWidth: 1,
+        // borderBottomColor: Pink,
       },
       headerTitleAlign: 'center',
       gestureEnabled: false,
@@ -84,7 +86,7 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '게시물 작성',
-      headerTintColor: '#034AA6',
+      headerTintColor: Pink,
       headerTitleAlign: 'center',
     },
   },
@@ -94,9 +96,9 @@ export const MenuList = [
     options: {
       title: '친구',
       headerStyle: {
-        backgroundColor: '#4AB154',
+        backgroundColor: '#ffffff',
       },
-      headerTintColor: '#ffffff',
+      headerTintColor: '#DE91A9',
       headerTitleAlign: 'center',
     },
   },
@@ -119,9 +121,9 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '걷기왕 리워드',
-      headerTintColor: '#ffff',
+      headerTintColor: Pink,
       headerStyle: {
-        backgroundColor: '#000080',
+        backgroundColor: White,
       },
       headerTitleAlign: 'center',
     },
@@ -163,6 +165,16 @@ export const MapMenuList = [
   {
     name: 'Header',
     component: Header,
+    options: { headerShown: false },
+  },
+  {
+    name: 'Music',
+    component: Music,
+    options: { headerShown: false },
+  },
+  {
+    name: 'PlayerScreen',
+    component: PlayerScreen,
     options: { headerShown: false },
   },
 ];

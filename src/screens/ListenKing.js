@@ -11,13 +11,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
 import { Pink, White } from '../constant/Color';
+import { url } from '../constant/Url';
 
 const RoundedShadowBox = ({ children }) => {
   return <View style={styles.roundedShadowBox}>{children}</View>;
 };
 
 const ListenKing = ({ navigation }) => {
-  const serverURL = 'http://125.133.34.224:8001';
   let fixed = 8;
   let LOADING_MSG = '로딩 중...';
 
@@ -36,10 +36,11 @@ const ListenKing = ({ navigation }) => {
     setImages(imgDataBeta);
 
     const TOKEN = await AsyncStorage.getItem('accessToken');
+    console.log(TOKEN);
     try {
       if (TOKEN) {
         axios
-          .get(`${serverURL}/api/reward/listen`, {
+          .get(`${url}/api/reward/listen`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },
@@ -99,7 +100,7 @@ const ListenKing = ({ navigation }) => {
     const TOKEN = await AsyncStorage.getItem('accessToken');
     axios
       .patch(
-        `${serverURL}/api/reward`,
+        `${url}/api/reward`,
         {
           'rewardType': 'listen',
           'select_id': selection,

@@ -10,8 +10,8 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
+import { url } from '../constant/Url';
 
-const serverURL = 'http://125.133.34.224:8001';
 let loadData = null;
 let TOKEN = null;
 let temp;
@@ -25,7 +25,7 @@ const MainStory = ({ data, frame }) => {
       const TOKEN = await AsyncStorage.getItem('accessToken');
       if (TOKEN) {
         axios
-          .get(`${serverURL}/api/reward/listen`, {
+          .get(`${url}/api/reward/listen`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },

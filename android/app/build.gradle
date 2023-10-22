@@ -163,6 +163,16 @@ android {
             }
         }
     }
+     signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
 
     if (isNewArchitectureEnabled()) {
         // We configure the NDK build only if you decide to opt-in for the New Architecture.
@@ -231,6 +241,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
 
@@ -263,6 +274,7 @@ dependencies {
     implementation project(path: ':viro_renderer')
     implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
     implementation 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
+     implementation platform('com.google.firebase:firebase-bom:29.1.0') // 추가 (line:221)
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
