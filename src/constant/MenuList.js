@@ -132,10 +132,10 @@ export const MenuList = [
     options: {
       headerShown: true,
       title: '듣기왕 리워드',
-      headerTintColor: 'white',
+      headerTintColor: Pink,
       headerStyle: {
         // backgroundColor: '#000080',
-        backgroundColor: Pink, 
+        backgroundColor: White, 
       },
       headerTitleAlign: 'center',
     },
