@@ -113,7 +113,7 @@ const MyPage = ({ navigation, route }) => {
     };
 
     fetchDataAndRender();
-  }, []);
+  }, [imageUrl]);
 
   const fetchUserInfo = async () => {
     try {
@@ -142,7 +142,7 @@ const MyPage = ({ navigation, route }) => {
       />
       <View style={styles.myPage}>
         <TouchableOpacity onPress={handleImageClick}>
-          <Image style={styles.profile} source={uploadedImage} />
+          <Image style={styles.profile} source={{ uri: imageUrl }} />
         </TouchableOpacity>
 
         <View>
