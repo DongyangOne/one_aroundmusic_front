@@ -78,7 +78,7 @@ const WorldSceneAR = props => {
   };
 
   const handleImageClick = abc => {
-    props.navigation.navigate('PlayerScreen', {
+    props.navigation.navigate('PlayerScreen2', {
       title: abc.music.title,
       image: abc.music.thumbnail,
       singer: abc.music.singer,

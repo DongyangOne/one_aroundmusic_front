@@ -10,7 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 // ** Utils Imports
 import Swiper from 'react-native-swiper';
-import { useAuth, useSwipe } from './context/AuthContext';
+import { useAuth, useSwipe, useLogin } from './context/AuthContext';
 
 const Stack = createStackNavigator();
 
@@ -28,23 +28,26 @@ const MainApp = () => {
   const { open } = useAuth(false);
   const { swipe } = useSwipe(false);
 
+  // console.log('로그인ㄷ됐냐' + isLogin);
+
   return (
     <Swiper
       showsPagination={false}
       style={styles.wrapper}
       loop={false}
       index={0}
-      scrollEnabled={ swipe }>
+      scrollEnabled={swipe}>
       <NavigationContainer Linking={linking}>
         <Stack.Navigator>
-          {MenuList.map(item => (
-            <Stack.Screen
-              key={item.name}
-              name={item.name}
-              component={item.component}
-              options={item.options}
-            />
-          ))}
+          {
+            MenuList.map(item => (
+              <Stack.Screen
+                key={item.name}
+                name={item.name}
+                component={item.component}
+                options={item.options}
+              />
+            ))}
         </Stack.Navigator>
       </NavigationContainer>
       {open && (

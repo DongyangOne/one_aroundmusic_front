@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,9 +14,14 @@ import { Black, Pink, White, Yellow } from '../constant/Color';
 import LottieView from 'lottie-react-native';
 import DeviceInfo from 'react-native-device-info';
 import { url } from '../constant/Url';
+import { useLogin } from '../context/AuthContext';
+
 function StartingPage({ navigation }) {
   const [email, setEmail] = useState('ex@gmail.com');
   const [socialToken, setSocialToken] = useState('string');
+  const { isLogin, setIsLogin } = useLogin(false);
+  // console.log("됨?"+isLogin);
+   
   const getDeviceId = async () => {
     try {
       const deviceId = await DeviceInfo.getUniqueId();
@@ -26,8 +31,38 @@ function StartingPage({ navigation }) {
       console.log('Error getting device ID: ', error);
     }
   };
-
   getDeviceId();
+
+  useEffect(() => {
+    autoLoginIfNecessary();
+  }, []);
+
+  const autoLoginIfNecessary = async () => {
+    // console.log('여기 오긴 했냐?');
+    try {
+      const storedIsLogin = await AsyncStorage.getItem('isLogin');
+      // console.log(storedIsLogin);
+      if (storedIsLogin === 'true') {
+        const storedEmail = await AsyncStorage.getItem('email');
+        const storedSocialToken = await AsyncStorage.getItem('socialToken');
+  
+        if (storedEmail && storedSocialToken) {
+          const response = await axios.post(`${url}/api/user/login`, {
+            email: storedEmail,
+            socialToken: storedSocialToken,
+          });
+  
+          if (response.data.data.access) {
+            await AsyncStorage.setItem('accessToken', response.data.data.access);
+            navigation.replace('Main');
+          }
+        }
+      }
+    } catch (error) {
+      console.log(JSON.stringify(error));
+      ToastAndroid.show('자동 로그인에 실패했습니다', ToastAndroid.SHORT);
+    }
+  };
 
   const handleLogin = async () => {
     try {
@@ -36,17 +71,27 @@ function StartingPage({ navigation }) {
         email: email,
         socialToken: socialToken,
       });
-      console.log(response);
+      const data = response.data.email;
+      loginCheck();
+      await AsyncStorage.setItem('email', email);
+      await AsyncStorage.setItem('socialToken', socialToken);
       await AsyncStorage.setItem('accessToken', response.data.data.access);
+      await AsyncStorage.setItem('isLogin', String(isLogin));
       navigation.replace('Main');
     } catch (error) {
+      console.log('에러 발생:', error);
       console.log(JSON.stringify(error));
       ToastAndroid.show(
-        '비밀번호 혹은 아이디를 확인하세요',
+        '아이디 혹은 비밀번호를 확인하세요',
         ToastAndroid.SHORT,
       );
     }
   };
+
+  const loginCheck = () => {
+    setIsLogin(true);
+  };
+
 
   return (
     <SafeAreaView style={styles.outBox}>
@@ -83,7 +128,7 @@ function StartingPage({ navigation }) {
             </Pressable>
             <Pressable
               style={styles.btn2}
-              onPress={() => navigation.push('SignUp')}>
+              onPress={() => navigation.navigate('SignUp')}>
               <Text style={styles.SingUpText}>회원가입</Text>
             </Pressable>
           </View>
