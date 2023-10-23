@@ -26,31 +26,28 @@ const Board = ({ navigation }) => {
   const uploadContent = async () => {
     const pathToFile = storage().ref(`/Board/${imageUrls}`);
     await pathToFile.putFile(imageUrl);
-    await storage()
-      .ref(`/Board/${imageUrls}`)
-      .getDownloadURL()
-      .then(async res => {
-        const token = await AsyncStorage.getItem('accessToken');
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const requestData = {
-          content: content,
-          location: location,
-          img: res,
-        };
-        axios
-          .post(`${url}/api/board`, requestData, config)
-          .then(res => {
-            console.log(res.data);
-            navigation.navigate('Main');
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      });
+    await pathToFile.getDownloadURL().then(async res => {
+      const token = await AsyncStorage.getItem('accessToken');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const requestData = {
+        content: content,
+        location: location,
+        img: res,
+      };
+      axios
+        .post(`${url}/api/board`, requestData, config)
+        .then(res => {
+          console.log(res.data);
+          navigation.navigate('Main');
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   };
 
   const openImagePicker = () => {
