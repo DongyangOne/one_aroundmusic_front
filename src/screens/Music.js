@@ -24,10 +24,11 @@ const Music = ({ route, navigation }) => {
   let DATA = [];
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [musicFilter, setMusicFilter] = useState(null);
   const { swipe, setSwipe } = useSwipe(false);
-  console.log(swipe);
+  let apiLink =
+    'https://api.spotify.com/v1/playlists/37i9dQZF1DX9tPFwDMOaN1/tracks';
   if (route.params) {
+    apiLink = route.params.apiUrl;
     const { selectedGenre, selectedSeason, selectedTime, selectCountry } =
       route.params;
     if (selectedGenre) {
@@ -57,45 +58,41 @@ const Music = ({ route, navigation }) => {
       });
     }
   }
+  const shuffleArray = array => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  };
 
   useEffect(() => {
     handleSwipe();
-    const newMusicFilter =
-      (route.params?.selectCountry || '') +
-      (route.params?.selectedGenre || '') +
-      (route.params?.selectedSeason || '');
-
-    // Log the updated musicFilter
-    console.log('장르:', newMusicFilter);
-
-    // Set the musicFilter
-    setMusicFilter(newMusicFilter);
-
     fetchData();
   }, [route.params]);
 
   const fetchData = async () => {
     const token = await AsyncStorage.getItem('token');
-    console.log('장르: ', musicFilter);
     if (token) {
       try {
-        const response = await fetch(
-          'https://api.spotify.com/v1/playlists/2MlsYqBrtrsZczJC4MyIqw/tracks',
-          {
-            headers: {
-              Authorization: 'Bearer ' + token,
-            },
+        const response = await fetch(`${apiLink}`, {
+          headers: {
+            Authorization: 'Bearer ' + token,
           },
-        );
+        });
         const data = await response.json();
 
         const filteredTracks = data.items.filter(
           item => item.track.preview_url !== null,
         );
 
-        setTracks(filteredTracks);
+        const shuffledTracks = shuffleArray(filteredTracks);
+        setTracks(shuffledTracks);
         setLoading(false);
-        console.log(data.items[0].track.preview_url);
       } catch (error) {
         console.error(error);
         setLoading(false);

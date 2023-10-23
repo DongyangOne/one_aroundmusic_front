@@ -6,7 +6,8 @@ import {
   DATATIME,
   DATACOUNTRY,
 } from '../components/DummyData';
-
+import API_URLS from '../constant/MusicList';
+import { Black, Pink, White, Yellow } from '../constant/Color';
 const FilterDetailButton = ({ title, isSelected, onPress }) => {
   return (
     <TouchableOpacity
@@ -24,6 +25,10 @@ const FilterScreen = ({ navigation }) => {
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectCountry, setSelectCountry] = useState(null);
+  const [filterData, setFilterData] = useState({
+    selectCountry: null,
+    selectedGenre: null,
+  });
 
   // 장르 버튼 스타일 변경을 위한 객체
   useEffect(() => {
@@ -35,7 +40,7 @@ const FilterScreen = ({ navigation }) => {
     DATAGENRE.forEach(item => {
       item.isSelected = genreButtonStyles[item.title];
     });
-  }, [selectedGenre]);
+  }, [setSelectedGenre]);
 
   // 계절 버튼 스타일 변경을 위한 객체
   useEffect(() => {
@@ -47,7 +52,7 @@ const FilterScreen = ({ navigation }) => {
     DATASEASON.forEach(item => {
       item.isSelected = seasonButtonStyles[item.title];
     });
-  }, [selectedSeason]);
+  }, [setSelectedSeason]);
 
   // 시간 버튼 스타일 변경을 위한 객체
   useEffect(() => {
@@ -59,7 +64,7 @@ const FilterScreen = ({ navigation }) => {
     DATATIME.forEach(item => {
       item.isSelected = timeButtonStyles[item.title];
     });
-  }, [selectedTime]);
+  }, [setSelectedTime]);
 
   //나라 버튼 스타일 번경을 위한 객체
   useEffect(() => {
@@ -71,8 +76,17 @@ const FilterScreen = ({ navigation }) => {
     DATACOUNTRY.forEach(item => {
       item.isSelected = countryButtonStyles[item.title];
     });
-  }, [selectCountry]);
+  }, [setSelectCountry]);
 
+  useEffect(() => {
+    setFilterData({ selectCountry, selectedGenre });
+  }, [selectCountry, selectedGenre]);
+  useEffect(() => {
+    setFilterData({ selectCountry, selectedGenre });
+  }, [selectCountry, selectedGenre]);
+
+  let abc = filterData.selectCountry + filterData.selectedGenre;
+  const apiUrl = API_URLS[abc];
   const createFilterButtons = (data, setSelectedFunction, selectedValue) => {
     return data.map(item => (
       <FilterDetailButton
@@ -83,7 +97,6 @@ const FilterScreen = ({ navigation }) => {
       />
     ));
   };
-
   return (
     <View style={styles.AllBack}>
       <View style={styles.centerBtn}>
@@ -122,6 +135,7 @@ const FilterScreen = ({ navigation }) => {
               selectedSeason,
               selectedTime,
               selectCountry,
+              apiUrl,
             })
           }>
           <Text style={styles.buttonText}>적용하기</Text>
@@ -133,11 +147,10 @@ const FilterScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   AllBack: {
-    flex: 1,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   MainText: {
-    color: 'pink',
+    color: Pink,
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 23,
@@ -151,7 +164,7 @@ const styles = StyleSheet.create({
   },
   centerBtn: { marginTop: 10 },
   button: {
-    backgroundColor: 'pink',
+    backgroundColor: Pink,
     paddingVertical: 8,
     paddingHorizontal: 30,
     borderRadius: 10,
@@ -177,14 +190,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    color: '#656565',
+    color: '#000000',
   },
   clickText: {
     fontSize: 14,
     color: '#ffffff',
   },
   clickedButton: {
-    backgroundColor: 'pink',
+    backgroundColor: Pink,
   },
 });
 

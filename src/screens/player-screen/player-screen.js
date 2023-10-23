@@ -74,6 +74,11 @@ const PlayerScreenView = ({ route, navigation }) => {
       }
     });
     setSound(sound);
+
+    return () => {
+      sound.pause();
+      setIsPlay(false);
+    };
   }, []);
 
   // 재생
@@ -87,12 +92,15 @@ const PlayerScreenView = ({ route, navigation }) => {
   // 정지
   const handleStop = () => {
     if (sound && isPlay) {
-      sound.pause();
+      sound.pause(() => {
+        setIsPlaying(false);
+      });
       setIsPlay(false);
     }
   };
 
   const shareAr = async () => {
+    handleStop();
     const requestData = {
       youtubeId: trackId,
       title: title,

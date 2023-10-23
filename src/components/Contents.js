@@ -62,7 +62,7 @@ const Contents = ({ content }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         {loading ? (
-          <View style={styles.gray}>
+          <View style={styles.white}>
             <Text style={styles.loding}>
               시간이 약간 걸립니다. 잠시 기다려주세요.
             </Text>
@@ -90,9 +90,11 @@ const Contents = ({ content }) => {
 
 const styles = StyleSheet.create({
   container: { backgroundColor: 'white' },
+  white: { backgroundColor: 'white', marginBottom: '500%' },
+  // container: { backgroundColor: 'white' },
   content: {
     marginTop: '2%',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   storyRow: {
     flexDirection: 'row',

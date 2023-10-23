@@ -10,7 +10,6 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-import { url } from '../constant/Url';
 
 const MainStory = ({ data, frame }) => {
   const [itemFrame, setItemFrame] = useState();
@@ -80,6 +79,7 @@ const MainStory = ({ data, frame }) => {
     getData();
     getStoryUsers();
   }, []);
+  // }, [loadData]);
 
   try {
     return (
@@ -93,7 +93,8 @@ const MainStory = ({ data, frame }) => {
               <TouchableWithoutFeedback>
                 {index == 0 ? (
                   <ImageBackground
-                    source={{ uri: itemFrame }}
+                    // source={IMG_SRC[itemFrame].src} // 기존 코드
+                    source={{ uri: itemFrame }} // 신규 코드
                     style={styles.imageBg}>
                     <Image
                       source={{ uri: item.profileImg }}
@@ -117,6 +118,7 @@ const MainStory = ({ data, frame }) => {
         nestedScrollEnabled={true}
         horizontal={true}>
         <View style={styles.storyRow}>
+          {/* Previous Code */}
           {data.map((item, index) => (
             <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
