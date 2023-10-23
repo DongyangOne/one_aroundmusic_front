@@ -4,10 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { url } from '../constant/Url';
 import { Pink, Black } from '../constant/Color';
-const Contents = ({ content }) => {
+const Contents = () => {
   const [data, setData] = useState([]);
-  const [imgUrl, setImgUrl] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const getData = async () => {
     try {
@@ -33,45 +31,21 @@ const Contents = ({ content }) => {
     }
   };
 
-  const loadImages = async () => {
-    let imgData = [];
-    for (let i = 0; i < data.length; i++) {
-      try {
-        const imageUrl = data[i].img;
-        imgData.push(imageUrl);
-      } catch (error) {
-        console.error(`Image download failed: ${error}`);
-      }
-    }
-    setImgUrl(imgData);
-    setLoading(false); // 이미지 로딩이 완료됨을 표시
-  };
-
   useEffect(() => {
     getData();
   }, []);
 
-  useEffect(() => {
-    if (data.length > 0) {
-      loadImages();
-    }
-  }, [data]);
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        {loading ? (
+        {data.length === 0 ? ( // 데이터가 없을 때
           <View style={styles.white}>
-            <Text style={styles.loding}>
-              시간이 약간 걸립니다. 잠시 기다려주세요.
-            </Text>
+            <Text style={styles.loding}>데이터가 없습니다</Text>
           </View>
-        ) : data.length === 0 ? ( // 데이터가 없을 때
-          <Text>데이터가 없습니다</Text>
         ) : (
           data.map((item, index) => (
             <View style={styles.main} key={index}>
-              <Image source={{ uri: imgUrl[index] }} style={styles.image} />
+              <Image source={{ uri: item.img }} style={styles.image} />
               <View style={styles.textView}>
                 <Text style={styles.text}>{item.content}</Text>
                 <Text style={styles.date}>
