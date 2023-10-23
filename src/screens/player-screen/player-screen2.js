@@ -18,6 +18,7 @@ import axios from 'axios';
 import SVGComponentPlayBtn from '../../components/SVG/SVGComponentPlayBtn';
 import SVGComponentStopBtn from '../../components/SVG/SVGComponentStopBtn';
 import { url } from '../../constant/Url';
+import { useNavigation } from '@react-navigation/native';
 
 const PlayerScreenView = ({ route, navigation }) => {
   const [sound, setSound] = useState(null);
@@ -30,10 +31,11 @@ const PlayerScreenView = ({ route, navigation }) => {
   console.log('href' + href);
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const thisContainer = useNavigation();
 
   const handlePressBack = () => {
     if(navigation?.canGoBack()){
-      navigation.navigate('Music');
+      navigation.navigate('Map');
       return true;
     }
     return false;
@@ -45,7 +47,6 @@ const PlayerScreenView = ({ route, navigation }) => {
       BackHandler.removeEventListener('hardwareBackPress', handlePressBack);
     }
   }, [handlePressBack]);
-  
   useEffect(() => {
     if (isPlaying) {
       handlePlay();
