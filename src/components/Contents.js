@@ -42,7 +42,6 @@ const Contents = ({ content }) => {
       } catch (error) {
         console.error(`Image download failed: ${error}`);
       }
-      console.log(imgData);
     }
     setImgUrl(imgData);
     setLoading(false); // 이미지 로딩이 완료됨을 표시
