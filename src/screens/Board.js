@@ -26,6 +26,8 @@ const Board = ({ navigation }) => {
   const uploadContent = async () => {
     const pathToFile = storage().ref(`/Board/${imageUrls}`);
     await pathToFile.putFile(imageUrl);
+    let turl = await storage().ref(`/Board/${imageUrls}`).getDownloadURL();
+    setImageUrls(turl);
     const token = await AsyncStorage.getItem('accessToken');
     const config = {
       headers: {
