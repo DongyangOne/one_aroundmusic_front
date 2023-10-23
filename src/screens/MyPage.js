@@ -16,16 +16,22 @@ import SVGComponentLoca from '../components/SVG/SVGComponentLoca';
 import SVGComponentPlay from '../components/SVG/SVGComponentPlay';
 import SignUp from '../screens/SignUp';
 import axios from 'axios';
+import { launchImageLibrary } from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
 
 const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
   const [nickname, setNickname] = useState('');
   const [authState, setAuthState] = useState(null);
+  const [imageUrls, setImageUrls] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(
+    require('../../assets/profile.png'),
+  );
 
   async function authenticate() {
     const config = {
       clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
-
       redirectUrl: 'awesomeproject://main',
       scopes: ['user-read-private', 'user-read-email', 'streaming'],
       serviceConfiguration: {
@@ -46,7 +52,69 @@ const MyPage = ({ navigation, route }) => {
       console.error(error);
     }
   }
-  const fetchUserNickname = async () => {
+
+  // 이미지 업로드 함수
+  const uploadImage = async imageUri => {
+    const timestamp = new Date().getTime();
+    const fileName = `profile_${timestamp}.jpg`; // 파일 이름을 타임스탬프와 확장자 .jpg로 생성
+
+    const pathToFile = storage().ref(`/profile/${fileName}`);
+    await pathToFile.putFile(imageUri);
+    await pathToFile.getDownloadURL().then(async res => {
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      };
+      const requestBody = {
+        'profileImg': res, // 이미지의 다운로드 URL로 변경
+      };
+
+      axios
+        .patch(
+          'http://125.133.34.224:8001/api/user/profileImg',
+          requestBody,
+          config,
+        )
+        .then(res => {
+          console.log('프로필 이미지 업로드 성공');
+
+          // 이미지 업로드 성공 시 로컬 state에도 설정
+          setUploadedImage({ uri: imageUri }); // 업로드한 이미지 URI 설정
+        })
+        .catch(error => {
+          console.error('프로필 이미지 업로드 중 오류 발생:', error);
+        });
+    });
+  };
+
+  // 이미지 업로드 핸들러
+  const handleImageClick = () => {
+    const options = {
+      title: '이미지 선택',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log('사용자가 이미지 선택을 취소했습니다.');
+      } else if (response.error) {
+        console.error('이미지 선택 중 오류 발생:', response.error);
+      } else {
+        // 선택한 이미지를 업로드 또는 처리
+        let imageUri = response.uri || response.assets?.[0]?.uri;
+
+        // 이미지 업로드
+        uploadImage(imageUri);
+      }
+    });
+  };
+
+  const fetchUserInfo = async () => {
     try {
       const TOKEN = await AsyncStorage.getItem('accessToken');
       const config = {
@@ -58,18 +126,21 @@ const MyPage = ({ navigation, route }) => {
         'http://125.133.34.224:8001/api/user/my',
         config,
       );
+      const userProfileImageUri = response.data.data.profileImg; // 실제 필드 이름으로 변경
+      setUploadedImage({ uri: userProfileImageUri }); // 이미지 URI 설정
       const fetchNickname = response.data.data.nickname;
       setNickname(fetchNickname);
-      console.log(nickname, '님의 API요청 완료');
+      console.log('이미지 url 요청 ', userProfileImageUri);
     } catch (error) {
-      console.error('NICKNAME API요청 중 오류 발생 : ', error);
+      console.error('NICKNAME API 요청 중 오류 발생 : ', error);
       return null;
     }
   };
 
   useEffect(() => {
-    fetchUserNickname();
+    fetchUserInfo();
   }, []);
+
   return (
     <View style={styles.contain}>
       <Header
@@ -79,10 +150,9 @@ const MyPage = ({ navigation, route }) => {
         onPressMusic={() => navigation.push('Music')}
       />
       <View style={styles.myPage}>
-        <Image
-          style={styles.profile}
-          source={require('../../assets/profile.png')}
-        />
+        <TouchableOpacity onPress={handleImageClick}>
+          <Image style={styles.profile} source={uploadedImage} />
+        </TouchableOpacity>
 
         <View>
           <Text style={styles.id}>{nickname}님</Text>
@@ -248,14 +318,11 @@ const styles = StyleSheet.create({
   // Profile picture
   profile: {
     width: 100,
-    height: 104,
+    height: 100,
     marginLeft: 34,
     marginTop: 30,
+    borderRadius: 50,
   },
-  // for Middle margin area
-  // MiddleMargin: {
-  //   marginTop: 30,
-  // },
   // king Whole Container
   kingContainer: {
     flex: 3,
@@ -276,7 +343,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     borderColor: '#041c3c',
-    // borderWidth: 1,
     borderRadius: 25,
     elevation: 5,
     marginHorizontal: 25,
