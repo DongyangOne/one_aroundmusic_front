@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import storage from '@react-native-firebase/storage';
 import { url } from '../constant/Url';
 import { Pink, Black } from '../constant/Color';
 const Contents = ({ content }) => {
