@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     height: 150,
     textAlign: 'center',
     fontSize: 20,
+    color: 'black',
   },
   serve: {
     flexDirection: 'row',

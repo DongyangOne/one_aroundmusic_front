@@ -22,34 +22,34 @@ const MyPage = ({ navigation, route }) => {
     require('../../assets/profile.png'),
   );
 
-  // async function authenticate() {
-  //   const config = {
-  //     clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
-  //     redirectUrl: 'awesomeproject://main',
-  //     scopes: ['user-read-private', 'user-read-email', 'streaming'],
-  //     serviceConfiguration: {
-  //       authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-  //       tokenEndpoint: 'https://accounts.spotify.com/api/token',
-  //     },
-  //   };
+  async function authenticate() {
+    const config = {
+      clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
+      redirectUrl: 'awesomeproject://main',
+      scopes: ['user-read-private', 'user-read-email', 'streaming'],
+      serviceConfiguration: {
+        authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+        tokenEndpoint: 'https://accounts.spotify.com/api/token',
+      },
+    };
 
-  //   try {
-  //     const result = await authorize(config);
-  //     if (result.accessToken) {
-  //       await AsyncStorage.setItem('token', result.accessToken);
-  //       console.log(result.accessToken);
-  //       setAuthState(result);
-  //       navigation.navigate('Main');
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+    try {
+      const result = await authorize(config);
+      if (result.accessToken) {
+        await AsyncStorage.setItem('token', result.accessToken);
+        console.log(result.accessToken);
+        setAuthState(result);
+        navigation.navigate('Main');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // 이미지 업로드 함수
   const uploadImage = async imageUri => {
     const timestamp = new Date().getTime();
-    const fileName = `profile_${timestamp}.jpg`; // 파일 이름을 타임스탬프와 확장자 .jpg로 생성
+    const fileName = `profile_${timestamp}.jpg`;
 
     const pathToFile = storage().ref(`/profile/${fileName}`);
     await pathToFile.putFile(imageUri);
@@ -61,7 +61,7 @@ const MyPage = ({ navigation, route }) => {
         },
       };
       const requestBody = {
-        'profileImg': res, // 이미지의 다운로드 URL로 변경
+        'profileImg': res,
       };
 
       axios
@@ -72,7 +72,6 @@ const MyPage = ({ navigation, route }) => {
         )
         .then(res => {
           console.log('프로필 이미지 업로드 성공');
-          // 이미지 업로드 성공 시 이미지 URI 설정
           setImageUrl(res.data.profileImg);
         })
         .catch(error => {
@@ -97,10 +96,8 @@ const MyPage = ({ navigation, route }) => {
       } else if (response.error) {
         console.error('이미지 선택 중 오류 발생:', response.error);
       } else {
-        // 선택한 이미지를 업로드 또는 처리
         let imageUri = response.uri || response.assets?.[0]?.uri;
 
-        // 이미지 업로드
         uploadImage(imageUri);
       }
     });
@@ -108,7 +105,6 @@ const MyPage = ({ navigation, route }) => {
 
   useEffect(() => {
     const fetchDataAndRender = async () => {
-      // 닉네임 및 이미지 URI 가져오기
       await fetchUserInfo();
     };
 
@@ -126,7 +122,7 @@ const MyPage = ({ navigation, route }) => {
       });
 
       setNickname(response.data.data.nickname);
-      setImageUrl(response.data.data.profileImg); // 이미지 URI 설정
+      setImageUrl(response.data.data.profileImg);
     } catch (error) {
       console.error('NICKNAME API요청 중 오류 발생 : ', error);
     }

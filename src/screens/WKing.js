@@ -142,7 +142,11 @@ const WKing = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.centeredContainer}>
-        <Image style={styles.LogoMain} source={{ uri: images[1] }} />
+        {images[1] != 0 ? (
+          <Image style={styles.LogoMain} source={{ uri: images[1] }} />
+        ) : (
+          <Text style={styles.LogoText}>로딩중...</Text>
+        )}
       </View>
 
       <View style={styles.centeredContainer}></View>
@@ -215,6 +219,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 5,
     alignItems: 'center',
+  },
+  LogoText: {
+    marginTop: '20%',
+    marginBottom: 50,
+    width: 150,
+    height: 150,
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'black',
   },
 });
 
