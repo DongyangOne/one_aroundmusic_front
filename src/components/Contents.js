@@ -38,9 +38,7 @@ const Contents = ({ content }) => {
     let imgData = [];
     for (let i = 0; i < data.length; i++) {
       try {
-        const imageUrl = await storage()
-          .ref(`/Board/${data[i].img}`)
-          .getDownloadURL();
+        const imageUrl = data[i].img;
         imgData.push(imageUrl);
       } catch (error) {
         console.error(`Image download failed: ${error}`);

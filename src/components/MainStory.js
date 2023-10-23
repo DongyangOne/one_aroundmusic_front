@@ -11,33 +11,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
 
-const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
-let loadData = null; // DB에서 불러온 데이터 저장
-export let TOKEN = null;
-let temp;
-
 const MainStory = ({ data, frame }) => {
   const [itemFrame, setItemFrame] = useState();
-  const [selectId, setSelectId] = useState();
+  const [friends, setFriends] = useState([]);
 
   const getData = async () => {
     try {
-      const value = await AsyncStorage.getItem('accessToken');
-      if (value !== null) {
-        TOKEN = value;
-        axios
-          .get(`${serverURL}/api/reward/listen`, {
+      const TOKEN = await AsyncStorage.getItem('accessToken');
+      if (TOKEN) {
+        await axios
+          .get(`${url}/api/reward/listen`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },
           })
           .then(response => {
-            loadData = response.data;
-            /** Attempt 3 */
-            // console.log(loadData);
-            temp = loadData.data.selectedReward.id;
-            setSelectId(temp);
-            setData();
+            temp = response.data.data.selectedReward.reward;
+            setItemFrame(temp);
           })
           .catch(e => {
             console.error(`GET ERROR >> ${e}`);
@@ -50,15 +40,44 @@ const MainStory = ({ data, frame }) => {
     }
   };
 
-  /** Attempt 5 */
-  const setData = async () => {
-    text = `/reward/listen/listen${temp - 6}.png`;
-    // console.log(`text >> ${text}`);
-    setItemFrame(await storage().ref(text).getDownloadURL());
+  const getStoryUsers = async () => {
+    const TOKEN = await AsyncStorage.getItem('accessToken');
+
+    if (TOKEN) {
+      let friend = [];
+
+      await axios
+        .get(`${url}/api/user/my`, {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        })
+        .then(async res => {
+          friend.push(res.data.data);
+        })
+        .catch(e => {
+          console.log(`Error /api/user/my -> ${e}`);
+        });
+
+      await axios
+        .get(`${url}/api/story`, {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        })
+        .then(res => {
+          friend = [...friend, ...res.data.data];
+          setFriends(friend);
+        })
+        .catch(e => {
+          console.log(`Error /api/story -> ${e}`);
+        });
+    }
   };
 
   useEffect(() => {
     getData();
+    getStoryUsers();
   }, []);
   // }, [loadData]);
 
@@ -69,7 +88,7 @@ const MainStory = ({ data, frame }) => {
         nestedScrollEnabled={true}
         horizontal={true}>
         <View style={styles.storyRow}>
-          {data.map((item, index) => (
+          {friends.map((item, index) => (
             <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
                 {index == 0 ? (
@@ -77,10 +96,14 @@ const MainStory = ({ data, frame }) => {
                     // source={IMG_SRC[itemFrame].src} // 기존 코드
                     source={{ uri: itemFrame }} // 신규 코드
                     style={styles.imageBg}>
-                    <Image source={data[0].src} style={styles.imageSe}></Image>
+                    <Image
+                      source={{ uri: item.profileImg }}
+                      style={styles.imageSe}></Image>
                   </ImageBackground>
                 ) : (
-                  <Image source={item.src} style={styles.image}></Image>
+                  <Image
+                    source={{ uri: item.profileImg }}
+                    style={styles.image}></Image>
                 )}
               </TouchableWithoutFeedback>
             </View>
@@ -99,7 +122,9 @@ const MainStory = ({ data, frame }) => {
           {data.map((item, index) => (
             <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
-                <Image source={item.src} style={styles.image}></Image>
+                <Image
+                  source={{ uri: item.profileImg }}
+                  style={styles.image}></Image>
               </TouchableWithoutFeedback>
             </View>
           ))}
