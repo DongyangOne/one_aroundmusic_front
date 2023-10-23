@@ -368,7 +368,7 @@ const styles = StyleSheet.create({
     marginTop: 19,
   },
   scrollView: {
-    height: '80%',
+    height: '79%',
   },
   center: {
     FlexDirection: 'center',
