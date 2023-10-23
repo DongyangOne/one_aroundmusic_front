@@ -11,8 +11,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-
-const serverURL = 'http://125.133.34.224:8001'; // DB Server URL
+import { url } from '../constant/Url';
 let loadData = null; // DB에서 불러온 데이터 저장
 export let TOKEN = null;
 let temp;
@@ -28,7 +27,7 @@ const WorldSceneAR = props => {
       if (value !== null) {
         TOKEN = value;
         axios
-          .get(`${serverURL}/api/reward/pop`, {
+          .get(`${url}/api/reward/pop`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
             },
@@ -89,13 +88,13 @@ const WorldSceneAR = props => {
   return (
     <ViroARScene>
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[-3.99, 0.48, -3.01]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[-3.99, 0.48, -3.01]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -112,13 +111,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[-0.49, -0.15, -1.51]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[-0.49, -0.15, -1.51]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -135,13 +134,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={1}
-            width={1}
-            position={[-4.85, -3.95, -2.01]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={1}
+          width={1}
+          position={[-4.85, -3.95, -2.01]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.8}
         width={0.8}
@@ -158,13 +157,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[1.49, 4.31, -3.02]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[1.49, 4.31, -3.02]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -181,13 +180,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[1.98, 0.34, -0.51]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[1.98, 0.34, -0.51]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -204,13 +203,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[2.98, 0.44, -5.01]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[2.98, 0.44, -5.01]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -227,13 +226,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={1.05}
-            width={1.05}
-            position={[3.98, 3.01, -5.01]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={1.05}
+          width={1.05}
+          position={[3.98, 3.01, -5.01]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.7}
         width={0.7}
@@ -250,13 +249,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[3.98, 0.5, 0.99]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[3.98, 0.5, 0.99]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -273,13 +272,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[7, -4, 2.01]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[7, -4, 2.01]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}
@@ -296,13 +295,13 @@ const WorldSceneAR = props => {
         source={require('../../assets/play.png')}
       />
       {itemFrame ? (
-          <ViroImage
-            height={0.8}
-            width={0.8}
-            position={[0.01, 0.25, -2.01]}
-            source={{ uri: itemFrame }}
-          />
-        ) : null}
+        <ViroImage
+          height={0.8}
+          width={0.8}
+          position={[0.01, 0.25, -2.01]}
+          source={{ uri: itemFrame }}
+        />
+      ) : null}
       <ViroImage
         height={0.5}
         width={0.5}

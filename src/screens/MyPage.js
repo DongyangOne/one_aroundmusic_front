@@ -16,12 +16,12 @@ import SVGComponentLoca from '../components/SVG/SVGComponentLoca';
 import SVGComponentPlay from '../components/SVG/SVGComponentPlay';
 import SignUp from '../screens/SignUp';
 import axios from 'axios';
+import { url } from '../constant/Url';
 
 const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState('회원');
   const [authState, setAuthState] = useState(null);
-
   async function authenticate() {
     const config = {
       clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
@@ -46,21 +46,18 @@ const MyPage = ({ navigation, route }) => {
       console.error(error);
     }
   }
+
   const fetchUserNickname = async () => {
     try {
       const TOKEN = await AsyncStorage.getItem('accessToken');
-      const config = {
+      console.log(TOKEN);
+      const response = await axios.get(`${url}/api/user/my`, {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
         },
-      };
-      const response = await axios.get(
-        'http://125.133.34.224:8001/api/user/my',
-        config,
-      );
-      const fetchNickname = response.data.data.nickname;
-      setNickname(fetchNickname);
-      console.log(nickname, '님의 API요청 완료');
+      });
+      console.log('3');
+      setNickname(response.data.data.nickname);
     } catch (error) {
       console.error('NICKNAME API요청 중 오류 발생 : ', error);
       return null;
@@ -68,7 +65,11 @@ const MyPage = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    fetchUserNickname();
+    const fetchDataAndRender = async () => {
+      await fetchUserNickname(); // 닉네임을 가져옵니다.
+    };
+
+    fetchDataAndRender();
   }, []);
   return (
     <View style={styles.contain}>

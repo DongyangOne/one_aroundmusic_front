@@ -18,7 +18,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
-const serverURL = 'http://125.133.34.224:8001';
+import { url } from '../constant/Url';
 let loadData = null;
 let TOKEN = null;
 let temp;
@@ -39,7 +39,7 @@ export default Arscreen2 = ({ navigation, route }) => {
         TOKEN = await AsyncStorage.getItem('accessToken');
         if (TOKEN) {
           axios
-            .get(`${serverURL}/api/reward/pop`, {
+            .get(`${url}/api/reward/pop`, {
               headers: {
                 Authorization: `Bearer ${TOKEN}`,
               },
@@ -49,7 +49,7 @@ export default Arscreen2 = ({ navigation, route }) => {
               temp = loadData.data.selectedReward.id;
               setSelectId(temp);
               let text = `/reward/pop/border${temp - 42}.png`;
-              console.log("dkssud", text);
+              console.log('dkssud', text);
               storage()
                 .ref(text)
                 .getDownloadURL()
@@ -75,7 +75,6 @@ export default Arscreen2 = ({ navigation, route }) => {
     useEffect(() => {
       setData();
     }, []);
-
 
     return (
       <ViroARScene>
