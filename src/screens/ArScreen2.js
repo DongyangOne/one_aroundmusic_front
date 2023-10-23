@@ -82,23 +82,16 @@ export default Arscreen2 = ({ navigation, route }) => {
           <ViroImage
             height={0.8}
             width={0.8}
-            position={[0.01, 0.48, -1.51]}
+            position={[0.01, 0.48, -3]}
             source={{ uri: itemFrame }}
           />
         ) : null}
         <ViroImage
           height={0.5}
           width={0.5}
-          position={[0, 0.5, -1.5]}
+          position={[0, 0.5, -3]}
           placeholderSource={require('../../assets/music3.png')}
           source={{ uri: data.image }}
-        />
-        <ViroImage
-          height={0.2}
-          width={0.2}
-          position={[0, 0.13, -1.5]}
-          placeholderSource={require('../../assets/play.png')}
-          source={require('../../assets/play.png')}
         />
       </ViroARScene>
     );
