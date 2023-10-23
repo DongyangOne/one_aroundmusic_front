@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  Image,
-  Button,
-} from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authorize } from 'react-native-app-auth';
@@ -24,8 +17,7 @@ const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
   const [nickname, setNickname] = useState('회원');
   const [authState, setAuthState] = useState(null);
-  const [imageUrls, setImageUrls] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null); // 이미지 URI 상태 추가
   const [uploadedImage, setUploadedImage] = useState(
     require('../../assets/profile.png'),
   );
@@ -45,7 +37,6 @@ const MyPage = ({ navigation, route }) => {
       const result = await authorize(config);
       if (result.accessToken) {
         await AsyncStorage.setItem('token', result.accessToken);
-        console.log(token);
         console.log(result.accessToken);
         setAuthState(result);
         navigation.navigate('Main');
@@ -81,9 +72,8 @@ const MyPage = ({ navigation, route }) => {
         )
         .then(res => {
           console.log('프로필 이미지 업로드 성공');
-
-          // 이미지 업로드 성공 시 로컬 state에도 설정
-          setUploadedImage({ uri: imageUri }); // 업로드한 이미지 URI 설정
+          // 이미지 업로드 성공 시 이미지 URI 설정
+          setImageUrl(res.data.profileImg);
         })
         .catch(error => {
           console.error('프로필 이미지 업로드 중 오류 발생:', error);
@@ -116,6 +106,15 @@ const MyPage = ({ navigation, route }) => {
     });
   };
 
+  useEffect(() => {
+    const fetchDataAndRender = async () => {
+      // 닉네임 및 이미지 URI 가져오기
+      await fetchUserInfo();
+    };
+
+    fetchDataAndRender();
+  }, []);
+
   const fetchUserInfo = async () => {
     try {
       const TOKEN = await AsyncStorage.getItem('accessToken');
@@ -125,27 +124,13 @@ const MyPage = ({ navigation, route }) => {
           Authorization: `Bearer ${TOKEN}`,
         },
       });
-      console.log('3');
+
       setNickname(response.data.data.nickname);
-      };
-      const response = await axios.get(
-        'http://125.133.34.224:8001/api/user/my',
-        config,
-      );
-      const userProfileImageUri = response.data.data.profileImg; // 실제 필드 이름으로 변경
-      setUploadedImage({ uri: userProfileImageUri }); // 이미지 URI 설정
-      const fetchNickname = response.data.data.nickname;
-      setNickname(fetchNickname);
-      console.log('이미지 url 요청 ', userProfileImageUri);
-    } 
+      setImageUrl(response.data.data.profileImg); // 이미지 URI 설정
+    } catch (error) {
+      console.error('NICKNAME API요청 중 오류 발생 : ', error);
+    }
   };
-  const fetchDataAndRender = async () => {
-    await fetchUserNickname(); // 닉네임을 가져옵니다.
-  };
-  useEffect(() => {
-    fetchDataAndRender();
-    fetchUserInfo();
-  }, []);
 
   return (
     <View style={styles.contain}>
