@@ -1,6 +1,6 @@
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -8,7 +8,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  BackHandler,
 } from 'react-native';
 import axios from 'axios';
 import storage from '@react-native-firebase/storage';
@@ -72,20 +71,6 @@ const Board = ({ navigation }) => {
       }
     });
   };
-  const handlePressBack = () => {
-    if(navigation?.canGoBack()){
-      navigation.navigate('Music');
-      return true;
-    }
-    return false;
-  }
-
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', handlePressBack);
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handlePressBack);
-    }
-  }, [handlePressBack]);
 
   return (
     <KeyboardAwareScrollView>

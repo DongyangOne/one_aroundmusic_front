@@ -9,3 +9,5 @@ const PlayerScreen = ({ route, navigation }) => {
 };
 
 export default PlayerScreen;
+
+P;

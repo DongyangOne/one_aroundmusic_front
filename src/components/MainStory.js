@@ -6,7 +6,6 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import { url } from '../constant/Url';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';

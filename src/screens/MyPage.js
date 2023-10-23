@@ -38,6 +38,7 @@ const MyPage = ({ navigation, route }) => {
       const result = await authorize(config);
       if (result.accessToken) {
         await AsyncStorage.setItem('token', result.accessToken);
+        console.log(token);
         console.log(result.accessToken);
         setAuthState(result);
         navigation.navigate('Main');
@@ -63,12 +64,10 @@ const MyPage = ({ navigation, route }) => {
       return null;
     }
   };
-
+  const fetchDataAndRender = async () => {
+    await fetchUserNickname(); // 닉네임을 가져옵니다.
+  };
   useEffect(() => {
-    const fetchDataAndRender = async () => {
-      await fetchUserNickname(); // 닉네임을 가져옵니다.
-    };
-
     fetchDataAndRender();
   }, []);
   return (

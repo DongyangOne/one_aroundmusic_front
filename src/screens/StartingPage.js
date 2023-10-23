@@ -21,12 +21,11 @@ function StartingPage({ navigation }) {
   const [socialToken, setSocialToken] = useState('string');
   const { isLogin, setIsLogin } = useLogin(false);
   // console.log("됨?"+isLogin);
-   
+
   const getDeviceId = async () => {
     try {
       const deviceId = await DeviceInfo.getUniqueId();
       await AsyncStorage.setItem('deviceId', deviceId);
-      console.log('Device ID: ', deviceId);
     } catch (error) {
       console.log('Error getting device ID: ', error);
     }
@@ -45,15 +44,18 @@ function StartingPage({ navigation }) {
       if (storedIsLogin === 'true') {
         const storedEmail = await AsyncStorage.getItem('email');
         const storedSocialToken = await AsyncStorage.getItem('socialToken');
-  
+
         if (storedEmail && storedSocialToken) {
           const response = await axios.post(`${url}/api/user/login`, {
             email: storedEmail,
             socialToken: storedSocialToken,
           });
-  
+
           if (response.data.data.access) {
-            await AsyncStorage.setItem('accessToken', response.data.data.access);
+            await AsyncStorage.setItem(
+              'accessToken',
+              response.data.data.access,
+            );
             navigation.replace('Main');
           }
         }
@@ -66,7 +68,6 @@ function StartingPage({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      console.log(url);
       const response = await axios.post(`${url}/api/user/login`, {
         email: email,
         socialToken: socialToken,
@@ -91,7 +92,6 @@ function StartingPage({ navigation }) {
   const loginCheck = () => {
     setIsLogin(true);
   };
-
 
   return (
     <SafeAreaView style={styles.outBox}>

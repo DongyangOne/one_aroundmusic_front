@@ -24,19 +24,11 @@ const WKing = ({ navigation }) => {
   const [selection, setSelection] = useState(2);
 
   const loadData = async () => {
-    let imgDataBeta = [0, 0, 0];
-    for (i = 0; i < 3; i++) {
-      imgDataBeta[i] = await storage()
-        .ref(`/reward/walk/walk${i + 1}.png`)
-        .getDownloadURL();
-    }
-    setAbc(imgDataBeta);
-    setImages(imgDataBeta);
-
     const TOKEN = await AsyncStorage.getItem('accessToken');
+    console.log(TOKEN);
     try {
       if (TOKEN) {
-        axios
+        await axios
           .get(`${url}/api/reward/walk`, {
             headers: {
               Authorization: `Bearer ${TOKEN}`,
@@ -44,14 +36,15 @@ const WKing = ({ navigation }) => {
           })
           .then(response => {
             const temp = parseInt(response.data.data.selectedReward.id);
-
+            console.log(temp);
             try {
               if (temp == 1) handleLeftImageClick();
               else if (temp == 3) handleRightImageClick();
+              console.log(5);
             } catch (e) {
               console.error(`ERR with Switch Reward >> ${e}`);
             }
-            console.log(temp);
+            console.log(temp, '입니다.');
           })
           .catch(e => {
             console.error(`GET ERROR >> ${e}`);
@@ -62,6 +55,18 @@ const WKing = ({ navigation }) => {
     } catch (e) {
       console.error(`Error with Reading Data >> ${e}`);
     }
+
+    console.log('여기');
+    let imgDataBeta = [0, 0, 0];
+    for (i = 0; i < 3; i++) {
+      imgDataBeta[i] = await storage()
+        .ref(`/reward/walk/walk${i + 1}.png`)
+        .getDownloadURL();
+      console.log('저기', i);
+    }
+    setAbc(imgDataBeta);
+    console.log(abc);
+    setImages(imgDataBeta);
   };
 
   useEffect(() => {
