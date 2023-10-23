@@ -22,30 +22,30 @@ const MyPage = ({ navigation, route }) => {
   const [nickname, setNickname] = useState('');
   const [authState, setAuthState] = useState(null);
 
-  async function authenticate() {
-    const config = {
-      clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
+  // async function authenticate() {
+  //   const config = {
+  //     clientId: 'e58220cc9b0e4832aac9f6b7d6c3bf5c',
 
-      redirectUrl: 'awesomeproject://main',
-      scopes: ['user-read-private', 'user-read-email', 'streaming'],
-      serviceConfiguration: {
-        authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-        tokenEndpoint: 'https://accounts.spotify.com/api/token',
-      },
-    };
+  //     redirectUrl: 'awesomeproject://main',
+  //     scopes: ['user-read-private', 'user-read-email', 'streaming'],
+  //     serviceConfiguration: {
+  //       authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+  //       tokenEndpoint: 'https://accounts.spotify.com/api/token',
+  //     },
+  //   };
 
-    try {
-      const result = await authorize(config);
-      if (result.accessToken) {
-        await AsyncStorage.setItem('token', result.accessToken);
-        console.log(result.accessToken);
-        setAuthState(result);
-        navigation.navigate('Main');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //   try {
+  //     const result = await authorize(config);
+  //     if (result.accessToken) {
+  //       await AsyncStorage.setItem('token', result.accessToken);
+  //       console.log(result.accessToken);
+  //       setAuthState(result);
+  //       navigation.navigate('Main');
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
   const fetchUserNickname = async () => {
     try {
       const TOKEN = await AsyncStorage.getItem('accessToken');
@@ -86,9 +86,9 @@ const MyPage = ({ navigation, route }) => {
 
         <View>
           <Text style={styles.id}>{nickname}님</Text>
-          <TouchableOpacity style={styles.spotify} onPress={authenticate}>
+          {/* <TouchableOpacity style={styles.spotify} onPress={authenticate}>
             <Text style={{ color: 'white' }}>스포티파이 로그인</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
             <View style={styles.friendBtn}>
               <Text style={styles.text}>내 친구 {friend}</Text>
