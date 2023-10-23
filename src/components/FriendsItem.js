@@ -1,9 +1,11 @@
 import { Image, StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import storage from '@react-native-firebase/storage';
 
 const FriendsItem = ({ name, image, state, color, textColor, onPress }) => {
   const profile =
-    image == null ? require('../../assets/BasicProfile.png') : image;
+    image == null ? require('../../assets/BasicProfile.png') : { uri: image };
+
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
