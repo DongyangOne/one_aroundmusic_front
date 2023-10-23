@@ -10,7 +10,7 @@ import {
   View,
   PermissionsAndroid,
   Button,
-  BackHandler
+  BackHandler,
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
@@ -18,8 +18,9 @@ import axios from 'axios';
 import SVGComponentPlayBtn from '../../components/SVG/SVGComponentPlayBtn';
 import SVGComponentStopBtn from '../../components/SVG/SVGComponentStopBtn';
 import { url } from '../../constant/Url';
+import { useNavigation } from '@react-navigation/native';
 
-const PlayerScreenView = ({ route, navigation }) => {
+const PlayerScreenView2 = ({ route, navigation }) => {
   const [sound, setSound] = useState(null);
   const [isPlay, setIsPlay] = useState(true);
   const { trackId } = route.params;
@@ -30,22 +31,22 @@ const PlayerScreenView = ({ route, navigation }) => {
   console.log('href' + href);
   const [location, setLocation] = useState([{ latitude: '', longitude: '' }]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const thisContainer = useNavigation();
 
   const handlePressBack = () => {
-    if(navigation?.canGoBack()){
-      navigation.navigate('Music');
+    if (navigation?.canGoBack()) {
+      navigation.navigate('Map');
       return true;
     }
     return false;
-  }
+  };
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handlePressBack);
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', handlePressBack);
-    }
+    };
   }, [handlePressBack]);
-  
   useEffect(() => {
     if (isPlaying) {
       handlePlay();
@@ -109,9 +110,7 @@ const PlayerScreenView = ({ route, navigation }) => {
   // 정지
   const handleStop = () => {
     if (sound && isPlay) {
-      sound.pause(() => {
-        setIsPlaying(false);
-      });
+      sound.pause();
       setIsPlay(false);
     }
   };
@@ -139,7 +138,7 @@ const PlayerScreenView = ({ route, navigation }) => {
         .post(`${url}/api/ar`, requestData, config)
         .then(response => {
           console.log(response);
-          navigation.navigate('ArScreen2', {
+          navigation.navigate('ArScreen', {
             youtubeId: trackId,
             title: title,
             thumbnailUrl: image,
@@ -234,4 +233,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-export default PlayerScreenView;
+export default PlayerScreenView2;

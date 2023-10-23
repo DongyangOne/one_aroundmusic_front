@@ -13,7 +13,8 @@ import MyPage from '../screens/MyPage';
 import PopularKing from '../screens/PopularKing';
 import StartingPage from '../screens/StartingPage';
 import WKing from '../screens/WKing';
-import PlayerScreen from '../screens/player-screen';
+import PlayerScreen from '../screens/player-screen/player-screen';
+import PlayerScreen2 from '../screens/player-screen2/player-screen2';
 import SignUp from '../screens/SignUp';
 import { Black, Pink, White, Yellow } from '../constant/Color';
 export const MenuList = [
@@ -137,7 +138,7 @@ export const MenuList = [
       headerTintColor: Pink,
       headerStyle: {
         // backgroundColor: '#000080',
-        backgroundColor: White, 
+        backgroundColor: White,
       },
       headerTitleAlign: 'center',
     },
@@ -173,8 +174,8 @@ export const MapMenuList = [
     options: { headerShown: false },
   },
   {
-    name: 'PlayerScreen',
-    component: PlayerScreen,
+    name: 'PlayerScreen2',
+    component: PlayerScreen2,
     options: { headerShown: false },
   },
 ];
