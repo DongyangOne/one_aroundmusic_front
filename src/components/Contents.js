@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import storage from '@react-native-firebase/storage';
 import { url } from '../constant/Url';
 import { Pink, Black } from '../constant/Color';
 const Contents = ({ content }) => {
@@ -43,6 +42,7 @@ const Contents = ({ content }) => {
       } catch (error) {
         console.error(`Image download failed: ${error}`);
       }
+      console.log(imgData);
     }
     setImgUrl(imgData);
     setLoading(false); // 이미지 로딩이 완료됨을 표시
