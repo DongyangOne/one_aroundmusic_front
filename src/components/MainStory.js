@@ -6,6 +6,7 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
+
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -16,8 +17,8 @@ let temp;
 
 const MainStory = ({ data, frame }) => {
   const [itemFrame, setItemFrame] = useState();
-  const [friends, setFriends] = useState([]);
-
+  const [friends, setFriends] = useState();
+  let a;
   const getData = async () => {
     try {
       const TOKEN = await AsyncStorage.getItem('accessToken');
@@ -57,13 +58,16 @@ const MainStory = ({ data, frame }) => {
         })
         .then(async res => {
           friend.push(res.data.data);
+          if (res.data.data.profileImg == null) {
+            a = 0;
+          }
         })
         .catch(e => {
           console.log(`Error /api/user/my -> ${e}`);
         });
 
       await axios
-        .get(`${url}/api/story`, {
+        .get(`${url}/api/friend`, {
           headers: {
             Authorization: `Bearer ${TOKEN}`,
           },
@@ -94,7 +98,11 @@ const MainStory = ({ data, frame }) => {
           {friends.map((item, index) => (
             <View style={styles.story} key={index}>
               <TouchableWithoutFeedback>
-                {index == 0 ? (
+                {a == 0 ? (
+                  <Image
+                    source={{ uri: item.profileImg }}
+                    style={styles.image}></Image>
+                ) : (
                   <ImageBackground
                     // source={IMG_SRC[itemFrame].src} // 기존 코드
                     source={{ uri: itemFrame }} // 신규 코드
@@ -103,10 +111,6 @@ const MainStory = ({ data, frame }) => {
                       source={{ uri: item.profileImg }}
                       style={styles.imageSe}></Image>
                   </ImageBackground>
-                ) : (
-                  <Image
-                    source={{ uri: item.profileImg }}
-                    style={styles.image}></Image>
                 )}
               </TouchableWithoutFeedback>
             </View>

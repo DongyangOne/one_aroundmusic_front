@@ -8,6 +8,7 @@ import {
 } from '../components/DummyData';
 import API_URLS from '../constant/MusicList';
 import { Black, Pink, White, Yellow } from '../constant/Color';
+
 const FilterDetailButton = ({ title, isSelected, onPress }) => {
   return (
     <TouchableOpacity
@@ -29,6 +30,7 @@ const FilterScreen = ({ navigation }) => {
     selectCountry: null,
     selectedGenre: null,
   });
+  const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
 
   // 장르 버튼 스타일 변경을 위한 객체
   useEffect(() => {
@@ -66,7 +68,7 @@ const FilterScreen = ({ navigation }) => {
     });
   }, [setSelectedTime]);
 
-  //나라 버튼 스타일 번경을 위한 객체
+  // 나라 버튼 스타일 변경을 위한 객체
   useEffect(() => {
     const countryButtonStyles = DATACOUNTRY.reduce((styles, item) => {
       styles[item.title] = item.title === selectCountry;
@@ -85,8 +87,24 @@ const FilterScreen = ({ navigation }) => {
     setFilterData({ selectCountry, selectedGenre });
   }, [selectCountry, selectedGenre]);
 
-  let abc = filterData.selectCountry + filterData.selectedGenre;
-  const apiUrl = API_URLS[abc];
+  const applyFilters = () => {
+    if (!selectedGenre || !selectCountry) {
+      // 필수 선택 사항을 확인하고 메시지 설정
+      setErrorMessage('장르와 나라는 꼭 선택해주세요!');
+    } else {
+      // 필수 선택 사항이 모두 선택된 경우 이동
+      const abc = selectCountry + selectedGenre;
+      const apiUrl = API_URLS[abc];
+      navigation.navigate('Music', {
+        selectedGenre,
+        selectedSeason,
+        selectedTime,
+        selectCountry,
+        apiUrl,
+      });
+    }
+  };
+
   const createFilterButtons = (data, setSelectedFunction, selectedValue) => {
     return data.map(item => (
       <FilterDetailButton
@@ -97,6 +115,7 @@ const FilterScreen = ({ navigation }) => {
       />
     ));
   };
+
   return (
     <View style={styles.AllBack}>
       <View style={styles.centerBtn}>
@@ -127,17 +146,10 @@ const FilterScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.bu}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigation.navigate('Music', {
-              selectedGenre,
-              selectedSeason,
-              selectedTime,
-              selectCountry,
-              apiUrl,
-            })
-          }>
+        {errorMessage && (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        )}
+        <TouchableOpacity style={styles.button} onPress={applyFilters}>
           <Text style={styles.buttonText}>적용하기</Text>
         </TouchableOpacity>
       </View>
@@ -146,9 +158,7 @@ const FilterScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  AllBack: {
-    // backgroundColor: 'white',
-  },
+  AllBack: {},
   MainText: {
     color: Pink,
     fontSize: 20,
@@ -156,6 +166,11 @@ const styles = StyleSheet.create({
     marginTop: 23,
     marginLeft: 14,
     marginBottom: 10,
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: 16,
+    marginTop: 10,
   },
   buttonContainer: {
     flexDirection: 'row',
