@@ -56,7 +56,7 @@ function StartingPage({ navigation }) {
               'accessToken',
               response.data.data.access,
             );
-            navigation.replace('Main');
+            navigation.navigate('Main');
           }
         }
       }

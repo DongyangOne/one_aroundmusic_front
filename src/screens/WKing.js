@@ -17,7 +17,7 @@ const RoundedShadowBox = ({ children }) => {
 };
 
 const WKing = ({ navigation }) => {
-  let fixed = 2;
+  /*  let fixed = 2;
 
   const [images, setImages] = useState([0, 0, 0]);
   const [abc, setAbc] = useState([0, 0, 0]);
@@ -137,7 +137,7 @@ const WKing = ({ navigation }) => {
       .catch(e => {
         console.error(`PATCH Error >> ${e}`);
       });
-  };
+  }; */
 
   return (
     <SafeAreaView style={styles.container}>

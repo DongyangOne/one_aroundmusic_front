@@ -12,7 +12,7 @@ import axios from 'axios';
 import { url } from '../constant/Url';
 import { launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
-
+import { Pink } from '../constant/Color';
 const MyPage = ({ navigation, route }) => {
   const [friend, setFriend] = useState(0);
   const [nickname, setNickname] = useState('회원');
@@ -44,6 +44,13 @@ const MyPage = ({ navigation, route }) => {
     } catch (error) {
       console.error(error);
     }
+  }
+  async function logOut() {
+    await AsyncStorage.removeItem('email');
+    await AsyncStorage.removeItem('socialToken');
+    await AsyncStorage.removeItem('accessToken');
+    await AsyncStorage.removeItem('isLogin');
+    navigation.navigate('Start');
   }
 
   // 이미지 업로드 함수
@@ -147,9 +154,12 @@ const MyPage = ({ navigation, route }) => {
 
         <View>
           <Text style={styles.id}>{nickname}님</Text>
-          {/* <TouchableOpacity style={styles.spotify} onPress={authenticate}>
+          <TouchableOpacity style={styles.spotify} onPress={authenticate}>
             <Text style={{ color: 'white' }}>스포티파이 로그인</Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.logout} onPress={logOut}>
+            <Text style={{ color: 'white' }}>로그아웃</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('FriendList')}>
             <View style={styles.friendBtn}>
               <Text style={styles.text}>내 친구 {friend}</Text>
@@ -278,6 +288,19 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: '14%',
     borderRadius: 13,
+  },
+  logout: {
+    marginTop: 10,
+    width: 140,
+    height: 27,
+    marginLeft: 25,
+    textAlign: 'left',
+    borderColor: '#E6E6E6',
+    borderWidth: 1,
+    borderRadius: 13,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#d9d9d9',
   },
   // Friend Button
   friendBtn: {

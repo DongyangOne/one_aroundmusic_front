@@ -172,9 +172,6 @@ const PlayerScreenView2 = ({ route, navigation }) => {
             }}>
             {isPlaying ? <SVGComponentStopBtn /> : <SVGComponentPlayBtn />}
           </TouchableOpacity>
-          <TouchableOpacity onPress={shareAr} style={styles.shareBtn}>
-            <Text style={styles.btnText}>Share</Text>
-          </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>
